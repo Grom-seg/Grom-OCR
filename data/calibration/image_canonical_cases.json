@@ -1,0 +1,47 @@
+[
+  {
+    "file": "10458347_x216.jpg",
+    "path": "C:/Grom_OCR/data/uploads/10458347_x216.jpg",
+    "expected_text": "PXZ9991",
+    "expected_pattern": "Antigo",
+    "expected_status": "CONCLUSIVO",
+    "case_kind": "placa_antiga_desgastada",
+    "notes": "Placa antiga com ultimo digito sensivel a refinamento geometrico."
+  },
+  {
+    "file": "20171119_154214_ch6-1024x576.jpg",
+    "path": "C:/Grom_OCR/data/uploads/20171119_154214_ch6-1024x576.jpg",
+    "expected_text": "DFO8819",
+    "expected_pattern": "Antigo",
+    "expected_status": "CONCLUSIVO",
+    "case_kind": "placa_antiga_cena_externa",
+    "notes": "Caso base de D/O/U com recorte traseiro e placa antiga."
+  },
+  {
+    "file": "fiat.jpg",
+    "path": "C:/Grom_OCR/data/uploads/fiat.jpg",
+    "expected_text": "REI5G32",
+    "expected_pattern": "Mercosul",
+    "expected_status": "CONCLUSIVO",
+    "case_kind": "frota_frontal_multipla",
+    "notes": "Cena com multiplos veiculos; alvo principal deve permanecer o frontal dominante."
+  },
+  {
+    "file": "sddefault.jpg",
+    "path": "C:/Grom_OCR/data/uploads/sddefault.jpg",
+    "expected_text": "",
+    "expected_pattern": "Indefinido",
+    "expected_status": "INCONCLUSIVO",
+    "case_kind": "cena_insuficiente",
+    "notes": "Caso fraco; sistema deve abster-se de leitura conclusiva."
+  },
+  {
+    "file": "teste.jpg",
+    "path": "C:/Grom_OCR/data/uploads/teste.jpg",
+    "expected_text": "",
+    "expected_pattern": "Indefinido",
+    "expected_status": "INCONCLUSIVO",
+    "case_kind": "placa_distante",
+    "notes": "Veiculo distante com area de placa muito pequena para OCR confiavel."
+  }
+]

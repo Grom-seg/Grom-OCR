@@ -1,0 +1,41 @@
+{
+  "image_calibration_battery": {
+    "baseline_path": "c:/Grom_OCR/data/test_results/image_calibration_battery_current.json",
+    "min_accuracy": 80.0,
+    "min_matched": 4,
+    "max_accuracy_drop": 0.0,
+    "max_matched_drop": 0
+  },
+  "benchmark_suite": {
+    "notes": "Baseline inicial conservador da Fase 1. Scene preprocess e OCR reranking usam regressao relativa porque os valores absolutos atuais ainda precisam ser recalibrados.",
+    "baseline_summary_path": "c:/Grom_OCR/data/benchmark_suite_latest.json",
+    "require_all_jobs_ok": true,
+    "jobs": {
+      "scene_preprocess_hard": {
+        "metrics": [
+          {
+            "path": "summary.accuracy_percent",
+            "max_drop_vs_baseline": 0.0
+          }
+        ]
+      },
+      "plate_detector_hard": {
+        "metrics": [
+          {
+            "path": "summary.scene_roi_rate_percent",
+            "min": 100.0,
+            "max_drop_vs_baseline": 0.0
+          }
+        ]
+      },
+      "ocr_reranking_hard": {
+        "metrics": [
+          {
+            "path": "summary.accuracy_percent",
+            "max_drop_vs_baseline": 0.0
+          }
+        ]
+      }
+    }
+  }
+}

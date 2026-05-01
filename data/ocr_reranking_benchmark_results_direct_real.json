@@ -1,0 +1,2221 @@
+{
+  "generated_at_utc": "2026-04-04T14:34:39.789228Z",
+  "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest_crops_real.json",
+  "summary": {
+    "total": 10,
+    "matched": 7,
+    "accuracy_percent": 70.0,
+    "top_candidate_match_count": 7,
+    "top_candidate_match_rate_percent": 70.0,
+    "expected_in_top_candidates_count": 7,
+    "expected_in_top_candidates_rate_percent": 70.0,
+    "avg_expected_rank": 1.0,
+    "median_expected_rank": 1.0,
+    "avg_best_weighted_support_matched": 10.649,
+    "avg_best_weighted_support_mismatched": 6.64,
+    "best_engine_counts": {
+      "ensemble": 8,
+      "rapidocr": 2
+    },
+    "per_engine_summary": {
+      "easyocr": {
+        "total": 10,
+        "top_match": 0,
+        "candidate_found": 0,
+        "top_match_rate_percent": 0.0,
+        "candidate_recall_rate_percent": 0.0,
+        "mean_candidate_rank": 0.0,
+        "median_candidate_rank": 0.0,
+        "mean_top_score": 0.0,
+        "mean_top_confidence": 0.0
+      },
+      "rapidocr": {
+        "total": 10,
+        "top_match": 7,
+        "candidate_found": 7,
+        "top_match_rate_percent": 70.0,
+        "candidate_recall_rate_percent": 70.0,
+        "mean_candidate_rank": 1.0,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 117.65,
+        "mean_top_confidence": 82.2
+      },
+      "tesseract": {
+        "total": 10,
+        "top_match": 3,
+        "candidate_found": 4,
+        "top_match_rate_percent": 30.0,
+        "candidate_recall_rate_percent": 40.0,
+        "mean_candidate_rank": 1.5,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 48.76,
+        "mean_top_confidence": 28.18
+      }
+    }
+  },
+  "results": [
+    {
+      "image": "data/uploads/plate_test.png",
+      "kind": "crop",
+      "notes": "Recorte limpo de placa para calibracao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 129.24,
+      "observed_best_confidence": 91.07,
+      "observed_best_weighted_support": 14.47,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "tesseract": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 122.1,
+          "avg_conf": 86.5
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 129.24,
+          "avg_conf": 91.07
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "ABC1234",
+          "score": 129.24,
+          "avg_conf": 91.07,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 14.47,
+          "engine_contributions": {
+            "rapidocr": 8.56,
+            "tesseract": 4.064
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.531,
+              "factor": 0.7176,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1Z34",
+          "score": 119.24,
+          "avg_conf": 91.07,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 5.96,
+          "engine_contributions": {
+            "rapidocr": 2.777,
+            "tesseract": 1.328
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.531,
+              "factor": 0.7176,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "ABC1234",
+          "score": 122.1,
+          "avg_conf": 86.5,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 129.24,
+          "avg_conf": 91.07,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 17320.0,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 37386.81,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.01,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "ALTA",
+        "confidence_percent": 91.1,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": false,
+        "reasons": []
+      },
+      "pericial_status": "ALTA",
+      "index": 1
+    },
+    {
+      "image": "data/uploads/plate_test_degraded.png",
+      "kind": "crop",
+      "notes": "Recorte degradado para calibracao e regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 126.94,
+      "observed_best_confidence": 91.0,
+      "observed_best_weighted_support": 14.18,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "tesseract": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 121.0,
+          "avg_conf": 91.0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 126.94,
+          "avg_conf": 89.92
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "ABC1234",
+          "score": 126.94,
+          "avg_conf": 91.0,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 14.18,
+          "engine_contributions": {
+            "rapidocr": 8.485,
+            "tesseract": 3.849
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.4992,
+              "factor": 0.6746,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1Z34",
+          "score": 116.94,
+          "avg_conf": 91.0,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 5.86,
+          "engine_contributions": {
+            "rapidocr": 2.752,
+            "tesseract": 1.258
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.4992,
+              "factor": 0.6746,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "ABC1234",
+          "score": 121.0,
+          "avg_conf": 91.0,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 126.94,
+          "avg_conf": 89.92,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 29175.58,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 28239.66,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.01,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "ALTA",
+        "confidence_percent": 91.0,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": false,
+        "reasons": []
+      },
+      "pericial_status": "ALTA",
+      "index": 2
+    },
+    {
+      "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "OFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 106.79,
+      "observed_best_confidence": 73.35,
+      "observed_best_weighted_support": 7.97,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "OFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 106.79,
+          "avg_conf": 73.35
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "OFO8819",
+          "score": 106.79,
+          "avg_conf": 73.35,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 7.97,
+          "engine_contributions": {
+            "rapidocr": 7.968
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.1236,
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "OFO8B19",
+          "score": 92.79,
+          "avg_conf": 73.35,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 2.55,
+          "engine_contributions": {
+            "rapidocr": 2.545
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.1236,
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 106.79,
+          "avg_conf": 73.35,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 69235.03,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 59201.42,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.0,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "BAIXA",
+        "confidence_percent": 73.3,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": true,
+        "reasons": [
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 3
+    },
+    {
+      "image": "data/uploads/placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "PXZ9391",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 122.98,
+      "observed_best_confidence": 89.54,
+      "observed_best_weighted_support": 8.68,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 1,
+          "best_score": 122.98,
+          "avg_conf": 89.54
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "PXZ9391",
+          "score": 122.98,
+          "avg_conf": 89.54,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 8.68,
+          "engine_contributions": {
+            "rapidocr": 8.681
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.1236,
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "PXZ9391",
+          "score": 122.98,
+          "avg_conf": 89.54,
+          "pattern": "Antigo",
+          "candidate_count": 1
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 67104.38,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 41259.96,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.01,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "MEDIA",
+        "confidence_percent": 89.5,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 4
+    },
+    {
+      "image": "data/uploads/placa_sddefault.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "AMX3640",
+      "observed_best_engine": "rapidocr",
+      "observed_best_score": 118.49,
+      "observed_best_confidence": 86.93,
+      "observed_best_weighted_support": 5.92,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_fallback",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "AMX3640",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 7,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 5,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "AMX3640",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 4,
+          "best_score": 118.49,
+          "avg_conf": 86.93
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "AMX3640",
+          "score": 118.49,
+          "avg_conf": 86.93,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 6.03,
+          "engine_contributions": {
+            "rapidocr": 6.034
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 0.7957,
+              "factor": 0.7506,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "AMX3660",
+          "score": 115.0,
+          "avg_conf": 83.44,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 1.98,
+          "engine_contributions": {
+            "rapidocr": 1.975
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 0.7957,
+              "factor": 0.7506,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "AMX3G40",
+          "score": 109.99,
+          "avg_conf": 86.93,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 1.31,
+          "engine_contributions": {
+            "rapidocr": 1.309
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 0.7957,
+              "factor": 0.7506,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "AMX8640",
+          "score": 23.0,
+          "avg_conf": 0.0,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 0.29,
+          "engine_contributions": {
+            "tesseract": 0.288
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1299,
+              "factor": 0.1755,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "AMX8G40",
+          "score": 16.0,
+          "avg_conf": 0.0,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 0.22,
+          "engine_contributions": {
+            "tesseract": 0.222
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1299,
+              "factor": 0.1755,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ASTAQ",
+          "score": 0.0,
+          "avg_conf": 19.25,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": -0.04,
+          "engine_contributions": {
+            "tesseract": -0.042
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1299,
+              "factor": 0.1755,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "SCSSGA",
+          "score": 0.0,
+          "avg_conf": 16.0,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": -0.07,
+          "engine_contributions": {
+            "tesseract": -0.065
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1299,
+              "factor": 0.1755,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 5
+        },
+        "rapidocr": {
+          "text": "AMX3640",
+          "score": 118.49,
+          "avg_conf": 86.93,
+          "pattern": "Antigo",
+          "candidate_count": 4
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "tesseract:tesseract_low_reliability_abstained"
+      ],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 42539.79,
+          "error": "",
+          "warning": "tesseract_low_reliability_abstained"
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 37127.91,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.01,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "MEDIA",
+        "confidence_percent": 86.9,
+        "agreement_ratio_percent": 50.0,
+        "manual_review_required": true,
+        "reasons": [
+          "baixo_consenso_entre_motores",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 5
+    },
+    {
+      "image": "data/uploads/placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "ROI limpa de placa usada como referencia",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 128.57,
+      "observed_best_confidence": 89.75,
+      "observed_best_weighted_support": 12.33,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "tesseract": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 6,
+          "best_score": 123.1,
+          "avg_conf": 45.5
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 128.57,
+          "avg_conf": 89.75
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "ABC1234",
+          "score": 128.57,
+          "avg_conf": 89.75,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 12.33,
+          "engine_contributions": {
+            "rapidocr": 8.519,
+            "tesseract": 1.965
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.2833,
+              "factor": 0.3829,
+              "mode": "noisy",
+              "reason": "weak_top_candidate"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1Z34",
+          "score": 118.57,
+          "avg_conf": 89.75,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 5.04,
+          "engine_contributions": {
+            "rapidocr": 2.763,
+            "tesseract": 0.427
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.2833,
+              "factor": 0.3829,
+              "mode": "noisy",
+              "reason": "weak_top_candidate"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1254",
+          "score": 119.1,
+          "avg_conf": 86.5,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 0.72,
+          "engine_contributions": {
+            "tesseract": 0.717
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.2833,
+              "factor": 0.3829,
+              "mode": "noisy",
+              "reason": "weak_top_candidate"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "ABC1234",
+          "score": 123.1,
+          "avg_conf": 45.5,
+          "pattern": "Antigo",
+          "candidate_count": 6
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 128.57,
+          "avg_conf": 89.75,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 34859.36,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 21965.99,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.01,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "MEDIA",
+        "confidence_percent": 89.8,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 6
+    },
+    {
+      "image": "data/uploads/placa_plate_test_degraded.jpg",
+      "kind": "crop",
+      "notes": "ROI degradada de placa para regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 126.1,
+      "observed_best_confidence": 88.89,
+      "observed_best_weighted_support": 8.45,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 5,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 3,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 126.1,
+          "avg_conf": 88.89
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "ABC1234",
+          "score": 126.1,
+          "avg_conf": 88.89,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 8.45,
+          "engine_contributions": {
+            "rapidocr": 8.446
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1Z34",
+          "score": 116.1,
+          "avg_conf": 88.89,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 2.74,
+          "engine_contributions": {
+            "rapidocr": 2.739
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ACI34",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": -0.06,
+          "engine_contributions": {
+            "tesseract": -0.063
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1048,
+              "factor": 0.1417,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC24",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": -0.08,
+          "engine_contributions": {
+            "tesseract": -0.084
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1048,
+              "factor": 0.1417,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "A1234",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": -0.1,
+          "engine_contributions": {
+            "tesseract": -0.105
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.1048,
+              "factor": 0.1417,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 3
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 126.1,
+          "avg_conf": 88.89,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "tesseract:tesseract_low_reliability_abstained"
+      ],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 59461.07,
+          "error": "",
+          "warning": "tesseract_low_reliability_abstained"
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 37806.49,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.01,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "MEDIA",
+        "confidence_percent": 88.9,
+        "agreement_ratio_percent": 50.0,
+        "manual_review_required": true,
+        "reasons": [
+          "baixo_consenso_entre_motores",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 7
+    },
+    {
+      "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "OFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 104.86,
+      "observed_best_confidence": 72.56,
+      "observed_best_weighted_support": 7.51,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "OFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 3,
+          "best_score": 104.86,
+          "avg_conf": 72.56
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "OFO8819",
+          "score": 104.86,
+          "avg_conf": 72.56,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 7.51,
+          "engine_contributions": {
+            "rapidocr": 7.511
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0675,
+              "factor": 1.0071,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "OFO8B19",
+          "score": 91.86,
+          "avg_conf": 72.56,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 2.41,
+          "engine_contributions": {
+            "rapidocr": 2.406
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0675,
+              "factor": 1.0071,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "008819",
+          "score": 46.21,
+          "avg_conf": 77.47,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 0.14,
+          "engine_contributions": {
+            "rapidocr": 0.136
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0675,
+              "factor": 1.0071,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 104.86,
+          "avg_conf": 72.56,
+          "pattern": "Antigo",
+          "candidate_count": 3
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 77401.99,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 69701.06,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.0,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "BAIXA",
+        "confidence_percent": 72.6,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": true,
+        "reasons": [
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 8
+    },
+    {
+      "image": "data/uploads/placa_placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "PXI6662",
+      "observed_best_engine": "rapidocr",
+      "observed_best_score": 88.8,
+      "observed_best_confidence": 52.78,
+      "observed_best_weighted_support": 4.44,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_fallback",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "PXI6662",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "PXI6662",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 7,
+          "best_score": 88.8,
+          "avg_conf": 52.78
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "PXI6662",
+          "score": 88.8,
+          "avg_conf": 52.78,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 5.58,
+          "engine_contributions": {
+            "rapidocr": 5.58
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 0.88,
+              "factor": 0.8302,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "PXI6G62",
+          "score": 74.8,
+          "avg_conf": 52.78,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 1.77,
+          "engine_contributions": {
+            "rapidocr": 1.773
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 0.88,
+              "factor": 0.8302,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "1666Z",
+          "score": 27.6,
+          "avg_conf": 57.02,
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": -0.04,
+          "engine_contributions": {
+            "rapidocr": -0.037
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 0.88,
+              "factor": 0.8302,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "PXI6662",
+          "score": 88.8,
+          "avg_conf": 52.78,
+          "pattern": "Antigo",
+          "candidate_count": 7
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 71755.22,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 56055.12,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.0,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "BAIXA",
+        "confidence_percent": 52.8,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": true,
+        "reasons": [
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 9
+    },
+    {
+      "image": "data/uploads/placa_placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop de placa limpa",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 123.73,
+      "observed_best_confidence": 87.24,
+      "observed_best_weighted_support": 10.51,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 4,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "tesseract": {
+          "text": "ABC1254",
+          "top_match": false,
+          "candidate_rank": 3,
+          "candidate_found": true,
+          "candidate_count": 8,
+          "best_score": 121.4,
+          "avg_conf": 58.8
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 123.73,
+          "avg_conf": 87.24
+        },
+        "easyocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "text": "ABC1234",
+          "score": 123.73,
+          "avg_conf": 87.24,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "agreement_ratio": 100.0,
+          "weighted_support": 10.51,
+          "engine_contributions": {
+            "rapidocr": 8.359,
+            "tesseract": 0.301
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            },
+            "tesseract": {
+              "weight": 0.3229,
+              "factor": 0.4363,
+              "mode": "noisy",
+              "reason": "weak_top_candidate"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1Z34",
+          "score": 113.73,
+          "avg_conf": 87.24,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 2.71,
+          "engine_contributions": {
+            "rapidocr": 2.71
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "weight": 1.0855,
+              "factor": 1.0241,
+              "mode": "normal",
+              "reason": "stable"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1254",
+          "score": 121.4,
+          "avg_conf": 58.8,
+          "pattern": "Antigo",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 2.31,
+          "engine_contributions": {
+            "tesseract": 2.305
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.3229,
+              "factor": 0.4363,
+              "mode": "noisy",
+              "reason": "weak_top_candidate"
+            }
+          },
+          "engine": "ensemble"
+        },
+        {
+          "text": "ABC1Z54",
+          "score": 114.4,
+          "avg_conf": 58.8,
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "agreement_ratio": 50.0,
+          "weighted_support": 0.75,
+          "engine_contributions": {
+            "tesseract": 0.752
+          },
+          "engine_weights": {
+            "tesseract": {
+              "weight": 0.3229,
+              "factor": 0.4363,
+              "mode": "noisy",
+              "reason": "weak_top_candidate"
+            }
+          },
+          "engine": "ensemble"
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "ABC1254",
+          "score": 121.4,
+          "avg_conf": 58.8,
+          "pattern": "Antigo",
+          "candidate_count": 8
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 123.73,
+          "avg_conf": 87.24,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "easyocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [],
+      "ocr_engine_summary": {
+        "engines_registered": 3,
+        "engines_configured": 3,
+        "engines_available": 3,
+        "engines_ready": 3,
+        "engines_executed": 3,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "engines_skipped": 0,
+        "engines_failed": 0,
+        "engines_disabled": 0,
+        "engines_unavailable": 0
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 24664.24,
+          "error": "",
+          "warning": ""
+        },
+        "rapidocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": true,
+          "elapsed_ms": 33006.28,
+          "error": "",
+          "warning": ""
+        },
+        "easyocr": {
+          "enabled": true,
+          "available": true,
+          "status": "executed",
+          "has_text": false,
+          "elapsed_ms": 0.0,
+          "error": "",
+          "warning": ""
+        }
+      },
+      "assessment": {
+        "evidence_level": "MEDIA",
+        "confidence_percent": 87.2,
+        "agreement_ratio_percent": 100.0,
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 10
+    }
+  ]
+}

@@ -1,0 +1,4799 @@
+{
+  "generated_at_utc": "2026-04-04T22:32:05.413336Z",
+  "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest.json",
+  "summary": {
+    "total": 21,
+    "matched": 1,
+    "accuracy_percent": 4.76,
+    "top_candidate_match_count": 3,
+    "top_candidate_match_rate_percent": 14.29,
+    "expected_in_top_candidates_count": 3,
+    "expected_in_top_candidates_rate_percent": 14.29,
+    "avg_expected_rank": 1.0,
+    "median_expected_rank": 1.0,
+    "avg_best_weighted_support_matched": 21.56,
+    "avg_best_weighted_support_mismatched": 1.256,
+    "best_engine_counts": {
+      "ensemble": 3
+    },
+    "per_engine_summary": {
+      "pdf_probe": {
+        "total": 8,
+        "top_match": 3,
+        "candidate_found": 0,
+        "top_match_rate_percent": 37.5,
+        "candidate_recall_rate_percent": 0.0,
+        "mean_candidate_rank": 0.0,
+        "median_candidate_rank": 0.0,
+        "mean_top_score": 170.85,
+        "mean_top_confidence": 82.0
+      },
+      "rapidocr": {
+        "total": 21,
+        "top_match": 1,
+        "candidate_found": 1,
+        "top_match_rate_percent": 4.76,
+        "candidate_recall_rate_percent": 4.76,
+        "mean_candidate_rank": 1.0,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 53.44,
+        "mean_top_confidence": 34.46
+      },
+      "tesseract": {
+        "total": 21,
+        "top_match": 1,
+        "candidate_found": 2,
+        "top_match_rate_percent": 4.76,
+        "candidate_recall_rate_percent": 9.52,
+        "mean_candidate_rank": 4.5,
+        "median_candidate_rank": 4.5,
+        "mean_top_score": 23.42,
+        "mean_top_confidence": 10.98
+      }
+    }
+  },
+  "results": [
+    {
+      "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "DFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 121.2,
+      "observed_best_confidence": 77.72,
+      "observed_best_weighted_support": 11.61,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": false,
+      "top_candidate_text": "DFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "DFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 121.2,
+          "avg_conf": 77.72
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 77.72,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 11.615
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.997,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1765
+            }
+          },
+          "pattern": "Antigo",
+          "region": "lower_wide_focus",
+          "score": 121.2,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "DFO8819",
+          "weighted_support": 11.61
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 77.72,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 3.767
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.997,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1765
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "lower_wide_focus",
+          "score": 116.31,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "DFO8B19",
+          "weighted_support": 3.77
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "DFO8819",
+          "score": 121.2,
+          "avg_conf": 77.72,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 77.7,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 1
+    },
+    {
+      "image": "data/uploads/10458347_x216.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "PXZ9999",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 5,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "PXZ9999",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 103.47,
+          "avg_conf": 59.81
+        },
+        "tesseract": {
+          "text": "PXZ2991",
+          "top_match": false,
+          "candidate_rank": 8,
+          "candidate_found": true,
+          "candidate_count": 8,
+          "best_score": 88.61,
+          "avg_conf": 50.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 59.81,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 6.411
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.592,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.6986
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 103.47,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "PXZ9999",
+          "weighted_support": 6.41
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 50.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.99
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2373,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1139
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 88.61,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "PXZ2991",
+          "weighted_support": 0.99
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 36.33,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.306
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2373,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1139
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 76.43,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "PXZ2799",
+          "weighted_support": 0.31
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 36.33,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.198
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2373,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1139
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_detected_3",
+          "score": 74.59,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "PXZ2T99",
+          "weighted_support": 0.2
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 72.01,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.436
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.592,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.6986
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_detected_3",
+          "score": 56.57,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "PXZ99",
+          "weighted_support": 0.44
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "PXZ9999",
+          "score": 103.47,
+          "avg_conf": 59.81,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "PXZ2991",
+          "score": 88.61,
+          "avg_conf": 50.0,
+          "pattern": "Antigo",
+          "candidate_count": 8
+        }
+      },
+      "warnings": [
+        "center_guess:tesseract_low_reliability_abstained",
+        "center_guess:rapidocr_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 2,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 2
+    },
+    {
+      "image": "data/uploads/sddefault.jpg",
+      "kind": "scene",
+      "notes": "Cena real adicional com OCR historicamente mais instavel",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "SOR0CA8",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "SOR0CA8",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 7,
+          "best_score": 102.66,
+          "avg_conf": 80.56
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 80.56,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.493
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3652,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4309
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "detected_1",
+          "score": 102.66,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "SOR0CA8",
+          "weighted_support": 2.49
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 80.56,
+          "best_law_score": 55.4,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.736
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3652,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4309
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "detected_1",
+          "score": 89.27,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OROCA8A",
+          "weighted_support": 0.74
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 80.56,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.231
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3652,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4309
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "detected_1",
+          "score": 78.25,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "SOROCABA",
+          "weighted_support": 0.23
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "SOR0CA8",
+          "score": 102.66,
+          "avg_conf": 80.56,
+          "pattern": "Indefinido",
+          "candidate_count": 7
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "raw_detected_1:tesseract_low_reliability_abstained",
+        "raw_detected_1:rapidocr_low_reliability_abstained",
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 3
+    },
+    {
+      "image": "data/uploads/plate_test.png",
+      "kind": "crop",
+      "notes": "Recorte limpo de placa para calibracao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "IBC1234",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 8,
+          "best_score": 116.4,
+          "avg_conf": 78.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 78.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 1.106
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2356,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1131
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 116.4,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1234",
+          "weighted_support": 1.11
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 78.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.361
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2356,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1131
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_guess",
+          "score": 114.51,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1Z34",
+          "weighted_support": 0.36
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 13.71,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.198
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2356,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1131
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 97.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1254",
+          "weighted_support": 0.2
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "score": 116.4,
+          "avg_conf": 78.0,
+          "pattern": "Antigo",
+          "candidate_count": 8
+        }
+      },
+      "warnings": [
+        "lower_wide_focus:tesseract_low_reliability_abstained",
+        "center_guess:rapidocr_low_reliability_abstained",
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 4
+    },
+    {
+      "image": "data/uploads/plate_test_degraded.png",
+      "kind": "crop",
+      "notes": "Recorte degradado para calibracao e regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "IBC1234",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 5,
+          "best_score": 79.7,
+          "avg_conf": 8.75
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 8.75,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.984
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2643,
+              "mode": "noisy",
+              "reason": "weak_top_candidate",
+              "weight": 0.1269
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 79.7,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1234",
+          "weighted_support": 0.98
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 8.75,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.321
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2643,
+              "mode": "noisy",
+              "reason": "weak_top_candidate",
+              "weight": 0.1269
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_guess",
+          "score": 77.81,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1Z34",
+          "weighted_support": 0.32
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.182
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.2643,
+              "mode": "noisy",
+              "reason": "weak_top_candidate",
+              "weight": 0.1269
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 38.4,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "GBC1234",
+          "weighted_support": 0.18
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "score": 79.7,
+          "avg_conf": 8.75,
+          "pattern": "Antigo",
+          "candidate_count": 5
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 5
+    },
+    {
+      "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "DFO8815",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "DFO8815",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 4,
+          "best_score": 123.88,
+          "avg_conf": 70.95
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 70.95,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 9.377
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8102,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.956
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_front_center_focus",
+          "score": 123.88,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "DFO8815",
+          "weighted_support": 9.38
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 70.95,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 3.021
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8102,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.956
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_front_center_focus",
+          "score": 115.99,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "DFO8B15",
+          "weighted_support": 3.02
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 73.09,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.923
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8102,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.956
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_front_center_focus",
+          "score": 105.05,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "GIB8030",
+          "weighted_support": 1.92
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "DFO8815",
+          "score": 123.88,
+          "avg_conf": 70.95,
+          "pattern": "Antigo",
+          "candidate_count": 4
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 6
+    },
+    {
+      "image": "data/uploads/placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "front_center_focus:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 7
+    },
+    {
+      "image": "data/uploads/placa_sddefault.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "center_lower_focus:tesseract_low_reliability_abstained;center_guess:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 8
+    },
+    {
+      "image": "data/uploads/placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "ROI limpa de placa usada como referencia",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 9
+    },
+    {
+      "image": "data/uploads/placa_plate_test_degraded.jpg",
+      "kind": "crop",
+      "notes": "ROI degradada de placa para regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 10
+    },
+    {
+      "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "DFO8815",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "DFO8815",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 6,
+          "best_score": 110.06,
+          "avg_conf": 66.85
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 66.85,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 8.591
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7711,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.9099
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_full_image",
+          "score": 110.06,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "DFO8815",
+          "weighted_support": 8.59
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 65.3,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.787
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7711,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.9099
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_full_image",
+          "score": 106.76,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OGO8819",
+          "weighted_support": 2.79
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 66.85,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.809
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7711,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.9099
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_full_image",
+          "score": 105.17,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "DFO8B15",
+          "weighted_support": 1.81
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "DFO8815",
+          "score": 110.06,
+          "avg_conf": 66.85,
+          "pattern": "Antigo",
+          "candidate_count": 6
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 11
+    },
+    {
+      "image": "data/uploads/placa_placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "front_center_focus:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 12
+    },
+    {
+      "image": "data/uploads/placa_placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop de placa limpa",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 6,
+        "engines_executed": 2,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 13
+    },
+    {
+      "image": "data/uploads/relatorio_sddefault.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena sddefault",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "AMX3640",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "AMX3640",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 179.59,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.1
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_focus",
+          "score": 179.59,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "text": "AMX3640",
+          "weighted_support": 3.1
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "AMX3640",
+          "score": 179.59,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "haar_1:tesseract_low_reliability_abstained",
+        "haar_1:rapidocr_low_reliability_abstained;raw_haar_1:rapidocr_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 14
+    },
+    {
+      "image": "data/uploads/relatorio_20171119_154214_ch6-1024x576.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena 20171119",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "OFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 4,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "OEO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 159.23,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 6,
+          "best_score": 110.44,
+          "avg_conf": 64.59
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 64.59,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 8.631
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7773,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.9172
+            }
+          },
+          "pattern": "Antigo",
+          "region": "lower_wide_focus",
+          "score": 110.44,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8819",
+          "weighted_support": 8.63
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.036
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "roi_1",
+          "score": 159.23,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "text": "OEO8819",
+          "weighted_support": 3.04
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 64.59,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.798
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7773,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.9172
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "lower_wide_focus",
+          "score": 105.55,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8B19",
+          "weighted_support": 2.8
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 70.61,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.839
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7773,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.9172
+            }
+          },
+          "pattern": "Antigo",
+          "region": "lower_wide_focus",
+          "score": 105.52,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "GOB8030",
+          "weighted_support": 1.84
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "OEO8819",
+          "score": 159.23,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 110.44,
+          "avg_conf": 64.59,
+          "pattern": "Antigo",
+          "candidate_count": 6
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 15
+    },
+    {
+      "image": "data/uploads/relatorio_10458347_x216.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena 10458347",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 4,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 178.62,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "UIZ0EF0",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 8,
+          "best_score": 98.54,
+          "avg_conf": 69.28
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.1
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_focus",
+          "score": 178.62,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "text": "PXZ9391",
+          "weighted_support": 3.1
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 69.28,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 3.549
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5473,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.6458
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 98.54,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "UIZ0EF0",
+          "weighted_support": 3.55
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 69.28,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.123
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5473,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.6458
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 89.54,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "GJU1Z0E",
+          "weighted_support": 1.12
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 69.28,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.722
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5473,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.6458
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 88.7,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "HGJUI20",
+          "weighted_support": 0.72
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "PXZ9391",
+          "score": 178.62,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "UIZ0EF0",
+          "score": 98.54,
+          "avg_conf": 69.28,
+          "pattern": "Indefinido",
+          "candidate_count": 8
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "haar_1:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 16
+    },
+    {
+      "image": "data/uploads/relatorio_plate_test.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF limpo para validar o probe em PDF",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 179.09,
+      "observed_best_confidence": 88.32,
+      "observed_best_weighted_support": 21.56,
+      "observed_best_support_count": 3,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 3,
+      "engines_considered": 3,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 179.09,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 138.09,
+          "avg_conf": 88.32
+        },
+        "tesseract": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 126.1,
+          "avg_conf": 86.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 88.32,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.1,
+            "rapidocr": 12.255,
+            "tesseract": 2.708
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            },
+            "rapidocr": {
+              "factor": 0.9967,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1762
+            },
+            "tesseract": {
+              "factor": 0.5572,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.2675
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_focus",
+          "score": 179.09,
+          "support_count": 3,
+          "support_engines": [
+            "pdf_probe",
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1234",
+          "weighted_support": 21.56
+        },
+        {
+          "agreement_ratio": 66.7,
+          "avg_conf": 88.32,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 3.977,
+            "tesseract": 0.884
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.9967,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1762
+            },
+            "tesseract": {
+              "factor": 0.5572,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.2675
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "detected_4",
+          "score": 133.25,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1Z34",
+          "weighted_support": 6.61
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "ABC1234",
+          "score": 179.09,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 138.09,
+          "avg_conf": 88.32,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "ABC1234",
+          "score": 126.1,
+          "avg_conf": 86.0,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        }
+      },
+      "warnings": [
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 3,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 88.3,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 17
+    },
+    {
+      "image": "data/uploads/relatorio_plate_test_degraded.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF degradado para regressao dura",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "LOW9204",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "LOW9204",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 169.0,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.094
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_focus",
+          "score": 169.0,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "text": "LOW9204",
+          "weighted_support": 3.09
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "LOW9204",
+          "score": 169.0,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "haar_1:tesseract_low_reliability_abstained;raw_haar_1:tesseract_low_reliability_abstained",
+        "haar_1:rapidocr_low_reliability_abstained;raw_haar_1:rapidocr_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 18
+    },
+    {
+      "image": "data/uploads/relatorio_placa_20171119_154214_ch6-1024x576.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa gerado a partir da cena 20171119",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "OFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 168.9,
+      "observed_best_confidence": 82.0,
+      "observed_best_weighted_support": 13.51,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": false,
+      "top_candidate_text": "OFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 168.9,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 4,
+          "best_score": 117.39,
+          "avg_conf": 77.49
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.094,
+            "rapidocr": 8.665
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            },
+            "rapidocr": {
+              "factor": 0.7502,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.8853
+            }
+          },
+          "pattern": "Antigo",
+          "region": "front_center_focus",
+          "score": 168.9,
+          "support_count": 2,
+          "support_engines": [
+            "pdf_probe",
+            "rapidocr"
+          ],
+          "text": "OFO8819",
+          "weighted_support": 13.51
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 77.49,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.819
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7502,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.8853
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "front_center_focus",
+          "score": 114.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8B19",
+          "weighted_support": 2.82
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 76.73,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.826
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7502,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.8853
+            }
+          },
+          "pattern": "Antigo",
+          "region": "front_center_focus",
+          "score": 113.15,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OGO8819",
+          "weighted_support": 1.83
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "OFO8819",
+          "score": 168.9,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 117.39,
+          "avg_conf": 77.49,
+          "pattern": "Antigo",
+          "candidate_count": 4
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "front_center_focus:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 82.0,
+        "evidence_level": "MEDIA",
+        "manual_review_required": true,
+        "reasons": [
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 19
+    },
+    {
+      "image": "data/uploads/relatorio_placa_10458347_x216.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa gerado a partir da cena 10458347",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "COR0O00",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 4,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "COR0O00",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 162.55,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "TAB9942",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 8,
+          "best_score": 81.1,
+          "avg_conf": 7.88
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.056
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_focus",
+          "score": 162.55,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "text": "COR0O00",
+          "weighted_support": 3.06
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 7.88,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.72
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1931,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0927
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 81.1,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "TAB9942",
+          "weighted_support": 0.72
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 7.88,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.236
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1931,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0927
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 81.1,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "BTA8994",
+          "weighted_support": 0.24
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 31.5,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.072
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1931,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0927
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "center_guess",
+          "score": 43.85,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "9BT4899",
+          "weighted_support": 0.07
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "COR0O00",
+          "score": 162.55,
+          "avg_conf": 82.0,
+          "pattern": "Mercosul",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "TAB9942",
+          "score": 81.1,
+          "avg_conf": 7.88,
+          "pattern": "Antigo",
+          "candidate_count": 8
+        }
+      },
+      "warnings": [
+        "raw_center_guess:tesseract_low_reliability_abstained",
+        "center_guess:rapidocr_low_reliability_abstained;raw_center_guess:rapidocr_low_reliability_abstained;full_image:rapidocr_low_reliability_abstained",
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 20
+    },
+    {
+      "image": "data/uploads/relatorio_placa_plate_test.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa limpa para reforcar a regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "LOW8434",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 4,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "LOW8434",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 169.81,
+          "avg_conf": 82.0
+        },
+        "rapidocr": {
+          "text": "UTS7A7U",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 8,
+          "best_score": 96.56,
+          "avg_conf": 68.19
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 82.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 3.099
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_focus",
+          "score": 169.81,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "text": "LOW8434",
+          "weighted_support": 3.1
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 68.19,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 3.468
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5408,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.6381
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 96.56,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "UTS7A7U",
+          "weighted_support": 3.47
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 68.19,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.108
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5408,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.6381
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 90.06,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "PUT5TA7",
+          "weighted_support": 1.11
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 68.19,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.714
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5408,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.6381
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 88.16,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "PUT57A7",
+          "weighted_support": 0.71
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "LOW8434",
+          "score": 169.81,
+          "avg_conf": 82.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "UTS7A7U",
+          "score": 96.56,
+          "avg_conf": 68.19,
+          "pattern": "Indefinido",
+          "candidate_count": 8
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 3,
+        "engines_configured": 3,
+        "engines_disabled": 5,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 3,
+        "engines_registered": 8,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 2,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "pdf_probe": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 21
+    }
+  ]
+}

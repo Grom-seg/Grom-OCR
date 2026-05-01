@@ -1,0 +1,20 @@
+{
+  "process_status_code": 400,
+  "process_analysis_id": "",
+  "process_frame_sampling": {},
+  "process_selected_candidate_ids": [],
+  "process_selected_target": {},
+  "process_best_result": {},
+  "process_report_url": "",
+  "process_manifest_url": "",
+  "finalize_status_code": null,
+  "finalize_selected_candidate_ids": [],
+  "finalize_selected_target": {},
+  "finalize_selected_targets": [],
+  "finalize_best_result": {},
+  "finalize_report_url": "",
+  "finalize_manifest_url": "",
+  "finalize_evidence_manifest_url": "",
+  "finalize_contact_sheet_url": "",
+  "finalize_comparison_sheet_url": ""
+}

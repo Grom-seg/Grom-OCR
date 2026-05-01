@@ -1,0 +1,112 @@
+{
+  "geometry": {
+    "available": true,
+    "canonical_shape": [
+      128,
+      534
+    ],
+    "band_shape": [
+      80,
+      534
+    ],
+    "polarity": "bright_chars",
+    "band_y_range": [
+      38,
+      118
+    ],
+    "component_count": 8,
+    "right_side_count": 4,
+    "rightmost_component": {
+      "x": 420,
+      "y": 0,
+      "w": 13,
+      "h": 54,
+      "area": 619,
+      "aspect": 0.241,
+      "fill_ratio": 0.882,
+      "center_x_ratio": 0.799,
+      "height_ratio": 0.675
+    },
+    "comparison": {
+      "median_prev_aspect": 0.906,
+      "median_prev_width": 48.0,
+      "aspect_vs_prev": 0.266,
+      "width_vs_prev": 0.271
+    },
+    "profile_score": 61.807,
+    "tail_digit_one_confidence": 100.0,
+    "tail_digit_suggested": "1",
+    "tail_digit_geometry_label": "vertical_slim_digit"
+  },
+  "refine": {
+    "text": "PXZ9991",
+    "avg_conf": 82.0,
+    "score": 124.0,
+    "pattern": "Antigo",
+    "region": "geometry_tail_digit_refine_plate_crop",
+    "chars": [],
+    "support_count": 1,
+    "selection_reason": "tail_digit_geometry_refine",
+    "tail_digit_geometry": {
+      "available": true,
+      "canonical_shape": [
+        128,
+        534
+      ],
+      "band_shape": [
+        80,
+        534
+      ],
+      "polarity": "bright_chars",
+      "band_y_range": [
+        38,
+        118
+      ],
+      "component_count": 8,
+      "right_side_count": 4,
+      "rightmost_component": {
+        "x": 420,
+        "y": 0,
+        "w": 13,
+        "h": 54,
+        "area": 619,
+        "aspect": 0.241,
+        "fill_ratio": 0.882,
+        "center_x_ratio": 0.799,
+        "height_ratio": 0.675
+      },
+      "comparison": {
+        "median_prev_aspect": 0.906,
+        "median_prev_width": 48.0,
+        "aspect_vs_prev": 0.266,
+        "width_vs_prev": 0.271
+      },
+      "profile_score": 61.807,
+      "tail_digit_one_confidence": 100.0,
+      "tail_digit_suggested": "1",
+      "tail_digit_geometry_label": "vertical_slim_digit"
+    },
+    "geometry_refine_source": "C:\\Grom_OCR\\data\\uploads\\placa_10458347_x216.jpg",
+    "warning": "geometry_tail_digit_refine",
+    "candidates": [
+      {
+        "text": "PXZ9991",
+        "avg_conf": 82.0,
+        "score": 124.0,
+        "pattern": "Antigo",
+        "origin": "tail_digit_geometry_refine",
+        "region": "geometry_tail_digit_refine_plate_crop",
+        "hits": 1
+      },
+      {
+        "text": "PXZ9999",
+        "avg_conf": 59.81,
+        "score": 106.0,
+        "pattern": "Antigo",
+        "origin": "ensemble_anchor_before_geometry",
+        "region": "raw_yolo_roi",
+        "hits": 1
+      }
+    ]
+  }
+}

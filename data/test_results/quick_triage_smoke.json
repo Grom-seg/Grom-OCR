@@ -1,0 +1,52 @@
+[
+  {
+    "file": "teste.jpg",
+    "http_status": 200,
+    "elapsed_seconds": 3.55,
+    "status": "TRIAGEM_NEGATIVA",
+    "triage_status": "insuficiente",
+    "material_minimo_ocr": false,
+    "triage_score": 21.7,
+    "quick_hint_text": "",
+    "quick_hint_pattern": "Indefinido",
+    "quick_probe_engines": [],
+    "selected_region": "center_lower_focus",
+    "recommended_next_step": "solicitar_nova_captura_ou_recorte_manual",
+    "reasons": [
+      "roi_fraco_para_ocr",
+      "qualidade_visual_critica",
+      "integridade_de_entrada_reduzida",
+      "sem_texto_rapido_util",
+      "sinal_ocr_rapido_fraco"
+    ],
+    "strengths": [
+      "roi_detectado",
+      "roi_principal:center_lower_focus"
+    ]
+  },
+  {
+    "file": "fiat.jpg",
+    "http_status": 200,
+    "elapsed_seconds": 14.45,
+    "status": "TRIAGEM_APTA",
+    "triage_status": "apto_ocr",
+    "material_minimo_ocr": true,
+    "triage_score": 95.2,
+    "quick_hint_text": "REI3G69",
+    "quick_hint_pattern": "Mercosul",
+    "quick_probe_engines": [
+      "rapidocr_quick"
+    ],
+    "selected_region": "haar_1",
+    "recommended_next_step": "seguir_com_ocr_completo",
+    "reasons": [],
+    "strengths": [
+      "roi_detectado",
+      "roi_principal:haar_1",
+      "roi_com_qualidade_suficiente",
+      "nitidez_e_contraste_adequados",
+      "texto_rapido_compativel_com_placa",
+      "sinal_ocr_rapido_forte"
+    ]
+  }
+]

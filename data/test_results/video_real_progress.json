@@ -1,0 +1,5 @@
+{
+  "analysis_id": "video_92dcd3414d3c4268",
+  "error": "Nenhum quadro foi processado com sucesso",
+  "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 89, in <module>\nRuntimeError: Nenhum quadro foi processado com sucesso\n"
+}

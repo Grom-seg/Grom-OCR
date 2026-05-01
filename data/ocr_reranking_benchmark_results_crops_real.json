@@ -1,0 +1,2130 @@
+{
+  "generated_at_utc": "2026-04-11T01:21:10.047772Z",
+  "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest_crops_real.json",
+  "summary": {
+    "total": 10,
+    "matched": 4,
+    "accuracy_percent": 40.0,
+    "top_candidate_match_count": 4,
+    "top_candidate_match_rate_percent": 40.0,
+    "expected_in_top_candidates_count": 4,
+    "expected_in_top_candidates_rate_percent": 40.0,
+    "avg_expected_rank": 1.0,
+    "median_expected_rank": 1.0,
+    "avg_best_weighted_support_matched": 30.613,
+    "avg_best_weighted_support_mismatched": 0.0,
+    "best_engine_counts": {
+      "rapidocr": 3,
+      "microcalibration_manual": 1
+    },
+    "per_engine_summary": {
+      "microcalibration_manual": {
+        "total": 1,
+        "top_match": 1,
+        "candidate_found": 1,
+        "top_match_rate_percent": 100.0,
+        "candidate_recall_rate_percent": 100.0,
+        "mean_candidate_rank": 1.0,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 100.0,
+        "mean_top_confidence": 100.0
+      },
+      "rapidocr": {
+        "total": 10,
+        "top_match": 3,
+        "candidate_found": 3,
+        "top_match_rate_percent": 30.0,
+        "candidate_recall_rate_percent": 30.0,
+        "mean_candidate_rank": 1.0,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 55.07,
+        "mean_top_confidence": 34.04
+      },
+      "tesseract": {
+        "total": 10,
+        "top_match": 1,
+        "candidate_found": 3,
+        "top_match_rate_percent": 10.0,
+        "candidate_recall_rate_percent": 30.0,
+        "mean_candidate_rank": 2.0,
+        "median_candidate_rank": 2.0,
+        "mean_top_score": 52.74,
+        "mean_top_confidence": 21.88
+      }
+    }
+  },
+  "results": [
+    {
+      "image": "data/uploads/plate_test.png",
+      "kind": "crop",
+      "notes": "Recorte limpo de placa para calibracao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "rapidocr",
+      "observed_best_score": 149.52,
+      "observed_best_confidence": 91.8,
+      "observed_best_weighted_support": 7.48,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_fallback",
+      "observed_best_acceptance_reason": "style_consistent_single_engine",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 149.52,
+          "avg_conf": 91.8
+        },
+        "tesseract": {
+          "text": "ABC1254",
+          "top_match": false,
+          "candidate_rank": 3,
+          "candidate_found": true,
+          "candidate_count": 15,
+          "best_score": 149.2,
+          "avg_conf": 74.33
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 91.8,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 5.014,
+            "tesseract": 0.232
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4965,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4409
+            },
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "yolo_roi",
+          "score": 149.52,
+          "style_bonus_total": 1.094,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1234",
+          "weighted_support": 7.0
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 91.8,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.425,
+            "tesseract": 0.133
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4965,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4409
+            },
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "yolo_roi",
+          "score": 140.68,
+          "style_bonus_total": -0.717,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1Z34",
+          "weighted_support": 3.31
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 74.33,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 1.177
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_yolo_roi",
+          "score": 149.2,
+          "style_bonus_total": 0.73,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "ABC1254",
+          "weighted_support": 1.18
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 74.33,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.338
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_yolo_roi",
+          "score": 147.36,
+          "style_bonus_total": -0.358,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "ABC1Z54",
+          "weighted_support": 0.34
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 80.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.157
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_center_guess",
+          "score": 120.1,
+          "style_bonus_total": 0.365,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1234",
+          "weighted_support": 0.16
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 80.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.137
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_center_guess",
+          "score": 118.26,
+          "style_bonus_total": -0.358,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1Z34",
+          "weighted_support": 0.14
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 13.71,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.132
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1937,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 98.7,
+          "style_bonus_total": 0.365,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1254",
+          "weighted_support": 0.13
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 149.52,
+          "avg_conf": 91.8,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "ABC1254",
+          "score": 149.2,
+          "avg_conf": 74.33,
+          "pattern": "Antigo",
+          "candidate_count": 15
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 91.8,
+        "evidence_level": "ALTA",
+        "manual_review_required": true,
+        "reasons": [
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "ALTA",
+      "index": 1
+    },
+    {
+      "image": "data/uploads/plate_test_degraded.png",
+      "kind": "crop",
+      "notes": "Recorte degradado para calibracao e regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "IBC1234",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 15,
+          "best_score": 104.4,
+          "avg_conf": 28.25
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 28.25,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.696
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_center_guess",
+          "score": 104.4,
+          "style_bonus_total": -0.724,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1234",
+          "weighted_support": 0.7
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 28.25,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.264
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_center_guess",
+          "score": 102.56,
+          "style_bonus_total": 0.368,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IBC1Z34",
+          "weighted_support": 0.26
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 28.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.157
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_front_center_focus",
+          "score": 68.1,
+          "style_bonus_total": 0.368,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "SUI2L04",
+          "weighted_support": 0.16
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 28.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.087
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_front_center_focus",
+          "score": 66.26,
+          "style_bonus_total": -0.362,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "SUI2104",
+          "weighted_support": 0.09
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 1.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.091
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_front_center_focus",
+          "score": 41.1,
+          "style_bonus_total": 0.368,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "SUI1Z54",
+          "weighted_support": 0.09
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.074
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 40.1,
+          "style_bonus_total": -0.362,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "GBC1234",
+          "weighted_support": 0.07
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 1.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.074
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1587,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0873
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_front_center_focus",
+          "score": 39.26,
+          "style_bonus_total": -0.362,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "SUI1254",
+          "weighted_support": 0.07
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "score": 104.4,
+          "avg_conf": 28.25,
+          "pattern": "Antigo",
+          "candidate_count": 15
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 2
+    },
+    {
+      "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 3
+    },
+    {
+      "image": "data/uploads/placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "PXZ9391",
+      "observed_best_engine": "microcalibration_manual",
+      "observed_best_score": 100.0,
+      "observed_best_confidence": 100.0,
+      "observed_best_weighted_support": 100.0,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "microcalibration_manual": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 1,
+          "best_score": 100.0,
+          "avg_conf": 100.0
+        },
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 100.0,
+          "best_law_score": 100.0,
+          "engine": "microcalibration_manual",
+          "engine_contributions": {
+            "manual_review": 100.0
+          },
+          "engine_weights": {
+            "manual_review": {
+              "factor": 1.0,
+              "mode": "manual",
+              "reason": "microcalibration_override",
+              "weight": 1.0
+            }
+          },
+          "pattern": "Antigo",
+          "region": "manual_review",
+          "score": 100.0,
+          "support_count": 1,
+          "support_engines": [
+            "manual_review"
+          ],
+          "text": "PXZ9391",
+          "weighted_support": 100.0
+        }
+      ],
+      "engine_blocks": {
+        "microcalibration_manual": {
+          "text": "PXZ9391",
+          "score": 100.0,
+          "avg_conf": 100.0,
+          "pattern": "Antigo",
+          "candidate_count": 1
+        },
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "microcalibration_manual_override_applied",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 100.0,
+        "display_evidence_level": "RATIFICADA_MANUALMENTE",
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos",
+          "microcalibracao_manual_aplicada"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 4
+    },
+    {
+      "image": "data/uploads/placa_sddefault.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "OIX3640",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "OIX3640",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 9,
+          "best_score": 101.79,
+          "avg_conf": 63.64
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 4.751
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_full_image",
+          "score": 101.79,
+          "style_bonus_total": 0.747,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OIX3640",
+          "weighted_support": 4.75
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.332
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_full_image",
+          "score": 98.4,
+          "style_bonus_total": -0.369,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OIX3G40",
+          "weighted_support": 1.33
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.474
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 71.97,
+          "style_bonus_total": -0.075,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "IOIX364",
+          "weighted_support": 0.47
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 50.64,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.286
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 64.21,
+          "style_bonus_total": -0.075,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OULPR05",
+          "weighted_support": 0.29
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 57.06,
+          "best_law_score": 57.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.278
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 63.31,
+          "style_bonus_total": -0.075,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "SPS0RUA",
+          "weighted_support": 0.28
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 71.48,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.119
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 57.47,
+          "style_bonus_total": -0.075,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "A3040",
+          "weighted_support": 0.12
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.106
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 54.64,
+          "style_bonus_total": -0.075,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "101X3640",
+          "weighted_support": 0.11
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "OIX3640",
+          "score": 101.79,
+          "avg_conf": 63.64,
+          "pattern": "Antigo",
+          "candidate_count": 9
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 5
+    },
+    {
+      "image": "data/uploads/placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "ROI limpa de placa usada como referencia",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "rapidocr",
+      "observed_best_score": 149.62,
+      "observed_best_confidence": 93.05,
+      "observed_best_weighted_support": 7.48,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_fallback",
+      "observed_best_acceptance_reason": "style_consistent_single_engine",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 149.62,
+          "avg_conf": 93.05
+        },
+        "tesseract": {
+          "text": "ABC1254",
+          "top_match": false,
+          "candidate_rank": 2,
+          "candidate_found": true,
+          "candidate_count": 15,
+          "best_score": 140.6,
+          "avg_conf": 70.67
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 93.05,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 9.003,
+            "tesseract": 0.346
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8885,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7889
+            },
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Antigo",
+          "region": "yolo_roi",
+          "score": 149.62,
+          "style_bonus_total": 1.121,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1234",
+          "weighted_support": 11.1
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 93.05,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.551,
+            "tesseract": 0.128
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8885,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7889
+            },
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "yolo_roi",
+          "score": 140.78,
+          "style_bonus_total": -0.738,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1Z34",
+          "weighted_support": 4.43
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 70.67,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 1.123
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_full_image",
+          "score": 140.6,
+          "style_bonus_total": 0.747,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "ABC1254",
+          "weighted_support": 1.12
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 70.67,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.207
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_full_image",
+          "score": 138.76,
+          "style_bonus_total": -0.369,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "ABC1Z54",
+          "weighted_support": 0.21
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 29.5,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.127
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_yolo_roi",
+          "score": 78.7,
+          "style_bonus_total": 0.374,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "BCI2354",
+          "weighted_support": 0.13
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 29.5,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.126
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_yolo_roi",
+          "score": 76.2,
+          "style_bonus_total": 0.374,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "ABC1235",
+          "weighted_support": 0.13
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 29.5,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.106
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1886,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.1038
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_yolo_roi",
+          "score": 74.36,
+          "style_bonus_total": -0.369,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "ABC1Z35",
+          "weighted_support": 0.11
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 149.62,
+          "avg_conf": 93.05,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "ABC1254",
+          "score": 140.6,
+          "avg_conf": 70.67,
+          "pattern": "Antigo",
+          "candidate_count": 15
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 93.0,
+        "evidence_level": "ALTA",
+        "manual_review_required": true,
+        "reasons": [
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "ALTA",
+      "index": 6
+    },
+    {
+      "image": "data/uploads/placa_plate_test_degraded.jpg",
+      "kind": "crop",
+      "notes": "ROI degradada de placa para regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 7
+    },
+    {
+      "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 8
+    },
+    {
+      "image": "data/uploads/placa_placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 9
+    },
+    {
+      "image": "data/uploads/placa_placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop de placa limpa",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "rapidocr",
+      "observed_best_score": 149.72,
+      "observed_best_confidence": 91.92,
+      "observed_best_weighted_support": 7.49,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_fallback",
+      "observed_best_acceptance_reason": "style_consistent_single_engine",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 149.72,
+          "avg_conf": 91.92
+        },
+        "tesseract": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 15,
+          "best_score": 133.2,
+          "avg_conf": 45.5
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 91.92,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 8.989,
+            "tesseract": 0.924
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8885,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7889
+            },
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_full_image",
+          "score": 149.72,
+          "style_bonus_total": 1.494,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1234",
+          "weighted_support": 11.66
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 91.92,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.546,
+            "tesseract": 0.262
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8885,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7889
+            },
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_full_image",
+          "score": 140.88,
+          "style_bonus_total": -0.738,
+          "support_count": 2,
+          "support_engines": [
+            "rapidocr",
+            "tesseract"
+          ],
+          "text": "ABC1Z34",
+          "weighted_support": 4.56
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 37.4,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.17
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_center_guess",
+          "score": 77.5,
+          "style_bonus_total": 0.374,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "JCT2540",
+          "weighted_support": 0.17
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 12.5,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.103
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Antigo",
+          "region": "front_center_focus",
+          "score": 65.36,
+          "style_bonus_total": 0.374,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "DUI1204",
+          "weighted_support": 0.1
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 9.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.098
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_yolo_roi",
+          "score": 49.1,
+          "style_bonus_total": 0.374,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "IOO1234",
+          "weighted_support": 0.1
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 37.4,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.095
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_center_guess",
+          "score": 75.66,
+          "style_bonus_total": -0.369,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "JCT2S40",
+          "weighted_support": 0.09
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 12.5,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.087
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1645,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0905
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "front_center_focus",
+          "score": 67.2,
+          "style_bonus_total": -0.369,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "text": "DUI1Z04",
+          "weighted_support": 0.09
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 149.72,
+          "avg_conf": 91.92,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "ABC1234",
+          "score": 133.2,
+          "avg_conf": 45.5,
+          "pattern": "Antigo",
+          "candidate_count": 15
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 1,
+        "engines_configured": 1,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 1,
+        "engines_registered": 1,
+        "engines_skipped": 0,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r3"
+      },
+      "ocr_engine_status": {
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 91.9,
+        "evidence_level": "ALTA",
+        "manual_review_required": true,
+        "reasons": [
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "ALTA",
+      "index": 10
+    }
+  ]
+}

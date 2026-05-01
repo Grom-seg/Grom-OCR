@@ -1,0 +1,10 @@
+easyocr
+rapidocr-onnxruntime
+pypdfium2
+transformers
+sentencepiece
+safetensors
+python-doctr
+paddleocr
+paddlepaddle
+ultralytics

@@ -1,0 +1,219 @@
+[
+  {
+    "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+    "kind": "scene",
+    "expected_text": "DXP3457",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Cena veicular real com placa conhecida"
+  },
+  {
+    "image": "data/uploads/10458347_x216.jpg",
+    "kind": "scene",
+    "expected_text": "PXZ9391",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Cena veicular real com placa conhecida"
+  },
+  {
+    "image": "data/uploads/sddefault.jpg",
+    "kind": "scene",
+    "expected_text": "AMX3640",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Cena real adicional com OCR historicamente mais instavel"
+  },
+  {
+    "image": "data/uploads/plate_test.png",
+    "kind": "crop",
+    "expected_text": "ABC1234",
+    "difficulty": "easy",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Recorte limpo de placa para calibracao"
+  },
+  {
+    "image": "data/uploads/plate_test_degraded.png",
+    "kind": "crop",
+    "expected_text": "ABC1234",
+    "difficulty": "critical",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Recorte degradado para calibracao e regressao"
+  },
+  {
+    "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+    "kind": "crop",
+    "expected_text": "DXP3457",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "ROI de placa gerada a partir de cena real"
+  },
+  {
+    "image": "data/uploads/placa_10458347_x216.jpg",
+    "kind": "crop",
+    "expected_text": "PXZ9391",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "ROI de placa gerada a partir de cena real"
+  },
+  {
+    "image": "data/uploads/placa_sddefault.jpg",
+    "kind": "crop",
+    "expected_text": "AMX3640",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "ROI de placa gerada a partir de cena real"
+  },
+  {
+    "image": "data/uploads/placa_plate_test.jpg",
+    "kind": "crop",
+    "expected_text": "ABC1234",
+    "difficulty": "medium",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "ROI limpa de placa usada como referencia"
+  },
+  {
+    "image": "data/uploads/placa_plate_test_degraded.jpg",
+    "kind": "crop",
+    "expected_text": "ABC1234",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "ROI degradada de placa para regressao"
+  },
+  {
+    "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+    "kind": "crop",
+    "expected_text": "DXP3457",
+    "difficulty": "critical",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Crop de crop usado para testar robustez"
+  },
+  {
+    "image": "data/uploads/placa_placa_10458347_x216.jpg",
+    "kind": "crop",
+    "expected_text": "PXZ9391",
+    "difficulty": "critical",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Crop de crop usado para testar robustez"
+  },
+  {
+    "image": "data/uploads/placa_placa_plate_test.jpg",
+    "kind": "crop",
+    "expected_text": "ABC1234",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "plate_detector", "ocr_reranking"],
+    "notes": "Crop de crop de placa limpa"
+  },
+  {
+    "image": "data/uploads/relatorio_sddefault.pdf",
+    "kind": "pdf",
+    "expected_text": "AMX3640",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "Relatorio PDF real gerado a partir da cena sddefault"
+  },
+  {
+    "image": "data/uploads/relatorio_20171119_154214_ch6-1024x576.pdf",
+    "kind": "pdf",
+    "expected_text": "DXP3457",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "Relatorio PDF real gerado a partir da cena 20171119"
+  },
+  {
+    "image": "data/uploads/relatorio_10458347_x216.pdf",
+    "kind": "pdf",
+    "expected_text": "PXZ9391",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "Relatorio PDF real gerado a partir da cena 10458347"
+  },
+  {
+    "image": "data/uploads/relatorio_plate_test.pdf",
+    "kind": "pdf",
+    "expected_text": "ABC1234",
+    "difficulty": "medium",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "Relatorio PDF limpo para validar o probe em PDF"
+  },
+  {
+    "image": "data/uploads/relatorio_plate_test_degraded.pdf",
+    "kind": "pdf",
+    "expected_text": "ABC1234",
+    "difficulty": "critical",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "Relatorio PDF degradado para regressao dura"
+  },
+  {
+    "image": "data/uploads/relatorio_placa_20171119_154214_ch6-1024x576.pdf",
+    "kind": "pdf",
+    "expected_text": "DXP3457",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "PDF de placa gerado a partir da cena 20171119"
+  },
+  {
+    "image": "data/uploads/relatorio_placa_10458347_x216.pdf",
+    "kind": "pdf",
+    "expected_text": "PXZ9391",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "PDF de placa gerado a partir da cena 10458347"
+  },
+  {
+    "image": "data/uploads/relatorio_placa_plate_test.pdf",
+    "kind": "pdf",
+    "expected_text": "ABC1234",
+    "difficulty": "hard",
+    "targets": ["scene_preprocess", "ocr_reranking"],
+    "notes": "PDF de placa limpa para reforcar a regressao"
+  },
+  {
+    "image": "data/uploads/pdf_scene_placa_p1.jpg",
+    "kind": "scene",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Render de pagina PDF de placa para detector"
+  },
+  {
+    "image": "data/uploads/pdf_preview_placa_p1.jpg",
+    "kind": "crop",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Preview de PDF de placa para detector"
+  },
+  {
+    "image": "data/uploads/pdf_preview_placa_p2.jpg",
+    "kind": "crop",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Preview de PDF de placa para detector"
+  },
+  {
+    "image": "data/uploads/pdf_scene_relatorio_10458347_x216_5_p1.jpg",
+    "kind": "scene",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Render de pagina PDF de relatorio para detector"
+  },
+  {
+    "image": "data/uploads/pdf_preview_relatorio_10458347_x216_5_p1.jpg",
+    "kind": "crop",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Preview de PDF de relatorio para detector"
+  },
+  {
+    "image": "data/uploads/pdf_scene_x_p1.jpg",
+    "kind": "scene",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Render de pagina PDF curta para detector"
+  },
+  {
+    "image": "data/uploads/pdf_preview_x_p1.jpg",
+    "kind": "crop",
+    "difficulty": "hard",
+    "targets": ["plate_detector"],
+    "notes": "Preview de PDF curto para detector"
+  }
+]

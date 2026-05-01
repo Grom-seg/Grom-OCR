@@ -1,0 +1,48 @@
+{
+  "version": "2026-04-03",
+  "source": "builtin_default",
+  "thresholds": {
+    "aspect_target": 3.804,
+    "aspect_min": 1.7,
+    "aspect_max": 9.2,
+    "area_min_ratio": 0.0018,
+    "area_max_ratio": 0.42,
+    "min_image_width": 64,
+    "min_image_height": 32,
+    "min_box_width": 34,
+    "min_box_height": 14
+  },
+  "crop": {
+    "pad_ratio": 0.08,
+    "pad_ratio_small": 0.05,
+    "pad_ratio_large": -0.02,
+    "min_width": 58,
+    "min_height": 18
+  },
+  "quality": {
+    "aspect_target": 3.804,
+    "aspect_tolerance": 1.004,
+    "aspect_min": 1.5,
+    "aspect_max": 8.5,
+    "min_area": 4500
+  },
+  "loaded_from": "benchmark_suggestion",
+  "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+  "load_error": "",
+  "benchmark_summary": {
+    "total": 20,
+    "usable": 20,
+    "scene_samples": 6,
+    "scene_roi_detected": 6,
+    "scene_roi_rate_percent": 100.0,
+    "full_image_selected": 0,
+    "source_family_counts": {
+      "contour": 10,
+      "secondary": 5,
+      "heuristic": 4,
+      "haar": 1
+    },
+    "suggested_aspect_target": 3.804,
+    "suggested_quality_aspect_target": 3.804
+  }
+}

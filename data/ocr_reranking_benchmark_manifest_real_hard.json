@@ -1,0 +1,79 @@
+[
+  {
+    "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+    "kind": "scene",
+    "notes": "Cena veicular real com placa conhecida",
+    "difficulty": "hard",
+    "expected_text": "DXP3457"
+  },
+  {
+    "image": "data/uploads/10458347_x216.jpg",
+    "kind": "scene",
+    "notes": "Cena veicular real com placa conhecida",
+    "difficulty": "hard",
+    "expected_text": "PXZ9391"
+  },
+  {
+    "image": "data/uploads/sddefault.jpg",
+    "kind": "scene",
+    "notes": "Cena real adicional com OCR historicamente mais instavel",
+    "difficulty": "hard",
+    "expected_text": "AMX3640"
+  },
+  {
+    "image": "data/uploads/plate_test_degraded.png",
+    "kind": "crop",
+    "notes": "Recorte degradado para calibracao e regressao",
+    "difficulty": "critical",
+    "expected_text": "ABC1234"
+  },
+  {
+    "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+    "kind": "crop",
+    "notes": "ROI de placa gerada a partir de cena real",
+    "difficulty": "hard",
+    "expected_text": "DXP3457"
+  },
+  {
+    "image": "data/uploads/placa_10458347_x216.jpg",
+    "kind": "crop",
+    "notes": "ROI de placa gerada a partir de cena real",
+    "difficulty": "hard",
+    "expected_text": "PXZ9391"
+  },
+  {
+    "image": "data/uploads/placa_sddefault.jpg",
+    "kind": "crop",
+    "notes": "ROI de placa gerada a partir de cena real",
+    "difficulty": "hard",
+    "expected_text": "AMX3640"
+  },
+  {
+    "image": "data/uploads/placa_plate_test_degraded.jpg",
+    "kind": "crop",
+    "notes": "ROI degradada de placa para regressao",
+    "difficulty": "hard",
+    "expected_text": "ABC1234"
+  },
+  {
+    "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+    "kind": "crop",
+    "notes": "Crop de crop usado para testar robustez",
+    "difficulty": "critical",
+    "expected_text": "DXP3457"
+  },
+  {
+    "image": "data/uploads/placa_placa_10458347_x216.jpg",
+    "kind": "crop",
+    "notes": "Crop de crop usado para testar robustez",
+    "difficulty": "critical",
+    "expected_text": "PXZ9391"
+  },
+  {
+    "image": "data/uploads/placa_placa_plate_test.jpg",
+    "kind": "crop",
+    "notes": "Crop de crop de placa limpa",
+    "difficulty": "hard",
+    "expected_text": "ABC1234"
+  }
+]

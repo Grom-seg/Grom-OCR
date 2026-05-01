@@ -1,0 +1,338 @@
+{
+  "generated_at_utc": "2026-04-04T22:32:06.702722Z",
+  "run_id": "20260404T213025Z",
+  "project_root": "C:\\Grom_OCR",
+  "python_executable": "C:\\Grom_OCR\\.venv\\Scripts\\python.exe",
+  "mode": "standard",
+  "include_real": false,
+  "api_url": "",
+  "refresh_manifests": false,
+  "output_root": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z",
+  "catalog_summary_path": "C:\\Grom_OCR\\data\\benchmark_catalog_summary.json",
+  "catalog_summary": {
+    "generated_at_utc": "2026-04-04T14:12:13.738985Z",
+    "catalog_path": "C:\\Grom_OCR\\data\\benchmark_catalog.json",
+    "total_catalog_items": 28,
+    "difficulty_counts": {
+      "critical": 4,
+      "easy": 1,
+      "hard": 21,
+      "medium": 2
+    },
+    "targets": {
+      "scene_preprocess": {
+        "count": 21,
+        "with_expected_text": 21,
+        "pdf_count": 8,
+        "difficulty_counts": {
+          "critical": 4,
+          "easy": 1,
+          "hard": 14,
+          "medium": 2
+        }
+      },
+      "scene_preprocess_hard": {
+        "count": 18,
+        "with_expected_text": 18,
+        "pdf_count": 7,
+        "difficulty_counts": {
+          "critical": 4,
+          "hard": 14
+        }
+      },
+      "plate_detector": {
+        "count": 20,
+        "with_expected_text": 13,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "easy": 1,
+          "hard": 15,
+          "medium": 1
+        }
+      },
+      "plate_detector_hard": {
+        "count": 18,
+        "with_expected_text": 11,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "hard": 15
+        }
+      },
+      "ocr_reranking": {
+        "count": 21,
+        "with_expected_text": 21,
+        "pdf_count": 8,
+        "difficulty_counts": {
+          "critical": 4,
+          "easy": 1,
+          "hard": 14,
+          "medium": 2
+        }
+      },
+      "ocr_reranking_hard": {
+        "count": 18,
+        "with_expected_text": 18,
+        "pdf_count": 7,
+        "difficulty_counts": {
+          "critical": 4,
+          "hard": 14
+        }
+      },
+      "ocr_reranking_real": {
+        "count": 13,
+        "with_expected_text": 13,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "easy": 1,
+          "hard": 8,
+          "medium": 1
+        }
+      },
+      "ocr_reranking_real_hard": {
+        "count": 11,
+        "with_expected_text": 11,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "hard": 8
+        }
+      },
+      "ocr_reranking_core_real": {
+        "count": 6,
+        "with_expected_text": 6,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "hard": 6
+        }
+      },
+      "ocr_reranking_core_real_hard": {
+        "count": 6,
+        "with_expected_text": 6,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "hard": 6
+        }
+      },
+      "ocr_reranking_crops_real": {
+        "count": 10,
+        "with_expected_text": 10,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "easy": 1,
+          "hard": 5,
+          "medium": 1
+        }
+      },
+      "ocr_reranking_crops_real_hard": {
+        "count": 8,
+        "with_expected_text": 8,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "hard": 5
+        }
+      }
+    }
+  },
+  "job_count": 3,
+  "job_reports": [
+    {
+      "benchmark": "scene_preprocess",
+      "group": "standard",
+      "name": "scene_preprocess_full",
+      "script": "benchmark_scene_preprocess.py",
+      "manifest": "C:\\Grom_OCR\\data\\scene_preprocess_benchmark_manifest.json",
+      "output": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\scene_preprocess_full\\scene_preprocess_full.json",
+      "calibration_output": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\scene_preprocess_full\\scene_preprocess_full.calibration.json",
+      "stdout_log": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\scene_preprocess_full\\stdout.log",
+      "stderr_log": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\scene_preprocess_full\\stderr.log",
+      "started_at_utc": "2026-04-04T21:30:25.307868Z",
+      "finished_at_utc": "2026-04-04T22:01:20.747553Z",
+      "duration_sec": 1855.44,
+      "returncode": 0,
+      "status": "ok",
+      "summary": {
+        "total": 21,
+        "matched": 1,
+        "accuracy_percent": 4.76,
+        "avg_confidence": 11.81,
+        "avg_improvement": 10.35,
+        "route": "/process",
+        "scenario_summary": {
+          "dark": {
+            "total": 3,
+            "correct": 0,
+            "accuracy_percent": 0.0,
+            "avg_confidence": 25.91,
+            "selected_variants": {
+              "pillow_equalize": 2,
+              "gray_world_equalize": 1
+            }
+          },
+          "balanced": {
+            "total": 8,
+            "correct": 0,
+            "accuracy_percent": 0.0,
+            "avg_confidence": 0.0,
+            "selected_variants": {
+              "gray_world_clahe_1.8": 3,
+              "original": 3,
+              "gray_world_equalize": 2
+            }
+          },
+          "bright": {
+            "total": 10,
+            "correct": 1,
+            "accuracy_percent": 10.0,
+            "avg_confidence": 17.03,
+            "selected_variants": {
+              "pillow_brightness_down": 7,
+              "pillow_equalize": 2,
+              "pillow_autocontrast": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "benchmark": "plate_detector",
+      "group": "standard",
+      "name": "plate_detector_full",
+      "script": "benchmark_plate_detector.py",
+      "manifest": "C:\\Grom_OCR\\data\\plate_detector_benchmark_manifest.json",
+      "output": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\plate_detector_full\\plate_detector_full.json",
+      "calibration_output": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\plate_detector_full\\plate_detector_full.calibration.json",
+      "stdout_log": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\plate_detector_full\\stdout.log",
+      "stderr_log": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\plate_detector_full\\stderr.log",
+      "started_at_utc": "2026-04-04T22:01:20.768912Z",
+      "finished_at_utc": "2026-04-04T22:01:42.409870Z",
+      "duration_sec": 21.641,
+      "returncode": 0,
+      "status": "ok",
+      "summary": {
+        "total": 20,
+        "scene_total": 6,
+        "crop_total": 14,
+        "roi_detected_total": 20,
+        "full_image_total": 0,
+        "scene_roi_rate_percent": 100.0,
+        "scene_fallback_rate_percent": 0.0,
+        "avg_selected_score": 103.49,
+        "avg_selected_quality_score": 87.09,
+        "selected_source_counts": {
+          "contour": 10,
+          "heuristic": 10
+        },
+        "quality_label_counts": {
+          "excelente": 13,
+          "boa": 5,
+          "regular": 2
+        },
+        "kind_counts": {
+          "crop": 14,
+          "scene": 6
+        }
+      }
+    },
+    {
+      "benchmark": "ocr_reranking",
+      "group": "standard",
+      "name": "ocr_reranking_full",
+      "script": "benchmark_ocr_reranking.py",
+      "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest.json",
+      "output": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\ocr_reranking_full\\ocr_reranking_full.json",
+      "calibration_output": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\ocr_reranking_full\\ocr_reranking_full.calibration.json",
+      "stdout_log": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\ocr_reranking_full\\stdout.log",
+      "stderr_log": "C:\\Grom_OCR\\data\\benchmark_runs_smoke\\20260404T213025Z\\standard\\ocr_reranking_full\\stderr.log",
+      "started_at_utc": "2026-04-04T22:01:42.432305Z",
+      "finished_at_utc": "2026-04-04T22:32:06.680779Z",
+      "duration_sec": 1824.248,
+      "returncode": 0,
+      "status": "ok",
+      "summary": {
+        "total": 21,
+        "matched": 1,
+        "accuracy_percent": 4.76,
+        "top_candidate_match_count": 3,
+        "top_candidate_match_rate_percent": 14.29,
+        "expected_in_top_candidates_count": 3,
+        "expected_in_top_candidates_rate_percent": 14.29,
+        "avg_expected_rank": 1.0,
+        "median_expected_rank": 1.0,
+        "avg_best_weighted_support_matched": 21.56,
+        "avg_best_weighted_support_mismatched": 1.256,
+        "best_engine_counts": {
+          "ensemble": 3
+        },
+        "per_engine_summary": {
+          "pdf_probe": {
+            "total": 8,
+            "top_match": 3,
+            "candidate_found": 0,
+            "top_match_rate_percent": 37.5,
+            "candidate_recall_rate_percent": 0.0,
+            "mean_candidate_rank": 0.0,
+            "median_candidate_rank": 0.0,
+            "mean_top_score": 170.85,
+            "mean_top_confidence": 82.0
+          },
+          "rapidocr": {
+            "total": 21,
+            "top_match": 1,
+            "candidate_found": 1,
+            "top_match_rate_percent": 4.76,
+            "candidate_recall_rate_percent": 4.76,
+            "mean_candidate_rank": 1.0,
+            "median_candidate_rank": 1.0,
+            "mean_top_score": 53.44,
+            "mean_top_confidence": 34.46
+          },
+          "tesseract": {
+            "total": 21,
+            "top_match": 1,
+            "candidate_found": 2,
+            "top_match_rate_percent": 4.76,
+            "candidate_recall_rate_percent": 9.52,
+            "mean_candidate_rank": 4.5,
+            "median_candidate_rank": 4.5,
+            "mean_top_score": 23.42,
+            "mean_top_confidence": 10.98
+          }
+        }
+      }
+    }
+  ],
+  "benchmark_summary": {
+    "ocr_reranking": {
+      "jobs": 1,
+      "ok": 1,
+      "failed": 0,
+      "duration_sec": 1824.248
+    },
+    "plate_detector": {
+      "jobs": 1,
+      "ok": 1,
+      "failed": 0,
+      "duration_sec": 21.641
+    },
+    "scene_preprocess": {
+      "jobs": 1,
+      "ok": 1,
+      "failed": 0,
+      "duration_sec": 1855.44
+    }
+  },
+  "group_summary": {
+    "standard": {
+      "jobs": 3,
+      "ok": 3,
+      "failed": 0,
+      "duration_sec": 3701.329
+    }
+  },
+  "overall_status": "ok"
+}

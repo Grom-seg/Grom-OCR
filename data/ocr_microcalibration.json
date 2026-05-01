@@ -1,0 +1,19 @@
+{
+  "version": "2026-04-05-r1",
+  "source": "manual_review_2026-04-05",
+  "overrides": {
+    "da809b85e65ace4b8a56f20b0b56a8f92b5523ee548283a37d526a93711dde01": {
+      "photo_filename": "placa_10458347_x216.jpg",
+      "raw_text": "PXZ9399",
+      "raw_engine": "rapidocr",
+      "manual_text": "PXZ9391",
+      "manual_review_required": true,
+      "status": "RATIFICADA_MANUALMENTE",
+      "decision": "CORRIGIDO_MANUAL",
+      "operator": "microcalibracao_isolada",
+      "notes": "Amostra pontual ajustada por conferencia humana; OCR bruto permaneceu em PXZ9399, mas a leitura ratificada visualmente e no historico auditavel foi PXZ9391.",
+      "source": "data/audit_events.log",
+      "reviewed_at_utc": "2026-04-05T13:50:00Z"
+    }
+  }
+}

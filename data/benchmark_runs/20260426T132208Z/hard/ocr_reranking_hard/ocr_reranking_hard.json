@@ -1,0 +1,3864 @@
+{
+  "generated_at_utc": "2026-04-26T14:36:42.766479Z",
+  "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest_hard.json",
+  "summary": {
+    "total": 18,
+    "matched": 3,
+    "accuracy_percent": 16.67,
+    "top_candidate_match_count": 5,
+    "top_candidate_match_rate_percent": 27.78,
+    "expected_in_top_candidates_count": 5,
+    "expected_in_top_candidates_rate_percent": 27.78,
+    "avg_expected_rank": 1.0,
+    "median_expected_rank": 1.0,
+    "avg_best_weighted_support_matched": 39.46,
+    "avg_best_weighted_support_mismatched": 2.015,
+    "best_engine_counts": {
+      "ensemble": 4,
+      "microcalibration_manual": 1,
+      "rapidocr": 1
+    },
+    "per_engine_summary": {
+      "microcalibration_manual": {
+        "total": 1,
+        "top_match": 1,
+        "candidate_found": 1,
+        "top_match_rate_percent": 100.0,
+        "candidate_recall_rate_percent": 100.0,
+        "mean_candidate_rank": 1.0,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 100.0,
+        "mean_top_confidence": 100.0
+      },
+      "pdf_probe": {
+        "total": 7,
+        "top_match": 4,
+        "candidate_found": 0,
+        "top_match_rate_percent": 57.14,
+        "candidate_recall_rate_percent": 0.0,
+        "mean_candidate_rank": 0.0,
+        "median_candidate_rank": 0.0,
+        "mean_top_score": 100.0,
+        "mean_top_confidence": 65.0
+      },
+      "rapidocr": {
+        "total": 18,
+        "top_match": 2,
+        "candidate_found": 2,
+        "top_match_rate_percent": 11.11,
+        "candidate_recall_rate_percent": 11.11,
+        "mean_candidate_rank": 1.0,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 70.57,
+        "mean_top_confidence": 45.95
+      },
+      "tesseract": {
+        "total": 18,
+        "top_match": 0,
+        "candidate_found": 1,
+        "top_match_rate_percent": 0.0,
+        "candidate_recall_rate_percent": 5.56,
+        "mean_candidate_rank": 8.0,
+        "median_candidate_rank": 8.0,
+        "mean_top_score": 9.64,
+        "mean_top_confidence": 3.26
+      }
+    }
+  },
+  "results": [
+    {
+      "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "DFO8819",
+      "observed_best_engine": "rapidocr",
+      "observed_best_score": 130.9,
+      "observed_best_confidence": 85.72,
+      "observed_best_weighted_support": 6.54,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_fallback",
+      "observed_best_acceptance_reason": "style_consistent_single_engine",
+      "matched": false,
+      "top_candidate_text": "DFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "DFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 130.9,
+          "avg_conf": 85.72
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 85.72,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 8.161
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8456,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7509
+            }
+          },
+          "pattern": "Antigo",
+          "region": "lower_wide_focus",
+          "score": 130.9,
+          "style_bonus_total": 0.73,
+          "style_rank_priority": 0.735,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.735,
+          "text": "DFO8819",
+          "weighted_support": 8.16
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 85.72,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.324
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8456,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7509
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "lower_wide_focus",
+          "score": 126.06,
+          "style_bonus_total": -0.358,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "DFO8B19",
+          "weighted_support": 2.32
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "DFO8819",
+          "score": 130.9,
+          "avg_conf": 85.72,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 85.7,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 1
+    },
+    {
+      "image": "data/uploads/10458347_x216.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "PXZ2T99",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 9,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "PXZ9999",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 103.47,
+          "avg_conf": 59.81
+        },
+        "tesseract": {
+          "text": "PXZ2991",
+          "top_match": false,
+          "candidate_rank": 8,
+          "candidate_found": true,
+          "candidate_count": 13,
+          "best_score": 92.2,
+          "avg_conf": 50.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 36.33,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.183
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1788,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0983
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_detected_3",
+          "score": 74.59,
+          "style_bonus_total": 0.375,
+          "style_rank_priority": 0.745,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.745,
+          "text": "PXZ2T99",
+          "weighted_support": 0.18
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 17.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.11
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1788,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0983
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_detected_3",
+          "score": 51.76,
+          "style_bonus_total": 0.375,
+          "style_rank_priority": 0.745,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.745,
+          "text": "KZZ9I69",
+          "weighted_support": 0.11
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 59.81,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 3.757
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4973,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4416
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 103.47,
+          "style_bonus_total": -0.742,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ9999",
+          "weighted_support": 3.76
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 50.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.796
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1788,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0983
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 92.2,
+          "style_bonus_total": -0.742,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ2991",
+          "weighted_support": 0.8
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 36.33,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.242
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1788,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0983
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 76.43,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ2799",
+          "weighted_support": 0.24
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 17.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.093
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1788,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0983
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 57.5,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "PKZ2916",
+          "weighted_support": 0.09
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 17.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.092
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1788,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0983
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 53.65,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "KZZ9169",
+          "weighted_support": 0.09
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 72.01,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.255
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4973,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4416
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_detected_3",
+          "score": 56.57,
+          "style_bonus_total": -0.076,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ99",
+          "weighted_support": 0.25
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "PXZ9999",
+          "score": 103.47,
+          "avg_conf": 59.81,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "PXZ2991",
+          "score": 92.2,
+          "avg_conf": 50.0,
+          "pattern": "Antigo",
+          "candidate_count": 13
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 2
+    },
+    {
+      "image": "data/uploads/sddefault.jpg",
+      "kind": "scene",
+      "notes": "Cena real adicional com OCR historicamente mais instavel",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 3
+    },
+    {
+      "image": "data/uploads/plate_test_degraded.png",
+      "kind": "crop",
+      "notes": "Recorte degradado para calibracao e regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "IBC1Z34",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 6,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 6,
+          "best_score": 81.4,
+          "avg_conf": 8.75
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 8.75,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.21
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_guess",
+          "score": 79.56,
+          "style_bonus_total": 0.368,
+          "style_rank_priority": 0.738,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.738,
+          "text": "IBC1Z34",
+          "weighted_support": 0.21
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.079
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_guess",
+          "score": 38.26,
+          "style_bonus_total": 0.368,
+          "style_rank_priority": 0.738,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.738,
+          "text": "GBC1Z34",
+          "weighted_support": 0.08
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 8.75,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.545
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 81.4,
+          "style_bonus_total": -0.724,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "IBC1234",
+          "weighted_support": 0.55
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.099
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 40.1,
+          "style_bonus_total": -0.362,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "GBC1234",
+          "weighted_support": 0.1
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 20.0,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.003
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 31.3,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "H1L04",
+          "weighted_support": 0.0
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 24.25,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.001
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "center_guess",
+          "score": 18.65,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "8C123A",
+          "weighted_support": 0.0
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "IBC1234",
+          "score": 81.4,
+          "avg_conf": 8.75,
+          "pattern": "Antigo",
+          "candidate_count": 6
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 4
+    },
+    {
+      "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "DFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "DFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 125.81,
+          "avg_conf": 78.53
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 78.53,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 4.508
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_center_guess",
+          "score": 125.81,
+          "style_bonus_total": 0.747,
+          "style_rank_priority": 0.744,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.744,
+          "text": "DFO8819",
+          "weighted_support": 4.51
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 78.53,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.275
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_center_guess",
+          "score": 120.97,
+          "style_bonus_total": -0.369,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "DFO8B19",
+          "weighted_support": 1.28
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "DFO8819",
+          "score": 125.81,
+          "avg_conf": 78.53,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 5
+    },
+    {
+      "image": "data/uploads/placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "PXZ9391",
+      "observed_best_engine": "microcalibration_manual",
+      "observed_best_score": 100.0,
+      "observed_best_confidence": 100.0,
+      "observed_best_weighted_support": 100.0,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": true,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 3,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "microcalibration_manual": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 1,
+          "best_score": 100.0,
+          "avg_conf": 100.0
+        },
+        "rapidocr": {
+          "text": "PXZ9399",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 98.78,
+          "avg_conf": 55.13
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 100.0,
+          "best_law_score": 100.0,
+          "engine": "microcalibration_manual",
+          "engine_contributions": {
+            "manual_review": 100.0
+          },
+          "engine_weights": {
+            "manual_review": {
+              "factor": 1.0,
+              "mode": "manual",
+              "reason": "microcalibration_override",
+              "weight": 1.0
+            }
+          },
+          "pattern": "Antigo",
+          "region": "manual_review",
+          "score": 100.0,
+          "support_count": 1,
+          "support_engines": [
+            "manual_review"
+          ],
+          "text": "PXZ9391",
+          "weighted_support": 100.0
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 55.13,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 6.612
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8901,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7904
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_input",
+          "score": 98.78,
+          "style_bonus_total": -0.696,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ9399",
+          "weighted_support": 6.61
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 72.25,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.46
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.8901,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.7904
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_input",
+          "score": 56.8,
+          "style_bonus_total": -0.072,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ93",
+          "weighted_support": 0.46
+        }
+      ],
+      "engine_blocks": {
+        "microcalibration_manual": {
+          "text": "PXZ9391",
+          "score": 100.0,
+          "avg_conf": 100.0,
+          "pattern": "Antigo",
+          "candidate_count": 1
+        },
+        "rapidocr": {
+          "text": "PXZ9399",
+          "score": 98.78,
+          "avg_conf": 55.13,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "microcalibration_manual_override_applied",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 100.0,
+        "display_evidence_level": "RATIFICADA_MANUALMENTE",
+        "evidence_level": "MEDIA",
+        "manual_review_required": true,
+        "reasons": [
+          "baixo_consenso_entre_motores",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "achados_periciais_criticos",
+          "microcalibracao_manual_aplicada"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 6
+    },
+    {
+      "image": "data/uploads/placa_sddefault.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "OIX3640",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "OIX3640",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 9,
+          "best_score": 101.79,
+          "avg_conf": 63.64
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 4.751
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_full_image",
+          "score": 101.79,
+          "style_bonus_total": 0.747,
+          "style_rank_priority": 0.744,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.744,
+          "text": "OIX3640",
+          "weighted_support": 4.75
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.332
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_full_image",
+          "score": 98.4,
+          "style_bonus_total": -0.369,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "OIX3G40",
+          "weighted_support": 1.33
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.474
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 71.97,
+          "style_bonus_total": -0.075,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "IOIX364",
+          "weighted_support": 0.47
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 50.64,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.286
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 64.21,
+          "style_bonus_total": -0.075,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "OULPR05",
+          "weighted_support": 0.29
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 57.06,
+          "best_law_score": 57.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.278
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 63.31,
+          "style_bonus_total": -0.075,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "SPS0RUA",
+          "weighted_support": 0.28
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 71.48,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.119
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 57.47,
+          "style_bonus_total": -0.075,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "A3040",
+          "weighted_support": 0.12
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.64,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.106
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5418,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.4811
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_full_image",
+          "score": 54.64,
+          "style_bonus_total": -0.075,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "101X3640",
+          "weighted_support": 0.11
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "OIX3640",
+          "score": 101.79,
+          "avg_conf": 63.64,
+          "pattern": "Antigo",
+          "candidate_count": 9
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 7
+    },
+    {
+      "image": "data/uploads/placa_plate_test_degraded.jpg",
+      "kind": "crop",
+      "notes": "ROI degradada de placa para regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 8
+    },
+    {
+      "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "DFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 124.72,
+      "observed_best_confidence": 83.12,
+      "observed_best_weighted_support": 10.54,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "style_consistent_single_engine",
+      "matched": false,
+      "top_candidate_text": "DFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 4,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 4,
+          "best_score": 125.45,
+          "avg_conf": 83.79
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 83.12,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.941
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6245,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5546
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_input",
+          "score": 124.72,
+          "style_bonus_total": 8.978,
+          "style_rank_priority": 1.902,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 2.902,
+          "text": "DFO8819",
+          "weighted_support": 10.54
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 83.12,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.72
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6245,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5546
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_input",
+          "score": 121.38,
+          "style_bonus_total": 8.235,
+          "style_rank_priority": 1.158,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 2.158,
+          "text": "DFO8B19",
+          "weighted_support": 9.32
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 83.79,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 5.953
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6245,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5546
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_input",
+          "score": 125.45,
+          "style_bonus_total": 0.747,
+          "style_rank_priority": 0.744,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.744,
+          "text": "OFO8819",
+          "weighted_support": 5.95
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 83.79,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.094
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6245,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5546
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_input",
+          "score": 122.11,
+          "style_bonus_total": -0.369,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "OFO8B19",
+          "weighted_support": 1.09
+        }
+      ],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 125.45,
+          "avg_conf": 83.79,
+          "pattern": "Antigo",
+          "candidate_count": 4
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 83.1,
+        "evidence_level": "MEDIA",
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 9
+    },
+    {
+      "image": "data/uploads/placa_placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 10
+    },
+    {
+      "image": "data/uploads/placa_placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop de placa limpa",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 11
+    },
+    {
+      "image": "data/uploads/relatorio_sddefault.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena sddefault",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "AMX3640",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "AMX3640",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 65.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.782
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 100.0,
+          "style_bonus_total": 0.365,
+          "style_rank_priority": 0.735,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "support_rank": 1.735,
+          "text": "AMX3640",
+          "weighted_support": 2.78
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "AMX3640",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 12
+    },
+    {
+      "image": "data/uploads/relatorio_20171119_154214_ch6-1024x576.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena 20171119",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "NTI6O84",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 8,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "NTI6O84",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "CHG6JP6",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 10,
+          "best_score": 77.1,
+          "avg_conf": 54.05
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 65.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.418
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 100.0,
+          "style_bonus_total": -0.353,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "support_rank": 1.0,
+          "text": "NTI6O84",
+          "weighted_support": 2.42
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 54.05,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.404
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 77.1,
+          "style_bonus_total": -0.146,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "CHG6JP6",
+          "weighted_support": 1.4
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 69.01,
+          "best_law_score": 67.5,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.488
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 78.35,
+          "style_bonus_total": -0.073,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "AXS6JP6",
+          "weighted_support": 0.49
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 69.01,
+          "best_law_score": 57.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.284
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 66.8,
+          "style_bonus_total": -0.073,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "ZAX56JP",
+          "weighted_support": 0.28
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 69.01,
+          "best_law_score": 57.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.186
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 64.91,
+          "style_bonus_total": -0.073,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "ZAX5GJP",
+          "weighted_support": 0.19
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 51.44,
+          "best_law_score": 55.4,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.16
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 53.19,
+          "style_bonus_total": -0.073,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "IZAX5P6",
+          "weighted_support": 0.16
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 51.44,
+          "best_law_score": 55.4,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.157
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 49.8,
+          "style_bonus_total": -0.073,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "IZAXSP6",
+          "weighted_support": 0.16
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 76.7,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.087
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.3411,
+              "mode": "soft_noisy",
+              "reason": "pattern_missing",
+              "weight": 0.3029
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "haar_1",
+          "score": 66.25,
+          "style_bonus_total": -0.073,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "1024X5",
+          "weighted_support": 0.09
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "NTI6O84",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Mercosul",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "CHG6JP6",
+          "score": 77.1,
+          "avg_conf": 54.05,
+          "pattern": "Indefinido",
+          "candidate_count": 10
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 13
+    },
+    {
+      "image": "data/uploads/relatorio_10458347_x216.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena 10458347",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 65.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.597
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 100.0,
+          "style_bonus_total": 0.0,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ9391",
+          "weighted_support": 2.6
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "PXZ9391",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 14
+    },
+    {
+      "image": "data/uploads/relatorio_plate_test_degraded.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF degradado para regressao dura",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 136.33,
+      "observed_best_confidence": 90.72,
+      "observed_best_weighted_support": 9.22,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 136.33,
+          "avg_conf": 90.72
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 90.72,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.782,
+            "rapidocr": 4.688
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            },
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 136.33,
+          "style_bonus_total": 1.094,
+          "style_rank_priority": 0.735,
+          "support_count": 2,
+          "support_engines": [
+            "pdf_probe",
+            "rapidocr"
+          ],
+          "support_rank": 2.735,
+          "text": "ABC1234",
+          "weighted_support": 9.22
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 90.72,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.339
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 131.49,
+          "style_bonus_total": -0.358,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "ABC1Z34",
+          "weighted_support": 1.34
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "ABC1234",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 136.33,
+          "avg_conf": 90.72,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 90.7,
+        "evidence_level": "MEDIA",
+        "manual_review_required": false,
+        "reasons": [
+          "integridade_da_captura_em_atencao"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 15
+    },
+    {
+      "image": "data/uploads/relatorio_placa_20171119_154214_ch6-1024x576.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa gerado a partir da cena 20171119",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "DFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 129.77,
+      "observed_best_confidence": 83.91,
+      "observed_best_weighted_support": 13.15,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "style_consistent_single_engine",
+      "matched": false,
+      "top_candidate_text": "DFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "DFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 129.77,
+          "avg_conf": 83.91
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 83.91,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 4.578
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 129.77,
+          "style_bonus_total": 9.302,
+          "style_rank_priority": 1.886,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 2.886,
+          "text": "DFO8819",
+          "weighted_support": 13.15
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 65.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.782
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 100.0,
+          "style_bonus_total": 0.365,
+          "style_rank_priority": 0.735,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "support_rank": 1.735,
+          "text": "OFO8819",
+          "weighted_support": 2.78
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 83.91,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.303
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 124.93,
+          "style_bonus_total": -0.358,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "DFO8B19",
+          "weighted_support": 1.3
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "OFO8819",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "DFO8819",
+          "score": 129.77,
+          "avg_conf": 83.91,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 83.9,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "baixo_consenso_entre_motores",
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 16
+    },
+    {
+      "image": "data/uploads/relatorio_placa_10458347_x216.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa gerado a partir da cena 10458347",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "IDA7O56",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 7,
+      "consensus_ratio": 50.0,
+      "consensus_count": 1,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "IDA7O56",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "CON0ARY",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 6,
+          "best_score": 108.43,
+          "avg_conf": 84.7
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 65.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.415
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 100.0,
+          "style_bonus_total": -0.358,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "pdf_probe"
+          ],
+          "support_rank": 1.0,
+          "text": "IDA7O56",
+          "weighted_support": 2.42
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 84.7,
+          "best_law_score": 57.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.355
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.2728,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.2423
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 108.43,
+          "style_bonus_total": -0.147,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "CON0ARY",
+          "weighted_support": 1.35
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 85.61,
+          "best_law_score": 55.4,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.436
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.2728,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.2423
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 105.36,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "AWINPU7",
+          "weighted_support": 0.44
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 65.28,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.269
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.2728,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.2423
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 99.11,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "INPUT56",
+          "weighted_support": 0.27
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 65.28,
+          "best_law_score": 65.9,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.176
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.2728,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.2423
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 97.22,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "INPU756",
+          "weighted_support": 0.18
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 64.16,
+          "best_law_score": 57.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.161
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.2728,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.2423
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 86.68,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "SGN0ARY",
+          "weighted_support": 0.16
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 65.93,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.067
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.2728,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.2423
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 72.14,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "LIVO75",
+          "weighted_support": 0.07
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "IDA7O56",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Mercosul",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "CON0ARY",
+          "score": 108.43,
+          "avg_conf": 84.7,
+          "pattern": "Indefinido",
+          "candidate_count": 6
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 50.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "baixo_consenso_entre_motores",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 17
+    },
+    {
+      "image": "data/uploads/relatorio_placa_plate_test.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa limpa para reforcar a regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "ABC1234",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 132.45,
+      "observed_best_confidence": 87.03,
+      "observed_best_weighted_support": 9.16,
+      "observed_best_support_count": 2,
+      "observed_best_selection_reason": "consensus_majority",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": true,
+      "top_candidate_text": "ABC1234",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 2,
+      "engines_considered": 2,
+      "engine_matches": {
+        "pdf_probe": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 100.0,
+          "avg_conf": 65.0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 132.45,
+          "avg_conf": 87.03
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 87.03,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "pdf_probe": 2.782,
+            "rapidocr": 4.625
+          },
+          "engine_weights": {
+            "pdf_probe": {
+              "factor": 0.7675,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 0.5065
+            },
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 132.45,
+          "style_bonus_total": 1.094,
+          "style_rank_priority": 0.735,
+          "support_count": 2,
+          "support_engines": [
+            "pdf_probe",
+            "rapidocr"
+          ],
+          "support_rank": 2.735,
+          "text": "ABC1234",
+          "weighted_support": 9.16
+        },
+        {
+          "agreement_ratio": 50.0,
+          "avg_conf": 87.03,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.318
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.4767,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.4233
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 127.61,
+          "style_bonus_total": -0.358,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "ABC1Z34",
+          "weighted_support": 1.32
+        }
+      ],
+      "engine_blocks": {
+        "pdf_probe": {
+          "text": "ABC1234",
+          "score": 100.0,
+          "avg_conf": 65.0,
+          "pattern": "Antigo",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "ABC1234",
+          "score": 132.45,
+          "avg_conf": 87.03,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 87.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 18
+    }
+  ]
+}

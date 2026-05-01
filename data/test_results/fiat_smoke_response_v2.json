@@ -1,0 +1,1989 @@
+{
+  "analysis_id": "c27ff18100fa4385ad72d900799de249",
+  "analysis_mode": "image",
+  "assessment": {
+    "agreement_ratio_percent": 100.0,
+    "confidence_percent": 87.8,
+    "evidence_level": "MEDIA",
+    "manual_review_required": true,
+    "reasons": [
+      "revisao_humana_obrigatoria"
+    ]
+  },
+  "capture_metadata": {
+    "camera": "Generic Forensic Capture",
+    "camera_make": null,
+    "camera_model": null,
+    "datetime_digitized": null,
+    "datetime_original": null,
+    "exif_present": false,
+    "exposure_time": null,
+    "f_number": null,
+    "flash": null,
+    "focal_length": null,
+    "gps_available": false,
+    "iso": null,
+    "orientation": null,
+    "resolution": {
+      "height": 906,
+      "width": 1200
+    },
+    "software": null,
+    "timestamp": null
+  },
+  "confidence": 87.82,
+  "consensus": {
+    "agreeing_engines": [
+      "rapidocr"
+    ],
+    "agreement_count": 1,
+    "agreement_ratio": 100.0,
+    "best_text": "REI5G32",
+    "engines_considered": 1,
+    "vote_map": {
+      "REI3669": [
+        "rapidocr"
+      ],
+      "REI3G69": [
+        "rapidocr"
+      ],
+      "REI5632": [
+        "rapidocr"
+      ],
+      "REI5G32": [
+        "rapidocr"
+      ]
+    }
+  },
+  "evidence_manifest_fingerprint": "9900ff30a5d91fc72e2af8cb",
+  "evidence_manifest_path": "C:\\Grom_OCR\\data\\uploads\\GromOCR_EvidenceManifest_c27ff18100fa4385ad72d900799de249_image.json",
+  "evidence_manifest_url": "/artifact/GromOCR_EvidenceManifest_c27ff18100fa4385ad72d900799de249_image.json",
+  "forensic_chain": {
+    "analysis_id": "c27ff18100fa4385ad72d900799de249",
+    "finished_at_utc": "2026-04-13T02:19:32Z",
+    "plate_sha256": "",
+    "signature": "f999121b7ad768f9b309f566203523a5c11a2b019aef700a37c448a18f4ee08d",
+    "signature_algorithm": "SHA256",
+    "source_sha256": "d90844e6db6e1217a96b21cd4e653487d6d215445cca375cdf52605204e19100",
+    "started_at_utc": "2026-04-13T02:16:56Z"
+  },
+  "input_meta": {
+    "analysis_mode": "image",
+    "capture_metadata": {
+      "camera": "Generic Forensic Capture",
+      "camera_make": null,
+      "camera_model": null,
+      "datetime_digitized": null,
+      "datetime_original": null,
+      "exif_present": false,
+      "exposure_time": null,
+      "f_number": null,
+      "flash": null,
+      "focal_length": null,
+      "gps_available": false,
+      "iso": null,
+      "orientation": null,
+      "resolution": {
+        "height": 906,
+        "width": 1200
+      },
+      "software": null,
+      "timestamp": null
+    },
+    "input_security": {
+      "allowed": true,
+      "allowed_extensions": [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp",
+        ".bmp",
+        ".tif",
+        ".tiff",
+        ".pdf"
+      ],
+      "content_type": "image/jpeg",
+      "detected_mime": "image/jpeg",
+      "detected_signature": "jpeg",
+      "error": "",
+      "extension": ".jpg",
+      "file_size_bytes": 226760,
+      "file_size_mb": 0.22,
+      "input_type": "image",
+      "max_upload_bytes": 83886080,
+      "max_upload_mb": 80.0,
+      "original_filename": "fiat_23e8f0fc9cea.jpg",
+      "policy": "allowlist_extension+signature+size",
+      "signature_ok": true,
+      "status": "ok",
+      "warnings": []
+    },
+    "input_type": "image",
+    "partial_plate_evidence": {
+      "partial_plate_candidates": [],
+      "partial_plate_candidates_count": 0,
+      "partial_plate_has_evidence": false,
+      "partial_plate_summary": "-",
+      "partial_plate_text": "-",
+      "partial_plate_top_candidates": []
+    },
+    "plate_detection": {
+      "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+      "calibration_source": "file",
+      "candidate_count": 22,
+      "candidates": [
+        {
+          "area": 34704,
+          "aspect_ratio": 6.694,
+          "blue_band_ratio": 13.12,
+          "blue_ratio": 18.52,
+          "brightness": 114.26,
+          "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+          "calibration_source": "file",
+          "color_saturation": 40.84,
+          "contrast": 67.88,
+          "dynamic_range": 204.0,
+          "edge_density": 9.73,
+          "foreground_ratio": 83.6,
+          "gray_ratio": 58.43,
+          "plausibility_bonus": 4.5,
+          "quality_label": "boa",
+          "quality_score": 76.7,
+          "region": "yolo_roi",
+          "score": 331.2,
+          "shape_hint": "wide",
+          "sharpness": 698.14,
+          "source_family": "yolo",
+          "style_competing_strength": 0.7,
+          "style_confidence": 88.8,
+          "style_hint": "mercosul",
+          "style_strength": 0.92,
+          "white_ratio": 14.62
+        },
+        {
+          "area": 32232,
+          "aspect_ratio": 6.971,
+          "blue_band_ratio": 13.17,
+          "blue_ratio": 17.83,
+          "brightness": 89.93,
+          "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+          "calibration_source": "file",
+          "color_saturation": 44.89,
+          "contrast": 57.9,
+          "dynamic_range": 177.0,
+          "edge_density": 8.31,
+          "foreground_ratio": 81.42,
+          "gray_ratio": 59.48,
+          "plausibility_bonus": 4.5,
+          "quality_label": "boa",
+          "quality_score": 73.6,
+          "region": "raw_yolo_roi",
+          "score": 328.1,
+          "shape_hint": "wide",
+          "sharpness": 561.28,
+          "source_family": "yolo",
+          "style_competing_strength": 0.646,
+          "style_confidence": 87.7,
+          "style_hint": "mercosul",
+          "style_strength": 0.892,
+          "white_ratio": 4.17
+        },
+        {
+          "area": 115940,
+          "aspect_ratio": 3.316,
+          "blue_band_ratio": 0.0,
+          "blue_ratio": 1.42,
+          "brightness": 168.06,
+          "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+          "calibration_source": "file",
+          "color_saturation": 13.91,
+          "contrast": 72.14,
+          "dynamic_range": 221.0,
+          "edge_density": 5.61,
+          "foreground_ratio": 92.09,
+          "gray_ratio": 91.5,
+          "plausibility_bonus": 9.5,
+          "quality_label": "excelente",
+          "quality_score": 90.2,
+          "region": "raw_detected_2",
+          "score": 110.7,
+          "shape_hint": "compacta",
+          "sharpness": 447.27,
+          "source_family": "contour",
+          "style_competing_strength": 0.131,
+          "style_confidence": 85.3,
+          "style_hint": "antigo",
+          "style_strength": 0.832,
+          "white_ratio": 61.29
+        },
+        {
+          "area": 30820,
+          "aspect_ratio": 2.33,
+          "blue_band_ratio": 2.24,
+          "blue_ratio": 3.78,
+          "brightness": 126.14,
+          "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+          "calibration_source": "file",
+          "color_saturation": 32.38,
+          "contrast": 68.81,
+          "dynamic_range": 215.0,
+          "edge_density": 9.22,
+          "foreground_ratio": 86.81,
+          "gray_ratio": 64.46,
+          "plausibility_bonus": 6.0,
+          "quality_label": "excelente",
+          "quality_score": 87.6,
+          "region": "haar_1",
+          "score": 103.6,
+          "shape_hint": "compacta",
+          "sharpness": 747.69,
+          "source_family": "haar",
+          "style_competing_strength": 0.368,
+          "style_confidence": 80.0,
+          "style_hint": "antigo",
+          "style_strength": 0.7,
+          "white_ratio": 22.78
+        },
+        {
+          "area": 23760,
+          "aspect_ratio": 2.424,
+          "blue_band_ratio": 33.48,
+          "blue_ratio": 27.24,
+          "brightness": 166.94,
+          "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+          "calibration_source": "file",
+          "color_saturation": 28.29,
+          "contrast": 64.41,
+          "dynamic_range": 193.0,
+          "edge_density": 7.89,
+          "foreground_ratio": 89.2,
+          "gray_ratio": 53.63,
+          "plausibility_bonus": 6.0,
+          "quality_label": "excelente",
+          "quality_score": 84.9,
+          "region": "detected_8",
+          "score": 101.9,
+          "shape_hint": "compacta",
+          "sharpness": 488.31,
+          "source_family": "contour",
+          "style_competing_strength": 0.614,
+          "style_confidence": 85.2,
+          "style_hint": "mercosul",
+          "style_strength": 0.831,
+          "white_ratio": 49.89
+        }
+      ],
+      "canonical_pipeline": true,
+      "ocr_line_mode": "single_line",
+      "selected_aspect_ratio": 6.694,
+      "selected_metrics": {
+        "area": 34704,
+        "aspect_ratio": 6.694,
+        "blue_band_ratio": 13.12,
+        "blue_ratio": 18.52,
+        "brightness": 114.26,
+        "calibration_path": "C:\\Grom_OCR\\data\\plate_detector_calibration.json",
+        "calibration_source": "file",
+        "color_saturation": 40.84,
+        "contrast": 67.88,
+        "dynamic_range": 204.0,
+        "edge_density": 9.73,
+        "foreground_ratio": 83.6,
+        "gray_ratio": 58.43,
+        "plausibility_bonus": 4.5,
+        "quality_label": "boa",
+        "quality_score": 76.7,
+        "region": "yolo_roi",
+        "score": 331.2,
+        "shape_hint": "wide",
+        "sharpness": 698.14,
+        "source_family": "yolo",
+        "style_competing_strength": 0.7,
+        "style_confidence": 88.8,
+        "style_hint": "mercosul",
+        "style_strength": 0.92,
+        "white_ratio": 14.62
+      },
+      "selected_plausibility_bonus": 4.5,
+      "selected_quality_label": "boa",
+      "selected_quality_score": 76.7,
+      "selected_region": "yolo_roi",
+      "selected_score": 331.2,
+      "selected_shape_hint": "wide",
+      "selected_source": "yolo",
+      "selected_style_confidence": 88.8,
+      "selected_style_hint": "mercosul",
+      "status": "roi_detectado",
+      "strategy": "plate_roi_first",
+      "tesseract_whitelist": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+      "used_full_image": false
+    },
+    "scene_preprocess": {
+      "applied": true,
+      "calibration_path": "C:\\Grom_OCR\\data\\scene_preprocess_calibration.json",
+      "calibration_source": "file",
+      "calibration_version": "2026-04-09-forensic",
+      "candidate_count": 11,
+      "enabled": true,
+      "improvement": 10.04,
+      "original_margin": 0.49,
+      "original_score": 81.53,
+      "quality_after": {
+        "brightness": 156.23,
+        "contrast": 74.41,
+        "edge_density": 9.77,
+        "glare_score": 37.47,
+        "motion_blur_score": 0.0,
+        "noise": 5.44,
+        "overexposed_ratio": 1.07,
+        "quality_score": 89.81,
+        "saturation": 33.84,
+        "sharpness": 618.66,
+        "underexposed_ratio": 2.6
+      },
+      "quality_before": {
+        "brightness": 158.8,
+        "contrast": 82.46,
+        "edge_density": 4.53,
+        "glare_score": 43.54,
+        "motion_blur_score": 0.0,
+        "noise": 4.05,
+        "overexposed_ratio": 14.18,
+        "quality_score": 79.77,
+        "saturation": 38.83,
+        "sharpness": 317.63,
+        "underexposed_ratio": 3.97
+      },
+      "ranked_variants": [
+        {
+          "distance_penalty": 0.25,
+          "distance_weight": 3.25,
+          "family": "opencv",
+          "family_bonus": -0.23,
+          "matched_prefix": "",
+          "quality_bias": 0.4,
+          "quality_multiplier": 1.02,
+          "quality_score": 89.81,
+          "score": 91.53,
+          "variant": "gray_world_dehaze",
+          "variant_bonus": -0.23
+        },
+        {
+          "distance_penalty": 0.17,
+          "distance_weight": 3.25,
+          "family": "opencv",
+          "family_bonus": -0.23,
+          "matched_prefix": "gray_world_clahe",
+          "quality_bias": 0.4,
+          "quality_multiplier": 1.02,
+          "quality_score": 88.29,
+          "score": 91.26,
+          "variant": "gray_world_clahe_1.8",
+          "variant_bonus": 0.97
+        },
+        {
+          "distance_penalty": 0.09,
+          "distance_weight": 3.25,
+          "family": "opencv",
+          "family_bonus": -0.23,
+          "matched_prefix": "",
+          "quality_bias": 0.4,
+          "quality_multiplier": 1.02,
+          "quality_score": 89.03,
+          "score": 90.89,
+          "variant": "gray_world_adaptive_morph",
+          "variant_bonus": -0.23
+        },
+        {
+          "distance_penalty": 0.13,
+          "distance_weight": 3.25,
+          "family": "opencv",
+          "family_bonus": -0.23,
+          "matched_prefix": "gray_world_blend",
+          "quality_bias": 0.4,
+          "quality_multiplier": 1.02,
+          "quality_score": 88.28,
+          "score": 90.59,
+          "variant": "gray_world_blend_0.26",
+          "variant_bonus": 0.27
+        },
+        {
+          "distance_penalty": 0.17,
+          "distance_weight": 3.25,
+          "family": "pillow",
+          "family_bonus": 0.57,
+          "matched_prefix": "pillow_edge_enhance",
+          "quality_bias": 0.4,
+          "quality_multiplier": 1.02,
+          "quality_score": 87.4,
+          "score": 90.35,
+          "variant": "pillow_edge_enhance",
+          "variant_bonus": 0.97
+        }
+      ],
+      "scenario_display_label": "Muito claro",
+      "scenario_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "scenario_tags": [
+        "bright"
+      ],
+      "scene_profile": {
+        "calibration_path": "C:\\Grom_OCR\\data\\scene_preprocess_calibration.json",
+        "calibration_source": "file",
+        "calibration_version": "2026-04-09-forensic",
+        "display_label": "Muito claro",
+        "label": "bright",
+        "primary": "bright",
+        "profile": {
+          "distance_weight": 3.25,
+          "family_bonus": {
+            "default": 0.0,
+            "opencv": -0.233,
+            "pillow": 0.567
+          },
+          "original_margin": 0.49,
+          "quality_bias": 0.4,
+          "quality_multiplier": 1.02,
+          "variant_prefix_bonus": {
+            "forensic_char_restoration": 2.2,
+            "forensic_local_tone_map": 4.5,
+            "forensic_wiener_deblur": 2.5,
+            "gray_world_balance": 0.6,
+            "gray_world_blackhat": 0.7,
+            "gray_world_blend": 0.5,
+            "gray_world_clahe": 1.2,
+            "gray_world_equalize": 0.8,
+            "gray_world_gamma": 1.4,
+            "gray_world_median": 0.4,
+            "gray_world_morph_close": 0.5,
+            "gray_world_sharpen": 0.7,
+            "gray_world_tophat": 0.6,
+            "original": 0.0,
+            "pillow_autocontrast": 1.5,
+            "pillow_brightness_down": 3.7,
+            "pillow_contrast_up": 0.5,
+            "pillow_detail": 0.2,
+            "pillow_edge_enhance": 0.4,
+            "pillow_equalize": 0.9,
+            "pillow_sharpen": 0.5,
+            "pillow_unsharp": 0.4
+          }
+        },
+        "reasons": [
+          "imagem_superexposta"
+        ],
+        "severity": {
+          "bright": 2.3979999999999997
+        },
+        "tags": [
+          "bright"
+        ],
+        "thresholds": {
+          "adulterated_edge_min": 2.0,
+          "blurred_sharpness": 160.0,
+          "bright_brightness": 194.0,
+          "dark_brightness": 92.0,
+          "edge_weak": 1.8,
+          "foggy_contrast_max": 28.0,
+          "foggy_saturation_max": 60.0,
+          "low_contrast": 34.0,
+          "noisy": 24.0,
+          "overexposed_ratio": 12.0,
+          "underexposed_ratio": 12.0
+        }
+      },
+      "selected": "enhanced",
+      "selected_family": "opencv",
+      "selected_score": 91.53,
+      "selected_score_details": {
+        "distance_penalty": 0.25,
+        "distance_weight": 3.25,
+        "family_bonus": -0.23,
+        "matched_prefix": "",
+        "quality_bias": 0.4,
+        "quality_multiplier": 1.02,
+        "quality_score": 89.81,
+        "variant_bonus": -0.23
+      },
+      "selected_variant": "gray_world_dehaze",
+      "selection_reason": "scene_profile_selected_variant",
+      "software_families": [
+        "opencv",
+        "pillow"
+      ],
+      "steps": [
+        "gray_world_balance",
+        "pseudo_dehaze_clahe"
+      ]
+    },
+    "scene_selected": "enhanced",
+    "source_resolution": {
+      "height": 906,
+      "width": 1200
+    }
+  },
+  "manifest_fingerprint": "9900ff30a5d91fc72e2af8cb",
+  "manifest_path": "C:\\Grom_OCR\\data\\uploads\\GromOCR_EvidenceManifest_c27ff18100fa4385ad72d900799de249_image.json",
+  "manifest_url": "/artifact/GromOCR_EvidenceManifest_c27ff18100fa4385ad72d900799de249_image.json",
+  "ocr": "REI5G32",
+  "operational_protocol": {
+    "checklist_operacional": [
+      "Preservar a imagem original e registrar a origem, data/hora e resolucao.",
+      "Classificar a qualidade da captura em A/B/C/D antes de concluir.",
+      "Registrar leitura principal, alternativas e caracteres incertos do OCR.",
+      "Definir a base primaria do veiculo antes de individualizar o modelo.",
+      "Confrontar frente, traseira, lateral, rodas e interior quando disponivel.",
+      "Aplicar matriz de compatibilidade ponderada e explicita.",
+      "Verificar exclusoes obrigatorias e contradires fortes.",
+      "Cruzar a placa parcial com a hipoteses visual e com bases autorizadas.",
+      "Marcar revisao humana obrigatoria quando a captura estiver fragil."
+    ],
+    "compatibility_matrix": {
+      "available_max_score": 25.0,
+      "available_ratio": 104.0,
+      "available_score": 26.0,
+      "coverage_percent": 25.0,
+      "display_level": "Incompatível",
+      "items": [
+        {
+          "criterio": "Placa/OCR total ou parcial",
+          "disponivel": true,
+          "evidencias": [
+            "texto=REI5G32",
+            "leitura_nao_ratifcada",
+            "padrao_legal_valido"
+          ],
+          "fonte": "local",
+          "observacoes": [],
+          "peso_maximo": 25.0,
+          "pontuacao": 25.0,
+          "status": "Mercosul"
+        },
+        {
+          "criterio": "Farois",
+          "disponivel": false,
+          "evidencias": [
+            "dual_headlamps"
+          ],
+          "fonte": "local",
+          "observacoes": [],
+          "peso_maximo": 10.0,
+          "pontuacao": 1.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Lanternas traseiras",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "local",
+          "observacoes": [],
+          "peso_maximo": 10.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Linha lateral / vidros / colunas",
+          "disponivel": false,
+          "evidencias": [
+            "Marca indeterminada Modelo indeterminado perfil carroceria hatch sedan"
+          ],
+          "fonte": "assinaturas_componentes+comparativo",
+          "observacoes": [],
+          "peso_maximo": 10.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Painel / interior",
+          "disponivel": false,
+          "evidencias": [
+            "sem_recorte_interno_disponivel"
+          ],
+          "fonte": "local",
+          "observacoes": [],
+          "peso_maximo": 10.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Grade dianteira",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "local",
+          "observacoes": [],
+          "peso_maximo": 8.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Parachoques",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 8.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Emblemas / inscricoes",
+          "disponivel": false,
+          "evidencias": [
+            "Marca indeterminada Modelo indeterminado emblema frontal logotipo grade"
+          ],
+          "fonte": "assinaturas_componentes+comparativo",
+          "observacoes": [],
+          "peso_maximo": 8.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Rodas / calotas",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 6.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Macanetas / retrovisores / detalhes",
+          "disponivel": false,
+          "evidencias": [
+            "achados_forenses_presentes"
+          ],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 5.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Linhas do capo / dianteira",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 5.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Assinatura LED / luz diurna",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 5.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Amassados / retoques",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 5.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        },
+        {
+          "criterio": "Adesivos / propaganda",
+          "disponivel": false,
+          "evidencias": [],
+          "fonte": "comparativo_fontes_abertas",
+          "observacoes": [],
+          "peso_maximo": 5.0,
+          "pontuacao": 0.0,
+          "status": "indefinido"
+        }
+      ],
+      "level": "INCOMPATIVEL",
+      "max_score": 100.0,
+      "score_total": 26.0,
+      "summary": [
+        "Placa/OCR total ou parcial=25.0",
+        "Farois=1.0",
+        "Lanternas traseiras=0.0",
+        "Linha lateral / vidros / colunas=0.0"
+      ]
+    },
+    "conclusion": {
+      "decision": "conclusivo",
+      "display_decision": "Conclusivo",
+      "display_level": "Compatível parcial (forense)",
+      "inconclusive": false,
+      "level": "COMPATIVEL_PARCIAL",
+      "manual_review_required": true,
+      "score": 26.0,
+      "summary": "A leitura documental da placa foi consolidada com alta confianca. Resultado principal: REI5G32; consenso OCR=100.0%. A placa permanece apta para confronto investigativo, embora a individualizacao completa do fabricante/modelo continue dependente de assinaturas visuais adicionais. Principais sustentacoes: Placa/OCR total ou parcial=25.0; Farois=1.0; Lanternas traseiras=0.0.",
+      "supporting_items": [
+        "Placa/OCR total ou parcial=25.0",
+        "Farois=1.0",
+        "Lanternas traseiras=0.0"
+      ]
+    },
+    "evidence_preservation": {
+      "analysis_id": "c27ff18100fa4385ad72d900799de249",
+      "available_crops": [
+        {
+          "available": true,
+          "label": "imagem original",
+          "name": "original",
+          "path": "C:\\Grom_OCR\\data\\uploads\\fiat_23e8f0fc9cea_c27ff18100fa.jpg"
+        },
+        {
+          "available": true,
+          "label": "imagem ampliada",
+          "name": "ampliada",
+          "path": ""
+        },
+        {
+          "available": true,
+          "label": "recorte da placa",
+          "name": "placa_crop",
+          "path": ""
+        },
+        {
+          "available": false,
+          "label": "recorte frontal",
+          "name": "frontal_crop",
+          "path": ""
+        },
+        {
+          "available": false,
+          "label": "recorte traseiro",
+          "name": "traseiro_crop",
+          "path": ""
+        },
+        {
+          "available": false,
+          "label": "recorte lateral",
+          "name": "lateral_crop",
+          "path": ""
+        },
+        {
+          "available": false,
+          "label": "recorte interior",
+          "name": "interior_crop",
+          "path": ""
+        }
+      ],
+      "camera": "Generic Forensic Capture",
+      "capture_timestamp_utc": "2026-04-13T02:16:56Z",
+      "copy_preserved": true,
+      "exif": {},
+      "generated_timestamp_utc": "2026-04-13T02:19:32.847040+00:00",
+      "input_signature": "jpeg",
+      "input_signature_ok": true,
+      "input_status": "ok",
+      "input_type": "image",
+      "observations": [
+        "original_preserved_em_copia",
+        "crops_ausentes_marcados_como_indisponiveis"
+      ],
+      "origem": "image",
+      "plate_filename": "yolo_roi",
+      "plate_resolution": {},
+      "source_filename": "fiat_23e8f0fc9cea.jpg",
+      "source_resolution": {
+        "height": 906,
+        "width": 1200
+      },
+      "transformations": [
+        "scene_preprocess",
+        "plate_detection",
+        "visual_profile"
+      ],
+      "visual_scene_filename": "",
+      "visual_scene_resolution": {}
+    },
+    "exclusion_checks": {
+      "items": [
+        {
+          "code": "capture_integrity",
+          "impact": "medio",
+          "label": "Integridade da captura",
+          "reason": "Integridade da captura 96.5/100 (EXCELENTE) - proporcao_roi_limite",
+          "status": "atencao",
+          "strong_excluder": false
+        },
+        {
+          "code": "image_quality",
+          "impact": "medio",
+          "label": "Qualidade da imagem",
+          "reason": "score=100.0",
+          "status": "EXCELENTE",
+          "strong_excluder": false
+        },
+        {
+          "code": "ocr_pattern",
+          "impact": "baixo",
+          "label": "Padrao legal da placa",
+          "reason": "Mercosul",
+          "status": "valida",
+          "strong_excluder": false
+        },
+        {
+          "code": "ocr_ambiguity",
+          "impact": "medio",
+          "label": "Ambiguidade OCR",
+          "reason": "32.0",
+          "status": "alta",
+          "strong_excluder": true
+        },
+        {
+          "code": "ocr_consensus",
+          "impact": "baixo",
+          "label": "Consenso entre motores",
+          "reason": "agreement_ratio=100.0",
+          "status": "ok",
+          "strong_excluder": false
+        },
+        {
+          "code": "visual_abstention",
+          "impact": "medio",
+          "label": "Abstencao visual",
+          "reason": "confianca_modelo_abaixo_limite;margem_top2_insuficiente;evidencia_discriminativa_insuficiente;dados_visuais_insuficientes_close_up_placa",
+          "status": "ativa",
+          "strong_excluder": false
+        },
+        {
+          "code": "compatibility_coverage",
+          "impact": "alto",
+          "label": "Cobertura da matriz",
+          "reason": "coverage=25.0%",
+          "status": "baixa",
+          "strong_excluder": true
+        },
+        {
+          "code": "interior_presence",
+          "impact": "baixo",
+          "label": "Interior / painel",
+          "reason": "sem_recorte_interno",
+          "status": "indisponivel",
+          "strong_excluder": false
+        }
+      ],
+      "strong_triggered": [
+        {
+          "code": "ocr_ambiguity",
+          "impact": "medio",
+          "label": "Ambiguidade OCR",
+          "reason": "32.0",
+          "status": "alta",
+          "strong_excluder": true
+        },
+        {
+          "code": "compatibility_coverage",
+          "impact": "alto",
+          "label": "Cobertura da matriz",
+          "reason": "coverage=25.0%",
+          "status": "baixa",
+          "strong_excluder": true
+        }
+      ],
+      "strong_triggered_count": 2,
+      "summary": [
+        "Integridade da captura",
+        "Qualidade da imagem",
+        "Ambiguidade OCR",
+        "Abstencao visual",
+        "Cobertura da matriz",
+        "Interior / painel"
+      ],
+      "triggered_count": 5
+    },
+    "ocr_record": {
+      "agreement_ratio": 100.0,
+      "alerta_adulteracao": "Nao detectada",
+      "avg_conf": 87.8,
+      "caracteres_incertos": [
+        {
+          "expected_slot": "D",
+          "is_confusable": false,
+          "position": 4
+        },
+        {
+          "expected_slot": "L",
+          "is_confusable": true,
+          "position": 5
+        },
+        {
+          "expected_slot": "D",
+          "is_confusable": false,
+          "position": 6
+        },
+        {
+          "expected_slot": "D",
+          "is_confusable": false,
+          "position": 7
+        }
+      ],
+      "caracteres_incertos_resumo": "P4[D]; P5[L]; P6[D]; P7[D]",
+      "confidencia_estimativa": 94.2,
+      "law_score": 100.0,
+      "leitura_alternativas": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 87.82,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 6.277
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6439,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5718
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_input",
+          "score": 133.38,
+          "style_bonus_total": 0.751,
+          "style_rank_priority": 0.745,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.745,
+          "text": "REI5G32",
+          "weighted_support": 6.28
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 87.43,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.046
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6439,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5718
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_input",
+          "score": 132.3,
+          "style_bonus_total": 0.375,
+          "style_rank_priority": 0.745,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.745,
+          "text": "REI3G69",
+          "weighted_support": 2.05
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 87.82,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.157
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.6439,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.5718
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_input",
+          "score": 130.04,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "support_rank": 1.0,
+          "text": "REI5632",
+          "weighted_support": 1.16
+        }
+      ],
+      "leitura_principal": "REI5G32",
+      "leituras_conflitantes": [
+        "REI3G69 detectado por: rapidocr",
+        "REI5632 detectado por: rapidocr",
+        "REI3669 detectado por: rapidocr"
+      ],
+      "padrao_placa": "Mercosul",
+      "padrão_placa": "Mercosul",
+      "partial_plate": false,
+      "partial_plate_candidates": [],
+      "partial_plate_candidates_count": 0,
+      "partial_plate_detected": false,
+      "partial_plate_summary": "-",
+      "partial_plate_text": "-",
+      "pattern_source": "plate_pattern_info",
+      "pattern_valid": true,
+      "raw_text": "REI5G32",
+      "score_bruto": 133.4,
+      "supports": [
+        "rapidocr"
+      ],
+      "targets": [
+        {
+          "conf": 87.82,
+          "engine": "rapidocr",
+          "pattern": "Mercosul",
+          "role": "primary",
+          "text": "REI5G32"
+        }
+      ]
+    },
+    "quality_triage": {
+      "avg_confidence": 87.8,
+      "class": "A",
+      "consensus_ratio": 100.0,
+      "display_label": "Boa",
+      "integrity_score": 96.5,
+      "label": "boa",
+      "manual_review": false,
+      "quality_score": 100.0,
+      "reasons": [
+        "proporcao_roi_limite"
+      ],
+      "score": 97.5
+    },
+    "status": "atencao",
+    "summary": "A leitura documental da placa foi consolidada com alta confianca. Resultado principal: REI5G32; consenso OCR=100.0%. A placa permanece apta para confronto investigativo, embora a individualizacao completa do fabricante/modelo continue dependente de assinaturas visuais adicionais. Principais sustentacoes: Placa/OCR total ou parcial=25.0; Farois=1.0; Lanternas traseiras=0.0.",
+    "vehicle_basics": {
+      "assinatura_frontal": "traseira",
+      "caimento_teto": "indefinido",
+      "categoria_confidence": 50.5,
+      "categoria_primaria": "motocicleta",
+      "coluna_c": "indefinida",
+      "confianca_hipotese_visual": 16.4,
+      "fabricante_probavel": "Indeterminado",
+      "faixa_ano_probavel": "indeterminado",
+      "formato_vidro_traseiro": "indefinida",
+      "modelo_probavel": "Nao conclusivo",
+      "numero_portas_visiveis_estimado": "indefinido",
+      "observacoes": [
+        "geometria_compacta",
+        "comparativo_aberto_disponivel"
+      ],
+      "porte": "compacto",
+      "posicao_placa": "traseira",
+      "volume_traseiro": "indefinido"
+    }
+  },
+  "partial_plate_candidates": [],
+  "partial_plate_candidates_count": 0,
+  "partial_plate_has_evidence": false,
+  "partial_plate_summary": "-",
+  "partial_plate_text": "-",
+  "pattern": "Mercosul",
+  "report_url": "/pdf/Relatorio_fiat_23e8f0fc9cea_c27ff18100fa.pdf",
+  "score": 133.38,
+  "status": "CONCLUSIVO",
+  "style_rank_priority": 0.0,
+  "support_count": 1,
+  "support_rank": 1.0,
+  "targets": [
+    {
+      "conf": 87.82,
+      "engine": "rapidocr",
+      "pattern": "Mercosul",
+      "role": "primary",
+      "text": "REI5G32"
+    }
+  ],
+  "targets_detected": 1,
+  "visual_profile": {
+    "assinaturas_componentes": {
+      "cobertura_percentual": 0.0,
+      "componentes": {},
+      "itens_avaliados": 8,
+      "itens_detectados": 0,
+      "low_context_blocked": true,
+      "resumo_lista": [
+        "InformacÃ£o visual limitada ao recorte da placa - DetecÃ§Ãµes de componentes suspensas para evitar alucinacÃµes"
+      ]
+    },
+    "caracteristicas_forenses": {
+      "achados": [
+        {
+          "codigo": "possivel_painel_esquerdo_cor_diferente",
+          "confianca": 73.4,
+          "descricao": "Possivel diferenca de cor entre painel lateral esquerdo e demais paineis.",
+          "evidencia": "delta_lab_lc=24.4;delta_lab_lr=20.2",
+          "localizacao": "lateral_esquerda",
+          "status": "potencial",
+          "tipo": "pintura"
+        }
+      ],
+      "componentes_cobertura": 0.0,
+      "cor_contexto": "azul",
+      "itens_avaliados": [
+        "consistencia_de_cor_lateral",
+        "integridade_retrovisores",
+        "simetria_paralamas_dianteiros",
+        "marcacoes_adesivos_traseiros"
+      ],
+      "observacoes": [
+        "caracteristicas_forenses_requerem_confirmacao_humana"
+      ],
+      "resumo": [
+        "possivel_painel_esquerdo_cor_diferente (73.4%): Possivel diferenca de cor entre painel lateral esquerdo e demais paineis."
+      ],
+      "status": "achados_potenciais",
+      "total_achados": 1
+    },
+    "comparativo_fontes_abertas": {
+      "assinaturas_componentes": [
+        "Emblema frontal: indefinido (0.0%)",
+        "Grade dianteira: indefinido (0.0%)",
+        "Farois dianteiros: indefinido (0.0%)",
+        "Lanternas traseiras: indefinido (0.0%)",
+        "Linhas de portas: indefinido (0.0%)",
+        "Capo dianteiro: indefinido (0.0%)",
+        "Tampa traseira: indefinido (0.0%)",
+        "Design de carroceria: indefinido (0.0%)"
+      ],
+      "checklist_pericial": [
+        "Comparar formato da lanterna traseira (vertical/horizontal), altura relativa e posicao lateral.",
+        "Comparar desenho da tampa traseira e recorte do para-choque.",
+        "Comparar assinatura dos farois, grade dianteira e emblema frontal quando visivel.",
+        "Comparar retrovisores, molduras de vidro e linha de cintura.",
+        "Validar faixa de ano/modelo por FIPE e cruzar com anuncios reais.",
+        "Cruzar com catalogos de autopecas (lataria/farol/lanterna/grade) para confirmar aplicacao por modelo."
+      ],
+      "consulta_principal": "site:toyota.com.br (\"press kit\" OR \"media kit\" OR \"vehicle gallery\" OR imprensa) MARCA INDETERMINADA MODELO INDETERMINADO",
+      "consultas_caracteristicas": [
+        {
+          "caracteristica": "possivel_painel_esquerdo_cor_diferente",
+          "consulta": "Marca indeterminada Modelo indeterminado lateral esquerda cor diferente repintura",
+          "descricao": "Possivel diferenca de cor entre painel lateral esquerdo e demais paineis.",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparar padrao visual em imagens abertas",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+lateral+esquerda+cor+diferente+repintura"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "conferir variacoes reais em anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+lateral+esquerda+cor+diferente+repintura"
+            },
+            {
+              "fonte": "olx",
+              "objetivo": "buscar ocorrencias semelhantes em vendas abertas",
+              "url": "https://www.google.com/search?q=site%3Aolx.com.br+Marca+indeterminada+Modelo+indeterminado+lateral+esquerda+cor+diferente+repintura"
+            }
+          ],
+          "localizacao": "lateral_esquerda"
+        }
+      ],
+      "consultas_componentes": [
+        {
+          "componente": "emblema_frontal",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado emblema frontal logotipo grade",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+emblema+frontal+logotipo+grade"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+emblema+frontal+logotipo+grade"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+emblema+frontal+logotipo+grade"
+            }
+          ],
+          "rotulo": "Emblema frontal",
+          "status": "indefinido"
+        },
+        {
+          "componente": "grade_dianteira",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado grade dianteira desenho frontal",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+grade+dianteira+desenho+frontal"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+grade+dianteira+desenho+frontal"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+grade+dianteira+desenho+frontal"
+            }
+          ],
+          "rotulo": "Grade dianteira",
+          "status": "indefinido"
+        },
+        {
+          "componente": "farois_dianteiros",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado farol dianteiro assinatura optica",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+farol+dianteiro+assinatura+optica"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+farol+dianteiro+assinatura+optica"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+farol+dianteiro+assinatura+optica"
+            }
+          ],
+          "rotulo": "Farois dianteiros",
+          "status": "indefinido"
+        },
+        {
+          "componente": "lanternas_traseiras",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado lanterna traseira assinatura lente",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+lanterna+traseira+assinatura+lente"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+lanterna+traseira+assinatura+lente"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+lanterna+traseira+assinatura+lente"
+            }
+          ],
+          "rotulo": "Lanternas traseiras",
+          "status": "indefinido"
+        },
+        {
+          "componente": "linhas_portas",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado perfil lateral portas vincos",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+perfil+lateral+portas+vincos"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+perfil+lateral+portas+vincos"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+perfil+lateral+portas+vincos"
+            }
+          ],
+          "rotulo": "Linhas de portas",
+          "status": "indefinido"
+        },
+        {
+          "componente": "capo_dianteiro",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado capo dianteiro vincos recorte",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+capo+dianteiro+vincos+recorte"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+capo+dianteiro+vincos+recorte"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+capo+dianteiro+vincos+recorte"
+            }
+          ],
+          "rotulo": "Capo dianteiro",
+          "status": "indefinido"
+        },
+        {
+          "componente": "tampa_traseira",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado tampa traseira recorte placa",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+tampa+traseira+recorte+placa"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+tampa+traseira+recorte+placa"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+tampa+traseira+recorte+placa"
+            }
+          ],
+          "rotulo": "Tampa traseira",
+          "status": "indefinido"
+        },
+        {
+          "componente": "design_carroceria",
+          "confianca": 0.0,
+          "consulta": "Marca indeterminada Modelo indeterminado perfil carroceria hatch sedan",
+          "fontes": [
+            {
+              "fonte": "google_imagens",
+              "objetivo": "comparacao visual por foto",
+              "url": "https://www.google.com/search?tbm=isch&q=Marca+indeterminada+Modelo+indeterminado+perfil+carroceria+hatch+sedan"
+            },
+            {
+              "fonte": "google_web",
+              "objetivo": "ficha tecnica e materia especializada",
+              "url": "https://www.google.com/search?q=Marca+indeterminada+Modelo+indeterminado+perfil+carroceria+hatch+sedan"
+            },
+            {
+              "fonte": "webmotors",
+              "objetivo": "fotos reais de anuncios",
+              "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+Marca+indeterminada+Modelo+indeterminado+perfil+carroceria+hatch+sedan"
+            }
+          ],
+          "rotulo": "Design de carroceria",
+          "status": "indefinido"
+        }
+      ],
+      "consultas_referencia": [
+        {
+          "alvo": "geral",
+          "consulta": "site:toyota.com.br (\"press kit\" OR \"media kit\" OR \"vehicle gallery\" OR imprensa) MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:ford.com.br (\"midia kit\" OR \"press kit\" OR imprensa) MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:stellantis.com (press kit OR imprensa OR photos OR videos) MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:vw.com.br (\"press kit\" OR imprensa OR galeria) MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:netcarshow.com MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:cars.com/research MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:edmunds.com MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:automobile-catalog.com MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:gov.br \"PBE Veicular\" MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "manual do proprietario MARCA INDETERMINADA MODELO INDETERMINADO"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "MARCA INDETERMINADA MODELO INDETERMINADO detalhes visuais emblema grade farol lanterna"
+        },
+        {
+          "alvo": "geral",
+          "consulta": "site:quatrorodas.abril.com.br MARCA INDETERMINADA MODELO INDETERMINADO teste"
+        }
+      ],
+      "criterios_individualizacao": [
+        "Emblema frontal: posicao, geometria (circular/oval/barra) e contraste.",
+        "Conjunto optico dianteiro: desenho interno, recorte externo e alinhamento lateral.",
+        "Grade frontal: proporcao da abertura central, trama e area de contorno.",
+        "Conjunto optico traseiro: orientacao (vertical/horizontal), separacao e altura relativa.",
+        "Portas e lateral: vincos, coluna B, alinhamento de macanetas e linha de cintura.",
+        "Capo e tampa traseira: vincos principais, recortes e relacao com para-choques.",
+        "Carroceria geral: proporcao hatch/sedan, entre-eixos aparente e simetria visual.",
+        "Sinais forenses: possivel amassado, diferenca de pintura, retrovisor danificado e adesivos."
+      ],
+      "familias_fontes": {
+        "brazil_validation": 1,
+        "marketplace": 4,
+        "official_press_kit": 4,
+        "parts_catalog": 10,
+        "public_catalog": 4,
+        "research_search": 2,
+        "search": 4
+      },
+      "fontes": [
+        {
+          "familia": "research_search",
+          "fonte": "manual_proprietario",
+          "nome": "Manual do proprietario",
+          "objetivo": "manual oficial e diagramas",
+          "prioridade": 4.5,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=manual+do+proprietario+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "research_search",
+          "fonte": "google_imagens",
+          "nome": "Google Imagens",
+          "objetivo": "comparacao visual por imagens",
+          "prioridade": 4.4,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=MARCA+INDETERMINADA+MODELO+INDETERMINADO+detalhes+visuais+emblema+grade+farol+lanterna"
+        },
+        {
+          "familia": "official_press_kit",
+          "fonte": "toyota_vehicle_gallery",
+          "nome": "Toyota Vehicle Gallery / press kits",
+          "objetivo": "catalogos oficiais, releases e fotos por ano/modelo",
+          "prioridade": 5.0,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=site%3Atoyota.com.br+%28%22press+kit%22+OR+%22media+kit%22+OR+%22vehicle+gallery%22+OR+imprensa%29+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "official_press_kit",
+          "fonte": "ford_brasil_midia_kits",
+          "nome": "Ford Brasil Midia Kits",
+          "objetivo": "press kits e galerias de imprensa do fabricante",
+          "prioridade": 5.0,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=site%3Aford.com.br+%28%22midia+kit%22+OR+%22press+kit%22+OR+imprensa%29+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "official_press_kit",
+          "fonte": "stellantis_press_portal",
+          "nome": "Stellantis press portal",
+          "objetivo": "press kits oficiais e fotos de lancamento",
+          "prioridade": 5.0,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=site%3Astellantis.com+%28press+kit+OR+imprensa+OR+photos+OR+videos%29+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "official_press_kit",
+          "fonte": "volkswagen_press_kits",
+          "nome": "Volkswagen press kits",
+          "objetivo": "press kits e fotos oficiais por facelift e geracao",
+          "prioridade": 5.0,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=site%3Avw.com.br+%28%22press+kit%22+OR+imprensa+OR+galeria%29+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "public_catalog",
+          "fonte": "netcarshow",
+          "nome": "NetCarShow",
+          "objetivo": "catalogo visual por marca, modelo e ano",
+          "prioridade": 4.8,
+          "tipo": "direct",
+          "url": "https://www.netcarshow.com/"
+        },
+        {
+          "familia": "public_catalog",
+          "fonte": "cars_com_research",
+          "nome": "Cars.com Research",
+          "objetivo": "comparacao por anos, geracoes e versoes",
+          "prioridade": 4.6,
+          "tipo": "direct",
+          "url": "https://www.cars.com/research/"
+        },
+        {
+          "familia": "public_catalog",
+          "fonte": "edmunds",
+          "nome": "Edmunds",
+          "objetivo": "comparacao de trims e geracoes lado a lado",
+          "prioridade": 4.5,
+          "tipo": "direct",
+          "url": "https://www.edmunds.com/"
+        },
+        {
+          "familia": "public_catalog",
+          "fonte": "automobile_catalog",
+          "nome": "Automobile Catalog",
+          "objetivo": "catalogo tecnico por geracao e especificacoes",
+          "prioridade": 4.7,
+          "tipo": "direct",
+          "url": "https://www.automobile-catalog.com/"
+        },
+        {
+          "familia": "brazil_validation",
+          "fonte": "inmetro_pbe_veicular",
+          "nome": "Inmetro / PBE Veicular",
+          "objetivo": "validar combinações efetivamente ofertadas no Brasil",
+          "prioridade": 5.0,
+          "tipo": "consulta",
+          "url": "https://www.google.com/search?q=site%3Agov.br+%22PBE+Veicular%22+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "marketplace",
+          "fonte": "webmotors",
+          "nome": "Webmotors",
+          "objetivo": "fotos reais de anuncios",
+          "prioridade": 4.2,
+          "tipo": "direct",
+          "url": "https://www.google.com/search?q=site%3Awebmotors.com.br+MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "marketplace",
+          "fonte": "olx",
+          "nome": "OLX",
+          "objetivo": "amostra ampla de veiculos usados",
+          "prioridade": 3.1,
+          "tipo": "direct",
+          "url": "https://www.olx.com.br/autos-e-pecas?q=MARCA+INDETERMINADA+MODELO+INDETERMINADO"
+        },
+        {
+          "familia": "marketplace",
+          "fonte": "mercado_livre",
+          "nome": "Mercado Livre",
+          "objetivo": "pecas e variacoes disponiveis no mercado",
+          "prioridade": 3.0,
+          "tipo": "direct",
+          "url": "https://lista.mercadolivre.com.br/marca-indeterminada-modelo-indeterminado"
+        },
+        {
+          "familia": "marketplace",
+          "fonte": "amazon",
+          "nome": "Amazon",
+          "objetivo": "pecas e codigos de reposicao",
+          "prioridade": 2.8,
+          "tipo": "direct",
+          "url": "https://www.amazon.com.br/s?k=MARCA+INDETERMINADA+MODELO+INDETERMINADO+lanterna+traseira"
+        },
+        {
+          "familia": "search",
+          "fonte": "google_web",
+          "nome": "Google Search",
+          "objetivo": "busca ampla por noticias e comparativos",
+          "prioridade": 4.2,
+          "tipo": "search",
+          "url": "https://www.google.com/search?q=MARCA+INDETERMINADA+MODELO+INDETERMINADO+ficha+tecnica+comparativo+visual"
+        },
+        {
+          "familia": "search",
+          "fonte": "revista_quatro_rodas",
+          "nome": "Quatro Rodas",
+          "objetivo": "avaliacoes e fotos comparativas",
+          "prioridade": 4.0,
+          "tipo": "search",
+          "url": "https://www.google.com/search?q=site%3Aquatrorodas.abril.com.br+MARCA+INDETERMINADA+MODELO+INDETERMINADO+teste"
+        },
+        {
+          "familia": "search",
+          "fonte": "uol",
+          "nome": "UOL Busca",
+          "objetivo": "materias automotivas e comparativos",
+          "prioridade": 3.7,
+          "tipo": "search",
+          "url": "https://busca.uol.com.br/?q=MARCA+INDETERMINADA+MODELO+INDETERMINADO+grade+farol+lanterna+ficha+tecnica"
+        },
+        {
+          "familia": "search",
+          "fonte": "yahoo",
+          "nome": "Yahoo Search",
+          "objetivo": "segunda opiniao de busca",
+          "prioridade": 3.4,
+          "tipo": "search",
+          "url": "https://search.yahoo.com/search?p=MARCA+INDETERMINADA+MODELO+INDETERMINADO+grade+farol+lanterna+ficha+tecnica"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "catalogos_autopecas_multidominio",
+          "nome": "Catalogos autopecas multidominio",
+          "objetivo": "comparar componentes por catalogos de pecas",
+          "prioridade": 4.3,
+          "tipo": "search",
+          "url": "https://www.google.com/search?q=MARCA+INDETERMINADA+MODELO+INDETERMINADO+lanterna+farol+grade+para-choque+lataria+site%3Aautoexperts.parts+OR+site%3Adownload.centerparts.com.br+OR+site%3Amundocarautopecas.com.br+OR+site%3Apromo.ponteirasrodrigues.com.br+OR+site%3Asaojorgelatarias.com.br+OR+site%3Acentauroautoparts.com.br+OR+site%3Aautopecasprimo.com+OR+site%3Ajocar.com.br+OR+site%3Apartsy.com.br"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "autoexperts_parts",
+          "nome": "AutoExperts Parts",
+          "objetivo": "catalogo de autopecas para comparativo de componentes visuais",
+          "prioridade": 4.2,
+          "tipo": "direct",
+          "url": "https://www.autoexperts.parts/pt/br"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "centerparts_catalogos",
+          "nome": "Centerparts Catalogos",
+          "objetivo": "catalogos tecnicos para identificacao de aplicacoes de pecas",
+          "prioridade": 4.1,
+          "tipo": "direct",
+          "url": "https://download.centerparts.com.br/catalogos"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "mundocar_autopecas_lataria",
+          "nome": "Mundocar Autopecas Lataria",
+          "objetivo": "referencia de lataria e variacoes por modelo/ano",
+          "prioridade": 4.1,
+          "tipo": "direct",
+          "url": "https://www.mundocarautopecas.com.br/lataria"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "ponteiras_rodrigues_catalogo_lataria",
+          "nome": "Ponteiras Rodrigues Catalogo Lataria",
+          "objetivo": "catalogo focado em lataria para confronto de compatibilidade",
+          "prioridade": 4.1,
+          "tipo": "direct",
+          "url": "https://promo.ponteirasrodrigues.com.br/catalogo-autopecas-lataria"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "sao_jorge_latarias",
+          "nome": "Sao Jorge Latarias",
+          "objetivo": "pesquisa de itens de lataria por aplicacao",
+          "prioridade": 4.1,
+          "tipo": "direct",
+          "url": "https://saojorgelatarias.com.br/"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "centauro_autoparts",
+          "nome": "Centauro Autoparts",
+          "objetivo": "comparativo de pecas e componentes de carroceria",
+          "prioridade": 4.0,
+          "tipo": "direct",
+          "url": "https://www.centauroautoparts.com.br/"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "autopecas_primo_lataria",
+          "nome": "Autopecas Primo Lataria",
+          "objetivo": "lataria e monobloco para identificacao por conjunto de pecas",
+          "prioridade": 4.0,
+          "tipo": "direct",
+          "url": "https://www.autopecasprimo.com/latarias-e-monobloco/lataria"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "jocar_latarias",
+          "nome": "Jocar Latarias",
+          "objetivo": "catalogo de latarias para confronto de detalhes de carroceria",
+          "prioridade": 4.0,
+          "tipo": "direct",
+          "url": "https://www.jocar.com.br/latarias/"
+        },
+        {
+          "familia": "parts_catalog",
+          "fonte": "partsy_lataria",
+          "nome": "Partsy Lataria",
+          "objetivo": "amostra de pecas de lataria para triangulacao visual",
+          "prioridade": 4.0,
+          "tipo": "direct",
+          "url": "https://www.partsy.com.br/lataria"
+        }
+      ],
+      "fontes_total": 29,
+      "hipoteses_resumidas": [
+        "FIAT/Argo (32.8%) ano 2017-Atual",
+        "FIAT/Uno (32.8%) ano 2010-2021",
+        "CHEVROLET/Onix (31.3%) ano 2013-Atual"
+      ],
+      "metodologia_pericial": "Relatorio tecnico-pericial preliminar com inferencia visual automatizada, checagem de consistencia e consulta em fontes abertas rastreaveis.",
+      "modelo_alvo": "Marca indeterminada Modelo indeterminado",
+      "modelo_alvo_ajustado": false,
+      "modelo_alvo_ajustado_por_lanterna": false,
+      "modelo_alvo_ajuste_motivo": "Disputa tecnica entre modelos com margem de 0.0% - Aguardando evidencias forenses conclusivas",
+      "modelo_conclusivo": false,
+      "motores_analise_utilizados": [
+        "analise_visual_local_heuristica",
+        "assinaturas_componentes_geometricas",
+        "comparacao_fontes_abertas",
+        "checagem_forense_de_caracteristicas",
+        "comparacao_catalagos_publicos",
+        "validacao_pbe_veicular"
+      ],
+      "motores_busca_utilizados": [
+        "Google Search",
+        "Google Imagens",
+        "UOL Busca",
+        "Yahoo Search",
+        "Webmotors",
+        "OLX",
+        "Mercado Livre",
+        "Amazon",
+        "FIPE API aberta",
+        "NetCarShow",
+        "Cars.com Research",
+        "Edmunds",
+        "Automobile Catalog",
+        "Inmetro / PBE Veicular"
+      ],
+      "origem_hipotese_modelo": "heuristica_visual_local",
+      "sinal_lanterna_traseira": {
+        "confidence": 58.0,
+        "detected": true,
+        "vertical_pair": false
+      },
+      "sistemas_referencia": [
+        {
+          "categoria": "cloud_alpr",
+          "integracao_local": "opcional_token",
+          "sistema": "Plate Recognizer Snapshot API",
+          "url": "https://guides.platerecognizer.com/docs/snapshot/api-reference/"
+        },
+        {
+          "categoria": "cloud_alpr_vehicle",
+          "integracao_local": "opcional_secret_key",
+          "sistema": "Rekor CarCheck / OpenALPR",
+          "url": "https://docs.rekor.ai/developers/carcheck/integration"
+        },
+        {
+          "categoria": "open_source_alpr",
+          "integracao_local": "referencia_arquitetural",
+          "sistema": "OpenALPR (open source)",
+          "url": "https://github.com/openalpr/openalpr"
+        },
+        {
+          "categoria": "open_source_alpr",
+          "integracao_local": "opcional_endpoint",
+          "sistema": "Nomeroff-Net",
+          "url": "https://github.com/ria-com/nomeroff-net"
+        }
+      ],
+      "vista_alvo": "traseira"
+    },
+    "confianca_cor": 83.3,
+    "cor_probavel": "azul",
+    "cores_alternativas": [
+      {
+        "name": "azul",
+        "ratio": 51.64
+      },
+      {
+        "name": "verde",
+        "ratio": 40.29
+      },
+      {
+        "name": "amarela",
+        "ratio": 6.32
+      }
+    ],
+    "emblema": {
+      "detected": false
+    },
+    "fontes": [
+      "analise_visual_local_heuristica",
+      "consultas_abertas_multiplas_fontes"
+    ],
+    "geometria": {
+      "compact_vehicle": true,
+      "dual_headlamps": true,
+      "frontal_symmetry": 87.2,
+      "grille_edge_density": 6.32,
+      "headlamp_left_density": 7.79,
+      "headlamp_right_density": 4.46,
+      "vehicle_aspect_ratio": 1.325
+    },
+    "hipotese_principal": {
+      "confianca": 16.4,
+      "confianca_modelo_bruta": 32.8,
+      "evidencias": [
+        "proporcao_compacta",
+        "abstencao_modelo_por_baixa_evidencia"
+      ],
+      "fabricante": "Indeterminado",
+      "faixa_ano_modelo": "indeterminado",
+      "margem_top2": 0.0,
+      "modelo": "Nao conclusivo",
+      "motivo_abstencao_modelo": "confianca_modelo_abaixo_limite;margem_top2_insuficiente;evidencia_discriminativa_insuficiente;dados_visuais_insuficientes_close_up_placa"
+    },
+    "hipotese_principal_bruta": {
+      "confianca": 32.8,
+      "evidencias": [
+        "proporcao_compacta"
+      ],
+      "fabricante": "FIAT",
+      "faixa_ano_modelo": "2017-Atual",
+      "modelo": "Argo"
+    },
+    "hipoteses": [
+      {
+        "confianca": 32.8,
+        "evidencias": [
+          "proporcao_compacta"
+        ],
+        "fabricante": "FIAT",
+        "faixa_ano_modelo": "2017-Atual",
+        "modelo": "Argo"
+      },
+      {
+        "confianca": 32.8,
+        "evidencias": [
+          "proporcao_compacta"
+        ],
+        "fabricante": "FIAT",
+        "faixa_ano_modelo": "2010-2021",
+        "modelo": "Uno"
+      },
+      {
+        "confianca": 31.3,
+        "evidencias": [
+          "proporcao_compacta"
+        ],
+        "fabricante": "CHEVROLET",
+        "faixa_ano_modelo": "2013-Atual",
+        "modelo": "Onix"
+      }
+    ],
+    "lanterna_traseira": {
+      "components_detected": 0,
+      "confidence": 58.0,
+      "detected": true,
+      "layout_hint": true,
+      "layout_hint_lines": 15,
+      "left": null,
+      "pair_score": 52.0,
+      "right": null,
+      "source": "rear_layout_hint",
+      "symmetry": 0.0,
+      "vertical_pair": false
+    },
+    "matriz_evidencias": {
+      "candidates": [
+        {
+          "confianca": 32.8,
+          "evidencias_contadas": 1,
+          "fabricante": "FIAT",
+          "faixa_ano_modelo": "2017-Atual",
+          "fonte_ano": "",
+          "modelo": "Argo",
+          "modelo_match_base_aberta": "",
+          "peso_total_apoio": 8.0,
+          "rows": [
+            {
+              "categoria": "carroceria",
+              "componentes_relacionados": [],
+              "descricao": "ProporÃƒÂ§ÃƒÂ£o global compacta favorece modelos hatch pequenos.",
+              "evidencia": "proporcao_compacta",
+              "impacto": "moderado",
+              "peso_nominal": 8.0
+            }
+          ],
+          "status": "conclusivo"
+        },
+        {
+          "confianca": 32.8,
+          "evidencias_contadas": 1,
+          "fabricante": "FIAT",
+          "faixa_ano_modelo": "2010-2021",
+          "fonte_ano": "",
+          "modelo": "Uno",
+          "modelo_match_base_aberta": "",
+          "peso_total_apoio": 8.0,
+          "rows": [
+            {
+              "categoria": "carroceria",
+              "componentes_relacionados": [],
+              "descricao": "ProporÃƒÂ§ÃƒÂ£o global compacta favorece modelos hatch pequenos.",
+              "evidencia": "proporcao_compacta",
+              "impacto": "moderado",
+              "peso_nominal": 8.0
+            }
+          ],
+          "status": "conclusivo"
+        },
+        {
+          "confianca": 31.3,
+          "evidencias_contadas": 1,
+          "fabricante": "CHEVROLET",
+          "faixa_ano_modelo": "2013-Atual",
+          "fonte_ano": "",
+          "modelo": "Onix",
+          "modelo_match_base_aberta": "",
+          "peso_total_apoio": 8.0,
+          "rows": [
+            {
+              "categoria": "carroceria",
+              "componentes_relacionados": [],
+              "descricao": "ProporÃƒÂ§ÃƒÂ£o global compacta favorece modelos hatch pequenos.",
+              "evidencia": "proporcao_compacta",
+              "impacto": "moderado",
+              "peso_nominal": 8.0
+            }
+          ],
+          "status": "conclusivo"
+        }
+      ],
+      "component_snapshot": [],
+      "notes": [
+        "matriz_evidencias_baseada_em_componentes",
+        "validacao_humana_obrigatoria"
+      ],
+      "status": "ok",
+      "summary": [
+        "FIAT/Argo com 1 evidencias e peso 8.0"
+      ],
+      "view_type": "traseira"
+    },
+    "observacoes": [
+      "abstencao_modelo:confianca_modelo_abaixo_limite,margem_top2_insuficiente,evidencia_discriminativa_insuficiente,dados_visuais_insuficientes_close_up_placa",
+      "hipotese_nao_conclusiva",
+      "caracteristicas_forenses_potenciais_detectadas"
+    ],
+    "qualidade_modelo": {
+      "component_coverage": 0.0,
+      "confidence_margin_top2": 0.0,
+      "discriminative_evidence_count": 0,
+      "model_abstained": true,
+      "raw_confidence": 32.8,
+      "reasons": [
+        "confianca_modelo_abaixo_limite",
+        "margem_top2_insuficiente",
+        "evidencia_discriminativa_insuficiente",
+        "dados_visuais_insuficientes_close_up_placa"
+      ],
+      "status": "model_abstained",
+      "view_type": "traseira"
+    },
+    "status": "review_required",
+    "vista_detectada": "traseira"
+  },
+  "warnings": [],
+  "weighted_support": 6.67
+}

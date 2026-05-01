@@ -1,0 +1,215 @@
+{
+  "summary": {
+    "generated_at": "2026-04-26T00:20:38.141453",
+    "total_cases": 5,
+    "valid_cases": 5,
+    "matched_cases": 4,
+    "accuracy_percent": 80.0,
+    "average_elapsed_seconds": 116.13,
+    "failures": [
+      {
+        "file": "10458347_x216.jpg",
+        "expected_text": "PXZ9991",
+        "actual_text": "PXZ9999",
+        "expected_status": "CONCLUSIVO",
+        "actual_status": "CONCLUSIVO",
+        "expected_pattern": "Antigo",
+        "actual_pattern": "Antigo"
+      }
+    ]
+  },
+  "gate": {
+    "policy_file": "C:\\Grom_OCR\\data\\phase1_quality_gate_policy.json",
+    "baseline_path": "c:/Grom_OCR/data/test_results/image_calibration_battery_current.json",
+    "baseline_summary": {
+      "generated_at": "2026-04-26T00:14:52.819944",
+      "total_cases": 5,
+      "valid_cases": 5,
+      "matched_cases": 2,
+      "accuracy_percent": 40.0,
+      "average_elapsed_seconds": 133.95,
+      "failures": [
+        {
+          "file": "10458347_x216.jpg",
+          "expected_text": "PXZ9991",
+          "actual_text": "",
+          "expected_status": "CONCLUSIVO",
+          "actual_status": "INCONCLUSIVO",
+          "expected_pattern": "Antigo",
+          "actual_pattern": "Indefinido"
+        },
+        {
+          "file": "20171119_154214_ch6-1024x576.jpg",
+          "expected_text": "DFO8819",
+          "actual_text": "",
+          "expected_status": "CONCLUSIVO",
+          "actual_status": "INCONCLUSIVO",
+          "expected_pattern": "Antigo",
+          "actual_pattern": "Indefinido"
+        },
+        {
+          "file": "fiat.jpg",
+          "expected_text": "REI5G32",
+          "actual_text": "",
+          "expected_status": "CONCLUSIVO",
+          "actual_status": "INCONCLUSIVO",
+          "expected_pattern": "Mercosul",
+          "actual_pattern": "Indefinido"
+        }
+      ]
+    },
+    "passed": true,
+    "checks": [
+      {
+        "name": "min_accuracy_percent",
+        "passed": true,
+        "actual": 80.0,
+        "expected": 80.0,
+        "detail": "Acuracia percentual da bateria canônica."
+      },
+      {
+        "name": "min_matched_cases",
+        "passed": true,
+        "actual": 4,
+        "expected": 4,
+        "detail": "Quantidade minima de casos batidos integralmente."
+      },
+      {
+        "name": "max_accuracy_drop_percent",
+        "passed": true,
+        "actual": -40.0,
+        "expected": 0.0,
+        "detail": "Queda maxima permitida contra o baseline de acuracia."
+      },
+      {
+        "name": "max_matched_drop_cases",
+        "passed": true,
+        "actual": -2,
+        "expected": 0,
+        "detail": "Queda maxima permitida contra o baseline de casos batidos."
+      }
+    ]
+  },
+  "results": [
+    {
+      "file": "10458347_x216.jpg",
+      "path": "C:/Grom_OCR/data/uploads/10458347_x216.jpg",
+      "case_kind": "placa_antiga_desgastada",
+      "notes": "Placa antiga com ultimo digito sensivel a refinamento geometrico.",
+      "http_status": 200,
+      "elapsed_seconds": 144.26,
+      "expected_text": "PXZ9991",
+      "actual_text": "PXZ9999",
+      "expected_pattern": "Antigo",
+      "actual_pattern": "Antigo",
+      "expected_status": "CONCLUSIVO",
+      "actual_status": "CONCLUSIVO",
+      "confidence": 59.81,
+      "score": 103.47,
+      "support_count": 1,
+      "support_rank": 1.0,
+      "acceptance_reason": "",
+      "selection_reason": "single_engine_fallback",
+      "conclusion_decision": "inconclusivo",
+      "conclusion_level": "INCOMPATIVEL",
+      "protocol_status": "atencao",
+      "matched": false
+    },
+    {
+      "file": "20171119_154214_ch6-1024x576.jpg",
+      "path": "C:/Grom_OCR/data/uploads/20171119_154214_ch6-1024x576.jpg",
+      "case_kind": "placa_antiga_cena_externa",
+      "notes": "Caso base de D/O/U com recorte traseiro e placa antiga.",
+      "http_status": 200,
+      "elapsed_seconds": 104.45,
+      "expected_text": "DFO8819",
+      "actual_text": "DFO8819",
+      "expected_pattern": "Antigo",
+      "actual_pattern": "Antigo",
+      "expected_status": "CONCLUSIVO",
+      "actual_status": "CONCLUSIVO",
+      "confidence": 85.72,
+      "score": 130.9,
+      "support_count": 1,
+      "support_rank": 1.0,
+      "acceptance_reason": "",
+      "selection_reason": "single_engine_fallback",
+      "conclusion_decision": "conclusivo",
+      "conclusion_level": "COMPATIVEL_PARCIAL",
+      "protocol_status": "atencao",
+      "matched": true
+    },
+    {
+      "file": "fiat.jpg",
+      "path": "C:/Grom_OCR/data/uploads/fiat.jpg",
+      "case_kind": "frota_frontal_multipla",
+      "notes": "Cena com multiplos veiculos; alvo principal deve permanecer o frontal dominante.",
+      "http_status": 200,
+      "elapsed_seconds": 69.28,
+      "expected_text": "REI5G32",
+      "actual_text": "REI5G32",
+      "expected_pattern": "Mercosul",
+      "actual_pattern": "Mercosul",
+      "expected_status": "CONCLUSIVO",
+      "actual_status": "CONCLUSIVO",
+      "confidence": 87.82,
+      "score": 133.38,
+      "support_count": 1,
+      "support_rank": 1.0,
+      "acceptance_reason": "",
+      "selection_reason": "single_engine_fallback",
+      "conclusion_decision": "conclusivo",
+      "conclusion_level": "COMPATIVEL_PARCIAL",
+      "protocol_status": "atencao",
+      "matched": true
+    },
+    {
+      "file": "sddefault.jpg",
+      "path": "C:/Grom_OCR/data/uploads/sddefault.jpg",
+      "case_kind": "cena_insuficiente",
+      "notes": "Caso fraco; sistema deve abster-se de leitura conclusiva.",
+      "http_status": 200,
+      "elapsed_seconds": 122.08,
+      "expected_text": "",
+      "actual_text": "",
+      "expected_pattern": "Indefinido",
+      "actual_pattern": "Indefinido",
+      "expected_status": "INCONCLUSIVO",
+      "actual_status": "INCONCLUSIVO",
+      "confidence": 0.0,
+      "score": 0.0,
+      "support_count": 0,
+      "support_rank": 0.0,
+      "acceptance_reason": "",
+      "selection_reason": "",
+      "conclusion_decision": "inconclusivo",
+      "conclusion_level": "INCOMPATIVEL",
+      "protocol_status": "atencao",
+      "matched": true
+    },
+    {
+      "file": "teste.jpg",
+      "path": "C:/Grom_OCR/data/uploads/teste.jpg",
+      "case_kind": "placa_distante",
+      "notes": "Veiculo distante com area de placa muito pequena para OCR confiavel.",
+      "http_status": 200,
+      "elapsed_seconds": 140.6,
+      "expected_text": "",
+      "actual_text": "",
+      "expected_pattern": "Indefinido",
+      "actual_pattern": "Indefinido",
+      "expected_status": "INCONCLUSIVO",
+      "actual_status": "INCONCLUSIVO",
+      "confidence": 0.0,
+      "score": 0.0,
+      "support_count": 0,
+      "support_rank": 0.0,
+      "acceptance_reason": "",
+      "selection_reason": "",
+      "conclusion_decision": "inconclusivo",
+      "conclusion_level": "INCOMPATIVEL",
+      "protocol_status": "atencao",
+      "matched": true
+    }
+  ]
+}

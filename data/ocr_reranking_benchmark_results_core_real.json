@@ -1,0 +1,1488 @@
+{
+  "generated_at_utc": "2026-04-04T14:33:09.952284Z",
+  "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest_core_real.json",
+  "summary": {
+    "total": 6,
+    "matched": 2,
+    "accuracy_percent": 33.33,
+    "top_candidate_match_count": 3,
+    "top_candidate_match_rate_percent": 50.0,
+    "expected_in_top_candidates_count": 4,
+    "expected_in_top_candidates_rate_percent": 66.67,
+    "avg_expected_rank": 1.25,
+    "median_expected_rank": 1.0,
+    "avg_best_weighted_support_matched": 8.695,
+    "avg_best_weighted_support_mismatched": 1.992,
+    "best_engine_counts": {
+      "ensemble": 3
+    },
+    "per_engine_summary": {
+      "paddleocr": {
+        "total": 6,
+        "top_match": 0,
+        "candidate_found": 0,
+        "top_match_rate_percent": 0.0,
+        "candidate_recall_rate_percent": 0.0,
+        "mean_candidate_rank": 0.0,
+        "median_candidate_rank": 0.0,
+        "mean_top_score": 0.0,
+        "mean_top_confidence": 0.0
+      },
+      "rapidocr": {
+        "total": 6,
+        "top_match": 3,
+        "candidate_found": 4,
+        "top_match_rate_percent": 50.0,
+        "candidate_recall_rate_percent": 66.67,
+        "mean_candidate_rank": 1.25,
+        "median_candidate_rank": 1.0,
+        "mean_top_score": 115.83,
+        "mean_top_confidence": 82.6
+      },
+      "tesseract": {
+        "total": 6,
+        "top_match": 0,
+        "candidate_found": 0,
+        "top_match_rate_percent": 0.0,
+        "candidate_recall_rate_percent": 0.0,
+        "mean_candidate_rank": 0.0,
+        "median_candidate_rank": 0.0,
+        "mean_top_score": 0.0,
+        "mean_top_confidence": 0.0
+      }
+    }
+  },
+  "results": [
+    {
+      "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "OFO8819",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 107.5,
+      "observed_best_confidence": 72.52,
+      "observed_best_weighted_support": 7.97,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "pattern_threshold",
+      "matched": false,
+      "top_candidate_text": "OFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "paddleocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 2,
+          "best_score": 107.5,
+          "avg_conf": 72.52
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 72.52,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 7.968
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1236
+            }
+          },
+          "pattern": "Antigo",
+          "region": "front_center_focus",
+          "score": 107.5,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8819",
+          "weighted_support": 7.97
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 72.52,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 2.545
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1236
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "front_center_focus",
+          "score": 93.5,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8B19",
+          "weighted_support": 2.55
+        }
+      ],
+      "engine_blocks": {
+        "paddleocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 107.5,
+          "avg_conf": 72.52,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "trocr_coldstart_skipped",
+        "doctr_coldstart_skipped",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 5,
+        "engines_configured": 5,
+        "engines_disabled": 3,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 5,
+        "engines_registered": 8,
+        "engines_skipped": 2,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r2"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 72.5,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 1
+    },
+    {
+      "image": "data/uploads/10458347_x216.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "PXZ9391",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 123.64,
+      "observed_best_confidence": 84.38,
+      "observed_best_weighted_support": 8.59,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": true,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 2,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "paddleocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 2,
+          "best_score": 123.64,
+          "avg_conf": 84.38
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 84.38,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 8.592
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1236
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 123.64,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "PXZ9391",
+          "weighted_support": 8.59
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 63.33,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.037
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1236
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "score": 35.89,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "MGLJF",
+          "weighted_support": 0.04
+        }
+      ],
+      "engine_blocks": {
+        "paddleocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "PXZ9391",
+          "score": 123.64,
+          "avg_conf": 84.38,
+          "pattern": "Antigo",
+          "candidate_count": 2
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "trocr_coldstart_skipped",
+        "doctr_coldstart_skipped",
+        "raw_detected_3:tesseract_low_reliability_abstained;center_guess:tesseract_low_reliability_abstained;raw_detected_4:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 5,
+        "engines_configured": 5,
+        "engines_disabled": 3,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 5,
+        "engines_registered": 8,
+        "engines_skipped": 2,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r2"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 84.4,
+        "evidence_level": "MEDIA",
+        "manual_review_required": true,
+        "reasons": [
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 2
+    },
+    {
+      "image": "data/uploads/sddefault.jpg",
+      "kind": "scene",
+      "notes": "Cena real adicional com OCR historicamente mais instavel",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "AMX3660",
+      "expected_in_top_candidates_rank": 2,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "paddleocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "AMX3660",
+          "top_match": false,
+          "candidate_rank": 2,
+          "candidate_found": true,
+          "candidate_count": 4,
+          "best_score": 117.88,
+          "avg_conf": 86.33
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 86.33,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 5.917
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7383,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.7826
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_1",
+          "score": 117.88,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "AMX3660",
+          "weighted_support": 5.92
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 85.98,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.969
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7383,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.7826
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_1",
+          "score": 117.53,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "AMX3640",
+          "weighted_support": 1.97
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 86.33,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.284
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7383,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.7826
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_detected_1",
+          "score": 109.38,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "AMX3G60",
+          "weighted_support": 1.28
+        }
+      ],
+      "engine_blocks": {
+        "paddleocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "AMX3660",
+          "score": 117.88,
+          "avg_conf": 86.33,
+          "pattern": "Antigo",
+          "candidate_count": 4
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "trocr_coldstart_skipped",
+        "doctr_coldstart_skipped",
+        "raw_detected_1:tesseract_low_reliability_abstained;detected_1:tesseract_low_reliability_abstained;raw_center_guess:tesseract_low_reliability_abstained",
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 5,
+        "engines_configured": 5,
+        "engines_disabled": 3,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 5,
+        "engines_registered": 8,
+        "engines_skipped": 2,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r2"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 3
+    },
+    {
+      "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "OFO8819",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "paddleocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 3,
+          "best_score": 101.7,
+          "avg_conf": 73.12
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 73.12,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 4.238
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5729,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.6072
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 101.7,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8819",
+          "weighted_support": 4.24
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 73.12,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.357
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5729,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.6072
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 88.7,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "OFO8B19",
+          "weighted_support": 1.36
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 71.88,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 0.048
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.5729,
+              "mode": "noisy",
+              "reason": "engine_warning_low_reliability",
+              "weight": 0.6072
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "full_image",
+          "score": 40.6,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "008819",
+          "weighted_support": 0.05
+        }
+      ],
+      "engine_blocks": {
+        "paddleocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "OFO8819",
+          "score": 101.7,
+          "avg_conf": 73.12,
+          "pattern": "Antigo",
+          "candidate_count": 3
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "trocr_coldstart_skipped",
+        "doctr_coldstart_skipped",
+        "raw_lower_wide_focus:rapidocr_low_reliability_abstained;lower_wide_focus:rapidocr_low_reliability_abstained",
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 5,
+        "engines_configured": 5,
+        "engines_disabled": 3,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 5,
+        "engines_registered": 8,
+        "engines_skipped": 2,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r2"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 4
+    },
+    {
+      "image": "data/uploads/placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "PXZ9391",
+      "observed_best_engine": "ensemble",
+      "observed_best_score": 125.76,
+      "observed_best_confidence": 92.32,
+      "observed_best_weighted_support": 8.8,
+      "observed_best_support_count": 1,
+      "observed_best_selection_reason": "single_engine_strong",
+      "observed_best_acceptance_reason": "confidence_threshold",
+      "matched": true,
+      "top_candidate_text": "PXZ9391",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 1,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "paddleocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "PXZ9391",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 1,
+          "best_score": 125.76,
+          "avg_conf": 92.32
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 92.32,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 8.803
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 1.06,
+              "mode": "normal",
+              "reason": "stable",
+              "weight": 1.1236
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 125.76,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "PXZ9391",
+          "weighted_support": 8.8
+        }
+      ],
+      "engine_blocks": {
+        "paddleocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "PXZ9391",
+          "score": 125.76,
+          "avg_conf": 92.32,
+          "pattern": "Antigo",
+          "candidate_count": 1
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "trocr_coldstart_skipped",
+        "doctr_coldstart_skipped",
+        "center_guess:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 5,
+        "engines_configured": 5,
+        "engines_disabled": 3,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 5,
+        "engines_registered": 8,
+        "engines_skipped": 2,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r2"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 92.3,
+        "evidence_level": "MEDIA",
+        "manual_review_required": true,
+        "reasons": [
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "MEDIA",
+      "index": 5
+    },
+    {
+      "image": "data/uploads/placa_sddefault.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "AMX3640",
+      "expected_in_top_candidates_rank": 1,
+      "top_candidate_count": 3,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "paddleocr": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        },
+        "rapidocr": {
+          "text": "AMX3640",
+          "top_match": true,
+          "candidate_rank": 1,
+          "candidate_found": true,
+          "candidate_count": 4,
+          "best_score": 118.49,
+          "avg_conf": 86.93
+        },
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 86.93,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 6.034
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7506,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.7957
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 118.49,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "AMX3640",
+          "weighted_support": 6.03
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 83.44,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.975
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7506,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.7957
+            }
+          },
+          "pattern": "Antigo",
+          "region": "full_image",
+          "score": 115.0,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "AMX3660",
+          "weighted_support": 1.98
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 86.93,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "rapidocr": 1.309
+          },
+          "engine_weights": {
+            "rapidocr": {
+              "factor": 0.7506,
+              "mode": "soft_noisy",
+              "reason": "weak_consensus",
+              "weight": 0.7957
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "full_image",
+          "score": 109.99,
+          "support_count": 1,
+          "support_engines": [
+            "rapidocr"
+          ],
+          "text": "AMX3G40",
+          "weighted_support": 1.31
+        }
+      ],
+      "engine_blocks": {
+        "paddleocr": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        },
+        "rapidocr": {
+          "text": "AMX3640",
+          "score": 118.49,
+          "avg_conf": 86.93,
+          "pattern": "Antigo",
+          "candidate_count": 4
+        },
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "trocr_coldstart_skipped",
+        "doctr_coldstart_skipped",
+        "center_lower_focus:tesseract_low_reliability_abstained;front_center_focus:tesseract_low_reliability_abstained;lower_wide_focus:tesseract_low_reliability_abstained;center_guess:tesseract_low_reliability_abstained;full_image:tesseract_low_reliability_abstained",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 5,
+        "engines_configured": 5,
+        "engines_disabled": 3,
+        "engines_executed": 3,
+        "engines_failed": 0,
+        "engines_ready": 5,
+        "engines_registered": 8,
+        "engines_skipped": 2,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 2,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-04-r2"
+      },
+      "ocr_engine_status": {
+        "doctr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        },
+        "easyocr": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "engine_disabled",
+          "status": "disabled"
+        },
+        "paddleocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "pdf_probe": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "entrada_nao_pdf",
+          "status": "disabled"
+        },
+        "plate_recognizer": {
+          "available": false,
+          "enabled": false,
+          "executed": false,
+          "has_text": false,
+          "reason": "token_nao_configurado",
+          "status": "disabled"
+        },
+        "rapidocr": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        },
+        "trocr": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "coldstart_blocked",
+          "status": "skipped"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "alertas_tecnicos_presentes",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 6
+    }
+  ]
+}

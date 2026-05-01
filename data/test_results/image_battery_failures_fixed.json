@@ -1,0 +1,24 @@
+[
+  {
+    "file": "sddefault.jpg",
+    "status_code": 200,
+    "ocr": "",
+    "pattern": "Indefinido",
+    "confidence": 0.0,
+    "status": "INCONCLUSIVO",
+    "report_url": "/pdf/Relatorio_sddefault_2580dbc16ac8.pdf",
+    "report_error": null,
+    "summary": "A imagem apresenta limitacoes tecnicas relevantes, impedindo individualizacao segura. Concluir como Incompatível exige revisao humana qualificada. Principais sustentacoes: Placa/OCR total ou parcial=2.5; Farois=1.0; Lanternas traseiras=0.0."
+  },
+  {
+    "file": "teste.jpg",
+    "status_code": 200,
+    "ocr": "",
+    "pattern": "Indefinido",
+    "confidence": 0.0,
+    "status": "INCONCLUSIVO",
+    "report_url": "/pdf/Relatorio_teste_5da15d65c904.pdf",
+    "report_error": null,
+    "summary": "A imagem apresenta limitacoes tecnicas relevantes, impedindo individualizacao segura. Concluir como Incompatível exige revisao humana qualificada. Principais sustentacoes: Placa/OCR total ou parcial=2.5; Farois=0.0; Lanternas traseiras=0.0."
+  }
+]

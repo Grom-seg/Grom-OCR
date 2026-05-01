@@ -1,0 +1,62 @@
+[
+  {
+    "file": "10458347_x216.jpg",
+    "status_code": 200,
+    "ocr": "PXZ9999",
+    "pattern": "Antigo",
+    "confidence": 59.81,
+    "status": "CONCLUSIVO",
+    "report_url": "/pdf/Relatorio_10458347_x216_33865ece8942.pdf",
+    "support_count": 1,
+    "support_rank": 1.0,
+    "warnings": []
+  },
+  {
+    "file": "20171119_154214_ch6-1024x576.jpg",
+    "status_code": 200,
+    "ocr": "DFO8819",
+    "pattern": "Antigo",
+    "confidence": 85.72,
+    "status": "CONCLUSIVO",
+    "report_url": "/pdf/Relatorio_20171119_154214_ch6-1024x576_5cb5fc0c3a5d.pdf",
+    "support_count": 1,
+    "support_rank": 1.0,
+    "warnings": []
+  },
+  {
+    "file": "fiat.jpg",
+    "status_code": 200,
+    "ocr": "REI5G32",
+    "pattern": "Mercosul",
+    "confidence": 87.82,
+    "status": "CONCLUSIVO",
+    "report_url": "/pdf/Relatorio_fiat_bb4808fb2074.pdf",
+    "support_count": 1,
+    "support_rank": 1.0,
+    "warnings": []
+  },
+  {
+    "file": "sddefault.jpg",
+    "status_code": 200,
+    "ocr": "",
+    "pattern": "Indefinido",
+    "confidence": 0.0,
+    "status": "INCONCLUSIVO",
+    "report_url": "/pdf/Relatorio_sddefault_09161078acc3.pdf",
+    "support_count": 0,
+    "support_rank": 0.0,
+    "warnings": []
+  },
+  {
+    "file": "teste.jpg",
+    "status_code": 200,
+    "ocr": "",
+    "pattern": "Indefinido",
+    "confidence": 0.0,
+    "status": "INCONCLUSIVO",
+    "report_url": "/pdf/Relatorio_teste_2f036e2b8b4e.pdf",
+    "support_count": 0,
+    "support_rank": 0.0,
+    "warnings": []
+  }
+]

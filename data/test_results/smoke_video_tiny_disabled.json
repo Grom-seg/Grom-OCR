@@ -1,0 +1,95 @@
+{
+  "error": "Nenhum quadro foi analisado com sucesso",
+  "frame_failures": [
+    {
+      "error": "http_500",
+      "frame_index": 0,
+      "frame_order": 1
+    },
+    {
+      "error": "http_500",
+      "frame_index": 1,
+      "frame_order": 2
+    },
+    {
+      "error": "http_500",
+      "frame_index": 2,
+      "frame_order": 3
+    },
+    {
+      "error": "http_500",
+      "frame_index": 3,
+      "frame_order": 4
+    }
+  ],
+  "video_metadata": {
+    "analysis_id": "video_4dec188f8c1e4393",
+    "analysis_stage": "preview",
+    "backend": "opencv",
+    "codec_fourcc": "FMP4",
+    "codec_hint": "FMP4",
+    "duration_seconds": 80.0,
+    "file_size_bytes": 138564,
+    "file_size_mb": 0.13,
+    "fps": 0.05,
+    "frame_count": 4,
+    "height": 576,
+    "input_mime": "",
+    "input_security": {
+      "allowed": true,
+      "allowed_extensions": [
+        ".mp4",
+        ".m4v",
+        ".mov",
+        ".3gp",
+        ".avi",
+        ".mkv",
+        ".webm",
+        ".mpg",
+        ".mpeg",
+        ".ts",
+        ".m2ts",
+        ".mts",
+        ".vob",
+        ".dav",
+        ".264",
+        ".265",
+        ".h264",
+        ".h265"
+      ],
+      "content_type": "video/mp4",
+      "detected_mime": "video/mp4",
+      "detected_signature": "mp4",
+      "error": "",
+      "extension": ".mp4",
+      "file_size_bytes": 138564,
+      "file_size_mb": 0.13,
+      "input_type": "video",
+      "max_duration_seconds": 600,
+      "max_upload_bytes": 838860800,
+      "max_upload_mb": 800.0,
+      "original_filename": "video_minute_bias_smoke_tiny.mp4",
+      "policy": "allowlist_extension+signature+size+decoder_probe",
+      "signature_ok": true,
+      "status": "ok",
+      "video_probe": {
+        "duration_seconds": 80.0,
+        "fps": 0.05,
+        "frame_count": 4,
+        "resolution": {
+          "height": 576,
+          "width": 1024
+        }
+      },
+      "warnings": []
+    },
+    "input_signature": "unknown",
+    "notes": [],
+    "opened": true,
+    "rotation": 0,
+    "sha256": "590531a156b21c3c8c05c6f3b6518a4a4201875a4869cbf1b80286e67fd6e6df",
+    "video_filename": "video_minute_bias_smoke_tiny.mp4",
+    "video_path": "C:\\Grom_OCR\\data\\uploads\\video_minute_bias_smoke_tiny.mp4",
+    "width": 1024
+  }
+}

@@ -1,0 +1,31 @@
+# Ambiente virtual Python
+.venv/
+__pycache__/
+*.pyc
+
+# Variáveis de ambiente (contém senhas!)
+.env
+
+# Logs de runtime
+*.log
+*.err.log
+*.out.log
+
+# Arquivos temporários
+tmp_*
+scratch/
+
+# Uploads de usuários (não versionar evidências)
+data/uploads/
+downloads/
+
+# Banco local
+data/grom_ocr.sqlite
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,142 @@
+Relatório consolidado de benchmarks - 2026-04-30T21:03:37.187316
+
+Executando: scene_preprocess
+Saída:
+{
+  "total": 21,
+  "matched": 0,
+  "accuracy_percent": 0.0,
+  "avg_confidence": 3.81,
+  "avg_improvement": 4.88,
+  "route": "/process",
+  "scenario_summary": {
+    "dark": {
+      "total": 3,
+      "correct": 0,
+      "accuracy_percent": 0.0,
+      "avg_confidence": 0.0,
+      "selected_variants": {
+        "gray_world_equalize": 2,
+        "pillow_equalize": 1
+      }
+    },
+    "balanced": {
+      "total": 16,
+      "correct": 0,
+      "accuracy_percent": 0.0,
+      "avg_confidence": 0.0,
+      "selected_variants": {
+        "original": 11,
+        "gray_world_clahe_1.8": 1,
+        "gray_world_equalize": 1,
+        "gray_world_morph_close": 1,
+        "pillow_autocontrast": 1,
+        "pillow_equalize": 1
+      }
+    },
+    "bright": {
+      "total": 2,
+      "correct": 0,
+      "accuracy_percent": 0.0,
+      "avg_confidence": 40.0,
+      "selected_variants": {
+        "pillow_brightness_down": 1,
+        "pillow_equalize": 1
+      }
+    }
+  }
+}
+Resultado salvo em: data\scene_preprocess_benchmark_results.json
+Calibracao sugerida salva em: data\scene_preprocess_calibration.generated.json
+
+------------------------------------------------------------
+
+Executando: plate_detector
+Saída:
+{
+  "total": 20,
+  "scene_total": 6,
+  "crop_total": 14,
+  "roi_detected_total": 20,
+  "full_image_total": 0,
+  "scene_roi_rate_percent": 100.0,
+  "scene_fallback_rate_percent": 0.0,
+  "avg_selected_score": 107.21,
+  "avg_selected_quality_score": 90.76,
+  "selected_source_counts": {
+    "contour": 10,
+    "secondary": 5,
+    "heuristic": 4,
+    "haar": 1
+  },
+  "quality_label_counts": {
+    "excelente": 16,
+    "boa": 4
+  },
+  "kind_counts": {
+    "crop": 14,
+    "scene": 6
+  }
+}
+Resultado salvo em: data\plate_detector_benchmark_results.json
+Calibracao sugerida salva em: data\plate_detector_calibration.generated.json
+
+------------------------------------------------------------
+
+Executando: ocr_reranking
+Saída:
+{
+  "total": 13,
+  "matched": 1,
+  "accuracy_percent": 7.69,
+  "top_candidate_match_count": 1,
+  "top_candidate_match_rate_percent": 7.69,
+  "expected_in_top_candidates_count": 2,
+  "expected_in_top_candidates_rate_percent": 15.38,
+  "avg_expected_rank": 2.0,
+  "median_expected_rank": 2.0,
+  "avg_best_weighted_support_matched": 6.71,
+  "avg_best_weighted_support_mismatched": 1.215,
+  "best_engine_counts": {
+    "tesseract": 4
+  },
+  "per_engine_summary": {
+    "easyocr": {
+      "total": 13,
+      "top_match": 0,
+      "candidate_found": 0,
+      "top_match_rate_percent": 0.0,
+      "candidate_recall_rate_percent": 0.0,
+      "mean_candidate_rank": 0.0,
+      "median_candidate_rank": 0.0,
+      "mean_top_score": 0.0,
+      "mean_top_confidence": 0.0
+    },
+    "rapidocr": {
+      "total": 13,
+      "top_match": 0,
+      "candidate_found": 0,
+      "top_match_rate_percent": 0.0,
+      "candidate_recall_rate_percent": 0.0,
+      "mean_candidate_rank": 0.0,
+      "median_candidate_rank": 0.0,
+      "mean_top_score": 0.0,
+      "mean_top_confidence": 0.0
+    },
+    "tesseract": {
+      "total": 13,
+      "top_match": 1,
+      "candidate_found": 2,
+      "top_match_rate_percent": 7.69,
+      "candidate_recall_rate_percent": 15.38,
+      "mean_candidate_rank": 2.0,
+      "median_candidate_rank": 2.0,
+      "mean_top_score": 32.77,
+      "mean_top_confidence": 14.32
+    }
+  }
+}
+Resultado salvo em: data\ocr_reranking_benchmark_results_raster.json
+Calibracao sugerida salva em: data\ocr_reranking_calibration_raster.generated.json
+
+------------------------------------------------------------

@@ -1,0 +1,129 @@
+{
+  "generated_at_utc": "2026-04-30T21:41:58.184708Z",
+  "catalog_path": "C:\\Grom_OCR\\data\\benchmark_catalog.json",
+  "total_catalog_items": 28,
+  "difficulty_counts": {
+    "critical": 4,
+    "easy": 1,
+    "hard": 21,
+    "medium": 2
+  },
+  "targets": {
+    "scene_preprocess": {
+      "count": 21,
+      "with_expected_text": 21,
+      "pdf_count": 8,
+      "difficulty_counts": {
+        "critical": 4,
+        "easy": 1,
+        "hard": 14,
+        "medium": 2
+      }
+    },
+    "scene_preprocess_hard": {
+      "count": 18,
+      "with_expected_text": 18,
+      "pdf_count": 7,
+      "difficulty_counts": {
+        "critical": 4,
+        "hard": 14
+      }
+    },
+    "plate_detector": {
+      "count": 20,
+      "with_expected_text": 13,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "critical": 3,
+        "easy": 1,
+        "hard": 15,
+        "medium": 1
+      }
+    },
+    "plate_detector_hard": {
+      "count": 18,
+      "with_expected_text": 11,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "critical": 3,
+        "hard": 15
+      }
+    },
+    "ocr_reranking": {
+      "count": 21,
+      "with_expected_text": 21,
+      "pdf_count": 8,
+      "difficulty_counts": {
+        "critical": 4,
+        "easy": 1,
+        "hard": 14,
+        "medium": 2
+      }
+    },
+    "ocr_reranking_hard": {
+      "count": 18,
+      "with_expected_text": 18,
+      "pdf_count": 7,
+      "difficulty_counts": {
+        "critical": 4,
+        "hard": 14
+      }
+    },
+    "ocr_reranking_real": {
+      "count": 13,
+      "with_expected_text": 13,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "critical": 3,
+        "easy": 1,
+        "hard": 8,
+        "medium": 1
+      }
+    },
+    "ocr_reranking_real_hard": {
+      "count": 11,
+      "with_expected_text": 11,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "critical": 3,
+        "hard": 8
+      }
+    },
+    "ocr_reranking_core_real": {
+      "count": 6,
+      "with_expected_text": 6,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "hard": 6
+      }
+    },
+    "ocr_reranking_core_real_hard": {
+      "count": 6,
+      "with_expected_text": 6,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "hard": 6
+      }
+    },
+    "ocr_reranking_crops_real": {
+      "count": 10,
+      "with_expected_text": 10,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "critical": 3,
+        "easy": 1,
+        "hard": 5,
+        "medium": 1
+      }
+    },
+    "ocr_reranking_crops_real_hard": {
+      "count": 8,
+      "with_expected_text": 8,
+      "pdf_count": 0,
+      "difficulty_counts": {
+        "critical": 3,
+        "hard": 5
+      }
+    }
+  }
+}

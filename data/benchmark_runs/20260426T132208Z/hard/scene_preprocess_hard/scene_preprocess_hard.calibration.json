@@ -1,0 +1,266 @@
+{
+  "version": "2026-04-09-forensic",
+  "source": "benchmark_tuned_2026-04-04_process_enhanced",
+  "default_profile_name": "balanced",
+  "scenario_priority": [
+    "dark",
+    "bright",
+    "low_contrast",
+    "noisy",
+    "blurred",
+    "balanced"
+  ],
+  "thresholds": {
+    "dark_brightness": 92.0,
+    "bright_brightness": 194.0,
+    "low_contrast": 34.0,
+    "foggy_contrast_max": 28.0,
+    "foggy_saturation_max": 60.0,
+    "noisy": 24.0,
+    "blurred_sharpness": 160.0,
+    "underexposed_ratio": 12.0,
+    "overexposed_ratio": 12.0,
+    "edge_weak": 1.8,
+    "adulterated_edge_min": 2.0
+  },
+  "profiles": {
+    "balanced": {
+      "quality_multiplier": 1.0,
+      "quality_bias": 0.0,
+      "distance_weight": 3.8,
+      "original_margin": 0.493,
+      "family_bonus": {
+        "opencv": 0.045,
+        "pillow": 0.192,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_balance": 0.6,
+        "gray_world_clahe": 0.8,
+        "gray_world_equalize": 0.4,
+        "gray_world_gamma": 0.5,
+        "gray_world_sharpen": 0.7,
+        "gray_world_blend": 0.4,
+        "gray_world_blackhat": 0.2,
+        "gray_world_tophat": 0.2,
+        "gray_world_median": 0.2,
+        "gray_world_morph_close": 0.5,
+        "pillow_autocontrast": 1.7,
+        "pillow_detail": 0.2,
+        "pillow_sharpen": 0.5,
+        "pillow_unsharp": 0.7,
+        "pillow_edge_enhance": 0.4,
+        "forensic_wiener_deblur": 2.5,
+        "forensic_char_restoration": 2.2,
+        "forensic_local_tone_map": 1.9,
+        "original": -0.3,
+        "pillow_equalize": -0.9
+      }
+    },
+    "foggy": {
+      "quality_multiplier": 1.08,
+      "quality_bias": 0.8,
+      "distance_weight": 3.5,
+      "original_margin": 0.4,
+      "family_bonus": {
+        "opencv": 0.8,
+        "pillow": 0.2,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_dehaze": 3.5,
+        "gray_world_clahe": 1.5,
+        "gray_world_equalize": 1.2,
+        "gray_world_sharpen": 1.0
+      }
+    },
+    "adulterated_lighting": {
+      "quality_multiplier": 1.05,
+      "quality_bias": 0.6,
+      "distance_weight": 3.4,
+      "original_margin": 0.45,
+      "family_bonus": {
+        "opencv": 0.7,
+        "pillow": 0.3,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_adaptive_morph": 3.5,
+        "gray_world_tophat": 1.5,
+        "gray_world_blackhat": 1.5,
+        "gray_world_sharpen": 1.0,
+        "pillow_edge_enhance": 1.2
+      }
+    },
+    "dark": {
+      "quality_multiplier": 1.04,
+      "quality_bias": 0.5,
+      "distance_weight": 3.1,
+      "original_margin": 0.2,
+      "family_bonus": {
+        "opencv": 0.3,
+        "pillow": 0.6,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_balance": 1.3,
+        "gray_world_denoise": 1.4,
+        "gray_world_bilateral": 1.6,
+        "gray_world_clahe": 2.6,
+        "gray_world_equalize": -1.0,
+        "gray_world_gamma": 1.8,
+        "gray_world_sharpen": 1.0,
+        "gray_world_blend": 0.7,
+        "gray_world_blackhat": 0.6,
+        "gray_world_tophat": 0.4,
+        "gray_world_median": 1.0,
+        "pillow_autocontrast": 1.4,
+        "pillow_brightness_up": 2.8,
+        "pillow_contrast_up": 1.9,
+        "pillow_detail": 0.5,
+        "pillow_sharpen": 0.9,
+        "pillow_unsharp": 1.0,
+        "pillow_median": 1.2,
+        "pillow_equalize": -0.9
+      }
+    },
+    "bright": {
+      "quality_multiplier": 1.02,
+      "quality_bias": 0.4,
+      "distance_weight": 3.25,
+      "original_margin": 0.242,
+      "family_bonus": {
+        "opencv": -0.233,
+        "pillow": 0.567,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_gamma": 1.4,
+        "gray_world_clahe": 1.2,
+        "gray_world_equalize": 0.8,
+        "gray_world_sharpen": 0.7,
+        "gray_world_blend": 0.5,
+        "gray_world_blackhat": 0.7,
+        "gray_world_tophat": 0.6,
+        "gray_world_median": 0.4,
+        "pillow_autocontrast": 1.5,
+        "pillow_brightness_down": 3.4,
+        "pillow_contrast_up": 0.5,
+        "pillow_detail": 0.2,
+        "pillow_unsharp": 0.4,
+        "pillow_equalize": 0.0,
+        "forensic_local_tone_map": 4.5
+      }
+    },
+    "low_contrast": {
+      "quality_multiplier": 1.05,
+      "quality_bias": 0.7,
+      "distance_weight": 3.4,
+      "original_margin": 0.42,
+      "family_bonus": {
+        "opencv": 0.5,
+        "pillow": 0.4,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_clahe": 3.0,
+        "gray_world_balance": 1.0,
+        "gray_world_equalize": 2.3,
+        "gray_world_sharpen": 1.0,
+        "gray_world_blend": 0.9,
+        "gray_world_gamma": 1.1,
+        "gray_world_blackhat": 1.3,
+        "gray_world_tophat": 1.0,
+        "gray_world_median": 0.7,
+        "pillow_autocontrast": 2.5,
+        "pillow_equalize": 2.1,
+        "pillow_contrast_up": 2.2,
+        "pillow_detail": 0.7,
+        "pillow_unsharp": 0.8,
+        "forensic_char_restoration": 5.0
+      }
+    },
+    "noisy": {
+      "quality_multiplier": 1.03,
+      "quality_bias": 0.5,
+      "distance_weight": 3.2,
+      "original_margin": 0.2,
+      "family_bonus": {
+        "opencv": 0.5,
+        "pillow": 0.5,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_denoise": 3.0,
+        "gray_world_bilateral": 2.8,
+        "gray_world_clahe": 1.2,
+        "gray_world_balance": 0.8,
+        "gray_world_equalize": 0.7,
+        "gray_world_sharpen": 0.4,
+        "gray_world_blackhat": 0.5,
+        "gray_world_tophat": 0.4,
+        "gray_world_median": 2.2,
+        "pillow_median": 2.5,
+        "pillow_autocontrast": 0.8,
+        "pillow_detail": 0.3,
+        "pillow_unsharp": 0.4,
+        "forensic_local_tone_map": -0.9
+      }
+    },
+    "blurred": {
+      "quality_multiplier": 1.04,
+      "quality_bias": 0.5,
+      "distance_weight": 3.3,
+      "original_margin": 0.5,
+      "family_bonus": {
+        "opencv": 0.4,
+        "pillow": 0.5,
+        "default": 0.0
+      },
+      "variant_prefix_bonus": {
+        "gray_world_sharpen": 2.9,
+        "gray_world_clahe": 1.1,
+        "gray_world_balance": 0.7,
+        "gray_world_blend": 0.8,
+        "gray_world_equalize": 0.8,
+        "gray_world_blackhat": 0.4,
+        "gray_world_tophat": 0.4,
+        "gray_world_median": 0.3,
+        "pillow_sharpen": 2.2,
+        "pillow_unsharp": 2.7,
+        "pillow_detail": 1.6,
+        "pillow_edge_enhance": 1.4,
+        "pillow_autocontrast": 0.8,
+        "forensic_wiener_deblur": 6.5
+      }
+    }
+  },
+  "loaded_from": "file",
+  "calibration_path": "C:\\Grom_OCR\\data\\scene_preprocess_calibration.json",
+  "benchmark_summary": {
+    "scenarios": {
+      "dark": {
+        "total": 3,
+        "correct": 0,
+        "accuracy_percent": 0.0
+      },
+      "balanced": {
+        "total": 6,
+        "correct": 1,
+        "accuracy_percent": 16.67
+      },
+      "bright": {
+        "total": 8,
+        "correct": 2,
+        "accuracy_percent": 25.0
+      },
+      "noisy": {
+        "total": 1,
+        "correct": 0,
+        "accuracy_percent": 0.0
+      }
+    }
+  },
+  "load_error": "",
+  "generated_from_benchmark": true
+}

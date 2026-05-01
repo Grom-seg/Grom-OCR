@@ -1,0 +1,426 @@
+{
+  "generated_at_utc": "2026-04-26T14:36:44.169087Z",
+  "run_id": "20260426T132208Z",
+  "project_root": "C:\\Grom_OCR",
+  "python_executable": "C:\\Grom_OCR\\.venv\\Scripts\\python.exe",
+  "mode": "hard",
+  "include_real": false,
+  "api_url": "",
+  "refresh_manifests": false,
+  "output_root": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z",
+  "catalog_summary_path": "C:\\Grom_OCR\\data\\benchmark_catalog_summary.json",
+  "catalog_summary": {
+    "generated_at_utc": "2026-04-04T14:12:13.738985Z",
+    "catalog_path": "C:\\Grom_OCR\\data\\benchmark_catalog.json",
+    "total_catalog_items": 28,
+    "difficulty_counts": {
+      "critical": 4,
+      "easy": 1,
+      "hard": 21,
+      "medium": 2
+    },
+    "targets": {
+      "scene_preprocess": {
+        "count": 21,
+        "with_expected_text": 21,
+        "pdf_count": 8,
+        "difficulty_counts": {
+          "critical": 4,
+          "easy": 1,
+          "hard": 14,
+          "medium": 2
+        }
+      },
+      "scene_preprocess_hard": {
+        "count": 18,
+        "with_expected_text": 18,
+        "pdf_count": 7,
+        "difficulty_counts": {
+          "critical": 4,
+          "hard": 14
+        }
+      },
+      "plate_detector": {
+        "count": 20,
+        "with_expected_text": 13,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "easy": 1,
+          "hard": 15,
+          "medium": 1
+        }
+      },
+      "plate_detector_hard": {
+        "count": 18,
+        "with_expected_text": 11,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "hard": 15
+        }
+      },
+      "ocr_reranking": {
+        "count": 21,
+        "with_expected_text": 21,
+        "pdf_count": 8,
+        "difficulty_counts": {
+          "critical": 4,
+          "easy": 1,
+          "hard": 14,
+          "medium": 2
+        }
+      },
+      "ocr_reranking_hard": {
+        "count": 18,
+        "with_expected_text": 18,
+        "pdf_count": 7,
+        "difficulty_counts": {
+          "critical": 4,
+          "hard": 14
+        }
+      },
+      "ocr_reranking_real": {
+        "count": 13,
+        "with_expected_text": 13,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "easy": 1,
+          "hard": 8,
+          "medium": 1
+        }
+      },
+      "ocr_reranking_real_hard": {
+        "count": 11,
+        "with_expected_text": 11,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "hard": 8
+        }
+      },
+      "ocr_reranking_core_real": {
+        "count": 6,
+        "with_expected_text": 6,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "hard": 6
+        }
+      },
+      "ocr_reranking_core_real_hard": {
+        "count": 6,
+        "with_expected_text": 6,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "hard": 6
+        }
+      },
+      "ocr_reranking_crops_real": {
+        "count": 10,
+        "with_expected_text": 10,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "easy": 1,
+          "hard": 5,
+          "medium": 1
+        }
+      },
+      "ocr_reranking_crops_real_hard": {
+        "count": 8,
+        "with_expected_text": 8,
+        "pdf_count": 0,
+        "difficulty_counts": {
+          "critical": 3,
+          "hard": 5
+        }
+      }
+    }
+  },
+  "job_count": 3,
+  "job_reports": [
+    {
+      "benchmark": "scene_preprocess",
+      "group": "hard",
+      "name": "scene_preprocess_hard",
+      "script": "benchmark_scene_preprocess.py",
+      "manifest": "C:\\Grom_OCR\\data\\scene_preprocess_benchmark_manifest_hard.json",
+      "output": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\scene_preprocess_hard\\scene_preprocess_hard.json",
+      "calibration_output": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\scene_preprocess_hard\\scene_preprocess_hard.calibration.json",
+      "stdout_log": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\scene_preprocess_hard\\stdout.log",
+      "stderr_log": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\scene_preprocess_hard\\stderr.log",
+      "started_at_utc": "2026-04-26T13:22:08.370686Z",
+      "finished_at_utc": "2026-04-26T14:00:15.249533Z",
+      "duration_sec": 2286.879,
+      "returncode": 0,
+      "status": "ok",
+      "summary": {
+        "total": 18,
+        "matched": 3,
+        "accuracy_percent": 16.67,
+        "avg_confidence": 29.47,
+        "avg_improvement": 11.73,
+        "route": "/process",
+        "scenario_summary": {
+          "dark": {
+            "total": 3,
+            "correct": 0,
+            "accuracy_percent": 0.0,
+            "avg_confidence": 28.57,
+            "selected_variants": {
+              "gray_world_equalize": 2,
+              "pillow_equalize": 1
+            }
+          },
+          "balanced": {
+            "total": 6,
+            "correct": 1,
+            "accuracy_percent": 16.67,
+            "avg_confidence": 16.67,
+            "selected_variants": {
+              "original": 3,
+              "forensic_local_tone_map": 1,
+              "gray_world_clahe_1.8": 1,
+              "pillow_equalize": 1
+            }
+          },
+          "bright": {
+            "total": 8,
+            "correct": 2,
+            "accuracy_percent": 25.0,
+            "avg_confidence": 32.71,
+            "selected_variants": {
+              "pillow_brightness_down": 6,
+              "pillow_equalize": 2
+            }
+          },
+          "noisy": {
+            "total": 1,
+            "correct": 0,
+            "accuracy_percent": 0.0,
+            "avg_confidence": 83.12,
+            "selected_variants": {
+              "forensic_local_tone_map": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "benchmark": "plate_detector",
+      "group": "hard",
+      "name": "plate_detector_hard",
+      "script": "benchmark_plate_detector.py",
+      "manifest": "C:\\Grom_OCR\\data\\plate_detector_benchmark_manifest_hard.json",
+      "output": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\plate_detector_hard\\plate_detector_hard.json",
+      "calibration_output": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\plate_detector_hard\\plate_detector_hard.calibration.json",
+      "stdout_log": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\plate_detector_hard\\stdout.log",
+      "stderr_log": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\plate_detector_hard\\stderr.log",
+      "started_at_utc": "2026-04-26T14:00:15.267965Z",
+      "finished_at_utc": "2026-04-26T14:00:36.195405Z",
+      "duration_sec": 20.927,
+      "returncode": 0,
+      "status": "ok",
+      "summary": {
+        "total": 18,
+        "scene_total": 6,
+        "crop_total": 12,
+        "roi_detected_total": 18,
+        "full_image_total": 0,
+        "scene_roi_rate_percent": 100.0,
+        "scene_fallback_rate_percent": 0.0,
+        "avg_selected_score": 193.53,
+        "avg_selected_quality_score": 84.78,
+        "selected_source_counts": {
+          "yolo": 7,
+          "contour": 4,
+          "secondary": 4,
+          "heuristic": 2,
+          "haar": 1
+        },
+        "quality_label_counts": {
+          "excelente": 9,
+          "boa": 8,
+          "regular": 1
+        },
+        "kind_counts": {
+          "crop": 12,
+          "scene": 6
+        }
+      }
+    },
+    {
+      "benchmark": "ocr_reranking",
+      "group": "hard",
+      "name": "ocr_reranking_hard",
+      "script": "benchmark_ocr_reranking.py",
+      "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest_hard.json",
+      "output": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\ocr_reranking_hard\\ocr_reranking_hard.json",
+      "calibration_output": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\ocr_reranking_hard\\ocr_reranking_hard.calibration.json",
+      "stdout_log": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\ocr_reranking_hard\\stdout.log",
+      "stderr_log": "C:\\Grom_OCR\\data\\benchmark_runs\\20260426T132208Z\\hard\\ocr_reranking_hard\\stderr.log",
+      "started_at_utc": "2026-04-26T14:00:36.212286Z",
+      "finished_at_utc": "2026-04-26T14:36:44.105350Z",
+      "duration_sec": 2167.893,
+      "returncode": 0,
+      "status": "ok",
+      "summary": {
+        "total": 18,
+        "matched": 3,
+        "accuracy_percent": 16.67,
+        "top_candidate_match_count": 5,
+        "top_candidate_match_rate_percent": 27.78,
+        "expected_in_top_candidates_count": 5,
+        "expected_in_top_candidates_rate_percent": 27.78,
+        "avg_expected_rank": 1.0,
+        "median_expected_rank": 1.0,
+        "avg_best_weighted_support_matched": 39.46,
+        "avg_best_weighted_support_mismatched": 2.015,
+        "best_engine_counts": {
+          "ensemble": 4,
+          "microcalibration_manual": 1,
+          "rapidocr": 1
+        },
+        "per_engine_summary": {
+          "microcalibration_manual": {
+            "total": 1,
+            "top_match": 1,
+            "candidate_found": 1,
+            "top_match_rate_percent": 100.0,
+            "candidate_recall_rate_percent": 100.0,
+            "mean_candidate_rank": 1.0,
+            "median_candidate_rank": 1.0,
+            "mean_top_score": 100.0,
+            "mean_top_confidence": 100.0
+          },
+          "pdf_probe": {
+            "total": 7,
+            "top_match": 4,
+            "candidate_found": 0,
+            "top_match_rate_percent": 57.14,
+            "candidate_recall_rate_percent": 0.0,
+            "mean_candidate_rank": 0.0,
+            "median_candidate_rank": 0.0,
+            "mean_top_score": 100.0,
+            "mean_top_confidence": 65.0
+          },
+          "rapidocr": {
+            "total": 18,
+            "top_match": 2,
+            "candidate_found": 2,
+            "top_match_rate_percent": 11.11,
+            "candidate_recall_rate_percent": 11.11,
+            "mean_candidate_rank": 1.0,
+            "median_candidate_rank": 1.0,
+            "mean_top_score": 70.57,
+            "mean_top_confidence": 45.95
+          },
+          "tesseract": {
+            "total": 18,
+            "top_match": 0,
+            "candidate_found": 1,
+            "top_match_rate_percent": 0.0,
+            "candidate_recall_rate_percent": 5.56,
+            "mean_candidate_rank": 8.0,
+            "median_candidate_rank": 8.0,
+            "mean_top_score": 9.64,
+            "mean_top_confidence": 3.26
+          }
+        }
+      }
+    }
+  ],
+  "benchmark_summary": {
+    "ocr_reranking": {
+      "jobs": 1,
+      "ok": 1,
+      "failed": 0,
+      "duration_sec": 2167.893
+    },
+    "plate_detector": {
+      "jobs": 1,
+      "ok": 1,
+      "failed": 0,
+      "duration_sec": 20.927
+    },
+    "scene_preprocess": {
+      "jobs": 1,
+      "ok": 1,
+      "failed": 0,
+      "duration_sec": 2286.879
+    }
+  },
+  "group_summary": {
+    "hard": {
+      "jobs": 3,
+      "ok": 3,
+      "failed": 0,
+      "duration_sec": 4475.699
+    }
+  },
+  "overall_status": "ok",
+  "gate": {
+    "policy_applied": true,
+    "baseline_path": "C:\\Grom_OCR\\data\\benchmark_suite_latest.json",
+    "passed": true,
+    "checks": [
+      {
+        "scope": "scene_preprocess_hard",
+        "name": "job_status_ok",
+        "passed": true,
+        "actual": "ok",
+        "expected": "ok",
+        "detail": "Cada benchmark selecionado deve concluir com status ok."
+      },
+      {
+        "scope": "plate_detector_hard",
+        "name": "job_status_ok",
+        "passed": true,
+        "actual": "ok",
+        "expected": "ok",
+        "detail": "Cada benchmark selecionado deve concluir com status ok."
+      },
+      {
+        "scope": "ocr_reranking_hard",
+        "name": "job_status_ok",
+        "passed": true,
+        "actual": "ok",
+        "expected": "ok",
+        "detail": "Cada benchmark selecionado deve concluir com status ok."
+      },
+      {
+        "scope": "scene_preprocess_hard",
+        "name": "summary.accuracy_percent:max_drop_vs_baseline",
+        "passed": true,
+        "actual": -16.67,
+        "expected": 0.0,
+        "detail": "Queda maxima permitida contra o baseline do mesmo job."
+      },
+      {
+        "scope": "plate_detector_hard",
+        "name": "summary.scene_roi_rate_percent:min",
+        "passed": true,
+        "actual": 100.0,
+        "expected": 100.0,
+        "detail": "Valor minimo absoluto exigido pela politica."
+      },
+      {
+        "scope": "plate_detector_hard",
+        "name": "summary.scene_roi_rate_percent:max_drop_vs_baseline",
+        "passed": true,
+        "actual": 0.0,
+        "expected": 0.0,
+        "detail": "Queda maxima permitida contra o baseline do mesmo job."
+      },
+      {
+        "scope": "ocr_reranking_hard",
+        "name": "summary.accuracy_percent:max_drop_vs_baseline",
+        "passed": true,
+        "actual": -16.67,
+        "expected": 0.0,
+        "detail": "Queda maxima permitida contra o baseline do mesmo job."
+      }
+    ]
+  }
+}

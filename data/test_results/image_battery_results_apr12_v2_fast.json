@@ -1,0 +1,57 @@
+[
+  {
+    "file": "10458347_x216.jpg",
+    "status_code": 200,
+    "ocr": "PXZ9999",
+    "pattern": "Antigo",
+    "confidence": 59.81,
+    "status": "CONCLUSIVO",
+    "support_count": 1,
+    "support_rank": 1.0,
+    "warnings": []
+  },
+  {
+    "file": "20171119_154214_ch6-1024x576.jpg",
+    "status_code": 200,
+    "ocr": "DFO8819",
+    "pattern": "Antigo",
+    "confidence": 85.72,
+    "status": "CONCLUSIVO",
+    "support_count": 1,
+    "support_rank": 1.0,
+    "warnings": []
+  },
+  {
+    "file": "fiat.jpg",
+    "status_code": 200,
+    "ocr": "REI5G32",
+    "pattern": "Mercosul",
+    "confidence": 87.82,
+    "status": "CONCLUSIVO",
+    "support_count": 1,
+    "support_rank": 1.0,
+    "warnings": []
+  },
+  {
+    "file": "sddefault.jpg",
+    "status_code": 200,
+    "ocr": "",
+    "pattern": "Indefinido",
+    "confidence": 0.0,
+    "status": "INCONCLUSIVO",
+    "support_count": 0,
+    "support_rank": 0.0,
+    "warnings": []
+  },
+  {
+    "file": "teste.jpg",
+    "status_code": 200,
+    "ocr": "",
+    "pattern": "Indefinido",
+    "confidence": 0.0,
+    "status": "INCONCLUSIVO",
+    "support_count": 0,
+    "support_rank": 0.0,
+    "warnings": []
+  }
+]

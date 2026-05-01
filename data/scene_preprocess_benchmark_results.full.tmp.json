@@ -1,0 +1,1056 @@
+{
+  "generated_at_utc": "2026-04-04T21:04:59.548853Z",
+  "manifest": "C:\\Grom_OCR\\data\\scene_preprocess_benchmark_manifest.json",
+  "summary": {
+    "total": 21,
+    "matched": 2,
+    "accuracy_percent": 9.52,
+    "avg_confidence": 20.09,
+    "avg_improvement": 9.95,
+    "route": "/process",
+    "scenario_summary": {
+      "dark": {
+        "total": 2,
+        "correct": 0,
+        "accuracy_percent": 0.0,
+        "avg_confidence": 36.61,
+        "selected_variants": {
+          "gray_world_equalize": 1,
+          "pillow_equalize": 1
+        }
+      },
+      "balanced": {
+        "total": 7,
+        "correct": 0,
+        "accuracy_percent": 0.0,
+        "avg_confidence": 10.53,
+        "selected_variants": {
+          "gray_world_equalize": 2,
+          "original": 2,
+          "gray_world_clahe_1.8": 1,
+          "pillow_autocontrast": 1,
+          "pillow_edge_enhance": 1
+        }
+      },
+      "bright": {
+        "total": 10,
+        "correct": 2,
+        "accuracy_percent": 20.0,
+        "avg_confidence": 27.5,
+        "selected_variants": {
+          "pillow_brightness_down": 8,
+          "original": 1,
+          "pillow_equalize": 1
+        }
+      },
+      "noisy": {
+        "total": 2,
+        "correct": 0,
+        "accuracy_percent": 0.0,
+        "avg_confidence": 0.0,
+        "selected_variants": {
+          "pillow_median": 2
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "index": 1,
+      "image": "C:\\Grom_OCR\\data\\uploads\\20171119_154214_ch6-1024x576.jpg",
+      "expected_text": "DXP3457",
+      "observed_text": "OFO8819",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 73.22,
+      "scene_label": "dark",
+      "scenario_primary": "dark",
+      "scenario_tags": [
+        "dark"
+      ],
+      "scenario_reasons": [
+        "imagem_subexposta"
+      ],
+      "selected_variant": "pillow_equalize",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.2,
+      "quality_before": {
+        "brightness": 79.38,
+        "contrast": 45.41,
+        "edge_density": 17.23,
+        "noise": 8.29,
+        "overexposed_ratio": 0.14,
+        "quality_score": 74.41,
+        "saturation": 0.0,
+        "sharpness": 1362.63,
+        "underexposed_ratio": 11.23
+      },
+      "quality_after": {
+        "brightness": 126.62,
+        "contrast": 73.66,
+        "edge_density": 22.08,
+        "noise": 14.58,
+        "overexposed_ratio": 3.94,
+        "quality_score": 84.23,
+        "saturation": 0.0,
+        "sharpness": 4305.87,
+        "underexposed_ratio": 6.77
+      },
+      "improvement": 9.82,
+      "candidate_count": 16,
+      "route": "/process",
+      "notes": "Cena veicular real com placa conhecida"
+    },
+    {
+      "index": 2,
+      "image": "C:\\Grom_OCR\\data\\uploads\\10458347_x216.jpg",
+      "expected_text": "PXZ9391",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada"
+      ],
+      "selected_variant": "gray_world_clahe_1.8",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.78,
+      "quality_before": {
+        "brightness": 127.76,
+        "contrast": 53.08,
+        "edge_density": 9.06,
+        "noise": 8.12,
+        "overexposed_ratio": 4.59,
+        "quality_score": 96.87,
+        "saturation": 137.03,
+        "sharpness": 1374.28,
+        "underexposed_ratio": 0.01
+      },
+      "quality_after": {
+        "brightness": 131.92,
+        "contrast": 58.87,
+        "edge_density": 15.69,
+        "noise": 11.91,
+        "overexposed_ratio": 6.1,
+        "quality_score": 98.87,
+        "saturation": 138.74,
+        "sharpness": 3035.04,
+        "underexposed_ratio": 0.03
+      },
+      "improvement": 2.0,
+      "candidate_count": 10,
+      "route": "/process",
+      "notes": "Cena veicular real com placa conhecida"
+    },
+    {
+      "index": 3,
+      "image": "C:\\Grom_OCR\\data\\uploads\\sddefault.jpg",
+      "expected_text": "AMX3640",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "dark",
+      "scenario_primary": "dark",
+      "scenario_tags": [
+        "dark"
+      ],
+      "scenario_reasons": [
+        "imagem_subexposta"
+      ],
+      "selected_variant": "gray_world_equalize",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.2,
+      "quality_before": {
+        "brightness": 73.52,
+        "contrast": 68.1,
+        "edge_density": 5.85,
+        "noise": 6.32,
+        "overexposed_ratio": 0.01,
+        "quality_score": 78.75,
+        "saturation": 70.36,
+        "sharpness": 832.1,
+        "underexposed_ratio": 26.48
+      },
+      "quality_after": {
+        "brightness": 100.72,
+        "contrast": 83.67,
+        "edge_density": 9.37,
+        "noise": 8.4,
+        "overexposed_ratio": 3.76,
+        "quality_score": 87.69,
+        "saturation": 75.45,
+        "sharpness": 1583.42,
+        "underexposed_ratio": 26.37
+      },
+      "improvement": 8.94,
+      "candidate_count": 16,
+      "route": "/process",
+      "notes": "Cena real adicional com OCR historicamente mais instavel"
+    },
+    {
+      "index": 4,
+      "image": "C:\\Grom_OCR\\data\\uploads\\plate_test.png",
+      "expected_text": "ABC1234",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 226.93,
+        "contrast": 78.69,
+        "edge_density": 3.82,
+        "noise": 15.3,
+        "overexposed_ratio": 88.13,
+        "quality_score": 50.24,
+        "saturation": 0.0,
+        "sharpness": 4102.08,
+        "underexposed_ratio": 10.26
+      },
+      "quality_after": {
+        "brightness": 199.34,
+        "contrast": 69.13,
+        "edge_density": 3.81,
+        "noise": 13.4,
+        "overexposed_ratio": 0.0,
+        "quality_score": 67.53,
+        "saturation": 0.0,
+        "sharpness": 3167.78,
+        "underexposed_ratio": 10.31
+      },
+      "improvement": 17.29,
+      "candidate_count": 8,
+      "route": "/process",
+      "notes": "Recorte limpo de placa para calibracao"
+    },
+    {
+      "index": 5,
+      "image": "C:\\Grom_OCR\\data\\uploads\\plate_test_degraded.png",
+      "expected_text": "ABC1234",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "pillow_equalize",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.8,
+      "quality_before": {
+        "brightness": 221.6,
+        "contrast": 60.28,
+        "edge_density": 4.46,
+        "noise": 6.87,
+        "overexposed_ratio": 57.52,
+        "quality_score": 58.28,
+        "saturation": 27.86,
+        "sharpness": 1411.54,
+        "underexposed_ratio": 0.78
+      },
+      "quality_after": {
+        "brightness": 177.64,
+        "contrast": 75.78,
+        "edge_density": 31.95,
+        "noise": 27.12,
+        "overexposed_ratio": 19.37,
+        "quality_score": 88.95,
+        "saturation": 88.88,
+        "sharpness": 22837.65,
+        "underexposed_ratio": 3.45
+      },
+      "improvement": 30.67,
+      "candidate_count": 15,
+      "route": "/process",
+      "notes": "Recorte degradado para calibracao e regressao"
+    },
+    {
+      "index": 6,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_20171119_154214_ch6-1024x576.jpg",
+      "expected_text": "DXP3457",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "gray_world_equalize",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 2.0,
+      "quality_before": {
+        "brightness": 104.3,
+        "contrast": 66.81,
+        "edge_density": 24.37,
+        "noise": 20.27,
+        "overexposed_ratio": 2.07,
+        "quality_score": 81.65,
+        "saturation": 0.46,
+        "sharpness": 8628.68,
+        "underexposed_ratio": 5.36
+      },
+      "quality_after": {
+        "brightness": 127.39,
+        "contrast": 74.05,
+        "edge_density": 24.55,
+        "noise": 20.33,
+        "overexposed_ratio": 4.1,
+        "quality_score": 85.6,
+        "saturation": 6.36,
+        "sharpness": 8723.78,
+        "underexposed_ratio": 6.66
+      },
+      "improvement": 3.95,
+      "candidate_count": 16,
+      "route": "/process",
+      "notes": "ROI de placa gerada a partir de cena real"
+    },
+    {
+      "index": 7,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_10458347_x216.jpg",
+      "expected_text": "PXZ9391",
+      "observed_text": "XZZA991",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada"
+      ],
+      "selected_variant": "pillow_autocontrast",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.78,
+      "quality_before": {
+        "brightness": 133.07,
+        "contrast": 64.96,
+        "edge_density": 22.0,
+        "noise": 11.64,
+        "overexposed_ratio": 5.62,
+        "quality_score": 99.01,
+        "saturation": 138.67,
+        "sharpness": 2681.74,
+        "underexposed_ratio": 0.63
+      },
+      "quality_after": {
+        "brightness": 133.4,
+        "contrast": 65.38,
+        "edge_density": 22.15,
+        "noise": 11.71,
+        "overexposed_ratio": 5.96,
+        "quality_score": 99.05,
+        "saturation": 138.59,
+        "sharpness": 2716.14,
+        "underexposed_ratio": 0.67
+      },
+      "improvement": 0.04,
+      "candidate_count": 11,
+      "route": "/process",
+      "notes": "ROI de placa gerada a partir de cena real"
+    },
+    {
+      "index": 8,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_sddefault.jpg",
+      "expected_text": "AMX3640",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "original",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_kept_original_by_margin",
+      "original_margin": 18.0,
+      "quality_before": {
+        "brightness": 135.75,
+        "contrast": 69.51,
+        "edge_density": 19.06,
+        "noise": 14.63,
+        "overexposed_ratio": 0.27,
+        "quality_score": 99.33,
+        "saturation": 80.53,
+        "sharpness": 4761.94,
+        "underexposed_ratio": 0.58
+      },
+      "quality_after": {
+        "brightness": 135.75,
+        "contrast": 69.51,
+        "edge_density": 19.06,
+        "noise": 14.63,
+        "overexposed_ratio": 0.27,
+        "quality_score": 99.33,
+        "saturation": 80.53,
+        "sharpness": 4761.94,
+        "underexposed_ratio": 0.58
+      },
+      "improvement": 0.0,
+      "candidate_count": 11,
+      "route": "/process",
+      "notes": "ROI de placa gerada a partir de cena real"
+    },
+    {
+      "index": 9,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_plate_test.jpg",
+      "expected_text": "ABC1234",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "original",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_kept_original_by_margin",
+      "original_margin": 2.0,
+      "quality_before": {
+        "brightness": 174.89,
+        "contrast": 55.79,
+        "edge_density": 3.8,
+        "noise": 12.37,
+        "overexposed_ratio": 0.0,
+        "quality_score": 71.26,
+        "saturation": 0.0,
+        "sharpness": 2833.75,
+        "underexposed_ratio": 4.27
+      },
+      "quality_after": {
+        "brightness": 174.89,
+        "contrast": 55.79,
+        "edge_density": 3.8,
+        "noise": 12.37,
+        "overexposed_ratio": 0.0,
+        "quality_score": 71.26,
+        "saturation": 0.0,
+        "sharpness": 2833.75,
+        "underexposed_ratio": 4.27
+      },
+      "improvement": 0.0,
+      "candidate_count": 10,
+      "route": "/process",
+      "notes": "ROI limpa de placa usada como referencia"
+    },
+    {
+      "index": 10,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_plate_test_degraded.jpg",
+      "expected_text": "ABC1234",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "noisy+bright",
+      "scenario_primary": "noisy",
+      "scenario_tags": [
+        "noisy",
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta",
+        "ruido_elevado",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "pillow_median",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 2.0,
+      "quality_before": {
+        "brightness": 155.7,
+        "contrast": 76.68,
+        "edge_density": 33.8,
+        "noise": 42.65,
+        "overexposed_ratio": 14.68,
+        "quality_score": 74.11,
+        "saturation": 45.87,
+        "sharpness": 58586.1,
+        "underexposed_ratio": 3.13
+      },
+      "quality_after": {
+        "brightness": 162.32,
+        "contrast": 65.67,
+        "edge_density": 31.67,
+        "noise": 13.02,
+        "overexposed_ratio": 0.95,
+        "quality_score": 90.23,
+        "saturation": 37.76,
+        "sharpness": 4008.94,
+        "underexposed_ratio": 2.05
+      },
+      "improvement": 16.12,
+      "candidate_count": 14,
+      "route": "/process",
+      "notes": "ROI degradada de placa para regressao"
+    },
+    {
+      "index": 11,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_placa_20171119_154214_ch6-1024x576.jpg",
+      "expected_text": "DXP3457",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "noisy",
+      "scenario_primary": "noisy",
+      "scenario_tags": [
+        "noisy"
+      ],
+      "scenario_reasons": [
+        "ruido_elevado",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "pillow_median",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 2.0,
+      "quality_before": {
+        "brightness": 122.72,
+        "contrast": 70.92,
+        "edge_density": 26.13,
+        "noise": 27.13,
+        "overexposed_ratio": 3.99,
+        "quality_score": 83.43,
+        "saturation": 6.22,
+        "sharpness": 16483.64,
+        "underexposed_ratio": 4.51
+      },
+      "quality_after": {
+        "brightness": 124.55,
+        "contrast": 63.88,
+        "edge_density": 23.24,
+        "noise": 14.62,
+        "overexposed_ratio": 0.84,
+        "quality_score": 85.03,
+        "saturation": 5.2,
+        "sharpness": 4822.7,
+        "underexposed_ratio": 2.81
+      },
+      "improvement": 1.6,
+      "candidate_count": 12,
+      "route": "/process",
+      "notes": "Crop de crop usado para testar robustez"
+    },
+    {
+      "index": 12,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_placa_10458347_x216.jpg",
+      "expected_text": "PXZ9391",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "original",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_kept_original_by_margin",
+      "original_margin": 18.0,
+      "quality_before": {
+        "brightness": 149.3,
+        "contrast": 81.02,
+        "edge_density": 24.91,
+        "noise": 10.75,
+        "overexposed_ratio": 16.82,
+        "quality_score": 94.89,
+        "saturation": 108.85,
+        "sharpness": 2139.04,
+        "underexposed_ratio": 2.18
+      },
+      "quality_after": {
+        "brightness": 149.3,
+        "contrast": 81.02,
+        "edge_density": 24.91,
+        "noise": 10.75,
+        "overexposed_ratio": 16.82,
+        "quality_score": 94.89,
+        "saturation": 108.85,
+        "sharpness": 2139.04,
+        "underexposed_ratio": 2.18
+      },
+      "improvement": 0.0,
+      "candidate_count": 10,
+      "route": "/process",
+      "notes": "Crop de crop usado para testar robustez"
+    },
+    {
+      "index": 13,
+      "image": "C:\\Grom_OCR\\data\\uploads\\placa_placa_plate_test.jpg",
+      "expected_text": "ABC1234",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada",
+        "entrada_com_formato_de_placa"
+      ],
+      "selected_variant": "pillow_edge_enhance",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 2.0,
+      "quality_before": {
+        "brightness": 175.28,
+        "contrast": 54.62,
+        "edge_density": 3.81,
+        "noise": 14.1,
+        "overexposed_ratio": 0.0,
+        "quality_score": 71.22,
+        "saturation": 0.0,
+        "sharpness": 3763.6,
+        "underexposed_ratio": 2.95
+      },
+      "quality_after": {
+        "brightness": 174.54,
+        "contrast": 59.55,
+        "edge_density": 9.66,
+        "noise": 31.33,
+        "overexposed_ratio": 5.26,
+        "quality_score": 73.21,
+        "saturation": 0.0,
+        "sharpness": 22018.41,
+        "underexposed_ratio": 6.0
+      },
+      "improvement": 1.99,
+      "candidate_count": 9,
+      "route": "/process",
+      "notes": "Crop de crop de placa limpa"
+    },
+    {
+      "index": 14,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_sddefault.pdf",
+      "expected_text": "AMX3640",
+      "observed_text": "ORE7875",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 89.03,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 213.76,
+        "contrast": 82.63,
+        "edge_density": 3.18,
+        "noise": 9.99,
+        "overexposed_ratio": 77.01,
+        "quality_score": 54.38,
+        "saturation": 13.89,
+        "sharpness": 1878.92,
+        "underexposed_ratio": 6.1
+      },
+      "quality_after": {
+        "brightness": 187.66,
+        "contrast": 72.8,
+        "edge_density": 3.09,
+        "noise": 8.79,
+        "overexposed_ratio": 0.0,
+        "quality_score": 71.25,
+        "saturation": 13.28,
+        "sharpness": 1455.06,
+        "underexposed_ratio": 6.37
+      },
+      "improvement": 16.87,
+      "candidate_count": 13,
+      "route": "/process",
+      "notes": "Relatorio PDF real gerado a partir da cena sddefault"
+    },
+    {
+      "index": 15,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_20171119_154214_ch6-1024x576.pdf",
+      "expected_text": "DXP3457",
+      "observed_text": "DFO8819",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 73.72,
+      "scene_label": "balanced",
+      "scenario_primary": "balanced",
+      "scenario_tags": [
+        "balanced"
+      ],
+      "scenario_reasons": [
+        "imagem_equilibrada"
+      ],
+      "selected_variant": "gray_world_equalize",
+      "selected_family": "opencv",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.78,
+      "quality_before": {
+        "brightness": 99.61,
+        "contrast": 70.48,
+        "edge_density": 15.95,
+        "noise": 9.4,
+        "overexposed_ratio": 11.97,
+        "quality_score": 78.75,
+        "saturation": 0.0,
+        "sharpness": 1681.3,
+        "underexposed_ratio": 10.1
+      },
+      "quality_after": {
+        "brightness": 129.9,
+        "contrast": 76.42,
+        "edge_density": 20.39,
+        "noise": 14.07,
+        "overexposed_ratio": 11.95,
+        "quality_score": 83.13,
+        "saturation": 0.0,
+        "sharpness": 4028.49,
+        "underexposed_ratio": 6.15
+      },
+      "improvement": 4.38,
+      "candidate_count": 15,
+      "route": "/process",
+      "notes": "Relatorio PDF real gerado a partir da cena 20171119"
+    },
+    {
+      "index": 16,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_10458347_x216.pdf",
+      "expected_text": "PXZ9391",
+      "observed_text": "UIZ0EF0",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 229.78,
+        "contrast": 58.98,
+        "edge_density": 3.18,
+        "noise": 10.17,
+        "overexposed_ratio": 81.91,
+        "quality_score": 53.72,
+        "saturation": 20.27,
+        "sharpness": 1967.16,
+        "underexposed_ratio": 1.03
+      },
+      "quality_after": {
+        "brightness": 201.79,
+        "contrast": 51.93,
+        "edge_density": 3.1,
+        "noise": 8.95,
+        "overexposed_ratio": 0.0,
+        "quality_score": 70.97,
+        "saturation": 20.33,
+        "sharpness": 1522.88,
+        "underexposed_ratio": 1.11
+      },
+      "improvement": 17.25,
+      "candidate_count": 15,
+      "route": "/process",
+      "notes": "Relatorio PDF real gerado a partir da cena 10458347"
+    },
+    {
+      "index": 17,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_plate_test.pdf",
+      "expected_text": "ABC1234",
+      "observed_text": "ABC1234",
+      "matched": true,
+      "status_code": 200,
+      "confidence": 90.87,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 244.75,
+        "contrast": 45.87,
+        "edge_density": 2.92,
+        "noise": 10.69,
+        "overexposed_ratio": 94.19,
+        "quality_score": 44.69,
+        "saturation": 0.0,
+        "sharpness": 2166.52,
+        "underexposed_ratio": 2.24
+      },
+      "quality_after": {
+        "brightness": 214.98,
+        "contrast": 40.35,
+        "edge_density": 2.92,
+        "noise": 9.41,
+        "overexposed_ratio": 0.0,
+        "quality_score": 59.22,
+        "saturation": 0.0,
+        "sharpness": 1677.15,
+        "underexposed_ratio": 2.34
+      },
+      "improvement": 14.53,
+      "candidate_count": 11,
+      "route": "/process",
+      "notes": "Relatorio PDF limpo para validar o probe em PDF"
+    },
+    {
+      "index": 18,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_plate_test_degraded.pdf",
+      "expected_text": "ABC1234",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 244.05,
+        "contrast": 43.48,
+        "edge_density": 3.1,
+        "noise": 10.52,
+        "overexposed_ratio": 91.16,
+        "quality_score": 44.18,
+        "saturation": 2.14,
+        "sharpness": 2117.33,
+        "underexposed_ratio": 1.28
+      },
+      "quality_after": {
+        "brightness": 214.35,
+        "contrast": 38.28,
+        "edge_density": 3.09,
+        "noise": 9.26,
+        "overexposed_ratio": 0.0,
+        "quality_score": 58.87,
+        "saturation": 2.16,
+        "sharpness": 1639.09,
+        "underexposed_ratio": 1.39
+      },
+      "improvement": 14.69,
+      "candidate_count": 17,
+      "route": "/process",
+      "notes": "Relatorio PDF degradado para regressao dura"
+    },
+    {
+      "index": 19,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_placa_20171119_154214_ch6-1024x576.pdf",
+      "expected_text": "DXP3457",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 231.87,
+        "contrast": 61.41,
+        "edge_density": 5.05,
+        "noise": 11.12,
+        "overexposed_ratio": 85.15,
+        "quality_score": 52.42,
+        "saturation": 0.05,
+        "sharpness": 2346.31,
+        "underexposed_ratio": 1.69
+      },
+      "quality_after": {
+        "brightness": 203.64,
+        "contrast": 54.06,
+        "edge_density": 5.0,
+        "noise": 9.78,
+        "overexposed_ratio": 0.0,
+        "quality_score": 69.74,
+        "saturation": 0.06,
+        "sharpness": 1816.55,
+        "underexposed_ratio": 1.87
+      },
+      "improvement": 17.32,
+      "candidate_count": 14,
+      "route": "/process",
+      "notes": "PDF de placa gerado a partir da cena 20171119"
+    },
+    {
+      "index": 20,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_placa_10458347_x216.pdf",
+      "expected_text": "PXZ9391",
+      "observed_text": "",
+      "matched": false,
+      "status_code": 200,
+      "confidence": 0.0,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 230.61,
+        "contrast": 59.19,
+        "edge_density": 4.95,
+        "noise": 10.32,
+        "overexposed_ratio": 82.07,
+        "quality_score": 56.48,
+        "saturation": 20.36,
+        "sharpness": 2019.73,
+        "underexposed_ratio": 1.07
+      },
+      "quality_after": {
+        "brightness": 202.52,
+        "contrast": 52.11,
+        "edge_density": 4.75,
+        "noise": 9.08,
+        "overexposed_ratio": 0.0,
+        "quality_score": 73.55,
+        "saturation": 20.44,
+        "sharpness": 1563.71,
+        "underexposed_ratio": 1.19
+      },
+      "improvement": 17.07,
+      "candidate_count": 14,
+      "route": "/process",
+      "notes": "PDF de placa gerado a partir da cena 10458347"
+    },
+    {
+      "index": 21,
+      "image": "C:\\Grom_OCR\\data\\uploads\\relatorio_placa_plate_test.pdf",
+      "expected_text": "ABC1234",
+      "observed_text": "ABC1234",
+      "matched": true,
+      "status_code": 200,
+      "confidence": 95.07,
+      "scene_label": "bright",
+      "scenario_primary": "bright",
+      "scenario_tags": [
+        "bright"
+      ],
+      "scenario_reasons": [
+        "imagem_superexposta"
+      ],
+      "selected_variant": "pillow_brightness_down",
+      "selected_family": "pillow",
+      "selection_reason": "scene_profile_selected_variant",
+      "original_margin": 0.49,
+      "quality_before": {
+        "brightness": 239.37,
+        "contrast": 46.65,
+        "edge_density": 2.91,
+        "noise": 10.37,
+        "overexposed_ratio": 84.8,
+        "quality_score": 45.75,
+        "saturation": 0.0,
+        "sharpness": 2041.09,
+        "underexposed_ratio": 1.58
+      },
+      "quality_after": {
+        "brightness": 210.2,
+        "contrast": 41.1,
+        "edge_density": 2.91,
+        "noise": 9.12,
+        "overexposed_ratio": 0.0,
+        "quality_score": 60.19,
+        "saturation": 0.0,
+        "sharpness": 1580.28,
+        "underexposed_ratio": 2.17
+      },
+      "improvement": 14.44,
+      "candidate_count": 12,
+      "route": "/process",
+      "notes": "PDF de placa limpa para reforcar a regressao"
+    }
+  ]
+}
