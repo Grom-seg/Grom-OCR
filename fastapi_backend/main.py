@@ -13,6 +13,9 @@ from fastapi_backend.detector_module import detect_plate
 from fastapi_backend.ocr_module import run_ocr, get_last_ocr_runtime_info
 from PIL import Image
 from fpdf import FPDF
+from fastapi_backend.plate_validator import PlateValidator
+from fastapi_backend.quality_metrics import ImageQualityAnalyzer
+from fastapi_backend.confidence_scorer import ConfidenceScorer
 
 app = FastAPI(title="Grom OCR Backend", description="API para detecção e leitura de placas veiculares com IA pericial.")
 
@@ -285,6 +288,9 @@ def _build_process_payload(filename: str, detections: list, ocr_results: list, a
         'analysis_stage': analysis_stage,
         'report_ready': False,
         'warnings': warnings,
+        'plate_validation': {},
+        'image_quality': {},
+        'confidence_score': {},
     }
 
 @app.post("/detect-plate/")
@@ -420,6 +426,10 @@ async def process_legacy_endpoint(
             ocr_runtime_info=get_last_ocr_runtime_info(),
             ocr_runtime_events=ocr_runtime_events,
         )
+
+        # Enriquece com validação, qualidade e confiança
+        payload = _enrich_payload_with_validation(payload, persisted_photo_path)
+
         return JSONResponse(payload)
     finally:
         if os.path.exists(tmp_path):
@@ -501,3 +511,70 @@ async def process_video_legacy_endpoint():
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
+    """Enriquece payload com validação de placa, qualidade e confiança."""
+
+    best_text = payload.get('best', {}).get('text', '').strip()
+    detections = payload.get('detections', [])
+
+    # Validação de placa
+    if best_text:
+        validator = PlateValidator(strict_mode=False)
+        plate_validation = validator.validate(best_text)
+    else:
+        plate_validation = {'valid': False, 'score': 0.0, 'issues': ['Sem texto para validar']}
+
+    payload['plate_validation'] = plate_validation
+
+    # Análise de qualidade
+    if image_path and os.path.exists(image_path):
+        analyzer = ImageQualityAnalyzer()
+        image_quality = analyzer.analyze(image_path)
+    else:
+        image_quality = {
+            'overall_quality_score': 0.5,
+            'quality_status': 'fallback',
+            'error': 'Imagem de referência indisponível para análise',
+            'image_path': str(image_path or ''),
+        }
+
+    if isinstance(image_quality, dict) and image_quality.get('error'):
+        image_quality.setdefault('quality_status', 'fallback')
+        payload.setdefault('warnings', []).append('image_quality_fallback')
+    else:
+        image_quality.setdefault('quality_status', 'ok')
+
+    payload['image_quality'] = image_quality
+
+    # Confidence scoring integrado
+    if detections and best_text:
+        det_confidence = max([d.get('confidence', 0.0) for d in detections])
+        ocr_confidence = payload.get('best', {}).get('avg_conf', 0.0)
+
+        scorer = ConfidenceScorer()
+        confidence = scorer.calculate(
+            det_confidence, ocr_confidence,
+            plate_validation, image_quality
+        )
+    else:
+        # Sem detecção ou OCR
+        confidence = {
+            'overall_confidence': 0.0,
+            'confidence_level': 'reject',
+            'accept': False,
+            'requires_review': False,
+            'recommendation': '❌ Sem detecção ou OCR válido',
+            'reason': 'Resultado incompleto',
+        }
+
+    payload['confidence_score'] = confidence
+
+    # Atualiza assessment baseado em confiança
+    conf_level = confidence.get('confidence_level', 'reject')
+    payload['assessment']['confidence_level'] = conf_level
+    payload['assessment']['manual_review_required'] = conf_level in ['low', 'reject']
+    payload['assessment']['confidence_recommendation'] = confidence.get('recommendation', '')
+
+    return payload
