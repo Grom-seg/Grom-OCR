@@ -1,7 +1,9 @@
 # Ambiente virtual Python
 .venv/
+.venv-paddle311/
 __pycache__/
 *.pyc
+.pytest_cache/
 
 # Variáveis de ambiente (contém senhas!)
 .env
@@ -14,6 +16,7 @@ __pycache__/
 # Arquivos temporários
 tmp_*
 scratch/
+.pdx_cache/
 
 # Uploads de usuários (não versionar evidências)
 data/uploads/

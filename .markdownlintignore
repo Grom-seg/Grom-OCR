@@ -1,0 +1,5 @@
+.venv/**
+.venv-paddle311/**
+.pdx_cache/**
+**/site-packages/**
+**/*.dist-info/**

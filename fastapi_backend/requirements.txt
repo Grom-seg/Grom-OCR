@@ -1,0 +1,9 @@
+# Requisitos para FastAPI backend Grom OCR
+fastapi
+uvicorn
+python-multipart
+opencv-python
+pillow
+paddleocr
+ultralytics
+onnxruntime

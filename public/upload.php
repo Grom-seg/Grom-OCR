@@ -215,6 +215,12 @@ function buildApiCandidates(string $primaryUrl): array
 {
     $candidates = [normalizeApiBase($primaryUrl)];
 
+    if (strpos($primaryUrl, ':5000') !== false) {
+        $candidates[] = normalizeApiBase(str_replace(':5000', ':8000', $primaryUrl));
+    } elseif (strpos($primaryUrl, ':8000') !== false) {
+        $candidates[] = normalizeApiBase(str_replace(':8000', ':5000', $primaryUrl));
+    }
+
     if (strpos($primaryUrl, '127.0.0.1') !== false) {
         $candidates[] = normalizeApiBase(str_replace('127.0.0.1', 'localhost', $primaryUrl));
     } elseif (strpos($primaryUrl, 'localhost') !== false) {
@@ -1123,8 +1129,7 @@ function callReportEnrichmentApi(
     array $externalSystemsComparison = [],
     array $humanReview = [],
     array $warnings = []
-): array
-{
+): array {
     $payload = json_encode([
         'report_context' => $reportContext,
         'vehicle_info' => $vehicleInfo,
@@ -1185,6 +1190,8 @@ function callReportEnrichmentApi(
 
     return [$lastDecoded, $lastError, $lastStatus, $usedUrl];
 }
+
+$apiCandidates = buildApiCandidates($pythonApiUrl);
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     if ($finalizeReviewRequested) {
@@ -1308,222 +1315,223 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 $errorMessage .= ' | Limite: ' . number_format((float) $uploadSecurity['max_upload_mb'], 0, ',', '.') . ' MB';
             }
         } else {
-        $tmpPath = $file['tmp_name'];
-        $filename = basename($file['name']);
-        $apiCandidates = buildApiCandidates($pythonApiUrl);
-        [$response, $curlError, $statusCode, $usedApiUrl] = callOcrApi(
-            $apiCandidates,
-            $tmpPath,
-            (string) ($file['type'] ?? ''),
-            $filename,
-            ['analysis_stage' => 'preview']
-        );
+            $tmpPath = $file['tmp_name'];
+            $filename = basename($file['name']);
+            $apiCandidates = buildApiCandidates($pythonApiUrl);
+            [$response, $curlError, $statusCode, $usedApiUrl] = callOcrApi(
+                $apiCandidates,
+                $tmpPath,
+                (string) ($file['type'] ?? ''),
+                $filename,
+                ['analysis_stage' => 'preview']
+            );
 
-        if ($curlError !== '') {
-            $errorMessage = 'Erro ao processar imagem: ' . $curlError;
-            if ($usedApiUrl !== '') {
-                $errorMessage .= ' (API: ' . $usedApiUrl . ')';
-            }
-            if (
-                stripos($curlError, 'Could not connect') !== false
-                || stripos($curlError, 'Failed to connect') !== false
-            ) {
-                $errorMessage .= ' | API OCR offline. Execute: C:\\Grom_OCR\\tools\\start_grom_ocr.cmd';
-            }
-        } elseif ($statusCode >= 400) {
-            $errorMessage = 'Servico OCR retornou HTTP ' . $statusCode . '.';
-            if ($usedApiUrl !== '') {
-                $errorMessage .= ' (API: ' . $usedApiUrl . ')';
-            }
-        } else {
-            $decoded = json_decode($response, true);
-            if (!is_array($decoded)) {
-                $errorMessage = 'Servico OCR retornou uma resposta invalida.';
-            } elseif (isset($decoded['error'])) {
-                $errorMessage = 'Servico OCR: ' . $decoded['error'];
+            if ($curlError !== '') {
+                $errorMessage = 'Erro ao processar imagem: ' . $curlError;
+                if ($usedApiUrl !== '') {
+                    $errorMessage .= ' (API: ' . $usedApiUrl . ')';
+                }
+                if (
+                    stripos($curlError, 'Could not connect') !== false
+                    || stripos($curlError, 'Failed to connect') !== false
+                ) {
+                    $errorMessage .= ' | API OCR offline. Execute: C:\\Grom_OCR\\tools\\start_grom_ocr.cmd';
+                }
+            } elseif ($statusCode >= 400) {
+                $errorMessage = 'Servico OCR retornou HTTP ' . $statusCode . '.';
+                if ($usedApiUrl !== '') {
+                    $errorMessage .= ' (API: ' . $usedApiUrl . ')';
+                }
             } else {
-                $result = $decoded;
-                if (!isset($result['pericial']) || !is_array($result['pericial'])) {
-                    $result['pericial'] = [];
-                }
-                if (!isset($result['pericial']['cross_checks']) || !is_array($result['pericial']['cross_checks'])) {
-                    $result['pericial']['cross_checks'] = [];
-                }
-                if (!isset($result['report_context']) || !is_array($result['report_context'])) {
-                    $result['report_context'] = [];
-                }
-                $result['report_context']['responsavel'] = $responsavelAnalise;
-                if (!isset($result['report_context']['cargo_funcao']) || trim((string) $result['report_context']['cargo_funcao']) === '') {
-                    $result['report_context']['cargo_funcao'] = 'Perícia / análise técnica';
-                }
-                if (!isset($result['input_meta']) || !is_array($result['input_meta'])) {
-                    $result['input_meta'] = [];
-                }
-                $result['input_meta']['responsavel'] = $responsavelAnalise;
+                $decoded = json_decode($response, true);
+                if (!is_array($decoded)) {
+                    $errorMessage = 'Servico OCR retornou uma resposta invalida.';
+                } elseif (isset($decoded['error'])) {
+                    $errorMessage = 'Servico OCR: ' . $decoded['error'];
+                } else {
+                    $result = $decoded;
+                    if (!isset($result['pericial']) || !is_array($result['pericial'])) {
+                        $result['pericial'] = [];
+                    }
+                    if (!isset($result['pericial']['cross_checks']) || !is_array($result['pericial']['cross_checks'])) {
+                        $result['pericial']['cross_checks'] = [];
+                    }
+                    if (!isset($result['report_context']) || !is_array($result['report_context'])) {
+                        $result['report_context'] = [];
+                    }
+                    $result['report_context']['responsavel'] = $responsavelAnalise;
+                    if (!isset($result['report_context']['cargo_funcao']) || trim((string) $result['report_context']['cargo_funcao']) === '') {
+                        $result['report_context']['cargo_funcao'] = 'Perícia / análise técnica';
+                    }
+                    if (!isset($result['input_meta']) || !is_array($result['input_meta'])) {
+                        $result['input_meta'] = [];
+                    }
+                    $result['input_meta']['responsavel'] = $responsavelAnalise;
 
-                if (isset($result['best']['text'])) {
-                    $ocrPlate = normalizePlateValue((string) ($result['best']['text'] ?? ''));
+                    if (isset($result['best']['text'])) {
+                        $ocrPlate = normalizePlateValue((string) ($result['best']['text'] ?? ''));
 
-                    try {
-                        $historyPdo = null;
                         try {
-                            $historyPdo = DatabaseConnection::create($db);
-                        } catch (Throwable $historyDbException) {
-                            // fallback silencioso para pesquisa local
-                        }
-                        $historyModel = new CaseModel($historyPdo);
-                        $historyMatches = $historyModel->findByPlate($_SESSION['user_id'], $ocrPlate, 20);
-                        $result['pericial']['cross_checks']['local_history'] = buildLocalHistoryCrossCheck($historyMatches);
-                    } catch (Throwable $historyException) {
-                        $result['pericial']['cross_checks']['local_history'] = [
-                            'status' => 'erro',
-                            'message' => $historyException->getMessage(),
-                            'previous_occurrences' => 0,
-                        ];
-                    }
-
-                    require_once __DIR__ . '/../app/services/ExternalVehicleLookup.php';
-                    $veiculo = ExternalVehicleLookup::searchByPlate($result['best']['text']);
-                    $consultaStatusLookup = strtolower(trim((string) ($veiculo['consulta_status'] ?? '')));
-                    $needsVisualFallback = !$veiculo
-                        || in_array($consultaStatusLookup, ['pending_async', 'pendente_webhook', 'aguardando_webhook'], true)
-                        || trim((string) ($veiculo['fabricante'] ?? '')) === ''
-                        || trim((string) ($veiculo['modelo'] ?? '')) === '';
-                    if ($needsVisualFallback) {
-                        $fallbackVehicle = buildOpenSourceVisualVehicleFallback($result);
-                        if ($fallbackVehicle) {
-                            $veiculo = array_replace($fallbackVehicle, is_array($veiculo) ? $veiculo : []);
-                        }
-                    }
-                    if ($veiculo) {
-                        $result['vehicle_info'] = $veiculo;
-                    }
-
-                    $veiculoExibicao = buildVehicleDisplayInfo($veiculo);
-                    $officialVehicleValidation = buildOfficialVehicleValidationSummary($veiculo);
-
-                    if ($veiculo) {
-                        $externalPlate = normalizePlateValue((string) ($veiculo['placa'] ?? ''));
-                        $plateMatch = ($externalPlate !== '' && $ocrPlate !== '' && $externalPlate === $ocrPlate);
-                        $sourceParts = [];
-                        $primarySource = trim((string) ($veiculo['fonte'] ?? ''));
-                        $complementarySource = trim((string) ($veiculo['fonte_complementar'] ?? ''));
-                        if ($primarySource !== '') {
-                            $sourceParts[] = $primarySource;
-                        }
-                        if ($complementarySource !== '') {
-                            $sourceParts[] = $complementarySource;
-                        }
-                        $sourceText = !empty($sourceParts) ? implode(' | ', $sourceParts) : 'provedor_externo';
-                        $officialStatus = (string) ($officialVehicleValidation['status'] ?? 'indefinido');
-                        $result['pericial']['cross_checks']['external_source'] = [
-                            'status' => in_array($consultaStatusLookup, ['pending_async', 'pendente_webhook', 'aguardando_webhook'], true)
-                                ? 'pendente_webhook_usezapay'
-                                : ($officialStatus !== 'nao_disponivel' ? $officialStatus : ((strpos((string) ($veiculo['fonte'] ?? ''), 'analise_visual_local_heuristica') !== false) ? 'estimado_fontes_abertas' : 'ok')),
-                            'source' => $sourceText,
-                            'source_primary' => $primarySource !== '' ? $primarySource : 'provedor_externo',
-                            'source_complementary' => $complementarySource !== '' ? $complementarySource : null,
-                            'source_kind' => (string) ($officialVehicleValidation['source_kind'] ?? 'indefinido'),
-                            'source_label' => (string) ($officialVehicleValidation['source_label'] ?? 'indefinida'),
-                            'official' => (bool) ($officialVehicleValidation['is_official'] ?? false),
-                            'plate_returned' => $externalPlate,
-                            'matches_ocr' => $externalPlate !== '' ? $plateMatch : null,
-                            'sensitive_fields_found' => $officialVehicleValidation['sensitive_fields_found'] ?? [],
-                            'multifonte_status' => (string) ($veiculoExibicao['consulta_multifonte_status'] ?? '-'),
-                            'multifonte_candidatos' => (int) ($veiculoExibicao['consulta_multifonte_candidatos'] ?? 0),
-                            'multifonte_confianca' => (string) ($veiculoExibicao['consulta_multifonte_confianca'] ?? '0.0'),
-                            'multifonte_taxa_consenso' => (string) ($veiculoExibicao['consulta_multifonte_taxa_consenso'] ?? '0.0'),
-                            'multifonte_score' => (string) ($veiculoExibicao['consulta_multifonte_score'] ?? '0.0'),
-                            'multifonte_limite' => (int) ($veiculoExibicao['consulta_multifonte_limite'] ?? 0),
-                            'multifonte_limite_aplicado' => (string) ($veiculoExibicao['consulta_multifonte_limite_aplicado'] ?? 'Não'),
-                            'multifonte_consenso' => (string) ($veiculoExibicao['consulta_multifonte_consenso'] ?? '-'),
-                            'multifonte_divergencias' => (string) ($veiculoExibicao['consulta_multifonte_divergencias'] ?? '-'),
-                            'multifonte_resumo' => (string) ($veiculoExibicao['consulta_multifonte_resumo'] ?? '-'),
-                            'multifonte_alertas' => (string) ($veiculoExibicao['consulta_multifonte_alertas'] ?? '-'),
-                        ];
-                        $result['pericial']['cross_checks']['official_vehicle_validation'] = $officialVehicleValidation;
-                        if (!$plateMatch && $externalPlate !== '') {
-                            if (!isset($result['warnings']) || !is_array($result['warnings'])) {
-                                $result['warnings'] = [];
+                            $historyPdo = null;
+                            try {
+                                $historyPdo = DatabaseConnection::create($db);
+                            } catch (Throwable $historyDbException) {
+                                // fallback silencioso para pesquisa local
                             }
-                            $result['warnings'][] = 'inconsistencia_placa_fonte_externa';
+                            $historyModel = new CaseModel($historyPdo);
+                            $historyMatches = $historyModel->findByPlate($_SESSION['user_id'], $ocrPlate, 20);
+                            $result['pericial']['cross_checks']['local_history'] = buildLocalHistoryCrossCheck($historyMatches);
+                        } catch (Throwable $historyException) {
+                            $result['pericial']['cross_checks']['local_history'] = [
+                                'status' => 'erro',
+                                'message' => $historyException->getMessage(),
+                                'previous_occurrences' => 0,
+                            ];
                         }
-                    } else {
-                        $result['pericial']['cross_checks']['external_source'] = [
-                            'status' => $vehicleLookupConfigured ? 'sem_retorno' : 'nao_configurado',
-                            'source' => $vehicleLookupConfigured ? 'provedor_externo_ou_fontes_abertas' : 'nenhum',
-                            'matches_ocr' => null,
-                            'multifonte_status' => $vehicleLookupConfigured ? 'sem_retorno' : 'nao_configurado',
-                            'multifonte_candidatos' => 0,
-                            'multifonte_confianca' => '0.0',
-                            'multifonte_taxa_consenso' => '0.0',
-                            'multifonte_score' => '0.0',
-                            'multifonte_limite' => 0,
-                            'multifonte_limite_aplicado' => 'Não',
-                            'multifonte_consenso' => '-',
-                            'multifonte_divergencias' => '-',
-                            'multifonte_resumo' => 'Consulta veicular não disponível nesta tentativa.',
-                            'multifonte_alertas' => $vehicleLookupConfigured ? 'sem_retorno_do_provedor' : 'integracao_desativada',
-                        ];
-                        $result['pericial']['cross_checks']['official_vehicle_validation'] = [
-                            'status' => 'nao_disponivel',
-                        ];
-                    }
 
-                    if (!$analysisPreviewRequested && isset($result['report_context']) && is_array($result['report_context'])) {
-                        [$enriched, $enrichError, $enrichStatus, $enrichApiUrl] = callReportEnrichmentApi(
-                            $apiCandidates,
-                            $result['report_context'],
-                            $veiculoExibicao ?: [],
-                            (string) ($result['best']['text'] ?? ''),
-                            is_array($result['forensic'] ?? null) ? $result['forensic'] : [],
-                            is_array($result['consensus'] ?? null) ? $result['consensus'] : [],
-                            is_array($result['assessment'] ?? null) ? $result['assessment'] : [],
-                            is_array($result['pericial'] ?? null) ? $result['pericial'] : [],
-                            is_array($result['ocr'] ?? null) ? $result['ocr'] : [],
-                            is_array($result['ocr_engine_status'] ?? null) ? $result['ocr_engine_status'] : [],
-                            is_array($result['ocr_engine_summary'] ?? null) ? $result['ocr_engine_summary'] : [],
-                            is_array($result['visual_profile'] ?? null) ? $result['visual_profile'] : [],
-                            is_array($result['external_systems_comparison'] ?? null) ? $result['external_systems_comparison'] : [],
-                            is_array($result['human_review'] ?? null) ? $result['human_review'] : [],
-                            is_array($result['warnings'] ?? null) ? $result['warnings'] : []
-                        );
+                        require_once __DIR__ . '/../app/services/ExternalVehicleLookup.php';
+                        $veiculo = ExternalVehicleLookup::searchByPlate($result['best']['text']);
+                        $consultaStatusLookup = strtolower(trim((string) ($veiculo['consulta_status'] ?? '')));
+                        $needsVisualFallback = !$veiculo
+                            || in_array($consultaStatusLookup, ['pending_async', 'pendente_webhook', 'aguardando_webhook'], true)
+                            || trim((string) ($veiculo['fabricante'] ?? '')) === ''
+                            || trim((string) ($veiculo['modelo'] ?? '')) === '';
+                        if ($needsVisualFallback) {
+                            $fallbackVehicle = buildOpenSourceVisualVehicleFallback($result);
+                            if ($fallbackVehicle) {
+                                $veiculo = array_replace($fallbackVehicle, is_array($veiculo) ? $veiculo : []);
+                            }
+                        }
+                        if ($veiculo) {
+                            $result['vehicle_info'] = $veiculo;
+                        }
 
-                        if ($enrichError === '' && is_array($enriched)) {
-                            if (!empty($enriched['pdf_report'])) {
-                                $result['pdf_report'] = (string) $enriched['pdf_report'];
+                        $veiculoExibicao = buildVehicleDisplayInfo($veiculo);
+                        $officialVehicleValidation = buildOfficialVehicleValidationSummary($veiculo);
+
+                        if ($veiculo) {
+                            $externalPlate = normalizePlateValue((string) ($veiculo['placa'] ?? ''));
+                            $plateMatch = ($externalPlate !== '' && $ocrPlate !== '' && $externalPlate === $ocrPlate);
+                            $sourceParts = [];
+                            $primarySource = trim((string) ($veiculo['fonte'] ?? ''));
+                            $complementarySource = trim((string) ($veiculo['fonte_complementar'] ?? ''));
+                            if ($primarySource !== '') {
+                                $sourceParts[] = $primarySource;
+                            }
+                            if ($complementarySource !== '') {
+                                $sourceParts[] = $complementarySource;
+                            }
+                            $sourceText = !empty($sourceParts) ? implode(' | ', $sourceParts) : 'provedor_externo';
+                            $officialStatus = (string) ($officialVehicleValidation['status'] ?? 'indefinido');
+                            $result['pericial']['cross_checks']['external_source'] = [
+                                'status' => in_array($consultaStatusLookup, ['pending_async', 'pendente_webhook', 'aguardando_webhook'], true)
+                                    ? 'pendente_webhook_usezapay'
+                                    : ($officialStatus !== 'nao_disponivel' ? $officialStatus : ((strpos((string) ($veiculo['fonte'] ?? ''), 'analise_visual_local_heuristica') !== false) ? 'estimado_fontes_abertas' : 'ok')),
+                                'source' => $sourceText,
+                                'source_primary' => $primarySource !== '' ? $primarySource : 'provedor_externo',
+                                'source_complementary' => $complementarySource !== '' ? $complementarySource : null,
+                                'source_kind' => (string) ($officialVehicleValidation['source_kind'] ?? 'indefinido'),
+                                'source_label' => (string) ($officialVehicleValidation['source_label'] ?? 'indefinida'),
+                                'official' => (bool) ($officialVehicleValidation['is_official'] ?? false),
+                                'plate_returned' => $externalPlate,
+                                'matches_ocr' => $externalPlate !== '' ? $plateMatch : null,
+                                'sensitive_fields_found' => $officialVehicleValidation['sensitive_fields_found'] ?? [],
+                                'multifonte_status' => (string) ($veiculoExibicao['consulta_multifonte_status'] ?? '-'),
+                                'multifonte_candidatos' => (int) ($veiculoExibicao['consulta_multifonte_candidatos'] ?? 0),
+                                'multifonte_confianca' => (string) ($veiculoExibicao['consulta_multifonte_confianca'] ?? '0.0'),
+                                'multifonte_taxa_consenso' => (string) ($veiculoExibicao['consulta_multifonte_taxa_consenso'] ?? '0.0'),
+                                'multifonte_score' => (string) ($veiculoExibicao['consulta_multifonte_score'] ?? '0.0'),
+                                'multifonte_limite' => (int) ($veiculoExibicao['consulta_multifonte_limite'] ?? 0),
+                                'multifonte_limite_aplicado' => (string) ($veiculoExibicao['consulta_multifonte_limite_aplicado'] ?? 'Não'),
+                                'multifonte_consenso' => (string) ($veiculoExibicao['consulta_multifonte_consenso'] ?? '-'),
+                                'multifonte_divergencias' => (string) ($veiculoExibicao['consulta_multifonte_divergencias'] ?? '-'),
+                                'multifonte_resumo' => (string) ($veiculoExibicao['consulta_multifonte_resumo'] ?? '-'),
+                                'multifonte_alertas' => (string) ($veiculoExibicao['consulta_multifonte_alertas'] ?? '-'),
+                            ];
+                            $result['pericial']['cross_checks']['official_vehicle_validation'] = $officialVehicleValidation;
+                            if (!$plateMatch && $externalPlate !== '') {
+                                if (!isset($result['warnings']) || !is_array($result['warnings'])) {
+                                    $result['warnings'] = [];
+                                }
+                                $result['warnings'][] = 'inconsistencia_placa_fonte_externa';
                             }
                         } else {
-                            if (!isset($result['warnings']) || !is_array($result['warnings'])) {
-                                $result['warnings'] = [];
+                            $result['pericial']['cross_checks']['external_source'] = [
+                                'status' => $vehicleLookupConfigured ? 'sem_retorno' : 'nao_configurado',
+                                'source' => $vehicleLookupConfigured ? 'provedor_externo_ou_fontes_abertas' : 'nenhum',
+                                'matches_ocr' => null,
+                                'multifonte_status' => $vehicleLookupConfigured ? 'sem_retorno' : 'nao_configurado',
+                                'multifonte_candidatos' => 0,
+                                'multifonte_confianca' => '0.0',
+                                'multifonte_taxa_consenso' => '0.0',
+                                'multifonte_score' => '0.0',
+                                'multifonte_limite' => 0,
+                                'multifonte_limite_aplicado' => 'Não',
+                                'multifonte_consenso' => '-',
+                                'multifonte_divergencias' => '-',
+                                'multifonte_resumo' => 'Consulta veicular não disponível nesta tentativa.',
+                                'multifonte_alertas' => $vehicleLookupConfigured ? 'sem_retorno_do_provedor' : 'integracao_desativada',
+                            ];
+                            $result['pericial']['cross_checks']['official_vehicle_validation'] = [
+                                'status' => 'nao_disponivel',
+                            ];
+                        }
+
+                        if (!$analysisPreviewRequested && isset($result['report_context']) && is_array($result['report_context'])) {
+                            [$enriched, $enrichError, $enrichStatus, $enrichApiUrl] = callReportEnrichmentApi(
+                                $apiCandidates,
+                                $result['report_context'],
+                                $veiculoExibicao ?: [],
+                                (string) ($result['best']['text'] ?? ''),
+                                is_array($result['forensic'] ?? null) ? $result['forensic'] : [],
+                                is_array($result['consensus'] ?? null) ? $result['consensus'] : [],
+                                is_array($result['assessment'] ?? null) ? $result['assessment'] : [],
+                                is_array($result['pericial'] ?? null) ? $result['pericial'] : [],
+                                is_array($result['ocr'] ?? null) ? $result['ocr'] : [],
+                                is_array($result['ocr_engine_status'] ?? null) ? $result['ocr_engine_status'] : [],
+                                is_array($result['ocr_engine_summary'] ?? null) ? $result['ocr_engine_summary'] : [],
+                                is_array($result['visual_profile'] ?? null) ? $result['visual_profile'] : [],
+                                is_array($result['external_systems_comparison'] ?? null) ? $result['external_systems_comparison'] : [],
+                                is_array($result['human_review'] ?? null) ? $result['human_review'] : [],
+                                is_array($result['warnings'] ?? null) ? $result['warnings'] : []
+                            );
+
+                            if ($enrichError === '' && is_array($enriched)) {
+                                if (!empty($enriched['pdf_report'])) {
+                                    $result['pdf_report'] = (string) $enriched['pdf_report'];
+                                }
+                            } else {
+                                if (!isset($result['warnings']) || !is_array($result['warnings'])) {
+                                    $result['warnings'] = [];
+                                }
+                                $warningText = 'Falha ao atualizar relatorio PDF pericial: ' . $enrichError;
+                                if ($enrichApiUrl !== '') {
+                                    $warningText .= ' (API: ' . $enrichApiUrl . ')';
+                                }
+                                if ($enrichStatus >= 400) {
+                                    $warningText .= ' [HTTP ' . $enrichStatus . ']';
+                                }
+                                $result['warnings'][] = $warningText;
                             }
-                            $warningText = 'Falha ao atualizar relatorio PDF pericial: ' . $enrichError;
-                            if ($enrichApiUrl !== '') {
-                                $warningText .= ' (API: ' . $enrichApiUrl . ')';
-                            }
-                            if ($enrichStatus >= 400) {
-                                $warningText .= ' [HTTP ' . $enrichStatus . ']';
-                            }
-                            $result['warnings'][] = $warningText;
                         }
                     }
-                }
 
-                if ($analysisPreviewRequested) {
-                    $result['analysis_stage'] = 'preview';
-                    $result['report_ready'] = false;
-                    storePendingPreviewResult($result);
-                } else {
-                    [$savedId, $dbWarning] = persistAnalysisRecord($result, $filename, $db, (int) $_SESSION['user_id']);
+                    if ($analysisPreviewRequested) {
+                        $result['analysis_stage'] = 'preview';
+                        $result['report_ready'] = false;
+                        storePendingPreviewResult($result);
+                    } else {
+                        [$savedId, $dbWarning] = persistAnalysisRecord($result, $filename, $db, (int) $_SESSION['user_id']);
+                    }
                 }
             }
-        }
         }
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1531,6 +1539,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     <link rel="stylesheet" href="/assets/app.css">
     <link rel="icon" type="image/png" href="/assets/grom-favicon.png">
 </head>
+
 <body>
     <?php
     $best = is_array($result) ? ($result['best'] ?? null) : null;
@@ -1654,135 +1663,135 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $reviewDefaultCandidate = is_array($topCandidates[0] ?? null) ? $topCandidates[0] : (is_array($best) ? $best : []);
     $reviewDefaultText = normalizePlateValue((string) ($reviewDefaultCandidate['text'] ?? ($best['text'] ?? '')));
     $finalReportReady = is_array($result) && !empty($result['pdf_report']);
-        $analysisReportTopics = [
-            'Identificação da captura',
-            'Tratamento técnico da imagem',
-            'OCR, consenso e ambiguidade',
-            'Correção e conferência humana',
-            'Conclusão',
-        ];
-        $analysisReportOutline = is_array($result['analysis_report_outline'] ?? null) ? $result['analysis_report_outline'] : [
-            [
-                'number' => '1',
-                'title' => 'Identificação da captura',
-                'summary' => 'Apresenta a imagem original, o recorte bruto, o recorte tratado, a cadeia de custódia digital, a integridade de entrada, os metadados e a descrição técnica da cena.',
-                'subitems' => [
-                    [
-                        'number' => '1.1',
-                        'title' => 'Imagem original, recorte bruto e recorte tratado',
-                        'summary' => 'Exibe a fonte documental em escala reduzida, o recorte bruto extraído e o recorte tratado, com comparação visual para conferência pericial.',
-                    ],
-                    [
-                        'number' => '1.2',
-                        'title' => 'Cadeia de custódia digital',
-                        'summary' => 'Registra origem, preservação, encadeamento da prova digital e rastreabilidade da análise.',
-                    ],
-                    [
-                        'number' => '1.3',
-                        'title' => 'Integridade de entrada',
-                        'summary' => 'Confere assinatura, formato, consistência do arquivo e alertas de segurança na entrada.',
-                    ],
-                    [
-                        'number' => '1.4',
-                        'title' => 'Metadados da imagem',
-                        'summary' => 'Resume EXIF, resolução, data, dispositivo de captura e parâmetros técnicos disponíveis.',
-                    ],
-                    [
-                        'number' => '1.5',
-                        'title' => 'Descrição técnica da imagem',
-                        'summary' => 'Descreve o contexto visual observado, como baixa luminosidade, excesso de luz, chuva, cena externa ou outras condições relevantes.',
-                    ],
+    $analysisReportTopics = [
+        'Identificação da captura',
+        'Tratamento técnico da imagem',
+        'OCR, consenso e ambiguidade',
+        'Correção e conferência humana',
+        'Conclusão',
+    ];
+    $analysisReportOutline = is_array($result['analysis_report_outline'] ?? null) ? $result['analysis_report_outline'] : [
+        [
+            'number' => '1',
+            'title' => 'Identificação da captura',
+            'summary' => 'Apresenta a imagem original, o recorte bruto, o recorte tratado, a cadeia de custódia digital, a integridade de entrada, os metadados e a descrição técnica da cena.',
+            'subitems' => [
+                [
+                    'number' => '1.1',
+                    'title' => 'Imagem original, recorte bruto e recorte tratado',
+                    'summary' => 'Exibe a fonte documental em escala reduzida, o recorte bruto extraído e o recorte tratado, com comparação visual para conferência pericial.',
+                ],
+                [
+                    'number' => '1.2',
+                    'title' => 'Cadeia de custódia digital',
+                    'summary' => 'Registra origem, preservação, encadeamento da prova digital e rastreabilidade da análise.',
+                ],
+                [
+                    'number' => '1.3',
+                    'title' => 'Integridade de entrada',
+                    'summary' => 'Confere assinatura, formato, consistência do arquivo e alertas de segurança na entrada.',
+                ],
+                [
+                    'number' => '1.4',
+                    'title' => 'Metadados da imagem',
+                    'summary' => 'Resume EXIF, resolução, data, dispositivo de captura e parâmetros técnicos disponíveis.',
+                ],
+                [
+                    'number' => '1.5',
+                    'title' => 'Descrição técnica da imagem',
+                    'summary' => 'Descreve o contexto visual observado, como baixa luminosidade, excesso de luz, chuva, cena externa ou outras condições relevantes.',
                 ],
             ],
-            [
-                'number' => '2',
-                'title' => 'Tratamento técnico da imagem',
-                'summary' => 'Explica o modelo de tratamento, os procedimentos de pré-processamento, a calibração aplicada e os refinamentos usados para maximizar repetibilidade e acurácia.',
-                'subitems' => [
-                    [
-                        'number' => '2.1',
-                        'title' => 'Modelo e estratégia de tratamento',
-                        'summary' => 'Descreve a família de software, a estratégia de seleção do ROI e a linha pericial adotada para preservar a evidência.',
-                    ],
-                    [
-                        'number' => '2.2',
-                        'title' => 'Pré-processamento e recorte',
-                        'summary' => 'Documenta equalização, contraste, nitidez, alinhamento e demais ajustes visuais utilizados.',
-                    ],
-                    [
-                        'number' => '2.3',
-                        'title' => 'Calibração e parâmetros técnicos',
-                        'summary' => 'Registra versões, parâmetros e critérios empregados no tratamento automatizado.',
-                    ],
+        ],
+        [
+            'number' => '2',
+            'title' => 'Tratamento técnico da imagem',
+            'summary' => 'Explica o modelo de tratamento, os procedimentos de pré-processamento, a calibração aplicada e os refinamentos usados para maximizar repetibilidade e acurácia.',
+            'subitems' => [
+                [
+                    'number' => '2.1',
+                    'title' => 'Modelo e estratégia de tratamento',
+                    'summary' => 'Descreve a família de software, a estratégia de seleção do ROI e a linha pericial adotada para preservar a evidência.',
+                ],
+                [
+                    'number' => '2.2',
+                    'title' => 'Pré-processamento e recorte',
+                    'summary' => 'Documenta equalização, contraste, nitidez, alinhamento e demais ajustes visuais utilizados.',
+                ],
+                [
+                    'number' => '2.3',
+                    'title' => 'Calibração e parâmetros técnicos',
+                    'summary' => 'Registra versões, parâmetros e critérios empregados no tratamento automatizado.',
                 ],
             ],
-            [
-                'number' => '3',
-                'title' => 'OCR, consenso e ambiguidade',
-                'summary' => 'Consolida os motores utilizados, as probabilidades de acerto, os percentuais apresentados e os pontos de ambiguidade entre leituras.',
-                'subitems' => [
-                    [
-                        'number' => '3.1',
-                        'title' => 'Motores empregados',
-                        'summary' => 'Lista os motores OCR acionados e o papel de cada um no ensemble.',
-                    ],
-                    [
-                        'number' => '3.2',
-                        'title' => 'Percentuais e confiança',
-                        'summary' => 'Resume as pontuações, confidências e índices de concordância obtidos.',
-                    ],
-                    [
-                        'number' => '3.3',
-                        'title' => 'Ambiguidades e hipótese aceita',
-                        'summary' => 'Expõe leituras conflitantes e a hipótese final escolhida pelo consenso.',
-                    ],
+        ],
+        [
+            'number' => '3',
+            'title' => 'OCR, consenso e ambiguidade',
+            'summary' => 'Consolida os motores utilizados, as probabilidades de acerto, os percentuais apresentados e os pontos de ambiguidade entre leituras.',
+            'subitems' => [
+                [
+                    'number' => '3.1',
+                    'title' => 'Motores empregados',
+                    'summary' => 'Lista os motores OCR acionados e o papel de cada um no ensemble.',
+                ],
+                [
+                    'number' => '3.2',
+                    'title' => 'Percentuais e confiança',
+                    'summary' => 'Resume as pontuações, confidências e índices de concordância obtidos.',
+                ],
+                [
+                    'number' => '3.3',
+                    'title' => 'Ambiguidades e hipótese aceita',
+                    'summary' => 'Expõe leituras conflitantes e a hipótese final escolhida pelo consenso.',
                 ],
             ],
-            [
-                'number' => '4',
-                'title' => 'Correção e conferência humana',
-                'summary' => 'Registra correções eventuais e a conferência humana obrigatória antes da consolidação final.',
-                'subitems' => [
-                    [
-                        'number' => '4.1',
-                        'title' => 'Revisão das hipóteses',
-                        'summary' => 'Aponta se houve ajuste manual na leitura e quais hipóteses foram confrontadas.',
-                    ],
-                    [
-                        'number' => '4.2',
-                        'title' => 'Conferência humana obrigatória',
-                        'summary' => 'Declara a conferência humana como etapa de validação antes da aprovação do relatório.',
-                    ],
-                    [
-                        'number' => '4.3',
-                        'title' => 'Aprovação final',
-                        'summary' => 'Indica se o resultado foi consolidado para impressão documental ou mantido em correção em tela.',
-                    ],
+        ],
+        [
+            'number' => '4',
+            'title' => 'Correção e conferência humana',
+            'summary' => 'Registra correções eventuais e a conferência humana obrigatória antes da consolidação final.',
+            'subitems' => [
+                [
+                    'number' => '4.1',
+                    'title' => 'Revisão das hipóteses',
+                    'summary' => 'Aponta se houve ajuste manual na leitura e quais hipóteses foram confrontadas.',
+                ],
+                [
+                    'number' => '4.2',
+                    'title' => 'Conferência humana obrigatória',
+                    'summary' => 'Declara a conferência humana como etapa de validação antes da aprovação do relatório.',
+                ],
+                [
+                    'number' => '4.3',
+                    'title' => 'Aprovação final',
+                    'summary' => 'Indica se o resultado foi consolidado para impressão documental ou mantido em correção em tela.',
                 ],
             ],
-            [
-                'number' => '5',
-                'title' => 'Conclusão',
-                'summary' => 'Fecha o documento com síntese técnica, em linguagem clara e credível, sobre as tecnologias usadas no tratamento, na captura da tela e no processamento da imagem.',
-                'subitems' => [
-                    [
-                        'number' => '5.1',
-                        'title' => 'Síntese documental',
-                        'summary' => 'Resume o caminho percorrido entre a fonte, o tratamento, o OCR e a validação humana.',
-                    ],
-                    [
-                        'number' => '5.2',
-                        'title' => 'Resultado consolidado',
-                        'summary' => 'Apresenta o resultado final com o nível de confiabilidade alcançado.',
-                    ],
-                    [
-                        'number' => '5.3',
-                        'title' => 'Observações finais',
-                        'summary' => 'Mantém o tom técnico, mas acessível, para leitura por operadores e interessados leigos.',
-                    ],
+        ],
+        [
+            'number' => '5',
+            'title' => 'Conclusão',
+            'summary' => 'Fecha o documento com síntese técnica, em linguagem clara e credível, sobre as tecnologias usadas no tratamento, na captura da tela e no processamento da imagem.',
+            'subitems' => [
+                [
+                    'number' => '5.1',
+                    'title' => 'Síntese documental',
+                    'summary' => 'Resume o caminho percorrido entre a fonte, o tratamento, o OCR e a validação humana.',
+                ],
+                [
+                    'number' => '5.2',
+                    'title' => 'Resultado consolidado',
+                    'summary' => 'Apresenta o resultado final com o nível de confiabilidade alcançado.',
+                ],
+                [
+                    'number' => '5.3',
+                    'title' => 'Observações finais',
+                    'summary' => 'Mantém o tom técnico, mas acessível, para leitura por operadores e interessados leigos.',
                 ],
             ],
-        ];
+        ],
+    ];
     $analysisReportOverview = [];
     if (is_array($result)) {
         $analysisReportOverview = [
@@ -2070,7 +2079,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         <p class="analysis-report-section-label">Procedimentos efetuados na análise</p>
                         <div class="analysis-report-outline">
                             <?php foreach ($analysisReportOutline as $outlineSection) { ?>
-                                <?php if (!is_array($outlineSection)) { continue; } ?>
+                                <?php if (!is_array($outlineSection)) {
+                                    continue;
+                                } ?>
                                 <article class="analysis-report-outline-item">
                                     <div class="analysis-report-outline-header">
                                         <div class="analysis-report-outline-number">
@@ -2087,7 +2098,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     <?php if ($outlineSubitems) { ?>
                                         <ul class="analysis-report-outline-sublist">
                                             <?php foreach ($outlineSubitems as $outlineSubitem) { ?>
-                                                <?php if (!is_array($outlineSubitem)) { continue; } ?>
+                                                <?php if (!is_array($outlineSubitem)) {
+                                                    continue;
+                                                } ?>
                                                 <li>
                                                     <strong><?php echo htmlspecialchars(trim((string) ($outlineSubitem['number'] ?? '') . ' - ' . (string) ($outlineSubitem['title'] ?? ''))); ?></strong>
                                                     <?php if (!empty($outlineSubitem['summary'])) { ?>
@@ -2286,20 +2299,20 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         <p class="kpi-value"><?php echo (int) ($ocrEngineSummary['engines_ready'] ?? $ocrEngineSummary['engines_available'] ?? count($ocrEngines)); ?></p>
                     </div>
                 </div>
-            <?php if ($ocrEngineSummary) { ?>
-                <p class="muted" style="margin-top:8px;">
-                    Registrados: <strong><?php echo (int) ($ocrEngineSummary['engines_registered'] ?? 0); ?></strong> |
-                            Prontos: <strong><?php echo (int) ($ocrEngineSummary['engines_ready'] ?? 0); ?></strong> |
-                            Com texto: <strong><?php echo (int) ($ocrEngineSummary['engines_with_text'] ?? 0); ?></strong> |
-                            Sem texto: <strong><?php echo (int) ($ocrEngineSummary['engines_without_text'] ?? 0); ?></strong> |
-                            Pulados: <strong><?php echo (int) ($ocrEngineSummary['engines_skipped'] ?? 0); ?></strong> |
-                            Desabilitados: <strong><?php echo (int) ($ocrEngineSummary['engines_disabled'] ?? 0); ?></strong> |
-                            Indisponiveis: <strong><?php echo (int) ($ocrEngineSummary['engines_unavailable'] ?? 0); ?></strong> |
+                <?php if ($ocrEngineSummary) { ?>
+                    <p class="muted" style="margin-top:8px;">
+                        Registrados: <strong><?php echo (int) ($ocrEngineSummary['engines_registered'] ?? 0); ?></strong> |
+                        Prontos: <strong><?php echo (int) ($ocrEngineSummary['engines_ready'] ?? 0); ?></strong> |
+                        Com texto: <strong><?php echo (int) ($ocrEngineSummary['engines_with_text'] ?? 0); ?></strong> |
+                        Sem texto: <strong><?php echo (int) ($ocrEngineSummary['engines_without_text'] ?? 0); ?></strong> |
+                        Pulados: <strong><?php echo (int) ($ocrEngineSummary['engines_skipped'] ?? 0); ?></strong> |
+                        Desabilitados: <strong><?php echo (int) ($ocrEngineSummary['engines_disabled'] ?? 0); ?></strong> |
+                        Indisponiveis: <strong><?php echo (int) ($ocrEngineSummary['engines_unavailable'] ?? 0); ?></strong> |
                         Falhos: <strong><?php echo (int) ($ocrEngineSummary['engines_failed'] ?? 0); ?></strong> |
                         Calibracao reranking: <strong><?php echo htmlspecialchars((string) ($ocrEngineSummary['reranking_calibration_source'] ?? 'builtin_default')); ?></strong> |
                         Arquivo: <strong><?php echo htmlspecialchars((string) ($ocrEngineSummary['reranking_calibration_path'] ?? '-')); ?></strong>
-                        </p>
-                    <?php } ?>
+                    </p>
+                <?php } ?>
             </section>
 
             <section class="card">
@@ -2334,7 +2347,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     <tbody>
                                         <?php if (!empty($topCandidates) && is_array($topCandidates)) { ?>
                                             <?php foreach (array_values($topCandidates) as $candidateIndex => $candidate) { ?>
-                                                <?php if (!is_array($candidate)) { continue; } ?>
+                                                <?php if (!is_array($candidate)) {
+                                                    continue;
+                                                } ?>
                                                 <tr>
                                                     <td><?php echo (int) ($candidateIndex + 1); ?></td>
                                                     <td class="mono"><?php echo htmlspecialchars((string) ($candidate['text'] ?? '-')); ?></td>
@@ -2384,12 +2399,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                             <option value="">Sem hipótese forte</option>
                                         <?php } else { ?>
                                             <?php foreach (array_values($topCandidates) as $candidateIndex => $candidate) { ?>
-                                                <?php if (!is_array($candidate)) { continue; } ?>
+                                                <?php if (!is_array($candidate)) {
+                                                    continue;
+                                                } ?>
                                                 <option
                                                     value="<?php echo (int) $candidateIndex; ?>"
                                                     data-text="<?php echo htmlspecialchars((string) ($candidate['text'] ?? '')); ?>"
-                                                    <?php echo $candidateIndex === 0 ? 'selected' : ''; ?>
-                                                >
+                                                    <?php echo $candidateIndex === 0 ? 'selected' : ''; ?>>
                                                     #<?php echo (int) ($candidateIndex + 1); ?> |
                                                     <?php echo htmlspecialchars((string) ($candidate['text'] ?? '-')); ?> |
                                                     <?php echo htmlspecialchars((string) ($candidate['engine'] ?? '-')); ?>
@@ -2627,18 +2643,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     Status: <?php echo htmlspecialchars(humanizePericialLabel($externalCross['status'] ?? 'indefinido')); ?> |
                                     Fonte: <?php echo htmlspecialchars((string) ($externalCross['source'] ?? '-')); ?> |
                                     Compatibilidade OCR: <?php
-                                        if (array_key_exists('matches_ocr', $externalCross)) {
-                                            if ($externalCross['matches_ocr'] === true) {
-                                                echo 'Sim';
-                                            } elseif ($externalCross['matches_ocr'] === false) {
-                                                echo 'Não';
-                                            } else {
-                                                echo 'N/A';
-                                            }
-                                        } else {
-                                            echo 'N/A';
-                                        }
-                                    ?>
+                                                            if (array_key_exists('matches_ocr', $externalCross)) {
+                                                                if ($externalCross['matches_ocr'] === true) {
+                                                                    echo 'Sim';
+                                                                } elseif ($externalCross['matches_ocr'] === false) {
+                                                                    echo 'Não';
+                                                                } else {
+                                                                    echo 'N/A';
+                                                                }
+                                                            } else {
+                                                                echo 'N/A';
+                                                            }
+                                                            ?>
                                     | Consulta multicamada: <?php echo htmlspecialchars(humanizePericialLabel($externalCross['multifonte_status'] ?? 'indefinido')); ?> |
                                     Fontes: <?php echo htmlspecialchars((string) ($externalCross['multifonte_candidatos'] ?? 0)); ?> |
                                     Confiança: <?php echo htmlspecialchars((string) ($externalCross['multifonte_confianca'] ?? '0.0')); ?>% |
@@ -2724,15 +2740,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     $opTransformations = is_array($opEvidence['transformations'] ?? null) ? $opEvidence['transformations'] : [];
                     $opCrops = is_array($opEvidence['available_crops'] ?? null) ? $opEvidence['available_crops'] : [];
                     ?>
-                <div class="grid">
-                    <div class="col-4 kpi">
+                    <div class="grid">
+                        <div class="col-4 kpi">
                             <p class="kpi-label">Status do protocolo</p>
-                        <p class="kpi-value"><?php echo htmlspecialchars(humanizePericialLabel($operationalProtocol['status'] ?? 'indefinido')); ?></p>
-                    </div>
-                    <div class="col-4 kpi">
-                        <p class="kpi-label">Nível conclusivo</p>
-                        <p class="kpi-value"><?php echo htmlspecialchars(humanizePericialLabel($opConclusion['display_level'] ?? ($opConclusion['level'] ?? 'INDEFINIDO'))); ?></p>
-                    </div>
+                            <p class="kpi-value"><?php echo htmlspecialchars(humanizePericialLabel($operationalProtocol['status'] ?? 'indefinido')); ?></p>
+                        </div>
+                        <div class="col-4 kpi">
+                            <p class="kpi-label">Nível conclusivo</p>
+                            <p class="kpi-value"><?php echo htmlspecialchars(humanizePericialLabel($opConclusion['display_level'] ?? ($opConclusion['level'] ?? 'INDEFINIDO'))); ?></p>
+                        </div>
                         <div class="col-4 kpi">
                             <p class="kpi-label">Pontuação</p>
                             <p class="kpi-value"><?php echo number_format((float) ($opConclusion['score'] ?? $opMatrix['score_total'] ?? 0), 1, ',', '.'); ?></p>
@@ -2762,14 +2778,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </td>
                                 </tr>
                                 <tr>
-                                <th>Triagem de qualidade</th>
-                                <td>
-                                    Classe: <?php echo htmlspecialchars(humanizePericialLabel($opTriage['class'] ?? 'D')); ?> |
-                                    Faixa: <?php echo htmlspecialchars(humanizePericialLabel($opTriage['display_label'] ?? ($opTriage['label'] ?? '-'))); ?> |
-                                    Nota: <?php echo number_format((float) ($opTriage['score'] ?? 0), 1, ',', '.'); ?> |
-                                    Revisão manual: <?php echo !empty($opTriage['manual_review']) ? 'Sim' : 'Não'; ?>
-                                </td>
-                            </tr>
+                                    <th>Triagem de qualidade</th>
+                                    <td>
+                                        Classe: <?php echo htmlspecialchars(humanizePericialLabel($opTriage['class'] ?? 'D')); ?> |
+                                        Faixa: <?php echo htmlspecialchars(humanizePericialLabel($opTriage['display_label'] ?? ($opTriage['label'] ?? '-'))); ?> |
+                                        Nota: <?php echo number_format((float) ($opTriage['score'] ?? 0), 1, ',', '.'); ?> |
+                                        Revisão manual: <?php echo !empty($opTriage['manual_review']) ? 'Sim' : 'Não'; ?>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th>OCR operacional</th>
                                     <td>
@@ -2789,14 +2805,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </td>
                                 </tr>
                                 <tr>
-                                <th>Matriz de compatibilidade</th>
-                                <td>
-                                    Score: <?php echo number_format((float) ($opMatrix['score_total'] ?? 0), 1, ',', '.'); ?> |
-                                    Cobertura: <?php echo number_format((float) ($opMatrix['coverage_percent'] ?? 0), 1, ',', '.'); ?>% |
-                                    Nível: <?php echo htmlspecialchars(humanizePericialLabel($opMatrix['display_level'] ?? ($opMatrix['level'] ?? 'INCOMPATIVEL'))); ?> |
-                                    Taxa disponível: <?php echo number_format((float) ($opMatrix['available_ratio'] ?? 0), 1, ',', '.'); ?>%
-                                </td>
-                            </tr>
+                                    <th>Matriz de compatibilidade</th>
+                                    <td>
+                                        Score: <?php echo number_format((float) ($opMatrix['score_total'] ?? 0), 1, ',', '.'); ?> |
+                                        Cobertura: <?php echo number_format((float) ($opMatrix['coverage_percent'] ?? 0), 1, ',', '.'); ?>% |
+                                        Nível: <?php echo htmlspecialchars(humanizePericialLabel($opMatrix['display_level'] ?? ($opMatrix['level'] ?? 'INCOMPATIVEL'))); ?> |
+                                        Taxa disponível: <?php echo number_format((float) ($opMatrix['available_ratio'] ?? 0), 1, ',', '.'); ?>%
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th>Exclusoes obrigatorias</th>
                                     <td>
@@ -2806,13 +2822,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </td>
                                 </tr>
                                 <tr>
-                                <th>Conclusão pericial</th>
-                                <td>
-                                    Nível: <?php echo htmlspecialchars(humanizePericialLabel($opConclusion['display_level'] ?? ($opConclusion['level'] ?? '-'))); ?> |
-                                    Revisão manual: <?php echo !empty($opConclusion['manual_review_required']) ? 'Sim' : 'Não'; ?> |
-                                    Resumo: <?php echo htmlspecialchars((string) ($opConclusion['summary'] ?? '-')); ?>
-                                </td>
-                            </tr>
+                                    <th>Conclusão pericial</th>
+                                    <td>
+                                        Nível: <?php echo htmlspecialchars(humanizePericialLabel($opConclusion['display_level'] ?? ($opConclusion['level'] ?? '-'))); ?> |
+                                        Revisão manual: <?php echo !empty($opConclusion['manual_review_required']) ? 'Sim' : 'Não'; ?> |
+                                        Resumo: <?php echo htmlspecialchars((string) ($opConclusion['summary'] ?? '-')); ?>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -2824,15 +2840,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     <?php if ($opCrops) { ?>
                         <p class="muted">
                             Cortes preservados: <?php
-                            $cropLines = [];
-                            foreach ($opCrops as $crop) {
-                                if (!is_array($crop)) {
-                                    continue;
-                                }
-                                $cropLines[] = (string) ($crop['name'] ?? '-') . '=' . (!empty($crop['available']) ? 'sim' : 'nao');
-                            }
-                            echo htmlspecialchars($cropLines ? implode(' | ', $cropLines) : '-');
-                            ?>
+                                                $cropLines = [];
+                                                foreach ($opCrops as $crop) {
+                                                    if (!is_array($crop)) {
+                                                        continue;
+                                                    }
+                                                    $cropLines[] = (string) ($crop['name'] ?? '-') . '=' . (!empty($crop['available']) ? 'sim' : 'nao');
+                                                }
+                                                echo htmlspecialchars($cropLines ? implode(' | ', $cropLines) : '-');
+                                                ?>
                         </p>
                     <?php } ?>
                 </section>
@@ -2869,7 +2885,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                             <p class="kpi-value"><?php echo htmlspecialchars(humanizePericialLabel($formConclusion['resultado'] ?? 'inconclusivo')); ?></p>
                         </div>
                         <div class="col-4 kpi">
-                    <p class="kpi-label">Nível</p>
+                            <p class="kpi-label">Nível</p>
                             <p class="kpi-value"><?php echo htmlspecialchars(humanizePericialLabel($formConclusion['nivel'] ?? 'INDEFINIDO')); ?></p>
                         </div>
                         <div class="col-4 kpi">
@@ -2894,8 +2910,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     <td>
                                         Arquivos: <?php echo (int) ($formMaterial['count'] ?? 0); ?> |
                                         Itens: <?php echo htmlspecialchars(is_array($formMaterial['items'] ?? null) ? implode(', ', array_map(function ($item) {
-                                            return is_array($item) ? ((string) ($item['label'] ?? '-')) . '=' . (!empty($item['available']) ? 'Sim' : 'Não') : '';
-                                        }, $formMaterial['items'])) : '-'); ?>
+                                                    return is_array($item) ? ((string) ($item['label'] ?? '-')) . '=' . (!empty($item['available']) ? 'Sim' : 'Não') : '';
+                                                }, $formMaterial['items'])) : '-'); ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -2982,15 +2998,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     <?php } ?>
                     <?php if (!empty($formChecklist) && is_array($formChecklist)) { ?>
                         <p class="muted">Checklist rapido: <?php
-                            $checkLines = [];
-                            foreach ($formChecklist as $checkItem) {
-                                if (!is_array($checkItem)) {
-                                    continue;
-                                }
-                                $checkLines[] = (string) ($checkItem['label'] ?? '-') . '=' . humanizePericialLabel($checkItem['status'] ?? '-');
-                            }
-                            echo htmlspecialchars($checkLines ? implode(' | ', $checkLines) : '-');
-                        ?></p>
+                                                            $checkLines = [];
+                                                            foreach ($formChecklist as $checkItem) {
+                                                                if (!is_array($checkItem)) {
+                                                                    continue;
+                                                                }
+                                                                $checkLines[] = (string) ($checkItem['label'] ?? '-') . '=' . humanizePericialLabel($checkItem['status'] ?? '-');
+                                                            }
+                                                            echo htmlspecialchars($checkLines ? implode(' | ', $checkLines) : '-');
+                                                            ?></p>
                     <?php } ?>
                 </section>
             <?php } ?>
@@ -3070,43 +3086,45 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($assistedSystems, 0, 4) as $systemItem) { ?>
-                                    <?php if (!is_array($systemItem)) { continue; } ?>
-                                    <?php
-                                    $systemVehicle = trim((string) (($systemItem['fabricante'] ?? '') . ' ' . ($systemItem['modelo'] ?? '')));
-                                    if ($systemVehicle === '') {
-                                        $systemVehicle = 'Indeterminado';
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($systemItem['nome'] ?? $systemItem['id'] ?? 'sistema_externo')); ?></td>
-                                        <td><?php echo htmlspecialchars($systemVehicle); ?></td>
-                                        <td><?php echo number_format((float) ($systemItem['vehicle_confidence'] ?? 0), 1, ',', '.'); ?>%</td>
-                                        <td><?php echo !empty($systemItem['matches_local_vehicle']) ? 'Sim' : 'Não'; ?></td>
-                                    </tr>
-                                <?php } ?>
+                                    <?php foreach (array_slice($assistedSystems, 0, 4) as $systemItem) { ?>
+                                        <?php if (!is_array($systemItem)) {
+                                            continue;
+                                        } ?>
+                                        <?php
+                                        $systemVehicle = trim((string) (($systemItem['fabricante'] ?? '') . ' ' . ($systemItem['modelo'] ?? '')));
+                                        if ($systemVehicle === '') {
+                                            $systemVehicle = 'Indeterminado';
+                                        }
+                                        ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($systemItem['nome'] ?? $systemItem['id'] ?? 'sistema_externo')); ?></td>
+                                            <td><?php echo htmlspecialchars($systemVehicle); ?></td>
+                                            <td><?php echo number_format((float) ($systemItem['vehicle_confidence'] ?? 0), 1, ',', '.'); ?>%</td>
+                                            <td><?php echo !empty($systemItem['matches_local_vehicle']) ? 'Sim' : 'Não'; ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
                     <?php } ?>
                     <?php if ($assistedAlternatives) { ?>
                         <p class="muted" style="margin-top:10px;">Hipóteses alternativas: <?php
-                            $altLines = [];
-                            foreach (array_slice($assistedAlternatives, 0, 3) as $altItem) {
-                                if (!is_array($altItem)) {
-                                    continue;
-                                }
-                                $altLabel = (string) ($altItem['label'] ?? '-');
-                                $altConf = number_format((float) ($altItem['confidence'] ?? 0), 1, ',', '.');
-                                $altYear = trim((string) ($altItem['year_range'] ?? ''));
-                                $altLine = $altLabel . ' (' . $altConf . '%)';
-                                if ($altYear !== '') {
-                                    $altLine .= ' ano ' . $altYear;
-                                }
-                                $altLines[] = $altLine;
-                            }
-                            echo htmlspecialchars($altLines ? implode(' | ', $altLines) : '-');
-                        ?></p>
+                                                                                            $altLines = [];
+                                                                                            foreach (array_slice($assistedAlternatives, 0, 3) as $altItem) {
+                                                                                                if (!is_array($altItem)) {
+                                                                                                    continue;
+                                                                                                }
+                                                                                                $altLabel = (string) ($altItem['label'] ?? '-');
+                                                                                                $altConf = number_format((float) ($altItem['confidence'] ?? 0), 1, ',', '.');
+                                                                                                $altYear = trim((string) ($altItem['year_range'] ?? ''));
+                                                                                                $altLine = $altLabel . ' (' . $altConf . '%)';
+                                                                                                if ($altYear !== '') {
+                                                                                                    $altLine .= ' ano ' . $altYear;
+                                                                                                }
+                                                                                                $altLines[] = $altLine;
+                                                                                            }
+                                                                                            echo htmlspecialchars($altLines ? implode(' | ', $altLines) : '-');
+                                                                                            ?></p>
                     <?php } ?>
                 </section>
             <?php } ?>
@@ -3228,7 +3246,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                             $colorLines[] = (string) ($entry['name'] ?? '-') . ': ' . number_format((float) ($entry['ratio'] ?? 0), 1, ',', '.') . '%';
                                         }
                                         echo htmlspecialchars($colorLines ? implode(' | ', $colorLines) : '-');
-                                    ?></td>
+                                        ?></td>
                                 </tr>
                                 <tr>
                                     <th>Confiança da hipótese</th>
@@ -3250,7 +3268,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         </table>
                     </div>
                     <?php if ($visualList && empty($visualModelQuality['model_abstained']) && strtolower((string) ($visualMain['modelo'] ?? '')) !== 'nao conclusivo') { ?>
-                        <p class="muted" style="margin-top:10px;">Top hipóteses: 
+                        <p class="muted" style="margin-top:10px;">Top hipóteses:
                             <?php
                             $visualLines = [];
                             foreach ($visualList as $entry) {
@@ -3294,22 +3312,22 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($componentLabels as $componentKey => $componentLabel) { ?>
-                                    <?php
-                                    $componentItem = is_array($visualComponents[$componentKey] ?? null) ? $visualComponents[$componentKey] : null;
-                                    if (!$componentItem) {
-                                        continue;
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($componentLabel); ?></td>
-                                        <td><?php echo htmlspecialchars(humanizePericialLabel($componentItem['status'] ?? 'indefinido')); ?></td>
-                                        <td><?php echo number_format((float) ($componentItem['confianca'] ?? 0), 1, ',', '.'); ?>%</td>
-                                        <td><?php echo htmlspecialchars((string) ($componentItem['detalhe'] ?? '-')); ?></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                    <?php foreach ($componentLabels as $componentKey => $componentLabel) { ?>
+                                        <?php
+                                        $componentItem = is_array($visualComponents[$componentKey] ?? null) ? $visualComponents[$componentKey] : null;
+                                        if (!$componentItem) {
+                                            continue;
+                                        }
+                                        ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($componentLabel); ?></td>
+                                            <td><?php echo htmlspecialchars(humanizePericialLabel($componentItem['status'] ?? 'indefinido')); ?></td>
+                                            <td><?php echo number_format((float) ($componentItem['confianca'] ?? 0), 1, ',', '.'); ?>%</td>
+                                            <td><?php echo htmlspecialchars((string) ($componentItem['detalhe'] ?? '-')); ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
                     <?php } ?>
                     <?php if ($visualEvidenceMatrix && is_array($visualEvidenceMatrix['candidates'] ?? null)) { ?>
@@ -3325,32 +3343,34 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($visualMatrixCandidates, 0, 3) as $matrixCandidate) { ?>
-                                    <?php if (!is_array($matrixCandidate)) { continue; } ?>
-                                    <?php
-                                    $matrixRows = is_array($matrixCandidate['rows'] ?? null) ? $matrixCandidate['rows'] : [];
-                                    $matrixTopEvidence = '-';
-                                    if ($matrixRows) {
-                                        $firstRow = $matrixRows[0];
-                                        if (is_array($firstRow)) {
-                                            $matrixTopEvidence = trim((string) ($firstRow['evidencia'] ?? $firstRow['descricao'] ?? '-'));
-                                            $matrixTopWeight = number_format((float) ($firstRow['peso_nominal'] ?? 0), 1, ',', '.');
-                                            $matrixTopEvidence .= ' (' . $matrixTopWeight . ')';
+                                    <?php foreach (array_slice($visualMatrixCandidates, 0, 3) as $matrixCandidate) { ?>
+                                        <?php if (!is_array($matrixCandidate)) {
+                                            continue;
+                                        } ?>
+                                        <?php
+                                        $matrixRows = is_array($matrixCandidate['rows'] ?? null) ? $matrixCandidate['rows'] : [];
+                                        $matrixTopEvidence = '-';
+                                        if ($matrixRows) {
+                                            $firstRow = $matrixRows[0];
+                                            if (is_array($firstRow)) {
+                                                $matrixTopEvidence = trim((string) ($firstRow['evidencia'] ?? $firstRow['descricao'] ?? '-'));
+                                                $matrixTopWeight = number_format((float) ($firstRow['peso_nominal'] ?? 0), 1, ',', '.');
+                                                $matrixTopEvidence .= ' (' . $matrixTopWeight . ')';
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo htmlspecialchars(trim((string) ($matrixCandidate['fabricante'] ?? '-')) . ' ' . trim((string) ($matrixCandidate['modelo'] ?? '-'))); ?>
-                                            <div class="muted">
-                                                <?php echo htmlspecialchars(humanizePericialLabel($matrixCandidate['status'] ?? 'indefinido')); ?>
-                                            </div>
-                                        </td>
-                                        <td><?php echo number_format((float) ($matrixCandidate['confianca'] ?? 0), 1, ',', '.'); ?>%</td>
-                                        <td><?php echo htmlspecialchars((string) ($matrixCandidate['faixa_ano_modelo'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars($matrixTopEvidence); ?></td>
-                                    </tr>
-                                <?php } ?>
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo htmlspecialchars(trim((string) ($matrixCandidate['fabricante'] ?? '-')) . ' ' . trim((string) ($matrixCandidate['modelo'] ?? '-'))); ?>
+                                                <div class="muted">
+                                                    <?php echo htmlspecialchars(humanizePericialLabel($matrixCandidate['status'] ?? 'indefinido')); ?>
+                                                </div>
+                                            </td>
+                                            <td><?php echo number_format((float) ($matrixCandidate['confianca'] ?? 0), 1, ',', '.'); ?>%</td>
+                                            <td><?php echo htmlspecialchars((string) ($matrixCandidate['faixa_ano_modelo'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars($matrixTopEvidence); ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3371,16 +3391,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($visualForensicFindings, 0, 8) as $findingItem) { ?>
-                                    <?php if (!is_array($findingItem)) { continue; } ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($findingItem['codigo'] ?? 'achado_visual')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($findingItem['descricao'] ?? '-')); ?></td>
-                                        <td><?php echo number_format((float) ($findingItem['confianca'] ?? 0), 1, ',', '.'); ?>%</td>
-                                        <td><?php echo htmlspecialchars((string) ($findingItem['localizacao'] ?? 'indefinida')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($findingItem['evidencia'] ?? '-')); ?></td>
-                                    </tr>
-                                <?php } ?>
+                                    <?php foreach (array_slice($visualForensicFindings, 0, 8) as $findingItem) { ?>
+                                        <?php if (!is_array($findingItem)) {
+                                            continue;
+                                        } ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($findingItem['codigo'] ?? 'achado_visual')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($findingItem['descricao'] ?? '-')); ?></td>
+                                            <td><?php echo number_format((float) ($findingItem['confianca'] ?? 0), 1, ',', '.'); ?>%</td>
+                                            <td><?php echo htmlspecialchars((string) ($findingItem['localizacao'] ?? 'indefinida')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($findingItem['evidencia'] ?? '-')); ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3418,29 +3440,31 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($visualComponentQueries, 0, 8) as $queryItem) { ?>
-                                    <?php
-                                    if (!is_array($queryItem)) { continue; }
-                                    $querySources = is_array($queryItem['fontes'] ?? null) ? $queryItem['fontes'] : [];
-                                    $queryLinks = [];
-                                    foreach (array_slice($querySources, 0, 3) as $sourceRef) {
-                                        if (!is_array($sourceRef)) {
+                                    <?php foreach (array_slice($visualComponentQueries, 0, 8) as $queryItem) { ?>
+                                        <?php
+                                        if (!is_array($queryItem)) {
                                             continue;
                                         }
-                                        $sourceUrl = (string) ($sourceRef['url'] ?? '');
-                                        $sourceName = (string) ($sourceRef['fonte'] ?? '-');
-                                        if ($sourceUrl !== '') {
-                                            $queryLinks[] = '<a href="' . htmlspecialchars($sourceUrl) . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($sourceName) . '</a>';
+                                        $querySources = is_array($queryItem['fontes'] ?? null) ? $queryItem['fontes'] : [];
+                                        $queryLinks = [];
+                                        foreach (array_slice($querySources, 0, 3) as $sourceRef) {
+                                            if (!is_array($sourceRef)) {
+                                                continue;
+                                            }
+                                            $sourceUrl = (string) ($sourceRef['url'] ?? '');
+                                            $sourceName = (string) ($sourceRef['fonte'] ?? '-');
+                                            if ($sourceUrl !== '') {
+                                                $queryLinks[] = '<a href="' . htmlspecialchars($sourceUrl) . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($sourceName) . '</a>';
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($queryItem['rotulo'] ?? $queryItem['componente'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars(humanizePericialLabel($queryItem['status'] ?? 'indefinido')); ?> (<?php echo number_format((float) ($queryItem['confianca'] ?? 0), 1, ',', '.'); ?>%)</td>
-                                        <td><?php echo htmlspecialchars((string) ($queryItem['consulta'] ?? '-')); ?></td>
-                                        <td><?php echo $queryLinks ? implode(' | ', $queryLinks) : '-'; ?></td>
-                                    </tr>
-                                <?php } ?>
+                                        ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($queryItem['rotulo'] ?? $queryItem['componente'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars(humanizePericialLabel($queryItem['status'] ?? 'indefinido')); ?> (<?php echo number_format((float) ($queryItem['confianca'] ?? 0), 1, ',', '.'); ?>%)</td>
+                                            <td><?php echo htmlspecialchars((string) ($queryItem['consulta'] ?? '-')); ?></td>
+                                            <td><?php echo $queryLinks ? implode(' | ', $queryLinks) : '-'; ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3457,29 +3481,31 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($visualFeatureQueries, 0, 8) as $featureItem) { ?>
-                                    <?php
-                                    if (!is_array($featureItem)) { continue; }
-                                    $featureSources = is_array($featureItem['fontes'] ?? null) ? $featureItem['fontes'] : [];
-                                    $featureLinks = [];
-                                    foreach (array_slice($featureSources, 0, 3) as $sourceRef) {
-                                        if (!is_array($sourceRef)) {
+                                    <?php foreach (array_slice($visualFeatureQueries, 0, 8) as $featureItem) { ?>
+                                        <?php
+                                        if (!is_array($featureItem)) {
                                             continue;
                                         }
-                                        $sourceUrl = (string) ($sourceRef['url'] ?? '');
-                                        $sourceName = (string) ($sourceRef['fonte'] ?? '-');
-                                        if ($sourceUrl !== '') {
-                                            $featureLinks[] = '<a href="' . htmlspecialchars($sourceUrl) . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($sourceName) . '</a>';
+                                        $featureSources = is_array($featureItem['fontes'] ?? null) ? $featureItem['fontes'] : [];
+                                        $featureLinks = [];
+                                        foreach (array_slice($featureSources, 0, 3) as $sourceRef) {
+                                            if (!is_array($sourceRef)) {
+                                                continue;
+                                            }
+                                            $sourceUrl = (string) ($sourceRef['url'] ?? '');
+                                            $sourceName = (string) ($sourceRef['fonte'] ?? '-');
+                                            if ($sourceUrl !== '') {
+                                                $featureLinks[] = '<a href="' . htmlspecialchars($sourceUrl) . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($sourceName) . '</a>';
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($featureItem['descricao'] ?? $featureItem['caracteristica'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($featureItem['localizacao'] ?? 'indefinida')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($featureItem['consulta'] ?? '-')); ?></td>
-                                        <td><?php echo $featureLinks ? implode(' | ', $featureLinks) : '-'; ?></td>
-                                    </tr>
-                                <?php } ?>
+                                        ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($featureItem['descricao'] ?? $featureItem['caracteristica'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($featureItem['localizacao'] ?? 'indefinida')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($featureItem['consulta'] ?? '-')); ?></td>
+                                            <td><?php echo $featureLinks ? implode(' | ', $featureLinks) : '-'; ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3487,15 +3513,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     <?php if ($visualComparisonSources) { ?>
                         <p class="muted" style="margin-top:10px;">
                             Famílias consultadas: <?php
-                            $familyLines = [];
-                            foreach ($visualComparisonFamilies as $familyName => $familyCount) {
-                                if (!is_scalar($familyName)) {
-                                    continue;
-                                }
-                                $familyLines[] = (string) $familyName . '=' . (int) $familyCount;
-                            }
-                            echo htmlspecialchars($familyLines ? implode(' | ', $familyLines) : '-');
-                            ?>
+                                                    $familyLines = [];
+                                                    foreach ($visualComparisonFamilies as $familyName => $familyCount) {
+                                                        if (!is_scalar($familyName)) {
+                                                            continue;
+                                                        }
+                                                        $familyLines[] = (string) $familyName . '=' . (int) $familyCount;
+                                                    }
+                                                    echo htmlspecialchars($familyLines ? implode(' | ', $familyLines) : '-');
+                                                    ?>
                         </p>
                         <div class="table-wrap" style="margin-top:12px;">
                             <table>
@@ -3507,21 +3533,23 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($visualComparisonSources, 0, 12) as $sourceItem) { ?>
-                                    <?php if (!is_array($sourceItem)) { continue; } ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($sourceItem['fonte'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($sourceItem['objetivo'] ?? '-')); ?></td>
-                                        <td>
-                                            <?php $srcUrl = (string) ($sourceItem['url'] ?? ''); ?>
-                                            <?php if ($srcUrl !== '') { ?>
-                                                <a href="<?php echo htmlspecialchars($srcUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($srcUrl); ?></a>
-                                            <?php } else { ?>
-                                                -
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                    <?php foreach (array_slice($visualComparisonSources, 0, 12) as $sourceItem) { ?>
+                                        <?php if (!is_array($sourceItem)) {
+                                            continue;
+                                        } ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($sourceItem['fonte'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($sourceItem['objetivo'] ?? '-')); ?></td>
+                                            <td>
+                                                <?php $srcUrl = (string) ($sourceItem['url'] ?? ''); ?>
+                                                <?php if ($srcUrl !== '') { ?>
+                                                    <a href="<?php echo htmlspecialchars($srcUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($srcUrl); ?></a>
+                                                <?php } else { ?>
+                                                    -
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3538,22 +3566,24 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($visualReferenceSystems, 0, 8) as $refSystem) { ?>
-                                    <?php if (!is_array($refSystem)) { continue; } ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($refSystem['sistema'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($refSystem['categoria'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($refSystem['integracao_local'] ?? '-')); ?></td>
-                                        <td>
-                                            <?php $refUrl = (string) ($refSystem['url'] ?? ''); ?>
-                                            <?php if ($refUrl !== '') { ?>
-                                                <a href="<?php echo htmlspecialchars($refUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($refUrl); ?></a>
-                                            <?php } else { ?>
-                                                -
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                    <?php foreach (array_slice($visualReferenceSystems, 0, 8) as $refSystem) { ?>
+                                        <?php if (!is_array($refSystem)) {
+                                            continue;
+                                        } ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($refSystem['sistema'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($refSystem['categoria'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($refSystem['integracao_local'] ?? '-')); ?></td>
+                                            <td>
+                                                <?php $refUrl = (string) ($refSystem['url'] ?? ''); ?>
+                                                <?php if ($refUrl !== '') { ?>
+                                                    <a href="<?php echo htmlspecialchars($refUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($refUrl); ?></a>
+                                                <?php } else { ?>
+                                                    -
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3611,38 +3641,40 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($externalSystemsRuns as $systemRun) { ?>
-                                    <?php
-                                    if (!is_array($systemRun)) { continue; }
-                                    $vehicleRun = is_array($systemRun['vehicle'] ?? null) ? $systemRun['vehicle'] : [];
-                                    $makeRun = trim((string) ($vehicleRun['fabricante'] ?? ''));
-                                    $modelRun = trim((string) ($vehicleRun['modelo'] ?? ''));
-                                    $vehicleLabel = trim($makeRun . ' ' . $modelRun);
-                                    if ($vehicleLabel === '') {
-                                        $vehicleLabel = '-';
-                                    }
-                                    $plateMatchValue = $systemRun['matches_internal_plate'] ?? null;
-                                    $vehicleMatchValue = $systemRun['matches_internal_vehicle'] ?? null;
-                                    $plateMatchText = $plateMatchValue === true ? 'Sim' : ($plateMatchValue === false ? 'Não' : 'N/A');
-                                    $vehicleMatchText = $vehicleMatchValue === true ? 'Sim' : ($vehicleMatchValue === false ? 'Não' : 'N/A');
-                                    ?>
-                                    <tr>
-                                        <td>
-                                        <?php echo htmlspecialchars((string) ($systemRun['nome'] ?? $systemRun['id'] ?? 'sistema_externo')); ?>
-                                            <?php if (!empty($systemRun['source_url'])) { ?>
-                                                <div class="muted">
-                                                    <a href="<?php echo htmlspecialchars((string) $systemRun['source_url']); ?>" target="_blank" rel="noopener noreferrer">fonte</a>
-                                                </div>
-                                            <?php } ?>
-                                        </td>
-                                        <td><?php echo htmlspecialchars(humanizePericialLabel($systemRun['status'] ?? 'indefinido')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($systemRun['plate'] ?? '-')); ?></td>
-                                        <td><?php echo number_format((float) ($systemRun['plate_confidence'] ?? 0), 1, ',', '.'); ?>%</td>
-                                        <td><?php echo htmlspecialchars($plateMatchText); ?></td>
-                                        <td><?php echo htmlspecialchars($vehicleMatchText); ?></td>
-                                        <td><?php echo htmlspecialchars($vehicleLabel); ?></td>
-                                    </tr>
-                                <?php } ?>
+                                    <?php foreach ($externalSystemsRuns as $systemRun) { ?>
+                                        <?php
+                                        if (!is_array($systemRun)) {
+                                            continue;
+                                        }
+                                        $vehicleRun = is_array($systemRun['vehicle'] ?? null) ? $systemRun['vehicle'] : [];
+                                        $makeRun = trim((string) ($vehicleRun['fabricante'] ?? ''));
+                                        $modelRun = trim((string) ($vehicleRun['modelo'] ?? ''));
+                                        $vehicleLabel = trim($makeRun . ' ' . $modelRun);
+                                        if ($vehicleLabel === '') {
+                                            $vehicleLabel = '-';
+                                        }
+                                        $plateMatchValue = $systemRun['matches_internal_plate'] ?? null;
+                                        $vehicleMatchValue = $systemRun['matches_internal_vehicle'] ?? null;
+                                        $plateMatchText = $plateMatchValue === true ? 'Sim' : ($plateMatchValue === false ? 'Não' : 'N/A');
+                                        $vehicleMatchText = $vehicleMatchValue === true ? 'Sim' : ($vehicleMatchValue === false ? 'Não' : 'N/A');
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo htmlspecialchars((string) ($systemRun['nome'] ?? $systemRun['id'] ?? 'sistema_externo')); ?>
+                                                <?php if (!empty($systemRun['source_url'])) { ?>
+                                                    <div class="muted">
+                                                        <a href="<?php echo htmlspecialchars((string) $systemRun['source_url']); ?>" target="_blank" rel="noopener noreferrer">fonte</a>
+                                                    </div>
+                                                <?php } ?>
+                                            </td>
+                                            <td><?php echo htmlspecialchars(humanizePericialLabel($systemRun['status'] ?? 'indefinido')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($systemRun['plate'] ?? '-')); ?></td>
+                                            <td><?php echo number_format((float) ($systemRun['plate_confidence'] ?? 0), 1, ',', '.'); ?>%</td>
+                                            <td><?php echo htmlspecialchars($plateMatchText); ?></td>
+                                            <td><?php echo htmlspecialchars($vehicleMatchText); ?></td>
+                                            <td><?php echo htmlspecialchars($vehicleLabel); ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3660,22 +3692,24 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach (array_slice($externalSystemsCatalog, 0, 8) as $catalogItem) { ?>
-                                    <?php if (!is_array($catalogItem)) { continue; } ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars((string) ($catalogItem['nome'] ?? $catalogItem['id'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($catalogItem['categoria'] ?? '-')); ?></td>
-                                        <td><?php echo htmlspecialchars((string) ($catalogItem['integracao_local'] ?? '-')); ?></td>
-                                        <td>
-                                            <?php $catalogUrl = (string) ($catalogItem['source_url'] ?? ''); ?>
-                                            <?php if ($catalogUrl !== '') { ?>
-                                                <a href="<?php echo htmlspecialchars($catalogUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($catalogUrl); ?></a>
-                                            <?php } else { ?>
-                                                -
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                    <?php foreach (array_slice($externalSystemsCatalog, 0, 8) as $catalogItem) { ?>
+                                        <?php if (!is_array($catalogItem)) {
+                                            continue;
+                                        } ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars((string) ($catalogItem['nome'] ?? $catalogItem['id'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($catalogItem['categoria'] ?? '-')); ?></td>
+                                            <td><?php echo htmlspecialchars((string) ($catalogItem['integracao_local'] ?? '-')); ?></td>
+                                            <td>
+                                                <?php $catalogUrl = (string) ($catalogItem['source_url'] ?? ''); ?>
+                                                <?php if ($catalogUrl !== '') { ?>
+                                                    <a href="<?php echo htmlspecialchars($catalogUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($catalogUrl); ?></a>
+                                                <?php } else { ?>
+                                                    -
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -3699,16 +3733,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($topCandidates as $candidate) { ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars((string) ($candidate['text'] ?? '-')); ?></td>
-                                    <td><?php echo number_format((float) ($candidate['score'] ?? 0), 1, ',', '.'); ?></td>
-                                    <td><?php echo number_format((float) ($candidate['avg_conf'] ?? 0), 1, ',', '.'); ?>%</td>
-                                    <td><?php echo htmlspecialchars((string) ($candidate['pattern'] ?? 'Indefinido')); ?></td>
-                                    <td><?php echo htmlspecialchars((string) ($candidate['region'] ?? '-')); ?></td>
-                                    <td><?php echo htmlspecialchars((string) ($candidate['engine'] ?? '-')); ?></td>
-                                </tr>
-                            <?php } ?>
+                                <?php foreach ($topCandidates as $candidate) { ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars((string) ($candidate['text'] ?? '-')); ?></td>
+                                        <td><?php echo number_format((float) ($candidate['score'] ?? 0), 1, ',', '.'); ?></td>
+                                        <td><?php echo number_format((float) ($candidate['avg_conf'] ?? 0), 1, ',', '.'); ?>%</td>
+                                        <td><?php echo htmlspecialchars((string) ($candidate['pattern'] ?? 'Indefinido')); ?></td>
+                                        <td><?php echo htmlspecialchars((string) ($candidate['region'] ?? '-')); ?></td>
+                                        <td><?php echo htmlspecialchars((string) ($candidate['engine'] ?? '-')); ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -3732,28 +3766,28 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-                            $engineNames = array_values(array_unique(array_merge(array_keys($ocrEngines), array_keys($ocrEngineStatus))));
-                            foreach ($engineNames as $engine) {
-                                $ocr = is_array($ocrEngines[$engine] ?? null) ? $ocrEngines[$engine] : [];
-                                $engineMeta = is_array($ocrEngineStatus[$engine] ?? null) ? $ocrEngineStatus[$engine] : [];
-                                $engineText = (string) ($ocr['text'] ?? '');
-                                $engineConf = (float) ($ocr['avg_conf'] ?? 0);
-                                $engineScore = (float) ($ocr['score'] ?? $engineConf);
-                                $enginePattern = (string) ($ocr['pattern'] ?? 'Indefinido');
-                                $engineState = humanizeEngineHealthLabel($engineMeta['status'] ?? ($engineText !== '' ? 'executed' : 'indefinido'));
-                                $engineReason = (string) ($engineMeta['reason'] ?? '-');
-                            ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars((string) $engine); ?></td>
-                                    <td><?php echo htmlspecialchars($engineState); ?></td>
-                                    <td><?php echo htmlspecialchars($engineReason); ?></td>
-                                    <td><?php echo htmlspecialchars((string) $engineText); ?></td>
-                                    <td><?php echo number_format($engineConf, 1, ',', '.'); ?>%</td>
-                                    <td><?php echo number_format($engineScore, 1, ',', '.'); ?></td>
-                                    <td><?php echo htmlspecialchars($enginePattern); ?></td>
-                                </tr>
-                            <?php } ?>
+                                <?php
+                                $engineNames = array_values(array_unique(array_merge(array_keys($ocrEngines), array_keys($ocrEngineStatus))));
+                                foreach ($engineNames as $engine) {
+                                    $ocr = is_array($ocrEngines[$engine] ?? null) ? $ocrEngines[$engine] : [];
+                                    $engineMeta = is_array($ocrEngineStatus[$engine] ?? null) ? $ocrEngineStatus[$engine] : [];
+                                    $engineText = (string) ($ocr['text'] ?? '');
+                                    $engineConf = (float) ($ocr['avg_conf'] ?? 0);
+                                    $engineScore = (float) ($ocr['score'] ?? $engineConf);
+                                    $enginePattern = (string) ($ocr['pattern'] ?? 'Indefinido');
+                                    $engineState = humanizeEngineHealthLabel($engineMeta['status'] ?? ($engineText !== '' ? 'executed' : 'indefinido'));
+                                    $engineReason = (string) ($engineMeta['reason'] ?? '-');
+                                ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars((string) $engine); ?></td>
+                                        <td><?php echo htmlspecialchars($engineState); ?></td>
+                                        <td><?php echo htmlspecialchars($engineReason); ?></td>
+                                        <td><?php echo htmlspecialchars((string) $engineText); ?></td>
+                                        <td><?php echo number_format($engineConf, 1, ',', '.'); ?>%</td>
+                                        <td><?php echo number_format($engineScore, 1, ',', '.'); ?></td>
+                                        <td><?php echo htmlspecialchars($enginePattern); ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -3772,12 +3806,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($charOptions as $option) { ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars((string) ($option[0] ?? '-')); ?></td>
-                                    <td><?php echo number_format((float) ($option[1] ?? 0), 1, ',', '.'); ?>%</td>
-                                </tr>
-                            <?php } ?>
+                                <?php foreach ($charOptions as $option) { ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars((string) ($option[0] ?? '-')); ?></td>
+                                        <td><?php echo number_format((float) ($option[1] ?? 0), 1, ',', '.'); ?>%</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -3818,8 +3852,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                             data-usezapay-panel="1"
                             data-usezapay-request-id="<?php echo htmlspecialchars($zapayLookupRequestId); ?>"
                             data-usezapay-plate="<?php echo htmlspecialchars($zapayLookupPlate); ?>"
-                            data-usezapay-status="<?php echo htmlspecialchars($zapayLookupStatus); ?>"
-                        >
+                            data-usezapay-status="<?php echo htmlspecialchars($zapayLookupStatus); ?>">
                             <div class="analysis-status-header">
                                 <div>
                                     <p class="muted" style="margin:0;">Monitoramento Zapay</p>
@@ -3863,65 +3896,65 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     <div class="table-wrap">
                         <table>
                             <tbody>
-                            <?php
-                            $vehicleDisplayOrder = [
-                                'placa' => 'Placa',
-                                'fabricante' => 'Fabricante',
-                                'marca_modelo' => 'Marca/Modelo bruto',
-                                'modelo' => 'Modelo',
-                                'ano' => 'Ano',
-                                'cor' => 'Cor',
-                                'categoria' => 'Categoria',
-                                'uf' => 'UF',
-                                'cidade' => 'Cidade',
-                                'municipio' => 'Municipio',
-                                'chassi' => 'Chassi',
-                                'renavam' => 'Renavam',
-                                'restricoes' => 'Restricoes',
-                                'estampador' => 'Estampador',
-                                'fipe_preco_medio' => 'FIPE preco medio',
-                                'fipe_codigo' => 'FIPE codigo',
-                                'fipe_ano_modelo' => 'FIPE ano/modelo',
-                                'fonte' => 'Fonte',
-                                'fonte_complementar' => 'Fonte complementar',
-                                'fontes_utilizadas' => 'Fontes utilizadas',
-                                'consulta_status' => 'Consulta status',
-                                'consulta_evento' => 'Consulta evento',
-                                'consulta_request_id' => 'Consulta request id',
-                                'consulta_detalhe' => 'Consulta detalhe',
-                                'consulta_multifonte_status' => 'Consulta multicamada',
-                                'consulta_multifonte_candidatos' => 'Fontes consultadas',
-                                'consulta_multifonte_confianca' => 'Confiança da consulta',
-                                'consulta_multifonte_taxa_consenso' => 'Taxa de consenso',
-                                'consulta_multifonte_score' => 'Score da melhor fonte',
-                                'consulta_multifonte_limite' => 'Limite de fontes',
-                                'consulta_multifonte_limite_aplicado' => 'Limite aplicado',
-                                'consulta_multifonte_fontes' => 'Fontes consolidadas',
-                                'consulta_multifonte_oficiais' => 'Fontes oficiais',
-                                'consulta_multifonte_consenso' => 'Campos em consenso',
-                                'consulta_multifonte_divergencias' => 'Divergencias',
-                                'consulta_multifonte_resumo' => 'Resumo da consulta',
-                                'consulta_multifonte_fonte_principal' => 'Fonte principal',
-                                'consulta_multifonte_fonte_tipo' => 'Tipo da fonte',
-                                'consulta_multifonte_alertas' => 'Alertas da consulta',
-                            ];
-                            foreach ($vehicleDisplayOrder as $fieldKey => $fieldLabel) {
-                                if (!array_key_exists($fieldKey, $veiculoExibicao)) {
-                                    continue;
-                                }
-                                $fieldValue = $veiculoExibicao[$fieldKey];
-                                if (is_array($fieldValue)) {
-                                    $fieldValue = json_encode($fieldValue, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-                                }
-                                if (trim((string) $fieldValue) === '') {
-                                    continue;
-                                }
+                                <?php
+                                $vehicleDisplayOrder = [
+                                    'placa' => 'Placa',
+                                    'fabricante' => 'Fabricante',
+                                    'marca_modelo' => 'Marca/Modelo bruto',
+                                    'modelo' => 'Modelo',
+                                    'ano' => 'Ano',
+                                    'cor' => 'Cor',
+                                    'categoria' => 'Categoria',
+                                    'uf' => 'UF',
+                                    'cidade' => 'Cidade',
+                                    'municipio' => 'Municipio',
+                                    'chassi' => 'Chassi',
+                                    'renavam' => 'Renavam',
+                                    'restricoes' => 'Restricoes',
+                                    'estampador' => 'Estampador',
+                                    'fipe_preco_medio' => 'FIPE preco medio',
+                                    'fipe_codigo' => 'FIPE codigo',
+                                    'fipe_ano_modelo' => 'FIPE ano/modelo',
+                                    'fonte' => 'Fonte',
+                                    'fonte_complementar' => 'Fonte complementar',
+                                    'fontes_utilizadas' => 'Fontes utilizadas',
+                                    'consulta_status' => 'Consulta status',
+                                    'consulta_evento' => 'Consulta evento',
+                                    'consulta_request_id' => 'Consulta request id',
+                                    'consulta_detalhe' => 'Consulta detalhe',
+                                    'consulta_multifonte_status' => 'Consulta multicamada',
+                                    'consulta_multifonte_candidatos' => 'Fontes consultadas',
+                                    'consulta_multifonte_confianca' => 'Confiança da consulta',
+                                    'consulta_multifonte_taxa_consenso' => 'Taxa de consenso',
+                                    'consulta_multifonte_score' => 'Score da melhor fonte',
+                                    'consulta_multifonte_limite' => 'Limite de fontes',
+                                    'consulta_multifonte_limite_aplicado' => 'Limite aplicado',
+                                    'consulta_multifonte_fontes' => 'Fontes consolidadas',
+                                    'consulta_multifonte_oficiais' => 'Fontes oficiais',
+                                    'consulta_multifonte_consenso' => 'Campos em consenso',
+                                    'consulta_multifonte_divergencias' => 'Divergencias',
+                                    'consulta_multifonte_resumo' => 'Resumo da consulta',
+                                    'consulta_multifonte_fonte_principal' => 'Fonte principal',
+                                    'consulta_multifonte_fonte_tipo' => 'Tipo da fonte',
+                                    'consulta_multifonte_alertas' => 'Alertas da consulta',
+                                ];
+                                foreach ($vehicleDisplayOrder as $fieldKey => $fieldLabel) {
+                                    if (!array_key_exists($fieldKey, $veiculoExibicao)) {
+                                        continue;
+                                    }
+                                    $fieldValue = $veiculoExibicao[$fieldKey];
+                                    if (is_array($fieldValue)) {
+                                        $fieldValue = json_encode($fieldValue, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                                    }
+                                    if (trim((string) $fieldValue) === '') {
+                                        continue;
+                                    }
                                 ?>
-                                <tr>
-                                    <th><?php echo htmlspecialchars(accentuatePortugueseText((string) $fieldLabel)); ?></th>
-                                    <td><?php echo htmlspecialchars((string) $fieldValue); ?></td>
-                                </tr>
-                            <?php } ?>
+                                    <tr>
+                                        <th><?php echo htmlspecialchars(accentuatePortugueseText((string) $fieldLabel)); ?></th>
+                                        <td><?php echo htmlspecialchars((string) $fieldValue); ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -3996,447 +4029,462 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         </div>
     </section>
     <script>
-    (function () {
-        const form = document.getElementById('ocrUploadForm');
-        const overlay = document.getElementById('analysisProgressOverlay');
-        const progressBar = document.getElementById('analysisProgressBar');
-        const progressValue = document.getElementById('analysisProgressValue');
-        const stageText = document.getElementById('analysisProgressStage');
-        const submitButton = document.getElementById('ocrSubmitButton');
-        const canvas = document.getElementById('analysisProgressChart');
+        (function() {
+            const form = document.getElementById('ocrUploadForm');
+            const overlay = document.getElementById('analysisProgressOverlay');
+            const progressBar = document.getElementById('analysisProgressBar');
+            const progressValue = document.getElementById('analysisProgressValue');
+            const stageText = document.getElementById('analysisProgressStage');
+            const submitButton = document.getElementById('ocrSubmitButton');
+            const canvas = document.getElementById('analysisProgressChart');
 
-        if (!form || !overlay || !progressBar || !progressValue || !stageText || !canvas) {
-            return;
-        }
-
-        const context = canvas.getContext('2d');
-        let timerId = null;
-        let progress = 0;
-        let series = [];
-        let analysisStartAt = 0;
-
-        function setupCanvas() {
-            const dpr = window.devicePixelRatio || 1;
-            const width = canvas.clientWidth || 680;
-            const height = canvas.clientHeight || 220;
-            canvas.width = Math.floor(width * dpr);
-            canvas.height = Math.floor(height * dpr);
-            context.setTransform(dpr, 0, 0, dpr, 0, 0);
-            return { width, height };
-        }
-
-        function drawChart() {
-            const chart = setupCanvas();
-            const width = chart.width;
-            const height = chart.height;
-            context.clearRect(0, 0, width, height);
-
-            context.fillStyle = '#f7fbff';
-            context.fillRect(0, 0, width, height);
-
-            context.strokeStyle = 'rgba(52, 94, 138, 0.18)';
-            context.lineWidth = 1;
-            for (let index = 1; index <= 4; index += 1) {
-                const y = (height / 5) * index;
-                context.beginPath();
-                context.moveTo(0, y);
-                context.lineTo(width, y);
-                context.stroke();
-            }
-
-            if (series.length < 2) {
+            if (!form || !overlay || !progressBar || !progressValue || !stageText || !canvas) {
                 return;
             }
 
-            const stepX = width / Math.max(1, series.length - 1);
-            context.beginPath();
-            series.forEach(function (point, index) {
-                const x = stepX * index;
-                const y = height - ((point / 100) * (height - 30)) - 15;
-                if (index === 0) {
-                    context.moveTo(x, y);
-                } else {
-                    context.lineTo(x, y);
+            const context = canvas.getContext('2d');
+            let timerId = null;
+            let progress = 0;
+            let series = [];
+            let analysisStartAt = 0;
+
+            function setupCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                const width = canvas.clientWidth || 680;
+                const height = canvas.clientHeight || 220;
+                canvas.width = Math.floor(width * dpr);
+                canvas.height = Math.floor(height * dpr);
+                context.setTransform(dpr, 0, 0, dpr, 0, 0);
+                return {
+                    width,
+                    height
+                };
+            }
+
+            function drawChart() {
+                const chart = setupCanvas();
+                const width = chart.width;
+                const height = chart.height;
+                context.clearRect(0, 0, width, height);
+
+                context.fillStyle = '#f7fbff';
+                context.fillRect(0, 0, width, height);
+
+                context.strokeStyle = 'rgba(52, 94, 138, 0.18)';
+                context.lineWidth = 1;
+                for (let index = 1; index <= 4; index += 1) {
+                    const y = (height / 5) * index;
+                    context.beginPath();
+                    context.moveTo(0, y);
+                    context.lineTo(width, y);
+                    context.stroke();
                 }
-            });
 
-            context.lineWidth = 2.4;
-            context.strokeStyle = '#0b5fae';
-            context.stroke();
+                if (series.length < 2) {
+                    return;
+                }
 
-            context.lineTo(width, height - 10);
-            context.lineTo(0, height - 10);
-            context.closePath();
-            const gradient = context.createLinearGradient(0, 0, 0, height);
-            gradient.addColorStop(0, 'rgba(11, 95, 174, 0.34)');
-            gradient.addColorStop(1, 'rgba(11, 95, 174, 0.03)');
-            context.fillStyle = gradient;
-            context.fill();
-        }
+                const stepX = width / Math.max(1, series.length - 1);
+                context.beginPath();
+                series.forEach(function(point, index) {
+                    const x = stepX * index;
+                    const y = height - ((point / 100) * (height - 30)) - 15;
+                    if (index === 0) {
+                        context.moveTo(x, y);
+                    } else {
+                        context.lineTo(x, y);
+                    }
+                });
 
-        function stageByProgress(value, elapsedMs) {
-            if (elapsedMs >= 120000) {
-                return 'Consolidacao final no servidor...';
-            }
-            if (value >= 99) {
-                return 'Consolidando resposta final no servidor...';
-            }
-            if (value >= 96) {
-                return 'Análise quase concluída. Consolidando a resposta final...';
-            }
-            if (elapsedMs >= 60000 && value >= 85) {
-                return 'Análise avançada em andamento no servidor. Mantenha esta aba aberta...';
-            }
-            if (value < 18) {
-                return 'Recebendo arquivo e validando formato...';
-            }
-            if (value < 45) {
-                return 'Aplicando melhorias de contraste, brilho e nitidez...';
-            }
-            if (value < 72) {
-                return 'Executando motores OCR e cruzando candidatos...';
-            }
-            if (value < 92) {
-                return 'Consolidando melhor leitura e dados complementares...';
-            }
-            return 'Finalizando resposta e preparando tela de resultado...';
-        }
+                context.lineWidth = 2.4;
+                context.strokeStyle = '#0b5fae';
+                context.stroke();
 
-        function updateProgressVisual(value) {
-            const elapsedMs = analysisStartAt ? (performance.now() - analysisStartAt) : 0;
-            const rounded = Math.max(1, Math.min(99.9, Math.round(value * 10) / 10));
-            progressBar.style.width = rounded + '%';
-            progressValue.textContent = String(rounded);
-            stageText.textContent = stageByProgress(rounded, elapsedMs);
-            series.push(Math.max(1, Math.min(99, rounded + ((Math.random() * 6) - 2))));
-            if (series.length > 56) {
-                series.shift();
+                context.lineTo(width, height - 10);
+                context.lineTo(0, height - 10);
+                context.closePath();
+                const gradient = context.createLinearGradient(0, 0, 0, height);
+                gradient.addColorStop(0, 'rgba(11, 95, 174, 0.34)');
+                gradient.addColorStop(1, 'rgba(11, 95, 174, 0.03)');
+                context.fillStyle = gradient;
+                context.fill();
             }
-            drawChart();
-        }
 
-        function nextIncrement(current) {
-            if (current < 22) {
-                return 1.9 + (Math.random() * 1.7);
+            function stageByProgress(value, elapsedMs) {
+                if (elapsedMs >= 120000) {
+                    return 'Consolidacao final no servidor...';
+                }
+                if (value >= 99) {
+                    return 'Consolidando resposta final no servidor...';
+                }
+                if (value >= 96) {
+                    return 'Análise quase concluída. Consolidando a resposta final...';
+                }
+                if (elapsedMs >= 60000 && value >= 85) {
+                    return 'Análise avançada em andamento no servidor. Mantenha esta aba aberta...';
+                }
+                if (value < 18) {
+                    return 'Recebendo arquivo e validando formato...';
+                }
+                if (value < 45) {
+                    return 'Aplicando melhorias de contraste, brilho e nitidez...';
+                }
+                if (value < 72) {
+                    return 'Executando motores OCR e cruzando candidatos...';
+                }
+                if (value < 92) {
+                    return 'Consolidando melhor leitura e dados complementares...';
+                }
+                return 'Finalizando resposta e preparando tela de resultado...';
             }
-            if (current < 58) {
-                return 0.9 + (Math.random() * 1.1);
-            }
-            if (current < 84) {
-                return 0.38 + (Math.random() * 0.6);
-            }
-            if (current < 94) {
-                return 0.18 + (Math.random() * 0.25);
-            }
-            if (current < 98.5) {
-                return 0.04 + (Math.random() * 0.08);
-            }
-            return 0.008 + (Math.random() * 0.018);
-        }
 
-        function beginProgress() {
-            if (timerId) {
-                return;
-            }
-            analysisStartAt = performance.now();
-            progress = 2;
-            series = Array.from({ length: 38 }, function (_, index) {
-                return Math.min(42, Math.max(2, (index * 1.05) + (Math.random() * 2.8)));
-            });
-            overlay.classList.add('is-active');
-            overlay.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('is-busy');
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.setAttribute('aria-disabled', 'true');
-            }
-            updateProgressVisual(progress);
-            timerId = window.setInterval(function () {
-                progress = Math.min(99.9, progress + nextIncrement(progress));
-                updateProgressVisual(progress);
-            }, 420);
-        }
-
-        function resetProgress() {
-            if (timerId) {
-                window.clearInterval(timerId);
-                timerId = null;
-            }
-            overlay.classList.remove('is-active');
-            overlay.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('is-busy');
-            analysisStartAt = 0;
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.removeAttribute('aria-disabled');
-            }
-        }
-
-        form.addEventListener('submit', beginProgress);
-        window.addEventListener('pageshow', resetProgress);
-        window.addEventListener('resize', function () {
-            if (overlay.classList.contains('is-active')) {
+            function updateProgressVisual(value) {
+                const elapsedMs = analysisStartAt ? (performance.now() - analysisStartAt) : 0;
+                const rounded = Math.max(1, Math.min(99.9, Math.round(value * 10) / 10));
+                progressBar.style.width = rounded + '%';
+                progressValue.textContent = String(rounded);
+                stageText.textContent = stageByProgress(rounded, elapsedMs);
+                series.push(Math.max(1, Math.min(99, rounded + ((Math.random() * 6) - 2))));
+                if (series.length > 56) {
+                    series.shift();
+                }
                 drawChart();
             }
-        });
-    }());
-    </script>
-    <script>
-    (function () {
-        const panel = document.getElementById('zapayStatusPanel');
-        if (!panel) {
-            return;
-        }
 
-        const chip = document.getElementById('zapayStatusChip');
-        const topbarChip = document.getElementById('analysisTopStatusChip');
-        const refreshBtn = document.getElementById('zapayRefreshBtn');
-        const plateField = document.getElementById('zapayStatusPlate');
-        const requestIdField = document.getElementById('zapayStatusRequestId');
-        const eventField = document.getElementById('zapayStatusEvent');
-        const detailField = document.getElementById('zapayStatusDetail');
-        const summaryField = document.getElementById('zapayStatusSummary');
-        const historyField = document.getElementById('zapayStatusHistoryCount');
-        const updatedField = document.getElementById('zapayStatusUpdatedAt');
-        const topbarText = document.getElementById('analysisTopStatusText');
-
-        const requestId = panel.dataset.usezapayRequestId || '';
-        const plate = panel.dataset.usezapayPlate || '';
-        let currentStatus = (panel.dataset.usezapayStatus || '').toLowerCase();
-        let pollTimer = null;
-        let abortController = null;
-
-        function setText(element, value) {
-            if (!element) {
-                return;
-            }
-            element.textContent = value && String(value).trim() !== '' ? String(value) : '-';
-        }
-
-        function statusMeta(status) {
-            const normalized = String(status || '').toLowerCase();
-            switch (normalized) {
-                case 'pending_async':
-                case 'pendente_webhook':
-                case 'aguardando_webhook':
-                    return { label: 'Pendente', className: 'status-chip--pending', final: false };
-                case 'resultado_cache':
-                case 'cache_hit':
-                case 'ok':
-                case 'vehicle_debt_found':
-                case 'concluido':
-                    return { label: 'Concluido', className: 'status-chip--ok', final: true };
-                case 'sem_retorno':
-                case 'nao_disponivel':
-                case 'not_found':
-                case 'vehicle_not_found':
-                case 'vehicle_debt_not_found':
-                    return { label: 'Sem retorno', className: 'status-chip--warning', final: true };
-                case 'erro':
-                case 'error':
-                case 'vehicle_debt_search_error':
-                    return { label: 'Erro', className: 'status-chip--error', final: true };
-                default:
-                    return {
-                        label: normalized ? normalized.replace(/_/g, ' ') : 'Indefinido',
-                        className: 'status-chip--neutral',
-                        final: false,
-                    };
-            }
-        }
-
-        function renderStatus(payload) {
-            const latest = (payload && typeof payload.latest === 'object' && payload.latest) ? payload.latest : {};
-            const summary = (payload && typeof payload.summary === 'object' && payload.summary) ? payload.summary : {};
-            const status = String(latest.status || latest.event || payload.status || currentStatus || '').toLowerCase();
-            const meta = statusMeta(status);
-
-            currentStatus = status;
-            if (chip) {
-                chip.className = 'status-chip ' + meta.className;
-                chip.textContent = meta.label;
-            }
-            if (topbarChip) {
-                topbarChip.className = 'status-chip ' + meta.className + ' status-chip--compact';
-                topbarChip.textContent = meta.label;
-            }
-
-            setText(plateField, payload.plate || latest.plate || plate);
-            setText(requestIdField, payload.request_id || latest.request_id || requestId);
-            setText(eventField, latest.event || payload.event || '');
-            setText(detailField, latest.detail || '');
-
-            const latestDebts = (latest && typeof latest.debts === 'object' && latest.debts) ? latest.debts : {};
-            const summaryText = latest.status === 'pending_async'
-                ? 'Consulta pendente de webhook.'
-                : (summary.summary_text || latestDebts.summary || latest.detail || '');
-            setText(summaryField, summaryText || summary.status || '');
-
-            const historyCount = typeof summary.history_count === 'number'
-                ? summary.history_count
-                : (summary.history_count ? Number(summary.history_count) : 0);
-            setText(historyField, historyCount ? (historyCount + ' eventos') : (latest.event ? '1 evento' : '0 eventos'));
-
-            const updatedAt = latest.received_at_utc || summary.updated_at_utc || '';
-            setText(updatedField, updatedAt ? ('Atualizado em UTC ' + updatedAt) : 'Atualizacao: aguardando sincronizacao do cache local.');
-
-            if (topbarText) {
-                const topbarParts = [];
-                const topbarPlate = String(payload.plate || latest.plate || plate || '').trim();
-                const topbarRequestId = String(payload.request_id || latest.request_id || requestId || '').trim();
-                if (topbarPlate) {
-                    topbarParts.push('Placa ' + topbarPlate);
+            function nextIncrement(current) {
+                if (current < 22) {
+                    return 1.9 + (Math.random() * 1.7);
                 }
-                if (topbarRequestId) {
-                    topbarParts.push('Request ' + topbarRequestId);
+                if (current < 58) {
+                    return 0.9 + (Math.random() * 1.1);
                 }
-                if (summaryText) {
-                    topbarParts.push(summaryText);
-                } else if (latest.detail) {
-                    topbarParts.push(String(latest.detail));
+                if (current < 84) {
+                    return 0.38 + (Math.random() * 0.6);
                 }
-                topbarText.textContent = topbarParts.length > 0 ? topbarParts.join(' · ') : 'Monitoramento Zapay ativo.';
+                if (current < 94) {
+                    return 0.18 + (Math.random() * 0.25);
+                }
+                if (current < 98.5) {
+                    return 0.04 + (Math.random() * 0.08);
+                }
+                return 0.008 + (Math.random() * 0.018);
             }
 
-            panel.dataset.usezapayStatus = status;
-            return meta.final;
-        }
-
-        function stopPolling() {
-            if (pollTimer) {
-                window.clearInterval(pollTimer);
-                pollTimer = null;
-            }
-            if (abortController) {
-                abortController.abort();
-                abortController = null;
-            }
-        }
-
-        function ensurePolling(active) {
-            if (!active || pollTimer) {
-                return;
-            }
-            pollTimer = window.setInterval(function () {
-                refreshStatus(false);
-            }, 5000);
-        }
-
-        async function refreshStatus(manual) {
-            if (!requestId && !plate) {
-                return;
-            }
-
-            if (abortController) {
-                abortController.abort();
-            }
-
-            abortController = new AbortController();
-            const url = new URL('/api/usezapay_status.php', window.location.origin);
-            if (requestId) {
-                url.searchParams.set('request_id', requestId);
-            } else if (plate) {
-                url.searchParams.set('plate', plate);
-            }
-
-            if (manual && refreshBtn) {
-                refreshBtn.disabled = true;
-                refreshBtn.textContent = 'Atualizando...';
-            }
-
-            try {
-                const response = await fetch(url.toString(), {
-                    headers: { 'Accept': 'application/json' },
-                    cache: 'no-store',
-                    signal: abortController.signal,
+            function beginProgress() {
+                if (timerId) {
+                    return;
+                }
+                analysisStartAt = performance.now();
+                progress = 2;
+                series = Array.from({
+                    length: 38
+                }, function(_, index) {
+                    return Math.min(42, Math.max(2, (index * 1.05) + (Math.random() * 2.8)));
                 });
-                if (!response.ok) {
-                    throw new Error('HTTP ' + response.status);
+                overlay.classList.add('is-active');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('is-busy');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.setAttribute('aria-disabled', 'true');
                 }
+                updateProgressVisual(progress);
+                timerId = window.setInterval(function() {
+                    progress = Math.min(99.9, progress + nextIncrement(progress));
+                    updateProgressVisual(progress);
+                }, 420);
+            }
 
-                const data = await response.json();
-                const finalStatus = renderStatus(data);
-                if (finalStatus) {
-                    stopPolling();
-                } else {
-                    ensurePolling(true);
+            function resetProgress() {
+                if (timerId) {
+                    window.clearInterval(timerId);
+                    timerId = null;
                 }
-            } catch (error) {
-                ensurePolling(true);
-                setText(updatedField, 'Falha ao consultar status local.');
-            } finally {
-                if (manual && refreshBtn) {
-                    refreshBtn.disabled = false;
-                    refreshBtn.textContent = 'Atualizar status';
+                overlay.classList.remove('is-active');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('is-busy');
+                analysisStartAt = 0;
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.removeAttribute('aria-disabled');
                 }
             }
-        }
 
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', function () {
-                refreshStatus(true);
+            form.addEventListener('submit', beginProgress);
+            window.addEventListener('pageshow', resetProgress);
+            window.addEventListener('resize', function() {
+                if (overlay.classList.contains('is-active')) {
+                    drawChart();
+                }
             });
-        }
-
-        const shouldAutoTrack = Boolean(requestId || plate || currentStatus);
-        if (shouldAutoTrack) {
-            refreshStatus(false);
-        }
-
-        window.addEventListener('beforeunload', stopPolling);
-    }());
+        }());
     </script>
     <script>
-    (function () {
-        const candidateSelect = document.getElementById('humanReviewCandidateSelect');
-        const confirmedTextInput = document.getElementById('humanReviewConfirmedText');
-        if (!candidateSelect || !confirmedTextInput) {
-            return;
-        }
-
-        function syncConfirmedText() {
-            const option = candidateSelect.options[candidateSelect.selectedIndex];
-            if (!option) {
+        (function() {
+            const panel = document.getElementById('zapayStatusPanel');
+            if (!panel) {
                 return;
             }
-            const candidateText = option.dataset.text || '';
-            if (candidateText.trim() !== '') {
-                confirmedTextInput.value = candidateText.trim();
+
+            const chip = document.getElementById('zapayStatusChip');
+            const topbarChip = document.getElementById('analysisTopStatusChip');
+            const refreshBtn = document.getElementById('zapayRefreshBtn');
+            const plateField = document.getElementById('zapayStatusPlate');
+            const requestIdField = document.getElementById('zapayStatusRequestId');
+            const eventField = document.getElementById('zapayStatusEvent');
+            const detailField = document.getElementById('zapayStatusDetail');
+            const summaryField = document.getElementById('zapayStatusSummary');
+            const historyField = document.getElementById('zapayStatusHistoryCount');
+            const updatedField = document.getElementById('zapayStatusUpdatedAt');
+            const topbarText = document.getElementById('analysisTopStatusText');
+
+            const requestId = panel.dataset.usezapayRequestId || '';
+            const plate = panel.dataset.usezapayPlate || '';
+            let currentStatus = (panel.dataset.usezapayStatus || '').toLowerCase();
+            let pollTimer = null;
+            let abortController = null;
+
+            function setText(element, value) {
+                if (!element) {
+                    return;
+                }
+                element.textContent = value && String(value).trim() !== '' ? String(value) : '-';
             }
-        }
 
-        candidateSelect.addEventListener('change', syncConfirmedText);
-        syncConfirmedText();
-    }());
+            function statusMeta(status) {
+                const normalized = String(status || '').toLowerCase();
+                switch (normalized) {
+                    case 'pending_async':
+                    case 'pendente_webhook':
+                    case 'aguardando_webhook':
+                        return {
+                            label: 'Pendente', className: 'status-chip--pending', final: false
+                        };
+                    case 'resultado_cache':
+                    case 'cache_hit':
+                    case 'ok':
+                    case 'vehicle_debt_found':
+                    case 'concluido':
+                        return {
+                            label: 'Concluido', className: 'status-chip--ok', final: true
+                        };
+                    case 'sem_retorno':
+                    case 'nao_disponivel':
+                    case 'not_found':
+                    case 'vehicle_not_found':
+                    case 'vehicle_debt_not_found':
+                        return {
+                            label: 'Sem retorno', className: 'status-chip--warning', final: true
+                        };
+                    case 'erro':
+                    case 'error':
+                    case 'vehicle_debt_search_error':
+                        return {
+                            label: 'Erro', className: 'status-chip--error', final: true
+                        };
+                    default:
+                        return {
+                            label: normalized ? normalized.replace(/_/g, ' ') : 'Indefinido',
+                                className: 'status-chip--neutral',
+                                final: false,
+                        };
+                }
+            }
+
+            function renderStatus(payload) {
+                const latest = (payload && typeof payload.latest === 'object' && payload.latest) ? payload.latest : {};
+                const summary = (payload && typeof payload.summary === 'object' && payload.summary) ? payload.summary : {};
+                const status = String(latest.status || latest.event || payload.status || currentStatus || '').toLowerCase();
+                const meta = statusMeta(status);
+
+                currentStatus = status;
+                if (chip) {
+                    chip.className = 'status-chip ' + meta.className;
+                    chip.textContent = meta.label;
+                }
+                if (topbarChip) {
+                    topbarChip.className = 'status-chip ' + meta.className + ' status-chip--compact';
+                    topbarChip.textContent = meta.label;
+                }
+
+                setText(plateField, payload.plate || latest.plate || plate);
+                setText(requestIdField, payload.request_id || latest.request_id || requestId);
+                setText(eventField, latest.event || payload.event || '');
+                setText(detailField, latest.detail || '');
+
+                const latestDebts = (latest && typeof latest.debts === 'object' && latest.debts) ? latest.debts : {};
+                const summaryText = latest.status === 'pending_async' ?
+                    'Consulta pendente de webhook.' :
+                    (summary.summary_text || latestDebts.summary || latest.detail || '');
+                setText(summaryField, summaryText || summary.status || '');
+
+                const historyCount = typeof summary.history_count === 'number' ?
+                    summary.history_count :
+                    (summary.history_count ? Number(summary.history_count) : 0);
+                setText(historyField, historyCount ? (historyCount + ' eventos') : (latest.event ? '1 evento' : '0 eventos'));
+
+                const updatedAt = latest.received_at_utc || summary.updated_at_utc || '';
+                setText(updatedField, updatedAt ? ('Atualizado em UTC ' + updatedAt) : 'Atualizacao: aguardando sincronizacao do cache local.');
+
+                if (topbarText) {
+                    const topbarParts = [];
+                    const topbarPlate = String(payload.plate || latest.plate || plate || '').trim();
+                    const topbarRequestId = String(payload.request_id || latest.request_id || requestId || '').trim();
+                    if (topbarPlate) {
+                        topbarParts.push('Placa ' + topbarPlate);
+                    }
+                    if (topbarRequestId) {
+                        topbarParts.push('Request ' + topbarRequestId);
+                    }
+                    if (summaryText) {
+                        topbarParts.push(summaryText);
+                    } else if (latest.detail) {
+                        topbarParts.push(String(latest.detail));
+                    }
+                    topbarText.textContent = topbarParts.length > 0 ? topbarParts.join(' · ') : 'Monitoramento Zapay ativo.';
+                }
+
+                panel.dataset.usezapayStatus = status;
+                return meta.final;
+            }
+
+            function stopPolling() {
+                if (pollTimer) {
+                    window.clearInterval(pollTimer);
+                    pollTimer = null;
+                }
+                if (abortController) {
+                    abortController.abort();
+                    abortController = null;
+                }
+            }
+
+            function ensurePolling(active) {
+                if (!active || pollTimer) {
+                    return;
+                }
+                pollTimer = window.setInterval(function() {
+                    refreshStatus(false);
+                }, 5000);
+            }
+
+            async function refreshStatus(manual) {
+                if (!requestId && !plate) {
+                    return;
+                }
+
+                if (abortController) {
+                    abortController.abort();
+                }
+
+                abortController = new AbortController();
+                const url = new URL('/api/usezapay_status.php', window.location.origin);
+                if (requestId) {
+                    url.searchParams.set('request_id', requestId);
+                } else if (plate) {
+                    url.searchParams.set('plate', plate);
+                }
+
+                if (manual && refreshBtn) {
+                    refreshBtn.disabled = true;
+                    refreshBtn.textContent = 'Atualizando...';
+                }
+
+                try {
+                    const response = await fetch(url.toString(), {
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        cache: 'no-store',
+                        signal: abortController.signal,
+                    });
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+
+                    const data = await response.json();
+                    const finalStatus = renderStatus(data);
+                    if (finalStatus) {
+                        stopPolling();
+                    } else {
+                        ensurePolling(true);
+                    }
+                } catch (error) {
+                    ensurePolling(true);
+                    setText(updatedField, 'Falha ao consultar status local.');
+                } finally {
+                    if (manual && refreshBtn) {
+                        refreshBtn.disabled = false;
+                        refreshBtn.textContent = 'Atualizar status';
+                    }
+                }
+            }
+
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', function() {
+                    refreshStatus(true);
+                });
+            }
+
+            const shouldAutoTrack = Boolean(requestId || plate || currentStatus);
+            if (shouldAutoTrack) {
+                refreshStatus(false);
+            }
+
+            window.addEventListener('beforeunload', stopPolling);
+        }());
     </script>
     <script>
-    (function () {
-        const printButton = document.querySelector('.analysis-report-actions-panel #analysisReportPrintBtn')
-            || document.getElementById('analysisReportPrintBtn');
-        if (!printButton) {
-            return;
-        }
+        (function() {
+            const candidateSelect = document.getElementById('humanReviewCandidateSelect');
+            const confirmedTextInput = document.getElementById('humanReviewConfirmedText');
+            if (!candidateSelect || !confirmedTextInput) {
+                return;
+            }
 
-        printButton.addEventListener('click', function () {
-            window.print();
-        });
-    }());
+            function syncConfirmedText() {
+                const option = candidateSelect.options[candidateSelect.selectedIndex];
+                if (!option) {
+                    return;
+                }
+                const candidateText = option.dataset.text || '';
+                if (candidateText.trim() !== '') {
+                    confirmedTextInput.value = candidateText.trim();
+                }
+            }
+
+            candidateSelect.addEventListener('change', syncConfirmedText);
+            syncConfirmedText();
+        }());
     </script>
     <script>
-    (function () {
-        const reportCard = document.getElementById('analysisReport');
-        if (!reportCard) {
-            return;
-        }
+        (function() {
+            const printButton = document.querySelector('.analysis-report-actions-panel #analysisReportPrintBtn') ||
+                document.getElementById('analysisReportPrintBtn');
+            if (!printButton) {
+                return;
+            }
 
-        window.requestAnimationFrame(function () {
-            reportCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    }());
+            printButton.addEventListener('click', function() {
+                window.print();
+            });
+        }());
+    </script>
+    <script>
+        (function() {
+            const reportCard = document.getElementById('analysisReport');
+            if (!reportCard) {
+                return;
+            }
+
+            window.requestAnimationFrame(function() {
+                reportCard.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        }());
     </script>
 </body>
+
 </html>
-
-
-
-
