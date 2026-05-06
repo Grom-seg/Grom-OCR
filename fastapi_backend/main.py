@@ -11,6 +11,9 @@ from uuid import uuid4
 from fastapi_backend.preprocessing import preprocess_image
 from fastapi_backend.detector_module import detect_plate
 from fastapi_backend.ensemble_detector import detect_ensemble
+from fastapi_backend.onnx_detector import get_onnx_detector
+from fastapi_backend.onnx_exporter import export_to_onnx, get_export_info
+from fastapi_backend.benchmark_onnx import run_benchmark, format_report
 from fastapi_backend.ocr_module import run_ocr, get_last_ocr_runtime_info
 from PIL import Image
 from fpdf import FPDF
@@ -536,6 +539,96 @@ async def process_ensemble_endpoint(
         }
 
         return JSONResponse(payload)
+    finally:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+
+
+@app.post("/detect-plate-onnx")
+async def detect_plate_onnx_endpoint(upload: UploadFile = File(...)):
+    """
+    Detecção de placa via ONNX Runtime (Phase 4).
+    Requer que o modelo ONNX exista (yolov8n.onnx).
+    Para exportar: POST /export-onnx
+
+    Returns:
+        {
+            'detections': [...],
+            'backend': 'onnx',
+            'model_path': str,
+        }
+    """
+    detector = get_onnx_detector()
+    if not detector.is_ready:
+        return JSONResponse(
+            {
+                'error': 'Modelo ONNX não encontrado. Use POST /export-onnx primeiro.',
+                'model_path': detector.model_path,
+            },
+            status_code=503,
+        )
+
+    tmp_path = _save_upload_to_temp(upload)
+    try:
+        detections = detector.detect(tmp_path)
+        return JSONResponse({
+            'detections': detections,
+            'backend': 'onnx',
+            'model_path': os.path.basename(detector.model_path),
+            'total': len(detections),
+        })
+    finally:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+
+
+@app.post("/export-onnx")
+async def export_onnx_endpoint(
+    pt_model: str = Body(default=None, embed=True),
+    imgsz: int = Body(default=640, embed=True),
+    quantize: bool = Body(default=False, embed=True),
+):
+    """
+    Exporta o modelo YOLOv8 para ONNX (Phase 4).
+    Operação demorada (~30s na primeira execução).
+
+    Body JSON (todos opcionais):
+        pt_model: caminho para .pt (default: yolov8n.pt)
+        imgsz: tamanho de entrada (default: 640)
+        quantize: se true, gera também versão INT8
+    """
+    model_path = pt_model or os.getenv('GROM_YOLO_MODEL', 'yolov8n.pt')
+    try:
+        onnx_path = export_to_onnx(
+            pt_model_path=model_path,
+            imgsz=imgsz,
+        )
+        info = get_export_info(onnx_path)
+        result = {'status': 'ok', 'onnx': info}
+
+        if quantize:
+            from fastapi_backend.onnx_exporter import quantize_onnx_int8
+            int8_path = quantize_onnx_int8(onnx_path)
+            result['int8'] = get_export_info(int8_path)
+
+        return JSONResponse(result)
+    except Exception as exc:
+        return JSONResponse({'error': str(exc)}, status_code=500)
+
+
+@app.post("/benchmark-onnx")
+async def benchmark_onnx_endpoint(upload: UploadFile = File(...), runs: int = Form(default=20)):
+    """
+    Benchmark YOLO vs ONNX na imagem enviada (Phase 4).
+
+    Returns:
+        Relatório JSON comparativo com latências e speedup.
+    """
+    tmp_path = _save_upload_to_temp(upload)
+    try:
+        result = run_benchmark(image_path=tmp_path, runs=runs)
+        result['report_text'] = format_report(result)
+        return JSONResponse(result)
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
