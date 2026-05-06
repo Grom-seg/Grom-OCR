@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from uuid import uuid4
 from fastapi_backend.preprocessing import preprocess_image
 from fastapi_backend.detector_module import detect_plate
+from fastapi_backend.ensemble_detector import detect_ensemble
 from fastapi_backend.ocr_module import run_ocr, get_last_ocr_runtime_info
 from PIL import Image
 from fpdf import FPDF
@@ -381,7 +382,16 @@ async def process_legacy_endpoint(
     persisted_crop_raw_path = os.path.join(UPLOAD_DIR, persisted_crop_raw_name)
 
     try:
-        preprocess_image(tmp_path).save(tmp_path)
+        # Análise de qualidade antecipada para guiar o preprocessing
+        _pre_quality = ImageQualityAnalyzer().analyze(tmp_path)
+        _pre_quality_score = _pre_quality.get('overall_quality_score', 0.60)
+        _pre_rotation = _pre_quality.get('rotation_angle', None)
+
+        preprocess_image(
+            tmp_path,
+            quality_score=_pre_quality_score,
+            rotation_angle=_pre_rotation,
+        ).save(tmp_path)
         detections = detect_plate(tmp_path)
 
         ocr_results = []
@@ -429,6 +439,101 @@ async def process_legacy_endpoint(
 
         # Enriquece com validação, qualidade e confiança
         payload = _enrich_payload_with_validation(payload, persisted_photo_path)
+
+        return JSONResponse(payload)
+    finally:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+
+
+@app.post("/process-ensemble")
+async def process_ensemble_endpoint(
+    upload: UploadFile = File(...),
+    analysis_stage: str = Form(default='investigacao'),
+):
+    """
+    Endpoint de detecção em ensemble (Phase 3).
+    Usa detect_ensemble() que encadeia YOLO + fallback por contornos com NMS.
+    Retorna o mesmo payload do /process com campo extra 'ensemble_info'.
+    """
+    analysis_id = str(uuid4())
+    safe_upload_name = _sanitize_filename(upload.filename or 'upload.jpg')
+    persisted_photo_name = _build_unique_artifact_filename(safe_upload_name, analysis_id, default_extension=os.path.splitext(safe_upload_name)[1] or '.jpg')
+    persisted_photo_path = os.path.join(UPLOAD_DIR, persisted_photo_name)
+
+    tmp_path = _save_upload_to_temp(upload)
+    shutil.copy2(tmp_path, persisted_photo_path)
+
+    persisted_plate_name = _build_unique_artifact_filename(safe_upload_name, analysis_id, prefix='placa_', default_extension='.jpg', force_extension=True)
+    persisted_plate_path = os.path.join(UPLOAD_DIR, persisted_plate_name)
+    persisted_crop_raw_name = _build_unique_artifact_filename(safe_upload_name, analysis_id, prefix='placa_raw_', default_extension='.jpg', force_extension=True)
+    persisted_crop_raw_path = os.path.join(UPLOAD_DIR, persisted_crop_raw_name)
+
+    try:
+        _pre_quality = ImageQualityAnalyzer().analyze(tmp_path)
+        _pre_quality_score = _pre_quality.get('overall_quality_score', 0.60)
+        _pre_rotation = _pre_quality.get('rotation_angle', None)
+
+        preprocess_image(
+            tmp_path,
+            quality_score=_pre_quality_score,
+            rotation_angle=_pre_rotation,
+        ).save(tmp_path)
+
+        # Ensemble detection
+        detections = detect_ensemble(tmp_path)
+        sources = list({d.get('source', 'unknown') for d in detections})
+
+        ocr_results = []
+        ocr_runtime_events = []
+        img = Image.open(tmp_path)
+        if detections:
+            for det in detections:
+                x1, y1, x2, y2 = det['bbox']
+                crop = img.crop((x1, y1, x2, y2))
+                crop_path = tmp_path + '_crop.jpg'
+                crop.save(crop_path)
+                if not os.path.exists(persisted_crop_raw_path):
+                    shutil.copy2(crop_path, persisted_crop_raw_path)
+                if not os.path.exists(persisted_plate_path):
+                    shutil.copy2(crop_path, persisted_plate_path)
+                try:
+                    ocr_results.extend(run_ocr(crop_path))
+                    ocr_runtime_events.append(get_last_ocr_runtime_info())
+                except RuntimeError:
+                    pass
+                finally:
+                    if os.path.exists(crop_path):
+                        os.remove(crop_path)
+        else:
+            try:
+                ocr_results = run_ocr(tmp_path)
+                ocr_runtime_events.append(get_last_ocr_runtime_info())
+            except RuntimeError:
+                ocr_results = []
+            shutil.copy2(tmp_path, persisted_crop_raw_path)
+            shutil.copy2(tmp_path, persisted_plate_path)
+
+        payload = _build_process_payload(
+            upload.filename or 'upload',
+            detections,
+            ocr_results,
+            analysis_stage.lower(),
+            analysis_id,
+            persisted_photo_name,
+            persisted_plate_name,
+            persisted_crop_raw_name,
+            ocr_runtime_info=get_last_ocr_runtime_info(),
+            ocr_runtime_events=ocr_runtime_events,
+        )
+
+        payload = _enrich_payload_with_validation(payload, persisted_photo_path)
+
+        payload['ensemble_info'] = {
+            'detector_sources': sources,
+            'total_raw_detections': len(detections),
+            'fallback_activated': 'contour' in sources,
+        }
 
         return JSONResponse(payload)
     finally:
