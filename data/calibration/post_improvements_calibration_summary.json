@@ -1,0 +1,49 @@
+{
+  "total": 5,
+  "ok": 5,
+  "errors": 0,
+  "avg_quality": 0.7195,
+  "avg_conf": 0.352,
+  "results": [
+    {
+      "path": "C:\\Grom_OCR\\data\\uploads\\10458347_x216.jpg",
+      "status_code": 200,
+      "quality": 0.7518556070327759,
+      "confidence": 0.0,
+      "ocr": "",
+      "status": "ok"
+    },
+    {
+      "path": "C:\\Grom_OCR\\data\\uploads\\20171119_154214_ch6-1024x576.jpg",
+      "status_code": 200,
+      "quality": 0.7590394496917725,
+      "confidence": 0.0,
+      "ocr": "",
+      "status": "ok"
+    },
+    {
+      "path": "C:\\Grom_OCR\\data\\uploads\\fiat.jpg",
+      "status_code": 200,
+      "quality": 0.764049973622587,
+      "confidence": 0.6587774389059596,
+      "ocr": "[{'text': '—', 'confidence': 55.0, 'engine': 'tesseract'}, {'text': '—)', 'confidence': 55.0, 'engine': 'tesseract'}, {'text': '5', 'confidence': 55.0, 'engine': 'tesseract'}]",
+      "status": "ok"
+    },
+    {
+      "path": "C:\\Grom_OCR\\data\\uploads\\sddefault.jpg",
+      "status_code": 200,
+      "quality": 0.7860749888420105,
+      "confidence": 0.5005027458667756,
+      "ocr": "[{'text': 'ch', 'confidence': 55.0, 'engine': 'tesseract'}]",
+      "status": "ok"
+    },
+    {
+      "path": "C:\\Grom_OCR\\data\\uploads\\teste.jpg",
+      "status_code": 200,
+      "quality": 0.536547932074512,
+      "confidence": 0.600742710241883,
+      "ocr": "[{'text': '=)', 'confidence': 55.0, 'engine': 'tesseract'}]",
+      "status": "ok"
+    }
+  ]
+}

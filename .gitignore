@@ -32,3 +32,17 @@ data/grom_ocr.sqlite
 # OS
 Thumbs.db
 .DS_Store
+
+# Modelos ONNX gerados localmente (grandes, gerados via /export-onnx)
+*.onnx
+*_int8.onnx
+
+# Modelos PyTorch baixados (gerenciados externamente)
+# yolov8n.pt  ← manter rastreado (pequeno, necessário p/ bootstrap)
+
+# Datasets externos (CCPD etc.) — nunca versionar
+data/datasets/
+data/ccpd/
+*.tar
+*.tar.gz
+*.zip

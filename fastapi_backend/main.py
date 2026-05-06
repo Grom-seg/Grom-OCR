@@ -387,12 +387,12 @@ async def process_legacy_endpoint(
     try:
         # Análise de qualidade antecipada para guiar o preprocessing
         _pre_quality = ImageQualityAnalyzer().analyze(tmp_path)
-        _pre_quality_score = _pre_quality.get('overall_quality_score', 0.60)
         _pre_rotation = _pre_quality.get('rotation_angle', None)
 
+        # Passa o dict completo: preprocessing extrai quality_score e resolution_category
         preprocess_image(
             tmp_path,
-            quality_score=_pre_quality_score,
+            quality_score=_pre_quality,
             rotation_angle=_pre_rotation,
         ).save(tmp_path)
         detections = detect_plate(tmp_path)
@@ -474,12 +474,11 @@ async def process_ensemble_endpoint(
 
     try:
         _pre_quality = ImageQualityAnalyzer().analyze(tmp_path)
-        _pre_quality_score = _pre_quality.get('overall_quality_score', 0.60)
         _pre_rotation = _pre_quality.get('rotation_angle', None)
 
         preprocess_image(
             tmp_path,
-            quality_score=_pre_quality_score,
+            quality_score=_pre_quality,
             rotation_angle=_pre_rotation,
         ).save(tmp_path)
 
