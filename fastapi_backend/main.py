@@ -1,6 +1,7 @@
 
 from fastapi import FastAPI, UploadFile, File, Form, Body
 from fastapi.responses import JSONResponse, FileResponse
+from typing import List
 import uvicorn
 import os
 import tempfile
@@ -20,6 +21,37 @@ from fpdf import FPDF
 from fastapi_backend.plate_validator import PlateValidator
 from fastapi_backend.quality_metrics import ImageQualityAnalyzer
 from fastapi_backend.confidence_scorer import ConfidenceScorer
+
+# Módulos adicionais (lazy — importados com try/except para não bloquear init)
+try:
+    from fastapi_backend.frame_selector import (
+        select_best_frame, merge_hdr, load_frames_from_paths, lap_variance,
+    )
+    _frame_selector_ok = True
+except Exception:
+    _frame_selector_ok = False
+
+try:
+    from fastapi_backend.super_resolution import get_sr_info
+    _sr_info_ok = True
+except Exception:
+    _sr_info_ok = False
+    def get_sr_info():  # type: ignore[misc]
+        return {'backend': 'unavailable'}
+
+try:
+    from fastapi_backend.lprnet_ocr import get_lprnet_info
+    _lprnet_info_ok = True
+except Exception:
+    _lprnet_info_ok = False
+    def get_lprnet_info():  # type: ignore[misc]
+        return {'available': False}
+
+try:
+    from fastapi_backend.vehicle_analyzer import analyze_vehicle, get_vehicle_analyzer_info
+    _va_ok = True
+except Exception:
+    _va_ok = False
 
 app = FastAPI(title="Grom OCR Backend", description="API para detecção e leitura de placas veiculares com IA pericial.")
 
@@ -705,6 +737,150 @@ async def process_video_legacy_endpoint():
     return JSONResponse(status_code=501, content={
         'error': 'process_video nao implementado no fastapi_backend'
     })
+
+
+# ---------------------------------------------------------------------------
+# Novos endpoints: Frame Selector, HDR Merge, Vehicle Analyzer
+# ---------------------------------------------------------------------------
+
+@app.post("/select-frame")
+async def select_frame_endpoint(
+    files: List[UploadFile] = File(...),
+    mode: str = Form(default='best'),
+):
+    """
+    Seleciona o melhor frame de um burst ou faz HDR merge.
+
+    Parâmetros:
+      files: lista de imagens (burst de 2–10 frames)
+      mode:  'best'  → seleciona frame mais nítido (Laplacian variance)
+             'hdr'   → fusão de exposições via Mertens (OpenCV)
+
+    Retorna:
+      JSON com 'mode', 'frames_received', 'sharpness_scores'
+      e 'selected_index' (mode=best) ou 'hdr_mean_brightness' (mode=hdr).
+      O arquivo resultante é salvo como artifact e o nome retornado em 'artifact'.
+    """
+    if not _frame_selector_ok:
+        return JSONResponse(
+            {'error': 'frame_selector não disponível'},
+            status_code=503,
+        )
+
+    if not files:
+        return JSONResponse({'error': 'Nenhum arquivo enviado.'}, status_code=400)
+
+    import cv2
+    import numpy as np
+
+    tmp_paths = []
+    frames = []
+    for f in files:
+        tmp = _save_upload_to_temp(f)
+        tmp_paths.append(tmp)
+        data = np.fromfile(tmp, dtype=np.uint8)
+        img = cv2.imdecode(data, cv2.IMREAD_COLOR) if data.size > 0 else None
+        frames.append(img)
+
+    sharpness = [
+        round(lap_variance(f), 2) if f is not None else 0.0
+        for f in frames
+    ]
+
+    try:
+        if mode == 'hdr':
+            result_frame = merge_hdr(frames)
+            extra = {'hdr_mean_brightness': round(float(result_frame.mean()), 2)}
+        else:
+            result_frame = select_best_frame(frames)
+            best_idx = sharpness.index(max(sharpness))
+            extra = {'selected_index': best_idx}
+
+        # Salva resultado como artifact
+        analysis_id = str(uuid4())[:12]
+        artifact_name = f'frame_{mode}_{analysis_id}.jpg'
+        artifact_path = os.path.join(UPLOAD_DIR, artifact_name)
+        cv2.imwrite(artifact_path, result_frame)
+
+        return JSONResponse({
+            'mode': mode,
+            'frames_received': len(files),
+            'sharpness_scores': sharpness,
+            'artifact': artifact_name,
+            **extra,
+        })
+    except ValueError as exc:
+        return JSONResponse({'error': str(exc)}, status_code=400)
+    finally:
+        for p in tmp_paths:
+            if os.path.exists(p):
+                os.remove(p)
+
+
+@app.post("/analyze-vehicle")
+async def analyze_vehicle_endpoint(
+    file: UploadFile = File(...),
+    include_clip: bool = Form(default=True),
+):
+    """
+    Análise complementar do veículo além da placa.
+
+    Retorna:
+      - vehicle_detections: detecções YOLOv8 (class, bbox, confidence)
+      - light_regions: regiões estimadas de faróis/lanternas
+      - headlight_templates: assinatura de faróis por template matching
+      - make_model_clip: identificação de marca/modelo via CLIP zero-shot
+      - clip_available, yolo_available, parts_model_available
+
+    Este endpoint é isolado do pipeline /process — não afeta latência
+    nem confiança de detecção de placa.
+    """
+    if not _va_ok:
+        return JSONResponse(
+            {'error': 'vehicle_analyzer não disponível'},
+            status_code=503,
+        )
+
+    import os as _os
+    if not include_clip:
+        _os.environ['GROM_VA_CLIP_ENABLED'] = 'false'
+
+    tmp_path = _save_upload_to_temp(file)
+    try:
+        result = analyze_vehicle(tmp_path)
+        result['filename'] = file.filename
+        result['timestamp_utc'] = datetime.now(timezone.utc).isoformat()
+        return JSONResponse(result)
+    except Exception as exc:
+        return JSONResponse({'error': str(exc)}, status_code=500)
+    finally:
+        if _os.path.exists(tmp_path):
+            _os.remove(tmp_path)
+        if not include_clip:
+            _os.environ.pop('GROM_VA_CLIP_ENABLED', None)
+
+
+@app.get("/capabilities")
+def capabilities_endpoint():
+    """
+    Retorna disponibilidade de todos os módulos e backends.
+
+    Útil para health-check expandido e diagnóstico de integração.
+    """
+    return JSONResponse({
+        'timestamp_utc': datetime.now(timezone.utc).isoformat(),
+        'super_resolution': get_sr_info(),
+        'lprnet': get_lprnet_info(),
+        'vehicle_analyzer': get_vehicle_analyzer_info() if _va_ok else {'available': False},
+        'frame_selector': {'available': _frame_selector_ok},
+        'modules': {
+            'frame_selector': _frame_selector_ok,
+            'super_resolution': _sr_info_ok,
+            'lprnet_ocr': _lprnet_info_ok,
+            'vehicle_analyzer': _va_ok,
+        },
+    })
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -2,6 +2,16 @@ import os
 from multiprocessing import get_context
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+try:
+    from fastapi_backend.lprnet_ocr import run_lprnet, get_lprnet_info
+    _lprnet_available = True
+except Exception:
+    _lprnet_available = False
+    def run_lprnet(image_path):  # type: ignore[misc]
+        return []
+    def get_lprnet_info():  # type: ignore[misc]
+        return {'enabled': False, 'available': False}
 PADDLE_CACHE_HOME = os.path.join(PROJECT_ROOT, '.pdx_cache')
 
 try:
@@ -157,8 +167,35 @@ def run_ocr(image_path):
 
     if pytesseract is not None:
         runtime_info['selected_engine'] = 'tesseract'
+        tesseract_results = _run_tesseract(image_path)
+
+        # --- LPRNet como terceira fonte complementar ---
+        lprnet_results = []
+        lprnet_enabled = os.getenv('GROM_OCR_ENABLE_LPRNET', '1').strip().lower() in ('1', 'true', 'yes', 'on')
+        if lprnet_enabled:
+            try:
+                lprnet_results = run_lprnet(image_path)
+                if lprnet_results:
+                    runtime_info['lprnet_used'] = True
+            except Exception as lpr_exc:
+                runtime_info['lprnet_error'] = str(lpr_exc)
+
+        combined = tesseract_results + lprnet_results
         _set_last_runtime_info(runtime_info)
-        return _run_tesseract(image_path)
+        return combined
+
+    # --- Sem Paddle nem Tesseract: tenta LPRNet isolado ---
+    lprnet_enabled = os.getenv('GROM_OCR_ENABLE_LPRNET', '1').strip().lower() in ('1', 'true', 'yes', 'on')
+    if lprnet_enabled:
+        try:
+            lprnet_results = run_lprnet(image_path)
+            if lprnet_results:
+                runtime_info['selected_engine'] = 'lprnet'
+                runtime_info['lprnet_used'] = True
+                _set_last_runtime_info(runtime_info)
+                return lprnet_results
+        except Exception:
+            pass
 
     if paddle_error:
         _set_last_runtime_info(runtime_info)

@@ -7,6 +7,14 @@ import numpy as np
 
 logger = logging.getLogger(__name__)
 
+# Importa SR unificado (Real-ESRGAN ONNX com fallback bicúbico)
+try:
+    from fastapi_backend.super_resolution import apply_super_resolution as _sr_apply
+    _SR_MODULE_AVAILABLE = True
+except Exception:
+    _sr_apply = None
+    _SR_MODULE_AVAILABLE = False
+
 
 def _load_bgr_image(image_path):
     """Carrega imagem com fallback para path Unicode no Windows."""
@@ -33,6 +41,60 @@ def _is_enabled(env_name: str, default: bool = True) -> bool:
 _SR_TARGET_WIDTH = int(os.getenv('GROM_SR_TARGET_WIDTH', '400'))
 # Categoria de resolução que dispara SR (very_low, low)
 _SR_TRIGGER_CATEGORIES = {'very_low', 'low'}
+
+
+def _classify_blur(gray: np.ndarray) -> str:
+    """
+    Classifica nível de blur pela variância do Laplaciano.
+
+    Inspirado no subset ccpd_blur (borrão de movimento por veículo em alta velocidade).
+    Limiares calibrados empiricamente para imagens de placa (crop reduzido):
+      - strong_blur : var < 50   → sharpening muito agressivo necessário
+      - moderate_blur: var < 150  → sharpening padrão elevado
+      - sharp       : var >= 150  → sharpening leve
+
+    Retorna: 'strong_blur' | 'moderate_blur' | 'sharp'
+    """
+    lap_var = cv2.Laplacian(gray, cv2.CV_64F).var()
+    if lap_var < 50.0:
+        return 'strong_blur'
+    if lap_var < 150.0:
+        return 'moderate_blur'
+    return 'sharp'
+
+
+def _correct_gamma(gray: np.ndarray) -> np.ndarray:
+    """
+    Corrige brilho global via correção de gama.
+
+    Inspirado no subset ccpd_fn (far+night: subexposição) e condições de
+    overexposure (sol direto, reflexo de asfalto).
+
+    Regra:
+      - mean < 70  → imagem escura  → gama < 1 (clareia, target ~128)
+      - mean > 185 → imagem clara  → gama > 1 (escurece, target ~128)
+      - 70–185     → sem alteração (CLAHE já lida com contraste local)
+
+    Usa LUT de 256 posições para eficiência O(1) por pixel.
+    """
+    mean = float(gray.mean())
+    if 70.0 <= mean <= 185.0:
+        return gray
+
+    target = 128.0
+    # Resolve (mean/255)^gamma = target/255 → gamma = log(target/255)/log(mean/255)
+    # O LUT aplica f(x) = x^gamma — NÃO o inverso.
+    log_mean = np.log(max(mean, 1.0) / 255.0)
+    if log_mean == 0.0:
+        return gray
+    gamma = float(np.log(target / 255.0) / log_mean)
+    gamma = float(np.clip(gamma, 0.25, 4.0))
+
+    table = np.array(
+        [(i / 255.0) ** gamma * 255 for i in range(256)],
+        dtype=np.uint8,
+    )
+    return cv2.LUT(gray, table)
 
 
 def _needs_super_resolution(img: np.ndarray, resolution_category: str = None) -> bool:
@@ -145,38 +207,40 @@ def _estimate_rotation_angle(gray: np.ndarray) -> float:
         return 0.0
 
 
-def _select_intensity(quality_score: float) -> dict:
+def _select_intensity(quality_score: float, blur_level: str = 'sharp') -> dict:
     """
-    Seleciona parâmetros de preprocessing com base no score de qualidade.
-    Imagens de baixa qualidade recebem processamento mais agressivo.
+    Seleciona parâmetros de preprocessing com base no score de qualidade e blur.
+
+    Dois eixos de controle:
+      - quality_score: 0–1, governa CLAHE e denoise
+      - blur_level: 'sharp' | 'moderate_blur' | 'strong_blur'
+                    governa sharpening (inspirado no subset ccpd_blur)
+
+    Tabela de sharpening por blur_level:
+      sharp         → weight 1.25, sigma 1.0
+      moderate_blur → weight 1.45, sigma 1.3  (+0.2/+0.3 vs sharp)
+      strong_blur   → weight 1.65, sigma 1.8  (+0.4/+0.8 vs sharp)
     """
+    # Parâmetros base por qualidade
     if quality_score >= 0.75:
-        # Boa qualidade: processamento leve
-        return {
-            'clahe_clip': 1.5,
-            'clahe_tile': (8, 8),
-            'denoise_h': 5,
-            'sharpen_weight': 1.25,
-            'sharpen_blur_sigma': 1.0,
-        }
+        base = {'clahe_clip': 1.5, 'clahe_tile': (8, 8), 'denoise_h': 5,
+                'sharpen_weight': 1.25, 'sharpen_blur_sigma': 1.0}
     elif quality_score >= 0.50:
-        # Qualidade média: processamento padrão
-        return {
-            'clahe_clip': 2.0,
-            'clahe_tile': (8, 8),
-            'denoise_h': 7,
-            'sharpen_weight': 1.35,
-            'sharpen_blur_sigma': 1.2,
-        }
+        base = {'clahe_clip': 2.0, 'clahe_tile': (8, 8), 'denoise_h': 7,
+                'sharpen_weight': 1.35, 'sharpen_blur_sigma': 1.2}
     else:
-        # Baixa qualidade: processamento agressivo
-        return {
-            'clahe_clip': 3.0,
-            'clahe_tile': (6, 6),
-            'denoise_h': 10,
-            'sharpen_weight': 1.50,
-            'sharpen_blur_sigma': 1.5,
-        }
+        base = {'clahe_clip': 3.0, 'clahe_tile': (6, 6), 'denoise_h': 10,
+                'sharpen_weight': 1.50, 'sharpen_blur_sigma': 1.5}
+
+    # Boost de sharpening conforme nível de blur (ccpd_blur)
+    if blur_level == 'strong_blur':
+        base['sharpen_weight'] = min(base['sharpen_weight'] + 0.40, 2.0)
+        base['sharpen_blur_sigma'] = min(base['sharpen_blur_sigma'] + 0.8, 2.5)
+    elif blur_level == 'moderate_blur':
+        base['sharpen_weight'] = min(base['sharpen_weight'] + 0.20, 2.0)
+        base['sharpen_blur_sigma'] = min(base['sharpen_blur_sigma'] + 0.3, 2.5)
+
+    return base
 
 
 def preprocess_image(image_path, quality_score: float = None, rotation_angle: float = None):
@@ -197,7 +261,9 @@ def preprocess_image(image_path, quality_score: float = None, rotation_angle: fl
         - GROM_OCR_PREPROCESS_DENOISE (default: true)
         - GROM_OCR_PREPROCESS_THRESHOLD (default: false)
         - GROM_OCR_PREPROCESS_ROTATION (default: true)
-        - GROM_OCR_PREPROCESS_SR (default: true)  ← super-resolução
+        - GROM_OCR_PREPROCESS_SR (default: true)        ← super-resolução
+        - GROM_OCR_PREPROCESS_GAMMA (default: true)     ← correção de gama (ccpd_fn)
+        - GROM_OCR_PREPROCESS_BLUR_ADAPT (default: true)← sharpening adaptativo ao blur (ccpd_blur)
     """
     img = _load_bgr_image(image_path)
     if img is None:
@@ -215,14 +281,28 @@ def preprocess_image(image_path, quality_score: float = None, rotation_angle: fl
     if quality_score is None:
         quality_score = 0.60  # Intensidade padrão (média)
 
-    params = _select_intensity(quality_score)
-
     # --- Flags de controle ---
     adaptive_enabled = _is_enabled('GROM_OCR_PREPROCESS_ADAPTIVE', default=True)
     denoise_enabled = _is_enabled('GROM_OCR_PREPROCESS_DENOISE', default=True)
     threshold_enabled = _is_enabled('GROM_OCR_PREPROCESS_THRESHOLD', default=False)
     rotation_enabled = _is_enabled('GROM_OCR_PREPROCESS_ROTATION', default=True)
     sr_enabled = _is_enabled('GROM_OCR_PREPROCESS_SR', default=True)
+    gamma_enabled = _is_enabled('GROM_OCR_PREPROCESS_GAMMA', default=True)
+    blur_adapt_enabled = _is_enabled('GROM_OCR_PREPROCESS_BLUR_ADAPT', default=True)
+
+    # --- Correção de gama (ccpd_fn: noite/overexposure) ---
+    # Feita ANTES de SR e rotação para normalizar brilho global primeiro.
+    if gamma_enabled:
+        gray = _correct_gamma(gray)
+        logger.debug('Gamma aplicado: mean_pós=%.1f', gray.mean())
+
+    # --- Classificação de blur (ccpd_blur) ---
+    blur_level = _classify_blur(gray) if blur_adapt_enabled else 'sharp'
+    if blur_level != 'sharp':
+        logger.debug('Blur detectado: %s (Laplacian var usado internamente)', blur_level)
+
+    # Parâmetros adaptativos (qualidade + blur)
+    params = _select_intensity(quality_score, blur_level)
 
     # --- Super-resolução (antes da rotação para aproveitar SR em imagem menor) ---
     if sr_enabled and _needs_super_resolution(gray, resolution_category):
@@ -230,7 +310,11 @@ def preprocess_image(image_path, quality_score: float = None, rotation_angle: fl
             'Aplicando super-resolução: %dx%d → target_width=%d (cat=%s)',
             gray.shape[1], gray.shape[0], _SR_TARGET_WIDTH, resolution_category,
         )
-        gray = _super_resolve(gray)
+        if _SR_MODULE_AVAILABLE and _sr_apply is not None:
+            # Usa Real-ESRGAN ONNX se disponível; fallback bicúbico interno
+            gray = _sr_apply(gray, _SR_TARGET_WIDTH)
+        else:
+            gray = _super_resolve(gray)
 
     # --- Correção de rotação ---
     if rotation_enabled:
