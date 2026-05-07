@@ -36,7 +36,7 @@ Objetivo: Aprimorar robustez, confiabilidade e taxa de acertos sem comprometer e
 ### A. Detectores ALPR Especializados
 
 | Ferramenta | Caso de Uso | Implementação |
-|------------|-----------|--------------|
+| ---------- | ----------- | ------------- |
 | **PaddleDetection** | Detecção Mercosul nativa | Modelo PP-YOLO treinado em RodoSol |
 | **YOLOx** | Alternativa ensemble YOLOv8 | Modelo leve complementar |
 | **UFPR-VeSV** | Veículos + contexto | Classificação secundária (opcional) |
@@ -44,7 +44,7 @@ Objetivo: Aprimorar robustez, confiabilidade e taxa de acertos sem comprometer e
 ### B. OCR e Pós-Processamento
 
 | Ferramenta | Caso de Uso | Implementação |
-|-----------|-----------|--------------|
+| --------- | ----------- | ------------- |
 | **Fast-Plate-OCR** | OCR especializado ALPR | Engine terciário (após PaddleOCR + Tesseract) |
 | **PaddleOCR** | OCR geral (JÁ ATIVO) | Manter como primário |
 | **LPLC Dataset** | Validação padrões | Regex + scoring contra LPs válidas BR/MZ |
@@ -52,7 +52,7 @@ Objetivo: Aprimorar robustez, confiabilidade e taxa de acertos sem comprometer e
 ### C. Melhoria de Qualidade
 
 | Ferramenta | Caso de Uso | Implementação |
-|-----------|-----------|--------------|
+| --------- | ----------- | ------------- |
 | **UFPR-SR-Plates** | Super-resolução | Pré-processamento para imagens <200px |
 | **CCPD Insights** | Blur/Rotação handling | Métricas de qualidade pré-OCR |
 | **OpenCV + ONNX** | Otimização pipeline | Conversão modelos para ONNX runtime |
@@ -60,7 +60,7 @@ Objetivo: Aprimorar robustez, confiabilidade e taxa de acertos sem comprometer e
 ### D. Datasets para Validação
 
 | Dataset | Aplicação | Status |
-|---------|-----------|--------|
+| ------- | --------- | ------ |
 | **RodoSol-ALPR** | Brasileira real (melhor) | ✓ Já em `data/datasets/` |
 | **UFPR-SR-Plates** | Variações, super-res | 📦 Disponível p/ integração |
 | **Artificial Mercosur** | Mercosul aberta | 📦 Complementar test |
@@ -192,7 +192,7 @@ Objetivo: Aprimorar robustez, confiabilidade e taxa de acertos sem comprometer e
 
 Cada fase segue este protocolo:
 
-```
+```text
 1. Criar novo módulo em branch isolado
 2. Testes unitários 100% coverage
 3. Teste E2E com dataset RodoSol pequeno
@@ -212,7 +212,7 @@ Cada fase segue este protocolo:
 ## 5. ESTIMATIVAS DE MELHORIA
 
 | Métrica | Baseline | Alvo (Fase 1-2) | Alvo (Fase 1-4) |
-|---------|----------|-----------------|-----------------|
+| ------- | -------- | --------------- | --------------- |
 | **Taxa de Acertos (Mercosul)** | 82% | 90% | 95% |
 | **Falsos Positivos** | 12% | 4% | 2% |
 | **Latência p50** | 150ms | 140ms | 100ms |

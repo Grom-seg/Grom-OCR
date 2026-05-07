@@ -142,6 +142,98 @@ class TestSelectIntensity:
         p = _select_intensity(0.60)
         assert p['clahe_clip'] == 2.0
 
+    def test_strong_blur_boosts_sharpening(self):
+        from fastapi_backend.preprocessing import _select_intensity
+        base = _select_intensity(0.80, blur_level='sharp')
+        boosted = _select_intensity(0.80, blur_level='strong_blur')
+        assert boosted['sharpen_weight'] > base['sharpen_weight']
+        assert boosted['sharpen_blur_sigma'] > base['sharpen_blur_sigma']
+
+    def test_moderate_blur_partial_boost(self):
+        from fastapi_backend.preprocessing import _select_intensity
+        base = _select_intensity(0.80, blur_level='sharp')
+        moderate = _select_intensity(0.80, blur_level='moderate_blur')
+        strong = _select_intensity(0.80, blur_level='strong_blur')
+        # Moderate deve estar entre sharp e strong_blur
+        assert base['sharpen_weight'] < moderate['sharpen_weight'] < strong['sharpen_weight']
+
+    def test_sharpen_weight_capped_at_2(self):
+        from fastapi_backend.preprocessing import _select_intensity
+        p = _select_intensity(0.30, blur_level='strong_blur')
+        assert p['sharpen_weight'] <= 2.0
+
+
+# ---------------------------------------------------------------------------
+# _classify_blur  (ccpd_blur)
+# ---------------------------------------------------------------------------
+
+class TestClassifyBlur:
+    def test_sharp_image_classified_sharp(self):
+        from fastapi_backend.preprocessing import _classify_blur
+        # Imagem com bordas nítidas → alta variância Laplaciana
+        img = np.zeros((80, 200), dtype=np.uint8)
+        cv2.rectangle(img, (20, 10), (180, 70), 255, 2)
+        cv2.line(img, (0, 40), (200, 40), 200, 1)
+        assert _classify_blur(img) == 'sharp'
+
+    def test_blurred_image_classified_blur(self):
+        from fastapi_backend.preprocessing import _classify_blur
+        # Imagem borrada: começa nítida e aplica blur forte
+        img = np.zeros((80, 200), dtype=np.uint8)
+        cv2.rectangle(img, (20, 10), (180, 70), 255, 2)
+        blurred = cv2.GaussianBlur(img, (21, 21), sigmaX=10)
+        result = _classify_blur(blurred)
+        assert result in ('strong_blur', 'moderate_blur')
+
+    def test_flat_image_is_strong_blur(self):
+        from fastapi_backend.preprocessing import _classify_blur
+        # Imagem uniforme: Laplacian var ≈ 0
+        img = np.full((80, 200), 128, dtype=np.uint8)
+        assert _classify_blur(img) == 'strong_blur'
+
+    def test_returns_valid_string(self):
+        from fastapi_backend.preprocessing import _classify_blur
+        img = _make_gray_image(200, 80)
+        result = _classify_blur(img)
+        assert result in ('sharp', 'moderate_blur', 'strong_blur')
+
+
+# ---------------------------------------------------------------------------
+# _correct_gamma  (ccpd_fn: noite/overexposure)
+# ---------------------------------------------------------------------------
+
+class TestCorrectGamma:
+    def test_dark_image_brightened(self):
+        from fastapi_backend.preprocessing import _correct_gamma
+        dark = np.full((80, 200), 40, dtype=np.uint8)  # mean=40, muito escuro
+        result = _correct_gamma(dark)
+        assert result.mean() > dark.mean()
+
+    def test_bright_image_darkened(self):
+        from fastapi_backend.preprocessing import _correct_gamma
+        bright = np.full((80, 200), 210, dtype=np.uint8)  # mean=210, overexposure
+        result = _correct_gamma(bright)
+        assert result.mean() < bright.mean()
+
+    def test_normal_image_unchanged(self):
+        from fastapi_backend.preprocessing import _correct_gamma
+        normal = np.full((80, 200), 128, dtype=np.uint8)  # mean=128, normal
+        result = _correct_gamma(normal)
+        # Dentro da faixa [70, 185] → deve retornar o mesmo array
+        assert result is normal
+
+    def test_output_dtype_uint8(self):
+        from fastapi_backend.preprocessing import _correct_gamma
+        dark = np.full((80, 200), 30, dtype=np.uint8)
+        result = _correct_gamma(dark)
+        assert result.dtype == np.uint8
+
+    def test_output_values_clipped_0_255(self):
+        from fastapi_backend.preprocessing import _correct_gamma
+        dark = np.full((80, 200), 10, dtype=np.uint8)
+        result = _correct_gamma(dark)
+        assert result.min() >= 0 and result.max() <= 255
+
 
 # ---------------------------------------------------------------------------
 # _estimate_rotation_angle
@@ -240,5 +332,21 @@ class TestPreprocessImage:
         if not os.path.exists(_PLATE_PNG):
             pytest.skip('plate_test.png não encontrado em test-assets/')
         monkeypatch.setenv('GROM_OCR_PREPROCESS_ROTATION', 'false')
+        result = preprocess_image(_PLATE_PNG)
+        assert isinstance(result, Image.Image)
+
+    def test_gamma_disabled_via_env(self, monkeypatch):
+        from fastapi_backend.preprocessing import preprocess_image
+        if not os.path.exists(_PLATE_PNG):
+            pytest.skip('plate_test.png não encontrado em test-assets/')
+        monkeypatch.setenv('GROM_OCR_PREPROCESS_GAMMA', 'false')
+        result = preprocess_image(_PLATE_PNG)
+        assert isinstance(result, Image.Image)
+
+    def test_blur_adapt_disabled_via_env(self, monkeypatch):
+        from fastapi_backend.preprocessing import preprocess_image
+        if not os.path.exists(_PLATE_PNG):
+            pytest.skip('plate_test.png não encontrado em test-assets/')
+        monkeypatch.setenv('GROM_OCR_PREPROCESS_BLUR_ADAPT', 'false')
         result = preprocess_image(_PLATE_PNG)
         assert isinstance(result, Image.Image)
