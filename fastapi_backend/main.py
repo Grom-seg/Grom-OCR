@@ -35,6 +35,7 @@ from fastapi_backend.preprocessing import preprocess_image
 from fastapi_backend.detector_module import detect_plate
 from fastapi_backend.ensemble_detector import detect_ensemble
 from fastapi_backend.onnx_detector import get_onnx_detector
+from fastapi_backend.pdf_forensic import generate_forensic_pdf
 from fastapi_backend.onnx_exporter import export_to_onnx, get_export_info
 from fastapi_backend.benchmark_onnx import run_benchmark, format_report
 from fastapi_backend.ocr_module import run_ocr, get_last_ocr_runtime_info
@@ -2088,22 +2089,23 @@ async def select_frame_endpoint(
       mode:  'best'  → seleciona frame mais nítido (Laplacian variance)
              'hdr'   → fusão de exposições via Mertens (OpenCV)
 
-    Retorna:
-      JSON com 'mode', 'frames_received', 'sharpness_scores'
-      e 'selected_index' (mode=best) ou 'hdr_mean_brightness' (mode=hdr).
-      O arquivo resultante é salvo como artifact e o nome retornado em 'artifact'.
-    """
-    if not _frame_selector_ok:
-        return JSONResponse(
-            {'error': 'frame_selector não disponível'},
-            status_code=503,
+    try:
+        pdf_report, pdf_success = generate_forensic_pdf(
+            photo_path=photo_path,
+            plate_path=plate_path,
+            recognized_text=ocr_text,
+            analysis_id=analysis_id,
+            report_context=report_context,
+            vehicle_info=vehicle_info,
+            forensic=forensic,
+            consensus=consensus,
+            assessment=assessment,
+            pericial=pericial,
+            warnings=warnings,
+            output_dir=UPLOAD_DIR
         )
-
-    if not files:
-        return JSONResponse({'error': 'Nenhum arquivo enviado.'}, status_code=400)
-
-    import cv2
-    import numpy as np
+    except Exception as exc:
+        return JSONResponse(status_code=500, content={'error': f'Falha ao gerar PDF forense: {exc}'})
 
     tmp_paths = []
     frames = []
@@ -2164,7 +2166,7 @@ async def analyze_vehicle_endpoint(
       - make_model_clip: identificação de marca/modelo via CLIP zero-shot
       - clip_available, yolo_available, parts_model_available
 
-    Este endpoint é isolado do pipeline /process — não afeta latência
+    Este endpoint é isolado do pipeline /process - não afeta latência
     nem confiança de detecção de placa.
     """
     if not _va_ok:
@@ -2424,7 +2426,7 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
 
     if photo_path and plate_path:
         try:
-            pdf_name = _generate_pdf_report(
+            pdf_name, pdf_success = generate_forensic_pdf(
                 photo_path=photo_path,
                 plate_path=plate_path,
                 recognized_text=best_text,
@@ -2436,9 +2438,10 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
                 assessment=payload.get('assessment', {}),
                 pericial=payload.get('pericial', {}),
                 warnings=payload.get('warnings', []),
+                output_dir=UPLOAD_DIR
             )
-            payload['pdf_report'] = pdf_name
-            payload['report_ready'] = True
+            payload['pdf_report'] = pdf_name if pdf_success else None
+            payload['report_ready'] = pdf_success
             payload.setdefault('report_context', {})
             payload['report_context']['evidence_links'] = {
                 'photo': f"/artifact/{photo_name}",
