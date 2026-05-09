@@ -63,7 +63,7 @@ class PlateValidator:
                 'confidence': float
             }
         """
-        plate_clean = plate_text.strip().upper()
+        plate_clean = plate_text.strip().upper().replace(' ', '')  # Remove espaços internos também
         result = {
             'valid': False,
             'score': 0.0,

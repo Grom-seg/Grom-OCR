@@ -334,7 +334,10 @@ async def detect_plate_endpoint(file: UploadFile = File(...)):
     tmp_path = _save_upload_to_temp(file)
     preprocess_image(tmp_path).save(tmp_path)
     detections = detect_plate(tmp_path)
-    os.remove(tmp_path)
+    try:
+        os.remove(tmp_path)
+    except (PermissionError, OSError):
+        pass
     return JSONResponse({
         "filename": file.filename,
         "detections": detections
@@ -347,12 +350,18 @@ async def ocr_plate_endpoint(file: UploadFile = File(...)):
     try:
         ocr_results = run_ocr(tmp_path)
     except RuntimeError as exc:
-        os.remove(tmp_path)
+        try:
+            os.remove(tmp_path)
+        except (PermissionError, OSError):
+            pass
         return JSONResponse(status_code=503, content={
             "filename": file.filename,
             "error": str(exc)
         })
-    os.remove(tmp_path)
+    try:
+        os.remove(tmp_path)
+    except (PermissionError, OSError):
+        pass
     return JSONResponse({
         "filename": file.filename,
         "ocr_results": ocr_results,
@@ -376,15 +385,27 @@ async def full_pipeline(file: UploadFile = File(...)):
             ocr = run_ocr(crop_path)
             ocr_runtime_events.append(get_last_ocr_runtime_info())
         except RuntimeError as exc:
-            os.remove(crop_path)
-            os.remove(tmp_path)
+            try:
+                os.remove(crop_path)
+            except (PermissionError, OSError):
+                pass
+            try:
+                os.remove(tmp_path)
+            except (PermissionError, OSError):
+                pass
             return JSONResponse(status_code=503, content={
                 "filename": file.filename,
                 "error": str(exc)
             })
         ocr_results.append({"bbox": det['bbox'], "ocr": ocr})
-        os.remove(crop_path)
-    os.remove(tmp_path)
+        try:
+            os.remove(crop_path)
+        except (PermissionError, OSError):
+            pass
+    try:
+        os.remove(tmp_path)
+    except (PermissionError, OSError):
+        pass
     return JSONResponse({
         "filename": file.filename,
         "detections": detections,
@@ -478,7 +499,10 @@ async def process_legacy_endpoint(
         return JSONResponse(payload)
     finally:
         if os.path.exists(tmp_path):
-            os.remove(tmp_path)
+            try:
+                os.remove(tmp_path)
+            except (PermissionError, OSError):
+                pass
 
 
 @app.post("/process-ensemble")
@@ -610,7 +634,10 @@ async def detect_plate_onnx_endpoint(upload: UploadFile = File(...)):
         })
     finally:
         if os.path.exists(tmp_path):
-            os.remove(tmp_path)
+            try:
+                os.remove(tmp_path)
+            except (PermissionError, OSError):
+                pass
 
 
 @app.post("/export-onnx")
@@ -662,7 +689,10 @@ async def benchmark_onnx_endpoint(upload: UploadFile = File(...), runs: int = Fo
         return JSONResponse(result)
     finally:
         if os.path.exists(tmp_path):
-            os.remove(tmp_path)
+            try:
+                os.remove(tmp_path)
+            except (PermissionError, OSError):
+                pass
 
 
 @app.post("/enrich_report")
@@ -855,7 +885,10 @@ async def analyze_vehicle_endpoint(
         return JSONResponse({'error': str(exc)}, status_code=500)
     finally:
         if _os.path.exists(tmp_path):
-            _os.remove(tmp_path)
+            try:
+                _os.remove(tmp_path)
+            except (PermissionError, OSError):
+                pass
         if not include_clip:
             _os.environ.pop('GROM_VA_CLIP_ENABLED', None)
 
@@ -922,8 +955,9 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
     payload['image_quality'] = image_quality
 
     # Confidence scoring integrado
-    if detections and best_text:
-        det_confidence = max([d.get('confidence', 0.0) for d in detections])
+    if best_text:
+        # Tem OCR válido
+        det_confidence = max([d.get('confidence', 0.0) for d in detections]) if detections else 0.3
         ocr_confidence = payload.get('best', {}).get('avg_conf', 0.0)
 
         scorer = ConfidenceScorer()
@@ -931,15 +965,22 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
             det_confidence, ocr_confidence,
             plate_validation, image_quality
         )
+        
+        # Ajuste: se não há detecção mas placa é válida, não rejeitar automaticamente
+        if not detections and confidence.get('confidence_level') == 'reject':
+            if plate_validation.get('valid') and ocr_confidence > 30.0:
+                confidence['confidence_level'] = 'medium'
+                confidence['recommendation'] = '⚠️ Placa válida mas sem detecção de veículo'
+                confidence['requires_review'] = False
     else:
-        # Sem detecção ou OCR
+        # Sem OCR válido
         confidence = {
             'overall_confidence': 0.0,
             'confidence_level': 'reject',
             'accept': False,
             'requires_review': False,
-            'recommendation': '❌ Sem detecção ou OCR válido',
-            'reason': 'Resultado incompleto',
+            'recommendation': '❌ OCR não disponível',
+            'reason': 'Sem resultado de OCR válido',
         }
 
     payload['confidence_score'] = confidence

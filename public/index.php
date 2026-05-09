@@ -1,5 +1,21 @@
 ﻿<?php
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+$showDiagnostic = isset($_GET['diagnostic']) && (string) $_GET['diagnostic'] === '1';
+
+if (!$showDiagnostic) {
+    if (isset($_SESSION['user_id'])) {
+        header('Location: /upload.php');
+        exit;
+    }
+
+    header('Location: /login.php');
+    exit;
+}
+
 $root = dirname(__DIR__);
 $envFile = $root . DIRECTORY_SEPARATOR . '.env';
 
@@ -33,6 +49,7 @@ $statusTesseract = is_file((string) $tesseract) ? 'OK' : 'NÃO ENCONTRADO';
 ?>
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="utf-8">
     <title>GROM OCR</title>
@@ -48,7 +65,7 @@ $statusTesseract = is_file((string) $tesseract) ? 'OK' : 'NÃO ENCONTRADO';
             border-radius: 10px;
             padding: 24px;
             max-width: 720px;
-            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
         }
 
         .ok {
@@ -68,25 +85,27 @@ $statusTesseract = is_file((string) $tesseract) ? 'OK' : 'NÃO ENCONTRADO';
         }
     </style>
 </head>
+
 <body>
-<div class="card">
-    <h1>GROM OCR</h1>
-    <p>Sistema PHP carregado com sucesso.</p>
+    <div class="card">
+        <h1>GROM OCR</h1>
+        <p>Sistema PHP carregado com sucesso.</p>
 
-    <p><strong>PHP:</strong> <?= htmlspecialchars(PHP_VERSION) ?></p>
+        <p><strong>PHP:</strong> <?= htmlspecialchars(PHP_VERSION) ?></p>
 
-    <p>
-        <strong>Tesseract:</strong>
-        <span class="<?= $statusTesseract === 'OK' ? 'ok' : 'erro' ?>">
-            <?= htmlspecialchars($statusTesseract) ?>
-        </span>
-    </p>
+        <p>
+            <strong>Tesseract:</strong>
+            <span class="<?= $statusTesseract === 'OK' ? 'ok' : 'erro' ?>">
+                <?= htmlspecialchars($statusTesseract) ?>
+            </span>
+        </p>
 
-    <p><strong>Caminho:</strong> <code><?= htmlspecialchars((string) $tesseract) ?></code></p>
+        <p><strong>Caminho:</strong> <code><?= htmlspecialchars((string) $tesseract) ?></code></p>
 
-    <hr>
+        <hr>
 
-    <p>Base pronta para iniciar o módulo OCR de placas veiculares.</p>
-</div>
+        <p>Base pronta para iniciar o módulo OCR de placas veiculares.</p>
+    </div>
 </body>
+
 </html>
