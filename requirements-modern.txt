@@ -1,0 +1,17 @@
+fastapi==0.109.2
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+Pillow==10.1.0
+numpy==1.26.3
+opencv-python==4.9.0.80
+pytesseract==0.3.13
+requests==2.31.0
+fpdf==1.7.2
+FPDF2==2.7.0
+easyocr==1.7.0
+onnxruntime>=1.25.1
+onnx>=1.21.0
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+Werkzeug==3.0.1
