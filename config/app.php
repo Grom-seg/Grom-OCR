@@ -1,8 +1,8 @@
 <?php
-$pythonApiUrl = trim((string) (getenv('GROM_OCR_PYTHON_API_URL') ?: 'http://127.0.0.1:8000'));
+$pythonApiUrl = trim((string) (getenv('GROM_OCR_PYTHON_API_URL') ?: 'http://127.0.0.1:8001'));
 
 if ($pythonApiUrl === '') {
-    $pythonApiUrl = 'http://127.0.0.1:8000';
+    $pythonApiUrl = 'http://127.0.0.1:8001';
 }
 
 $pythonApiUrl = rtrim($pythonApiUrl, '/');

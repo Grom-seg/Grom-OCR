@@ -217,8 +217,13 @@ function buildApiCandidates(string $primaryUrl): array
 
     if (strpos($primaryUrl, ':5000') !== false) {
         $candidates[] = normalizeApiBase(str_replace(':5000', ':8000', $primaryUrl));
+        $candidates[] = normalizeApiBase(str_replace(':5000', ':8001', $primaryUrl));
     } elseif (strpos($primaryUrl, ':8000') !== false) {
         $candidates[] = normalizeApiBase(str_replace(':8000', ':5000', $primaryUrl));
+        $candidates[] = normalizeApiBase(str_replace(':8000', ':8001', $primaryUrl));
+    } elseif (strpos($primaryUrl, ':8001') !== false) {
+        $candidates[] = normalizeApiBase(str_replace(':8001', ':8000', $primaryUrl));
+        $candidates[] = normalizeApiBase(str_replace(':8001', ':5000', $primaryUrl));
     }
 
     if (strpos($primaryUrl, '127.0.0.1') !== false) {
@@ -1350,6 +1355,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     $errorMessage = 'Servico OCR: ' . $decoded['error'];
                 } else {
                     $result = $decoded;
+                    if ($usedApiUrl !== '') {
+                        $result['api_url_used'] = (string) $usedApiUrl;
+                    }
                     if (!isset($result['pericial']) || !is_array($result['pericial'])) {
                         $result['pericial'] = [];
                     }
@@ -2129,9 +2137,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                             <?php if ($manifestUrl !== '') { ?>
                                 <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . $manifestUrl); ?>">Abrir manifesto pericial</a>
                             <?php } ?>
-                            <button id="analysisReportPrintBtn" class="btn btn-secondary" type="button">Imprimir relatório</button>
+                            <button id="analysisReportPrintBtn" class="btn btn-secondary" type="button">Imprimir página (não é o laudo documental)</button>
                         <?php } ?>
                     </div>
+                    <?php if (!empty($result['api_url_used'])) { ?>
+                        <p class="muted" style="margin: 8px 0 0;">API utilizada nesta análise: <?php echo htmlspecialchars((string) $result['api_url_used']); ?></p>
+                    <?php } ?>
+                    <?php if (!empty($result['pdf_report'])) { ?>
+                        <p class="muted" style="margin: 4px 0 0;">Para laudo pericial oficial, use sempre o botão "Abrir PDF documental".</p>
+                    <?php } ?>
                     <div class="analysis-report-header">
                         <div>
                             <p class="analysis-report-eyebrow">Relatório automático</p>
