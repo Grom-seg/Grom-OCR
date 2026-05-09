@@ -934,6 +934,11 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
 
     payload['plate_validation'] = plate_validation
 
+    # Adiciona padrão da placa ao objeto best para compatibilidade com PHP
+    if plate_validation.get('pattern'):
+        if isinstance(payload.get('best'), dict):
+            payload['best']['pattern'] = plate_validation['pattern']
+
     # Análise de qualidade
     if image_path and os.path.exists(image_path):
         analyzer = ImageQualityAnalyzer()
@@ -965,7 +970,7 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
             det_confidence, ocr_confidence,
             plate_validation, image_quality
         )
-        
+
         # Ajuste: se não há detecção mas placa é válida, não rejeitar automaticamente
         if not detections and confidence.get('confidence_level') == 'reject':
             if plate_validation.get('valid') and ocr_confidence > 30.0:
