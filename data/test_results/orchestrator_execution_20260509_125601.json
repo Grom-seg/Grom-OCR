@@ -1,0 +1,18 @@
+{
+  "started_at_utc": "2026-05-09T12:56:01.518079+00:00",
+  "finished_at_utc": "2026-05-09T12:56:01.523200+00:00",
+  "duration_sec": 0.01,
+  "total_tasks": 1,
+  "executed_tasks": 0,
+  "failed_tasks": 1,
+  "status": "failure",
+  "results": [
+    {
+      "task_id": "revalidate_gates",
+      "name": "Revalidação de Gates Forenses",
+      "status": "dry_run",
+      "returncode": 0
+    }
+  ],
+  "dry_run": true
+}

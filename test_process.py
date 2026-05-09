@@ -1,10 +1,12 @@
 import json
+import os
 import time
 from pathlib import Path
 
 import requests
 
-API_URL = "http://127.0.0.1:5000/process"
+API_BASE = os.environ.get("GROM_OCR_TEST_API_BASE", "http://127.0.0.1:8000").rstrip("/")
+API_URL = f"{API_BASE}/process"
 IMG_PATH = r"C:\Grom_OCR\data\uploads\20171119_154214_ch6-1024x576.jpg"
 OUT_PATH = r"C:\Grom_OCR\data\test_results\last_process_test.json"
 

@@ -1,14 +1,16 @@
 import json
+import os
 import time
 from pathlib import Path
 
 import requests
 
-API_URL = "http://127.0.0.1:5000/process_simple"
+API_BASE = os.environ.get("GROM_OCR_TEST_API_BASE", "http://127.0.0.1:8000").rstrip("/")
+API_URL = f"{API_BASE}/process"
 IMG_PATH = r"C:\Grom_OCR\data\uploads\20171119_154214_ch6-1024x576.jpg"
 
 
-def test_process_simple_regions_returns_json():
+def test_process_regions_returns_json():
     start = time.time()
     with open(IMG_PATH, "rb") as f:
         resp = requests.post(
@@ -35,6 +37,6 @@ def test_process_simple_regions_returns_json():
     data = resp.json()
 
     assert isinstance(data, dict), "payload JSON deve ser um objeto"
-    assert "ocr_results" in data, "payload deve conter 'ocr_results'"
-    assert "targets" in data, "payload deve conter 'targets' (lista)"
-    assert isinstance(data.get("targets", []), list), "targets deve ser uma lista"
+    assert "regions_tested" in data, "payload deve conter 'regions_tested'"
+    assert "detections" in data, "payload deve conter 'detections'"
+    assert isinstance(data.get("detections", []), list), "detections deve ser uma lista"

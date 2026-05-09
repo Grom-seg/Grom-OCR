@@ -240,12 +240,14 @@ Se o seu MySQL local estiver com usuario `root` sem senha, `GROM_OCR_DB_PASS` po
 8. Opcional (sem depender de politica de script): execute `C:\Grom_OCR\tools\start_grom_ocr.cmd`
 9. Para autostart no login do Windows, execute `powershell -ExecutionPolicy Bypass -File C:\Grom_OCR\tools\install_grom_ocr_autostart.ps1`
 10. Para remover o autostart, execute `powershell -ExecutionPolicy Bypass -File C:\Grom_OCR\tools\uninstall_grom_ocr_autostart.ps1`
-11. Na primeira inicializacao, aguarde o carregamento dos motores OCR (pode levar ate ~90s) e valide em `http://127.0.0.1:5000/health` antes do primeiro upload.
+11. Na primeira inicializacao, aguarde o carregamento dos motores OCR (pode levar ate ~90s) e valide em `http://127.0.0.1:8000/health` antes do primeiro upload.
 
 `tools/start_ocr_api.py` ja prepara o Tesseract portatil extraido em `tools/tesseract-portable` e usa `waitress` quando disponivel para manter a API em um unico processo no Windows.
 Ao subir por `start_ocr_api.py` ou `start_grom_ocr.*`, o modo profissional entra com um perfil mais rapido por padrao: `easyocr` e `rapidocr` ficam habilitados, `GROM_OCR_FORCE_ENSEMBLE=0`, e o Tesseract roda como OCR de linha unica para placa (ANPR/LPR) para reduzir latencia sem perder o fallback inteligente. Os motores `PaddleOCR`, `TrOCR` e `docTR` continuam em opt-in por padrao para evitar boot pesado sem ganho comprovado no acervo atual.
+Por padrao, o endpoint FastAPI `/process` delega para o pipeline forense consolidado (`python/ocr_agent.py`) via `GROM_OCR_USE_LEGACY_PIPELINE=1`, mantendo compatibilidade de rota e reduzindo risco de regressao de acuracia.
 O arranque agora e idempotente: se a API ou o PHP ja estiverem rodando, o script apenas confirma o estado e nao cria instancias duplicadas. O autostart de login usa a chave `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run`.
 Perfil padrao de calibracao EasyOCR:
+
 - `GROM_OCR_EASYOCR_ALLOWLIST=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`
 - `GROM_OCR_EASYOCR_DECODER=greedy`
 - `GROM_OCR_EASYOCR_BEAM_WIDTH=8`
@@ -253,12 +255,14 @@ Perfil padrao de calibracao EasyOCR:
 - `GROM_OCR_EASYOCR_REGION_EARLY_SCORE=106`
 
 Modo de comparacao profissional (todos os motores por upload):
+
 - `GROM_OCR_FORCE_ENSEMBLE=1`
 - `GROM_OCR_ACCURACY_FIRST=1` (varre mais recortes e desativa atalhos de decisao cedo, para auditoria pericial mais exaustiva)
 - `GROM_OCR_ENSEMBLE_TOP_PER_ENGINE=4`
 - `GROM_OCR_ENSEMBLE_WEIGHTS=easyocr=1.0,rapidocr=0.96,paddleocr=0.98,tesseract=0.92,trocr=0.8,doctr=0.8,plate_recognizer=1.2`
 
 Perfil Plate Recognizer (quando `PLATE_RECOGNIZER_TOKEN` estiver configurado):
+
 - `PLATE_RECOGNIZER_TIMEOUT=15`
 - `GROM_OCR_PLATE_RECOGNIZER_DYNAMIC_VARIANTS=1`
 - `GROM_OCR_PLATE_RECOGNIZER_MAX_VARIANTS=3`
@@ -271,11 +275,13 @@ Perfil Plate Recognizer (quando `PLATE_RECOGNIZER_TOKEN` estiver configurado):
 - `GROM_OCR_PLATE_RECOGNIZER_MIN_VARIANT_HITS=2`
 
 Perfil padrao do 3o motor (RapidOCR):
+
 - `GROM_OCR_ENABLE_RAPIDOCR=1`
 - `GROM_OCR_RAPIDOCR_HIT_BONUS=2.0`
 - `GROM_OCR_RAPIDOCR_REGION_EARLY_SCORE=105`
 
 Perfil padrao do 4o motor (PaddleOCR, desligado por padrao):
+
 - `GROM_OCR_ENABLE_PADDLEOCR=0`
 - `GROM_OCR_PADDLEOCR_LANG=en`
 - `GROM_OCR_PADDLEOCR_USE_GPU=0`
@@ -292,6 +298,7 @@ Perfil padrao do 4o motor (PaddleOCR, desligado por padrao):
 - `GROM_OCR_PADDLEOCR_MIN_VARIANT_HITS=2`
 
 Perfil padrao do 5o motor (TrOCR, desligado por padrao):
+
 - `GROM_OCR_ENABLE_TROCR=0`
 - `GROM_OCR_TROCR_MODEL_ID=microsoft/trocr-small-printed`
 - `GROM_OCR_TROCR_MAX_NEW_TOKENS=24`
@@ -301,6 +308,7 @@ Perfil padrao do 5o motor (TrOCR, desligado por padrao):
 - `GROM_OCR_TROCR_BASE_CONFIDENCE=54`
 
 Perfil padrao do 6o motor (docTR, desligado por padrao):
+
 - `GROM_OCR_ENABLE_DOCTR=0`
 - `GROM_OCR_DOCTR_REGION_LIMIT=2`
 - `GROM_OCR_DOCTR_HIT_BONUS=1.9`
@@ -317,6 +325,7 @@ Perfil padrao do 6o motor (docTR, desligado por padrao):
 Os motores `PaddleOCR`, `TrOCR` e `docTR` ficam desligados por padrao no fluxo principal porque o benchmark real recente nao trouxe ganho consistente sobre `RapidOCR` no acervo testado. Se quiser reavaliar, habilite explicitamente por ambiente e rode o benchmark direto antes de promover a mudanca.
 
 Detector opcional de placa via Ultralytics YOLO:
+
 - `GROM_OCR_ENABLE_YOLO_DETECTOR=1`
 - `GROM_OCR_YOLO_MODEL_PATH=C:\caminho\para\modelo_placa.pt`
 - `GROM_OCR_YOLO_CONFIDENCE=0.35`
@@ -329,6 +338,7 @@ Detector opcional de placa via Ultralytics YOLO:
 Se o caminho nao for informado, o bootstrap usa o modelo embarcado em `models/yolov8n_plate.pt` quando ele estiver presente no repositorio.
 
 Entrada PDF (imagem dentro de PDF):
+
 - `GROM_OCR_ENABLE_PDF_INPUT=1`
 - `GROM_OCR_PDF_MAX_PAGES=3`
 - `GROM_OCR_PDF_RENDER_SCALE=2.4`
@@ -342,6 +352,7 @@ Entrada PDF (imagem dentro de PDF):
 - `GROM_OCR_SCENE_PREPROCESS_CALIBRATION_PATH=C:\Grom_OCR\data\scene_preprocess_calibration.json`
 
 Seguranca da entrada / upload:
+
 - `GROM_OCR_ALLOWED_INPUT_EXTENSIONS=jpg,jpeg,png,webp,bmp,tif,tiff,pdf`
 - `GROM_OCR_MAX_UPLOAD_MB=80`
 - `GROM_OCR_MAX_UPLOAD_BYTES=` (opcional, sobrescreve o limite em bytes)
@@ -349,6 +360,7 @@ Seguranca da entrada / upload:
 - quando o arquivo passa, o relatório passa a exibir `input_meta.input_security` e `pericial.cross_checks.capture_integrity`
 
 Calibracao fina da integridade da captura:
+
 - `GROM_OCR_CAPTURE_INTEGRITY_REVIEW_THRESHOLD=68`
 - `GROM_OCR_CAPTURE_INTEGRITY_CRITICAL_THRESHOLD=52`
 - `GROM_OCR_CAPTURE_INTEGRITY_INPUT_PENALTY=12`
@@ -366,6 +378,7 @@ Calibracao fina da integridade da captura:
 - a nota e a faixa aparecem na tela, no PDF e no bloco `capture_integrity`
 
 Calibracao do detector / recorte da placa:
+
 - `GROM_OCR_PLATE_DETECTION_CALIBRATION_PATH=C:\Grom_OCR\data\plate_detector_calibration.json`
 - `GROM_OCR_OCR_RERANKING_CALIBRATION_PATH=C:\Grom_OCR\data\ocr_reranking_calibration.json`
 - `GROM_OCR_PLATE_DETECTION_ASPECT_TARGET=4.2`
@@ -418,11 +431,13 @@ Subconjunto duro separado:
 `C:\Grom_OCR\data\ocr_reranking_benchmark_manifest_hard.json`
 
 Microcalibracao isolada por amostra:
+
 - `GROM_OCR_MICROCALIBRATION_PATH=C:\Grom_OCR\data\ocr_microcalibration.json`
 - use para ratificar manualmente casos isolados por hash ou nome de arquivo
 - a microcalibracao preserva o OCR bruto para auditoria e aplica apenas o texto final ratificado no laudo
 
 Perfil visual do veiculo (hipoteses por imagem):
+
 - `GROM_OCR_VISUAL_PROFILE_ENABLE=1`
 - `GROM_OCR_VISUAL_PROFILE_MAX_SIDE=1280`
 - `GROM_OCR_VISUAL_PROFILE_MIN_CONFIDENCE=42`
@@ -438,6 +453,7 @@ Perfil visual do veiculo (hipoteses por imagem):
 - `GROM_OCR_VISUAL_FIPE_TIMEOUT=3`
 
 Modo forense profissional:
+
 - `GROM_OCR_CHAIN_SIGNING_KEY=<segredo forte para HMAC da cadeia de custodia>`
 - Prioridade recomendada de fontes:
   `Senatran/SERPRO -> Prodesp (Detran-SP) -> fontes externas autorizadas -> complemento FIPE`
@@ -513,6 +529,7 @@ Modo forense profissional:
   `GROM_OCR_NOMEROFF_COMPARE_TOKEN_HEADER=Authorization` (opcional)
 
 Modo anti-travamento (padrao recomendado):
+
 - `GROM_OCR_ALLOW_HEAVY_COLDSTART=0`
 - `GROM_OCR_TROCR_LOCAL_ONLY=1`
 - `GROM_OCR_TESSERACT_MAX_VARIANTS=14`
@@ -526,10 +543,101 @@ Modo anti-travamento (padrao recomendado):
 
 - `GET /health`: checagem rapida da API Python
 - `POST /warmup_heavy`: aquece TrOCR/docTR sem travar a primeira pesquisa
-- `POST /process`: pipeline completa de OCR
+- `POST /process`: pipeline completa de OCR (delegada ao pipeline pericial legado por padrão)
+- `POST /process-ensemble`: pipeline com detecção em ensemble + orquestração forense
+- `POST /full-pipeline`: pipeline completo orquestrado ponta a ponta
 - `POST /enrich_report`: atualiza PDF com dados externos de veiculo
 - `POST /process_simple`: pipeline simplificada
 - `GET /pdf/<arquivo>`: download do relatorio gerado
+
+## Orquestração Forense e Auditoria Institucional
+
+A partir da v1.0, o GROM OCR implementa **orquestração centralizada** com hierarquia de tarefas, delegação robusta e cadeia de custódia digital para garantir conformidade institucional:
+
+### Arquitetura de Orquestração
+
+```
+Entrada (imagem de placa)
+    ↓
+[ForensicOrchestrator]
+    ├── Cria contexto com analysis_id único (UUID)
+    ├── Define hierarquia de tarefas com dependências (topológico)
+    ├── Tenta delegação ao pipeline pericial legado (mais confiável)
+    ├── Em falha: executa fallback local com rastreamento
+    └── Consolida com cadeia de custódia digital
+    ↓
+Saída (análise + auditoria + compliance)
+```
+
+**Benefícios:**
+
+- ✅ **Máxima Confiabilidade**: Pipeline legado é mais confiável e testado
+- ✅ **Cadeia de Custódia**: Cada operação é auditada com timestamp UTC
+- ✅ **Rastreabilidade Total**: Saber exatamente o que foi executado e por quê
+- ✅ **Conformidade Institucional**: Preparado para adopção por órgãos públicos
+- ✅ **Graceful Degradation**: Se legado falhar, sistema continua com fallback
+
+### Revalidação Forense com Gates de Qualidade
+
+Executar revalidação completa antes de promover para produção:
+
+```bash
+# Modo completo (gates + integração + relatório)
+python tools/orchestrator_executor.py --mode full
+
+# Apenas gates de qualidade
+python tools/orchestrator_executor.py --mode gates-only
+
+# Apenas bateria de calibração
+python tools/orchestrator_executor.py --mode calibration
+
+# Modo simulação (dry-run)
+python tools/orchestrator_executor.py --mode full --dry-run
+```
+
+**Resultado:**
+
+- `data/test_results/forensic_revalidation_latest.json` - Métricas estruturadas
+- `data/test_results/forensic_revalidation_latest.md` - Sumário para apresentação
+- `data/test_results/institutional_assessment_latest.json` - Avaliação institucional
+- `logs/orchestrator_executor.log` - Log completo de execução
+
+### Policy de Gates de Qualidade
+
+Editar `data/phase1_quality_gate_policy.json` para ajustar conformidade por instituição:
+
+```json
+{
+  "phase": "1",
+  "gates": {
+    "ocr_text_confidence_min": {
+      "value": 0.75,
+      "description": "Confiança mínima de OCR (0.0-1.0)",
+      "required": true
+    },
+    "consensus_ratio_min": {
+      "value": 0.80,
+      "description": "Proporção mínima de consenso entre motores",
+      "required": true
+    },
+    "pattern_valid": {
+      "value": true,
+      "description": "Placa deve seguir padrão legal válido",
+      "required": true
+    }
+  }
+}
+```
+
+### Documentação de Padrões
+
+Para contribuidores e outras instituições:
+
+- **[ARCHITECTURE_PERICIAL.md](ARCHITECTURE_PERICIAL.md)** - Arquitetura completa com exemplos
+- **[CONTRIBUTING_PATTERNS.md](CONTRIBUTING_PATTERNS.md)** - Padrões de desenvolvimento e orquestração
+- **[fastapi_backend/orchestrator.py](fastapi_backend/orchestrator.py)** - Código-fonte do orquestrador
+
+## Endpoints uteis
 
 ## Script avancado de identificacao visual
 
@@ -538,6 +646,7 @@ Para analise dedicada de fabricante/modelo com comparacao entre modelos parecido
 `C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\vehicle_visual_investigator.py C:\caminho\imagem.jpg`
 
 Opcoes comuns:
+
 - `--search-provider auto|serpapi|brave|google_cse|none`
 - `--skip-vision-service` (roda apenas heuristica local)
 - `--output-json C:\caminho\saida.json`
@@ -547,8 +656,9 @@ Benchmark do pre-processamento de cena:
 `C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\benchmark_scene_preprocess.py --manifest C:\Grom_OCR\data\scene_preprocess_benchmark_manifest.json --output C:\Grom_OCR\data\scene_preprocess_benchmark_results.json`
 
 Opcional:
+
 - `--route /process | /process_simple`
-- `--api-url http://127.0.0.1:5000` para usar a API em execucao
+- `--api-url http://127.0.0.1:8000` para usar a API em execucao
 - `--export-calibration C:\Grom_OCR\data\scene_preprocess_calibration.generated.json`
 
 Os manifests agora sao gerados a partir de `C:\Grom_OCR\data\benchmark_catalog.json`, com um subconjunto duro separado em `C:\Grom_OCR\data\scene_preprocess_benchmark_manifest_hard.json`.
@@ -561,6 +671,18 @@ Suite permanente de benchmark:
 
 `C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\run_benchmark_suite.py --mode all`
 
+Suite com gate de regressao (politica oficial):
+
+`C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\run_benchmark_suite.py --mode hard --policy-file C:\Grom_OCR\data\phase1_quality_gate_policy.json --skip-refresh-manifests`
+
+Bateria canonica com gate:
+
+`C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\run_image_calibration_battery.py --policy-file C:\Grom_OCR\data\phase1_quality_gate_policy.json`
+
+Orquestrador unico de revalidacao (gera JSON + Markdown consolidado):
+
+`C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\revalidate_forensic_quality.py --policy-file C:\Grom_OCR\data\phase1_quality_gate_policy.json --skip-refresh-manifests`
+
 Opcional para incluir os subconjuntos OCR reais em modo direto:
 
 `C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\run_benchmark_suite.py --mode all --include-real`
@@ -569,6 +691,7 @@ O runner regenera os manifests a partir do catalogo mestre por padrao, grava cad
 Observacao: a suite e longa por desenho, porque mede os mesmos cenarios fixos de forma reproduzivel e auditavel.
 
 Fluxo implementado no script:
+
 - entrada + pre-processamento (brilho, contraste, nitidez) e recorte automatico do veiculo
 - inferencia de categoria veicular (`automovel`, `motocicleta`, `caminhao`) com confianca e sinais tecnicos
 - analise visual inicial por assinatura de componentes (emblema, grade, farois, lanternas, portas, capo, tampa traseira, carroceria)
@@ -638,5 +761,5 @@ Fluxo implementado no script:
 
 - estrutura completa do projeto revisada
 - arquivos Python compilam (`py_compile`)
-- API OCR validada em `http://127.0.0.1:5000/health`
+- API OCR validada em `http://127.0.0.1:8000/health`
 - fluxo web validado em `http://127.0.0.1:8080` (login, upload, OCR e historico)

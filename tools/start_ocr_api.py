@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -14,10 +15,10 @@ if YOLO_MODEL_PATH.exists():
     os.environ.setdefault('GROM_OCR_YOLO_MODEL_PATH', str(YOLO_MODEL_PATH))
 os.environ.setdefault('GROM_OCR_ENABLE_EASYOCR', '1')
 os.environ.setdefault('GROM_OCR_ENABLE_RAPIDOCR', '1')
-os.environ.setdefault('GROM_OCR_ENABLE_TROCR', '0')
-os.environ.setdefault('GROM_OCR_ENABLE_DOCTR', '0')
-os.environ.setdefault('GROM_OCR_ENABLE_PADDLEOCR', '0')
-os.environ.setdefault('GROM_OCR_FORCE_ENSEMBLE', '0')
+os.environ.setdefault('GROM_OCR_ENABLE_TROCR', '1')
+os.environ.setdefault('GROM_OCR_ENABLE_DOCTR', '1')
+os.environ.setdefault('GROM_OCR_ENABLE_PADDLEOCR', '1')
+os.environ.setdefault('GROM_OCR_FORCE_ENSEMBLE', '1')
 os.environ.setdefault('GROM_OCR_ALLOW_HEAVY_COLDSTART', '0')
 os.environ.setdefault('GROM_OCR_TROCR_LOCAL_ONLY', '1')
 os.environ.setdefault('GROM_OCR_TESSERACT_MAX_VARIANTS', '6')
@@ -41,20 +42,22 @@ os.environ.setdefault('GROM_OCR_VISUAL_FIPE_ENABLE', '1')
 os.environ.setdefault('GROM_OCR_VISUAL_FIPE_BASE_URL', 'https://fipe.parallelum.com.br/api/v2')
 os.environ.setdefault('GROM_OCR_VISUAL_FIPE_TIMEOUT', '3')
 
-sys.path.insert(0, str(PROJECT_ROOT / 'python'))
+api_port = int(os.environ.get('GROM_OCR_API_PORT', '8000'))
+api_host = os.environ.get('GROM_OCR_API_HOST', '127.0.0.1')
 
-import ocr_agent  # noqa: E402
+print(f'BOOT_TESSERACT_CMD={os.environ.get("GROM_OCR_TESSERACT_CMD", "")}', flush=True)
+print(f'BOOT_TESSDATA_PREFIX={os.environ.get("TESSDATA_PREFIX", "")}', flush=True)
+print(f'BOOT_API=http://{api_host}:{api_port}', flush=True)
 
-try:
-    from waitress import serve  # type: ignore
-except Exception:
-    serve = None
+cmd = [
+    sys.executable,
+    '-m',
+    'uvicorn',
+    'fastapi_backend.main:app',
+    '--host',
+    api_host,
+    '--port',
+    str(api_port),
+]
 
-
-print(f'BOOT_TESSERACT_CMD={ocr_agent.TESSERACT_CMD}', flush=True)
-print(f'BOOT_TESSDATA_PREFIX={os.environ.get("TESSDATA_PREFIX")}', flush=True)
-
-if serve is not None:
-    serve(ocr_agent.app, host='0.0.0.0', port=5000)
-else:
-    ocr_agent.app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
+raise SystemExit(subprocess.call(cmd, cwd=str(PROJECT_ROOT)))

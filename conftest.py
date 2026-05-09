@@ -6,11 +6,13 @@ from typing import Optional
 
 import pytest
 import requests
+from urllib.parse import urlparse
 
-API_BASE = "http://127.0.0.1:5000"
+API_BASE = os.environ.get("GROM_OCR_TEST_API_BASE", "http://127.0.0.1:8000").rstrip("/")
 HEALTH_URL = f"{API_BASE}/health"
 ROOT_URL = f"{API_BASE}/"
 START_SCRIPT = os.path.join("tools", "start_ocr_api.py")
+API_PORT = int(urlparse(API_BASE).port or 8000)
 
 STARTUP_TIMEOUT_S = 120
 POLL_INTERVAL_S = 1.5
@@ -94,8 +96,8 @@ def ensure_ocr_api() -> None:
     if _try_root_json_service() is not None:
         return
 
-    # Mata qualquer coisa que esteja na porta 5000 (dashboard/stale/...)
-    pids = _netstat_listening_pids(5000)
+    # Mata qualquer coisa que esteja na porta-alvo da API
+    pids = _netstat_listening_pids(API_PORT)
     if pids:
         _taskkill_pids(pids)
         time.sleep(1)

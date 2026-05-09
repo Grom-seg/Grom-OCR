@@ -1,0 +1,1691 @@
+{
+  "generated_at_utc": "2026-05-09T12:44:00.498428Z",
+  "manifest": "C:\\Grom_OCR\\data\\ocr_reranking_benchmark_manifest_hard.json",
+  "summary": {
+    "total": 18,
+    "matched": 0,
+    "accuracy_percent": 0.0,
+    "top_candidate_match_count": 0,
+    "top_candidate_match_rate_percent": 0.0,
+    "expected_in_top_candidates_count": 1,
+    "expected_in_top_candidates_rate_percent": 5.56,
+    "avg_expected_rank": 5.0,
+    "median_expected_rank": 5.0,
+    "avg_best_weighted_support_matched": 0.0,
+    "avg_best_weighted_support_mismatched": 0.0,
+    "best_engine_counts": {},
+    "per_engine_summary": {
+      "tesseract": {
+        "total": 11,
+        "top_match": 0,
+        "candidate_found": 1,
+        "top_match_rate_percent": 0.0,
+        "candidate_recall_rate_percent": 9.09,
+        "mean_candidate_rank": 6.0,
+        "median_candidate_rank": 6.0,
+        "mean_top_score": 15.78,
+        "mean_top_confidence": 5.34
+      }
+    }
+  },
+  "results": [
+    {
+      "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 1
+    },
+    {
+      "image": "data/uploads/10458347_x216.jpg",
+      "kind": "scene",
+      "notes": "Cena veicular real com placa conhecida",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "PXZ2T99",
+      "expected_in_top_candidates_rank": 5,
+      "top_candidate_count": 7,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "tesseract": {
+          "text": "PXZ2991",
+          "top_match": false,
+          "candidate_rank": 6,
+          "candidate_found": true,
+          "candidate_count": 10,
+          "best_score": 92.2,
+          "avg_conf": 50.0
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 36.67,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.183
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "raw_detected_3",
+          "score": 74.93,
+          "style_bonus_total": 0.375,
+          "style_rank_priority": 0.745,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.745,
+          "text": "PXZ2T99",
+          "weighted_support": 0.18
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 50.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.793
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 92.2,
+          "style_bonus_total": -0.742,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ2991",
+          "weighted_support": 0.79
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 36.67,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.241
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 76.77,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ2799",
+          "weighted_support": 0.24
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.084
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 42.2,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "BPX2999",
+          "weighted_support": 0.08
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.084
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Antigo",
+          "region": "raw_detected_3",
+          "score": 42.2,
+          "style_bonus_total": -0.371,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "PXZ9391",
+          "weighted_support": 0.08
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 34.75,
+          "best_law_score": 55.4,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.044
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "raw_detected_3",
+          "score": 39.82,
+          "style_bonus_total": -0.076,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "IFXK70C",
+          "weighted_support": 0.04
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 57.33,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.019
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1783,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.098
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "center_guess",
+          "score": 51.73,
+          "style_bonus_total": -0.076,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "JXZ939",
+          "weighted_support": 0.02
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "PXZ2991",
+          "score": 92.2,
+          "avg_conf": 50.0,
+          "pattern": "Antigo",
+          "candidate_count": 10
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 2
+    },
+    {
+      "image": "data/uploads/sddefault.jpg",
+      "kind": "scene",
+      "notes": "Cena real adicional com OCR historicamente mais instavel",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "forensic_traits_potencialmente_relevantes",
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 3
+    },
+    {
+      "image": "data/uploads/plate_test_degraded.png",
+      "kind": "crop",
+      "notes": "Recorte degradado para calibracao e regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "IBC1Z34",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 6,
+      "consensus_ratio": 100.0,
+      "consensus_count": 1,
+      "engines_considered": 1,
+      "engine_matches": {
+        "tesseract": {
+          "text": "IBC1234",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 6,
+          "best_score": 81.4,
+          "avg_conf": 8.75
+        }
+      },
+      "top_candidates": [
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 8.75,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.21
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_guess",
+          "score": 79.56,
+          "style_bonus_total": 0.368,
+          "style_rank_priority": 0.738,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.738,
+          "text": "IBC1Z34",
+          "weighted_support": 0.21
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.079
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Mercosul",
+          "region": "center_guess",
+          "score": 38.26,
+          "style_bonus_total": 0.368,
+          "style_rank_priority": 0.738,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.738,
+          "text": "GBC1Z34",
+          "weighted_support": 0.08
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 8.75,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.545
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 81.4,
+          "style_bonus_total": -0.724,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "IBC1234",
+          "weighted_support": 0.55
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 0.0,
+          "best_law_score": 100.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.099
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Antigo",
+          "region": "center_guess",
+          "score": 40.1,
+          "style_bonus_total": -0.362,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "GBC1234",
+          "weighted_support": 0.1
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 20.0,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.003
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "front_center_focus",
+          "score": 31.3,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "H1L04",
+          "weighted_support": 0.0
+        },
+        {
+          "agreement_ratio": 100.0,
+          "avg_conf": 24.25,
+          "best_law_score": 50.0,
+          "engine": "ensemble",
+          "engine_contributions": {
+            "tesseract": 0.001
+          },
+          "engine_weights": {
+            "tesseract": {
+              "factor": 0.1388,
+              "mode": "noisy",
+              "reason": "tesseract_warning_low_reliability",
+              "weight": 0.0763
+            }
+          },
+          "pattern": "Indefinido",
+          "region": "center_guess",
+          "score": 18.65,
+          "style_bonus_total": -0.074,
+          "style_rank_priority": 0.0,
+          "support_count": 1,
+          "support_engines": [
+            "tesseract"
+          ],
+          "support_rank": 1.0,
+          "text": "8C123A",
+          "weighted_support": 0.0
+        }
+      ],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "IBC1234",
+          "score": 81.4,
+          "avg_conf": 8.75,
+          "pattern": "Antigo",
+          "candidate_count": 6
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 1,
+        "engines_without_text": 0,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": true,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 100.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 4
+    },
+    {
+      "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 5
+    },
+    {
+      "image": "data/uploads/placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 6
+    },
+    {
+      "image": "data/uploads/placa_sddefault.jpg",
+      "kind": "crop",
+      "notes": "ROI de placa gerada a partir de cena real",
+      "status_code": 200,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 7
+    },
+    {
+      "image": "data/uploads/placa_plate_test_degraded.jpg",
+      "kind": "crop",
+      "notes": "ROI degradada de placa para regressao",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 8
+    },
+    {
+      "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "integridade_da_captura_em_atencao",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 9
+    },
+    {
+      "image": "data/uploads/placa_placa_10458347_x216.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop usado para testar robustez",
+      "status_code": 200,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 10
+    },
+    {
+      "image": "data/uploads/placa_placa_plate_test.jpg",
+      "kind": "crop",
+      "notes": "Crop de crop de placa limpa",
+      "status_code": 200,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {
+        "tesseract": {
+          "text": "",
+          "top_match": false,
+          "candidate_rank": null,
+          "candidate_found": false,
+          "candidate_count": 0,
+          "best_score": 0.0,
+          "avg_conf": 0.0
+        }
+      },
+      "top_candidates": [],
+      "engine_blocks": {
+        "tesseract": {
+          "text": "",
+          "score": 0.0,
+          "avg_conf": 0.0,
+          "pattern": "Indefinido",
+          "candidate_count": 0
+        }
+      },
+      "warnings": [
+        "visual_profile_review_required"
+      ],
+      "ocr_engine_summary": {
+        "engines_available": 2,
+        "engines_configured": 2,
+        "engines_disabled": 0,
+        "engines_executed": 1,
+        "engines_failed": 0,
+        "engines_ready": 2,
+        "engines_registered": 2,
+        "engines_skipped": 1,
+        "engines_unavailable": 0,
+        "engines_with_text": 0,
+        "engines_without_text": 1,
+        "reranking_calibration_load_error": "",
+        "reranking_calibration_path": "C:\\Grom_OCR\\data\\ocr_reranking_calibration.json",
+        "reranking_calibration_source": "file",
+        "reranking_calibration_version": "2026-04-12-r1"
+      },
+      "ocr_engine_status": {
+        "geometry_refine": {
+          "available": true,
+          "enabled": true,
+          "executed": false,
+          "has_text": false,
+          "reason": "tail_digit_geometry_not_applicable",
+          "status": "skipped"
+        },
+        "tesseract": {
+          "available": true,
+          "enabled": true,
+          "executed": true,
+          "has_text": false,
+          "reason": "ok",
+          "status": "executed"
+        }
+      },
+      "assessment": {
+        "agreement_ratio_percent": 0.0,
+        "confidence_percent": 0.0,
+        "evidence_level": "BAIXA",
+        "manual_review_required": true,
+        "reasons": [
+          "nenhum_resultado_aceito",
+          "confianca_abaixo_limiar",
+          "revisao_humana_obrigatoria",
+          "padrao_legal_nao_confirmado",
+          "achados_periciais_criticos"
+        ]
+      },
+      "pericial_status": "BAIXA",
+      "index": 11
+    },
+    {
+      "image": "data/uploads/relatorio_sddefault.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena sddefault",
+      "status_code": 400,
+      "expected_text": "AMX3640",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 12
+    },
+    {
+      "image": "data/uploads/relatorio_20171119_154214_ch6-1024x576.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena 20171119",
+      "status_code": 400,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 13
+    },
+    {
+      "image": "data/uploads/relatorio_10458347_x216.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF real gerado a partir da cena 10458347",
+      "status_code": 400,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 14
+    },
+    {
+      "image": "data/uploads/relatorio_plate_test_degraded.pdf",
+      "kind": "pdf",
+      "notes": "Relatorio PDF degradado para regressao dura",
+      "status_code": 400,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 15
+    },
+    {
+      "image": "data/uploads/relatorio_placa_20171119_154214_ch6-1024x576.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa gerado a partir da cena 20171119",
+      "status_code": 400,
+      "expected_text": "DXP3457",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 16
+    },
+    {
+      "image": "data/uploads/relatorio_placa_10458347_x216.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa gerado a partir da cena 10458347",
+      "status_code": 400,
+      "expected_text": "PXZ9391",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 17
+    },
+    {
+      "image": "data/uploads/relatorio_placa_plate_test.pdf",
+      "kind": "pdf",
+      "notes": "PDF de placa limpa para reforcar a regressao",
+      "status_code": 400,
+      "expected_text": "ABC1234",
+      "observed_best_text": "",
+      "observed_best_engine": "",
+      "observed_best_score": 0.0,
+      "observed_best_confidence": 0.0,
+      "observed_best_weighted_support": 0.0,
+      "observed_best_support_count": 0,
+      "observed_best_selection_reason": "",
+      "observed_best_acceptance_reason": "",
+      "matched": false,
+      "top_candidate_text": "",
+      "expected_in_top_candidates_rank": null,
+      "top_candidate_count": 0,
+      "consensus_ratio": 0.0,
+      "consensus_count": 0,
+      "engines_considered": 0,
+      "engine_matches": {},
+      "top_candidates": [],
+      "engine_blocks": {},
+      "warnings": [],
+      "ocr_engine_summary": {},
+      "ocr_engine_status": {},
+      "assessment": {},
+      "pericial_status": "",
+      "index": 18
+    }
+  ]
+}

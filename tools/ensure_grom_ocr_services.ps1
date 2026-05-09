@@ -2,7 +2,7 @@ param(
     [int]$PhpPort = 8080,
     [switch]$PythonOnly,
     [switch]$PhpOnly,
-    [int]$ApiPort = 5000,
+    [int]$ApiPort = 8000,
     [int]$HealthTimeoutSec = 90,
     [switch]$Quiet
 )
@@ -18,7 +18,8 @@ function Write-Status {
     if ($Quiet) { return }
     if ($Warning) {
         Write-Warning $Message
-    } else {
+    }
+    else {
         Write-Host $Message
     }
 }
@@ -28,7 +29,8 @@ function Test-PortListening {
     try {
         $connections = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue
         return [bool]$connections
-    } catch {
+    }
+    catch {
         return $false
     }
 }
@@ -38,7 +40,8 @@ function Test-ApiHealth {
     try {
         $health = Invoke-RestMethod ("http://127.0.0.1:{0}/health" -f $Port) -TimeoutSec 2
         return ($health.status -eq 'ok')
-    } catch {
+    }
+    catch {
         return $false
     }
 }
@@ -53,8 +56,8 @@ function Resolve-PhpExe {
     $wingetRoot = Join-Path $env:LOCALAPPDATA 'Microsoft\WinGet\Packages'
     if (Test-Path $wingetRoot) {
         $wingetPhp = Get-ChildItem -Path $wingetRoot -Filter 'php.exe' -Recurse -ErrorAction SilentlyContinue |
-            Where-Object { $_.FullName -like '*PHP.PHP.*' } |
-            Select-Object -ExpandProperty FullName
+        Where-Object { $_.FullName -like '*PHP.PHP.*' } |
+        Select-Object -ExpandProperty FullName
         if ($wingetPhp) {
             $phpCandidates += $wingetPhp
         }
@@ -75,6 +78,8 @@ function Set-ServiceEnv {
     $env:GROM_OCR_ENABLE_TROCR = '0'
     $env:GROM_OCR_ENABLE_DOCTR = '0'
     $env:GROM_OCR_ENABLE_PADDLEOCR = '0'
+    $env:GROM_OCR_ENABLE_PADDLE = $env:GROM_OCR_ENABLE_PADDLEOCR
+    $env:GROM_OCR_USE_LEGACY_PIPELINE = '1'
     $env:GROM_OCR_FORCE_ENSEMBLE = '0'
     $env:GROM_OCR_ALLOW_HEAVY_COLDSTART = '0'
     $env:GROM_OCR_TROCR_LOCAL_ONLY = '1'
@@ -153,6 +158,8 @@ function Start-PythonApi {
 
     $pythonOut = Join-Path $logsDir 'python-api.out.log'
     $pythonErr = Join-Path $logsDir 'python-api.err.log'
+    $env:GROM_OCR_API_PORT = "$ApiPort"
+    $env:GROM_OCR_API_HOST = '127.0.0.1'
     Start-Process -FilePath $pythonExe -ArgumentList $pythonScript -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput $pythonOut -RedirectStandardError $pythonErr | Out-Null
 }
 
@@ -170,6 +177,7 @@ function Start-PhpServer {
 
     $phpOut = Join-Path $logsDir 'php-server.out.log'
     $phpErr = Join-Path $logsDir 'php-server.err.log'
+    $env:GROM_OCR_PYTHON_API_URL = "http://127.0.0.1:$ApiPort"
     Start-Process -FilePath $phpExe -ArgumentList @('-S', "127.0.0.1:$PhpPort", '-t', 'public') -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput $phpOut -RedirectStandardError $phpErr | Out-Null
     return $true
 }
@@ -180,9 +188,11 @@ $startPython = $true
 $startPhp = $true
 if ($PythonOnly -and $PhpOnly) {
     Write-Status 'Os switches PythonOnly e PhpOnly sao conflitantes; iniciando ambos os servicos.' -Warning
-} elseif ($PythonOnly) {
+}
+elseif ($PythonOnly) {
     $startPhp = $false
-} elseif ($PhpOnly) {
+}
+elseif ($PhpOnly) {
     $startPython = $false
 }
 
@@ -191,7 +201,8 @@ if ($startPython -and -not $pythonReady) {
     if (-not (Test-PortListening -Port $ApiPort)) {
         Write-Status "Iniciando API OCR em http://127.0.0.1:$ApiPort ..."
         Start-PythonApi
-    } else {
+    }
+    else {
         Write-Status "A porta $ApiPort ja esta em uso. Aguardando resposta do /health..." -Warning
     }
 
@@ -206,7 +217,8 @@ if ($startPython -and -not $pythonReady) {
 
     if ($pythonReady) {
         Write-Status "API OCR pronta em http://127.0.0.1:$ApiPort"
-    } else {
+    }
+    else {
         Write-Status "API OCR ainda nao respondeu ao /health. Verifique os logs em C:\\Grom_OCR\\logs." -Warning
     }
 }
@@ -214,7 +226,8 @@ if ($startPython -and -not $pythonReady) {
 if ($startPhp) {
     if (Test-PortListening -Port $PhpPort) {
         Write-Status "Aplicacao PHP ja esta escutando em http://127.0.0.1:$PhpPort"
-    } else {
+    }
+    else {
         Write-Status "Iniciando aplicacao PHP em http://127.0.0.1:$PhpPort ..."
         [void](Start-PhpServer)
     }

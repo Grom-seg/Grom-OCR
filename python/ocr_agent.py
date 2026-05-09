@@ -13591,11 +13591,14 @@ def process_video():
         if 'consensus' not in payload:
             payload['consensus'] = consensus if consensus is not None else {}
         return jsonify(payload)
+
+    input_meta = dict(input_meta) if isinstance(input_meta, dict) else {}
+    input_meta.update({
         'media_type': 'video',
         'video_probe_ok': bool(video_metadata.get('opened')),
         'decoder_backend': video_metadata.get('backend', 'opencv'),
         'frame_sampling_strategy': 'frame_by_frame_scan',
-    }
+    })
 
     frame_sampling = {
         'strategy': 'frame_by_frame_scan',

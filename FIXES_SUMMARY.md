@@ -1,7 +1,7 @@
 # Resumo de Correções - Grom OCR | Regressão de Análises
 
-**Data:** 9 de Maio de 2026  
-**Status:** ✅ RESOLVIDO  
+**Data:** 9 de Maio de 2026
+**Status:** ✅ RESOLVIDO
 **Commits:** 92d73f9, 4d3a8cd
 
 ---
@@ -9,6 +9,7 @@
 ## Problema Inicial
 
 O usuário reportou que duas análises de placas de excelente qualidade (praticamente 100% de acerto) resultaram em análises INDEFINIDO/INCONCLUSIVO com:
+
 - Captura e padrão visual: **INDEFINIDO**
 - Consenso OCR: **0,0%**
 - Status pericial: **INCONCLUSIVO**
@@ -20,16 +21,20 @@ O usuário reportou que duas análises de placas de excelente qualidade (pratica
 ## Bugs Identificados e Corrigidos
 
 ### Bug #1: PermissionError em Limpeza de Arquivos Temporários
-**Arquivo:** `fastapi_backend/main.py`  
+
+**Arquivo:** `fastapi_backend/main.py`
 **Linhas Afetadas:** 337, 351, 359, 390, 403, 500, 596, 634, 686, 879
 
 **Problema:**
+
 ```python
 os.remove(tmp_path)  # Lançava PermissionError no Windows
 ```
+
 O arquivo temporário não podia ser deletado porque o engine OCR ainda tinha o arquivo aberto.
 
 **Solução:**
+
 ```python
 try:
     os.remove(tmp_path)
@@ -42,10 +47,12 @@ except (PermissionError, OSError):
 ---
 
 ### Bug #2: Confiança Zerada Sem Detecção de Veículo
-**Arquivo:** `fastapi_backend/main.py`  
+
+**Arquivo:** `fastapi_backend/main.py`
 **Função:** `_enrich_payload_with_validation()` (linhas 961-985)
 
 **Problema:**
+
 ```python
 if best_text:
     det_confidence = max([d.get('confidence', 0.0) for d in detections]) if detections else 0.3
@@ -56,6 +63,7 @@ if best_text:
 Análises de placas isoladas (alta qualidade, sem veículo detectado) eram **rejeitadas automaticamente** com confiança 0%.
 
 **Solução:**
+
 ```python
 # Ajuste: se não há detecção mas placa é válida, não rejeitar automaticamente
 if not detections and confidence.get('confidence_level') == 'reject':
@@ -70,10 +78,12 @@ if not detections and confidence.get('confidence_level') == 'reject':
 ---
 
 ### Bug #3: Normalização de Placa Falhava com Espaços
-**Arquivo:** `fastapi_backend/plate_validator.py`  
+
+**Arquivo:** `fastapi_backend/plate_validator.py`
 **Linha Afetada:** ~72
 
 **Problema:**
+
 ```python
 plate_clean = plate_text.strip().upper()
 # "ABC 1234" (com espaço) era comparado contra regex "AAA9999"
@@ -83,6 +93,7 @@ plate_clean = plate_text.strip().upper()
 Placas com espaços (ex: "ABC 1234") falhavam na validação mesmo sendo válidas.
 
 **Solução:**
+
 ```python
 plate_clean = plate_text.strip().upper().replace(' ', '')
 # Agora "ABC 1234" vira "ABC1234" e valida corretamente
@@ -93,11 +104,13 @@ plate_clean = plate_text.strip().upper().replace(' ', '')
 ---
 
 ### Bug #4: PHP Não Encontrava Padrão da Placa
-**Arquivo:** `fastapi_backend/main.py`  
+
+**Arquivo:** `fastapi_backend/main.py`
 **Função:** `_enrich_payload_with_validation()` (após linha 937)
 
 **Problema:**
 PHP esperava encontrar o padrão da placa em `$result['best']['pattern']`:
+
 ```php
 // public/upload.php linha 668
 $fromBest = trim((string) ($best['pattern'] ?? ''));
@@ -106,6 +119,7 @@ $fromBest = trim((string) ($best['pattern'] ?? ''));
 Mas a API retornava o padrão apenas em `plate_validation.pattern`, não em `best.pattern`.
 
 **Solução:**
+
 ```python
 # Adiciona padrão da placa ao objeto best para compatibilidade com PHP
 if plate_validation.get('pattern'):
@@ -120,6 +134,7 @@ if plate_validation.get('pattern'):
 ## Validação das Correções
 
 ### Teste de API (Direct)
+
 ```bash
 curl -X POST -F "file=@test-assets/plate_test.png" \
   -F "analysis_stage=preview" \
@@ -127,6 +142,7 @@ curl -X POST -F "file=@test-assets/plate_test.png" \
 ```
 
 **Resultados Esperados:**
+
 ```json
 {
   "best": {
@@ -153,7 +169,9 @@ curl -X POST -F "file=@test-assets/plate_test.png" \
 ```
 
 ### Teste de Compatibilidade PHP
+
 Todos os campos que PHP necessita agora estão presentes:
+
 - ✅ `best.pattern` - Padrão visual
 - ✅ `consensus.agreement_ratio` - Consenso OCR
 - ✅ `pericial.status` - Status pericial
@@ -165,13 +183,15 @@ Todos os campos que PHP necessita agora estão presentes:
 ## Impacto para Usuário
 
 ### Antes das Correções
-```
+
+```text
 Imagem enviada → API processa → Detecção falha → Confiança = 0%
 → PHP exibe: INDEFINIDO, Consenso 0,0%, Status INCONCLUSIVO
 ```
 
 ### Depois das Correções
-```
+
+```text
 Imagem enviada → API processa → OCR válido com placa válida
 → Confiança calculada (65.8%) → PHP exibe: Pattern correto, Consenso 100%, Status CONCLUÍDO
 ```
@@ -180,10 +200,8 @@ Imagem enviada → API processa → OCR válido com placa válida
 
 ## Commits
 
-| Hash | Mensagem | Mudanças |
-|------|----------|----------|
-| 92d73f9 | fix: wraps os.remove() calls to handle file-in-use errors | 10 try/except blocks + confidence scoring fixes |
-| 4d3a8cd | fix: adiciona plate pattern ao objeto best | 1 file, 6 insertions |
+- 92d73f9: fix: wraps os.remove() calls to handle file-in-use errors (10 try/except blocks + confidence scoring fixes)
+- 4d3a8cd: fix: adiciona plate pattern ao objeto best (1 file, 6 insertions)
 
 ---
 
