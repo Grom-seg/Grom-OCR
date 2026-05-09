@@ -213,7 +213,17 @@ function normalizeApiBase(string $url): string
 
 function buildApiCandidates(string $primaryUrl): array
 {
-    $candidates = [normalizeApiBase($primaryUrl)];
+    $primaryNormalized = normalizeApiBase($primaryUrl);
+    $candidates = [$primaryNormalized];
+
+    $parts = parse_url($primaryNormalized);
+    if (is_array($parts)) {
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        if ($host === '127.0.0.1' || $host === 'localhost') {
+            $scheme = (string) ($parts['scheme'] ?? 'http');
+            array_unshift($candidates, normalizeApiBase($scheme . '://127.0.0.1:8001'));
+        }
+    }
 
     if (strpos($primaryUrl, ':5000') !== false) {
         $candidates[] = normalizeApiBase(str_replace(':5000', ':8000', $primaryUrl));
@@ -1485,7 +1495,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                             ];
                         }
 
-                        if (!$analysisPreviewRequested && isset($result['report_context']) && is_array($result['report_context'])) {
+                        if (isset($result['report_context']) && is_array($result['report_context'])) {
                             [$enriched, $enrichError, $enrichStatus, $enrichApiUrl] = callReportEnrichmentApi(
                                 $apiCandidates,
                                 $result['report_context'],
@@ -1526,7 +1536,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
                     if ($analysisPreviewRequested) {
                         $result['analysis_stage'] = 'preview';
-                        $result['report_ready'] = false;
+                        $result['report_ready'] = !empty($result['pdf_report']);
                         storePendingPreviewResult($result);
                     } else {
                         [$savedId, $dbWarning] = persistAnalysisRecord($result, $filename, $db, (int) $_SESSION['user_id']);
@@ -2126,6 +2136,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     <div class="btn-row analysis-report-actions-panel">
                         <?php if ($analysisStage === 'preview') { ?>
                             <a class="btn btn-primary" href="#humanReviewForm">Ir para correção</a>
+                            <?php if (!empty($result['pdf_report'])) { ?>
+                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental (prévia)</a>
+                            <?php } ?>
                             <?php if ($manifestUrl !== '') { ?>
                                 <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . $manifestUrl); ?>">Abrir manifesto pericial</a>
                             <?php } ?>

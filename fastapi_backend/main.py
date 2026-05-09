@@ -1001,7 +1001,8 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
 def _build_process_payload(filename: str, detections: list, ocr_results: list, analysis_stage: str, analysis_id: str, photo_filename: str, plate_filename: str, crop_raw_filename: str, ocr_runtime_info: dict = None, ocr_runtime_events: list = None, vehicle_info_seed: dict = None):
     ocr_runtime_info = ocr_runtime_info or {}
     ocr_runtime_events = ocr_runtime_events or []
-    consolidated = {}
+    vehicle_info_seed = vehicle_info_seed or {}
+
     normalized_ocr_rows = []
     for item in ocr_results:
         if not isinstance(item, dict):
@@ -1014,31 +1015,65 @@ def _build_process_payload(filename: str, detections: list, ocr_results: list, a
         row['confidence'] = _normalize_confidence_value(row.get('confidence', row.get('score', 0.0)))
         normalized_ocr_rows.append(row)
 
+    has_paddle_results = any(c.get('engine') == 'paddleocr' for c in normalized_ocr_rows)
+    has_tesseract_results = any(c.get('engine') == 'tesseract' for c in normalized_ocr_rows)
+    has_easyocr_results = any(c.get('engine') == 'easyocr' for c in normalized_ocr_rows)
+    has_external_results = any(c.get('engine') == 'plate_recognizer_api' for c in normalized_ocr_rows)
+    selected_engine = str(ocr_runtime_info.get('selected_engine', '') or '').strip().lower()
+    paddle_error = str(ocr_runtime_info.get('paddle_error', '') or '').strip()
+    paddle_disabled = bool(ocr_runtime_info.get('paddle_disabled', False))
+
+    paddle_status = 'executed' if (has_paddle_results or selected_engine == 'paddleocr') else 'skipped'
+    if paddle_disabled:
+        paddle_status = 'disabled'
+    elif paddle_error:
+        paddle_status = 'failed'
+
+    tesseract_status = 'executed' if (has_tesseract_results or selected_engine == 'tesseract') else 'skipped'
+
+    engines_executed = sorted(list({str(c.get('engine', 'unknown')) for c in normalized_ocr_rows if str(c.get('engine', '')).strip()}))
+    if selected_engine and selected_engine not in engines_executed:
+        engines_executed.append(selected_engine)
+        engines_executed = sorted(engines_executed)
+    executed_engine_count = len(engines_executed)
+
+    consolidated = {}
+    for row in normalized_ocr_rows:
+        text = _normalize_plate_text(row.get('text', ''))
+        if text == '':
+            continue
         engine = str(row.get('engine', 'ocr')).strip() or 'ocr'
-        bbox_key = _bbox_key(row.get('bbox'))
-        key = (text, engine, bbox_key)
         conf = _normalize_confidence_value(row.get('confidence', row.get('score', 0.0)))
-        if key not in consolidated:
-            consolidated[key] = {
+        if text not in consolidated:
+            consolidated[text] = {
                 'text': text,
                 'engine': engine,
+                'engine_votes': {},
                 'sum_conf': 0.0,
                 'support_count': 0,
                 'pattern_quality': _plate_pattern_quality(text),
                 'bbox_likelihood': _bbox_plate_likelihood(row.get('bbox', [])),
             }
-        consolidated[key]['sum_conf'] += conf
-        consolidated[key]['support_count'] += 1
+        consolidated[text]['engine_votes'][engine] = int(consolidated[text]['engine_votes'].get(engine, 0) or 0) + 1
+        if int(consolidated[text]['engine_votes'][engine]) >= int(consolidated[text]['engine_votes'].get(consolidated[text]['engine'], 0) or 0):
+            consolidated[text]['engine'] = engine
+        consolidated[text]['bbox_likelihood'] = max(float(consolidated[text]['bbox_likelihood']), _bbox_plate_likelihood(row.get('bbox', [])))
+        consolidated[text]['sum_conf'] += conf
+        consolidated[text]['support_count'] += 1
 
     normalized_candidates = []
     for row in consolidated.values():
         support_count = int(row['support_count'])
+        engine_support_count = len(set([str(x).strip() for x in row.get('engine_votes', {}).keys() if str(x).strip()]))
         avg_conf = float(row['sum_conf']) / max(1, support_count)
         weighted_support = float(row['sum_conf'])
         support_bonus = 1.0 + min(0.15, 0.03 * (support_count - 1))
         pattern_quality = float(row.get('pattern_quality', 0.0) or 0.0)
         bbox_likelihood = float(row.get('bbox_likelihood', 0.35) or 0.35)
         score = ((avg_conf * 0.60) + (pattern_quality * 0.30) + (bbox_likelihood * 0.10)) * support_bonus
+        agreement_ratio = 0.0
+        if executed_engine_count > 1:
+            agreement_ratio = round((engine_support_count / float(executed_engine_count)) * 100.0, 1)
         normalized_candidates.append({
             'rank': 0,
             'text': row['text'],
@@ -1046,7 +1081,8 @@ def _build_process_payload(filename: str, detections: list, ocr_results: list, a
             'avg_conf': round(avg_conf, 4),
             'score': round(score, 4),
             'support_count': support_count,
-            'agreement_ratio': 100.0,
+            'engine_support_count': engine_support_count,
+            'agreement_ratio': agreement_ratio,
             'weighted_support': round(weighted_support, 4),
             'pattern_quality': round(pattern_quality, 4),
             'bbox_likelihood': round(bbox_likelihood, 4),
@@ -1055,7 +1091,6 @@ def _build_process_payload(filename: str, detections: list, ocr_results: list, a
 
     normalized_candidates.sort(key=lambda c: float(c.get('score', 0.0)), reverse=True)
 
-    # Poda de ruído: remove candidatos muito improváveis quando houver opções melhores.
     if len(normalized_candidates) > 1:
         filtered = []
         for row in normalized_candidates:
@@ -1094,30 +1129,25 @@ def _build_process_payload(filename: str, detections: list, ocr_results: list, a
     elif not plausible_candidates:
         warnings.append('best_candidate_low_plausibility')
 
-    has_paddle_results = any(c.get('engine') == 'paddleocr' for c in ocr_results)
-    has_tesseract_results = any(c.get('engine') == 'tesseract' for c in ocr_results)
-    has_easyocr_results = any(c.get('engine') == 'easyocr' for c in ocr_results)
-    has_external_results = any(c.get('engine') == 'plate_recognizer_api' for c in ocr_results)
-    selected_engine = str(ocr_runtime_info.get('selected_engine', '') or '').strip().lower()
-    paddle_error = str(ocr_runtime_info.get('paddle_error', '') or '').strip()
-    paddle_disabled = bool(ocr_runtime_info.get('paddle_disabled', False))
-
-    paddle_status = 'executed' if (has_paddle_results or selected_engine == 'paddleocr') else 'skipped'
-    if paddle_disabled:
-        paddle_status = 'disabled'
-    elif paddle_error:
-        paddle_status = 'failed'
-
-    tesseract_status = 'executed' if (has_tesseract_results or selected_engine == 'tesseract') else 'skipped'
-
-    engines_executed = sorted(list({str(c.get('engine', 'unknown')) for c in ocr_results if str(c.get('engine', '')).strip()}))
-    if selected_engine and selected_engine not in engines_executed:
-        engines_executed.append(selected_engine)
-        engines_executed = sorted(engines_executed)
-
     fallback_used = bool(ocr_runtime_info.get('fallback_used', False)) or any(
         bool((event or {}).get('fallback_used', False)) for event in ocr_runtime_events
     )
+
+    best_supporting_engines = set()
+    best_text_value = _normalize_plate_text(best.get('text', ''))
+    if best_text_value:
+        for row in normalized_ocr_rows:
+            row_text = _normalize_plate_text((row or {}).get('text', ''))
+            if row_text == best_text_value:
+                row_engine = str((row or {}).get('engine', '') or '').strip()
+                if row_engine:
+                    best_supporting_engines.add(row_engine)
+
+    consensus_ratio = 0.0
+    consensus_basis = 'single_engine_or_no_consensus'
+    if executed_engine_count > 1 and best_supporting_engines:
+        consensus_ratio = round((len(best_supporting_engines) / float(executed_engine_count)) * 100.0, 1)
+        consensus_basis = 'cross_engine_consensus'
 
     process_trace = [
         '1) Obtencao da imagem e preservacao de evidencia (arquivo original).',
@@ -1179,7 +1209,12 @@ def _build_process_payload(filename: str, detections: list, ocr_results: list, a
             'evidence_level': 'MEDIA' if best.get('text', '') else 'BAIXA',
         },
         'consensus': {
-            'agreement_ratio': 100.0 if best.get('text', '') else 0.0,
+            'agreement_ratio': consensus_ratio,
+            'basis': consensus_basis,
+            'best_text': best_text_value,
+            'engines_executed_count': executed_engine_count,
+            'engines_supporting_best_count': len(best_supporting_engines),
+            'engines_supporting_best': sorted(list(best_supporting_engines)),
         },
         'pericial': {
             'status': 'CONCLUIDO' if best.get('text', '') else 'INCONCLUSIVO',
