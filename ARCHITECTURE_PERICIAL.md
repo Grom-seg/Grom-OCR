@@ -24,7 +24,7 @@ O GROM OCR foi redesenhado para ser **referência nacional** em:
 
 A arquitetura implementa um **padrão de orquestração centralizado** que:
 
-```
+```text
 Entrada (imagem)
     ↓
 [Orquestrador Forense]
@@ -104,7 +104,7 @@ class TaskExecutionMetrics:
 Cada análise percorre domínios especializados:
 
 | Domínio | Descrição | Pipeline Legado | Fallback |
-|---------|-----------|-----------------|----------|
+| ------- | --------- | --------------- | -------- |
 | **PLATE_DETECTION** | Localizar placa na imagem | YOLOv8 + Heurísticas | Contour detection |
 | **OCR_RECOGNITION** | Ler caracteres da placa | Ensemble (RapidOCR, Tesseract) | Tesseract simples |
 | **VEHICLE_ANALYSIS** | Identificar marca/modelo | CLIP + Heurísticas | Análise visual local |
@@ -120,7 +120,7 @@ Cada análise percorre domínios especializados:
 
 ### Exemplo: Pipeline de /process (Delegado)
 
-```
+```text
 ┌─────────────────────────────────┐
 │  Análise Pericial Completa      │
 │  analysis_id: 12ab34cd56ef78gh  │
@@ -140,7 +140,7 @@ Cada análise percorre domínios especializados:
 
 ### Exemplo: Pipeline de /process-ensemble (Local + Orquestração)
 
-```
+```text
 ┌──────────────────────────────────────┐
 │  Análise Ensemble Orquestrada        │
 │  analysis_id: 987654321abcdef        │

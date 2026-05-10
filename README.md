@@ -539,7 +539,7 @@ Modo anti-travamento (padrao recomendado):
 - `GROM_OCR_TESSERACT_MIN_ACCEPT_CONF=28`
 - `GROM_OCR_TESSERACT_PATTERN_MIN_SCORE=58`
 
-## Endpoints uteis
+## Endpoints uteis da secao de investigacao visual
 
 - `GET /health`: checagem rapida da API Python
 - `POST /warmup_heavy`: aquece TrOCR/docTR sem travar a primeira pesquisa
@@ -556,7 +556,7 @@ A partir da v1.0, o GROM OCR implementa **orquestração centralizada** com hier
 
 ### Arquitetura de Orquestração
 
-```
+```text
 Entrada (imagem de placa)
     ↓
 [ForensicOrchestrator]
@@ -637,9 +637,9 @@ Para contribuidores e outras instituições:
 - **[CONTRIBUTING_PATTERNS.md](CONTRIBUTING_PATTERNS.md)** - Padrões de desenvolvimento e orquestração
 - **[fastapi_backend/orchestrator.py](fastapi_backend/orchestrator.py)** - Código-fonte do orquestrador
 
-## Endpoints uteis
+## Comando dedicado de identificacao visual
 
-## Script avancado de identificacao visual
+## Script avancado de identificacao visual de veiculos
 
 Para analise dedicada de fabricante/modelo com comparacao entre modelos parecidos e validacao em fontes abertas especializadas (automoveis, motocicletas e caminhoes):
 

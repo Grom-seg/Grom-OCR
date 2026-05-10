@@ -44,7 +44,7 @@
 
 ### Solução Imediata (PRÓXIMA AÇÃO)
 
-**1. INTEGRAR PLATE RECOGNIZER (RECOMENDADO)**
+#### 1. INTEGRAR PLATE RECOGNIZER (RECOMENDADO)
 
 ```python
 # Já desenvolvido: fastapi_backend/plate_recognizer_client.py
@@ -62,7 +62,7 @@ success, plate_text, metadata = recognize_plate_external(image_path)
 - ✓ Detecta também dados do veículo
 - ✓ Pronto para usar com token já configurado
 
-**2. USAR DATASET MELHOR PARA TESTES**
+#### 2. USAR DATASET MELHOR PARA TESTES
 
 - Imagem atual: `20171119_154214_ch6-1024x576.jpg` - MUITO ruim para OCR
 - Sugerido: CCPD dataset, OpenALPR, ou footage real de dirigindo
@@ -73,7 +73,7 @@ success, plate_text, metadata = recognize_plate_external(image_path)
 ## 📊 MÉTRICAS ATUAIS
 
 | Métrica | Status |
-|---------|--------|
+| ------- | ------ |
 | Detecção de Placa | ✅ 64% confiança |
 | Tempo de Processamento | ✅ 3.6s |
 | API Responsividade | ✅ OK |
@@ -94,13 +94,13 @@ success, plate_text, metadata = recognize_plate_external(image_path)
 
 ### P2 - OTIMIZAR (1-2 horas)
 
-4. Adicionar EasyOCR local (fallback antes de Plate Recognizer)
+1. Adicionar EasyOCR local (fallback antes de Plate Recognizer)
 2. Paralelizar múltiplos OCR engines
 3. Benchmark com dataset real
 
 ### P3 - PRODUÇÃO (manutenção contínua)
 
-7. Monitoramento de accuracy
+1. Monitoramento de accuracy
 2. Load testing
 3. Deployment em múltiplas instituições
 

@@ -221,7 +221,7 @@ git push
 ## 📊 Impacto das Melhorias
 
 | Crítica Original | Solução | Status |
-|------------------|---------|--------|
+| ---------------- | ------- | ------ |
 | "lê as placas da imagem toda" | Multi-placa com priorização | ✅ Implementado |
 | "análise bem elaboradas" | Seções periciais em PDF | ✅ Implementado |
 | "descrição de cenas" | Seção de análise de cena | ✅ Implementado |

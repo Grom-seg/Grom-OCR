@@ -172,7 +172,7 @@ git push
 ## 📁 Arquivos Chave
 
 | Arquivo | Descrição | Status |
-|---------|-----------|--------|
+| ------- | --------- | ------ |
 | `fastapi_backend/main.py` | Backend FastAPI principal | PRÉ-INTEGRAÇÃO |
 | `fastapi_backend/detector_module.py` | Multi-placa inteligente | ✅ Pronto |
 | `fastapi_backend/pdf_forensic.py` | PDF forense profissional | ✅ Pronto |

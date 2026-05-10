@@ -1,6 +1,6 @@
 # Padrões de Desenvolvimento - GROM OCR
 
-*Guia para contribuidores que desejam revolucionar a análise forense de placas veiculares*
+> Guia para contribuidores que desejam revolucionar a análise forense de placas veiculares
 
 ## 🎯 Visão
 
@@ -403,4 +403,4 @@ Para contribuir:
 
 **Juntos, vamos revolucionar a análise forense de placas no Brasil.**
 
-*Versão: 1.0 | Data: 9 de maio de 2026*
+> Versão: 1.0 | Data: 9 de maio de 2026

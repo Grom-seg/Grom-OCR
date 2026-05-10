@@ -85,7 +85,7 @@ rements
 
 ### Testes Executados
 
-```
+```text
 [TESTE RÁPIDO] ✅ PASSOU
 ├── 1. Detector Multi-Placa
 │   ├── ✅ detect_plate() com priority_score
@@ -151,7 +151,7 @@ python test_e2e_audit.py
 ## 📈 Impacto das Melhorias
 
 | Problema Original | Solução | Status |
-|---|---|---|
+| ----------------- | ------- | ------ |
 | "lê as placas da imagem toda" | Multi-placa com priority_rank | ✅ |
 | "sem análise bem elaboradas" | 10 seções periciais | ✅ |
 | "sem descrição de cenas" | _add_scene_analysis() | ✅ |
@@ -166,7 +166,7 @@ python test_e2e_audit.py
 
 ### Criados (Novos)
 
-```
+```text
 ✅ fastapi_backend/detector_module.py         (150 linhas)
 ✅ fastapi_backend/pdf_forensic.py            (400 linhas)
 ✅ integrate_improvements.py                  (helper)
@@ -177,7 +177,7 @@ python test_e2e_audit.py
 
 ### Modificados
 
-```
+```text
 ✅ fastapi_backend/main.py                    (consenso corrigido - ecbbe52)
 ✅ public/upload.php                         (fallback URLs - anterior)
 ```

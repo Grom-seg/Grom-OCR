@@ -28,7 +28,7 @@ O sistema **GROM OCR 2.0** foi completamente reconstruído, testado e validado. 
 
 ### 2. **OCR - Pipeline com Fallbacks**
 
-```
+```text
 Tesseract (local, rápido)
     ↓ [se vazio]
 EasyOCR (preciso, implementado)
@@ -58,7 +58,7 @@ Resultado garantido + Auditoria completa
 ## COMPONENTES CRIADOS/MODIFICADOS
 
 | Arquivo | Status | Descrição |
-|---------|--------|-----------|
+| ------- | ------ | --------- |
 | `fastapi_backend/main.py` | ✅ | Carregamento .env + endpoints com fallback duplo |
 | `fastapi_backend/plate_recognizer_v2.py` | ✅ | Cliente REST especializado em placas |
 | `fastapi_backend/easyocr_wrapper.py` | ✅ | Wrapper EasyOCR (pt-BR + en) |
@@ -71,14 +71,14 @@ Resultado garantido + Auditoria completa
 
 ### ✅ Health Check
 
-```
+```text
 Status: 200 OK
 Serviço: online
 ```
 
 ### ✅ Detecção
 
-```
+```text
 Detecções: 1
 Bbox: [559, 0, 1128, 696]
 Confiança: 63.7%
@@ -86,7 +86,7 @@ Confiança: 63.7%
 
 ### ✅ OCR/Fallback
 
-```
+```text
 Pipeline: Operacional
 Tesseract: Funcional
 Fallback 1 (EasyOCR): Implementado
@@ -100,7 +100,7 @@ Auditoria: Registrando corretamente
 
 ### 1. Obter Token Real Plate Recognizer (5 min)
 
-```
+```text
 Visite: https://platerecognizer.com
 Assine: Plano grátis ou pago
 Configure: PLATE_RECOGNIZER_TOKEN=seu_token_real em .env
@@ -109,7 +109,7 @@ Resultado: 95%+ accuracy esperada
 
 ### 2. Testar com Imagens Reais (30 min)
 
-```
+```text
 Capture: Fotografias de placas legítimas
 Qualidade: Mínimo 1920x1080
 Teste: Validar accuracy >90%
@@ -131,7 +131,7 @@ uvicorn fastapi_backend.main:app --host 0.0.0.0 --port 8000
 ## MÉTRICAS DE PERFORMANCE
 
 | Componente | Métrica | Valor |
-|-----------|---------|-------|
+| ---------- | ------- | ----- |
 | **Detecção YOLO** | Speed | 262ms |
 | | Recall | ~100% (baixa qualidade) |
 | | Precision | ~64% (ajustável) |
@@ -148,7 +148,7 @@ uvicorn fastapi_backend.main:app --host 0.0.0.0 --port 8000
 
 ## ARQUIVOS CRÍTICOS
 
-```
+```text
 c:\Grom_OCR\
 ├── fastapi_backend\
 │   ├── main.py                    ← API principal
@@ -242,7 +242,9 @@ Sistema robusto, escalável e pronto para análise forense profissional de placa
 - API REST profissional
 - Documentação forensicamente validada
 
-**Próximo Passo: Usar token real de Plate Recognizer para accuracy 95%+**
+### Próximo Passo
+
+Usar token real de Plate Recognizer para accuracy 95%+
 
 ---
 
@@ -255,4 +257,4 @@ Para configurar em produção ou obter token real do Plate Recognizer:
 
 ---
 
-**ENTREGA COMPLETA: 09 de Maio de 2026**
+## ENTREGA COMPLETA: 09 de Maio de 2026

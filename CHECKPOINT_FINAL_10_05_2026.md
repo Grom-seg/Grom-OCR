@@ -8,7 +8,7 @@
 
 ### 1. Instalação de Dependências (✅ 15 min)
 
-```
+```text
 ✅ python -m pip install -r requirements-modern.txt --upgrade
 ✅ Instalados: FastAPI 0.109.2, ultralytics 8.4.48, FPDF2 2.7.0, easyocr 1.7.0
 ✅ Deps críticas verificadas e funcionais
@@ -16,7 +16,7 @@
 
 ### 2. Testes E2E (✅ 20 min)
 
-```
+```text
 ✅ teste_rapido.py executado com sucesso
 ✅ Detector multi-placa: VALIDADO
 ✅ PDF forense profissional: VALIDADO
@@ -69,7 +69,7 @@ payload['report_ready'] = pdf_success
 
 ### 5. Git Commit & Push (✅ 5 min)
 
-```
+```text
 ✅ Commit: 91e05ba "Integra PDF forense profissional em main.py"
 ✅ Push: Sincronizado com GitHub
 ✅ https://github.com/Grom-seg/Grom-OCR (commitado)
@@ -80,7 +80,7 @@ payload['report_ready'] = pdf_success
 ## 📊 Histórico de Commits Desta Sessão
 
 | Commit | Mensagem | Status |
-|--------|----------|--------|
+| ------ | -------- | ------ |
 | `91e05ba` | Integra PDF forense profissional em main.py | ✅ |
 | `c0177b1` | Checkpoint 09/05: melhorias implementadas | ✅ |
 | `a6d4f8d` | Adiciona ultralytics ao requirements | ✅ |
@@ -181,7 +181,7 @@ php -S 127.0.0.1:8080 -t public
 ## 💾 Arquivos Críticos
 
 | Arquivo | Descrição | Status |
-|---------|-----------|--------|
+| ------- | --------- | ------ |
 | `fastapi_backend/main.py` | Backend principal - INTEGRADO | ✅ |
 | `fastapi_backend/detector_module.py` | Detector multi-placa | ✅ |
 | `fastapi_backend/pdf_forensic.py` | PDF forense | ✅ |
@@ -193,7 +193,7 @@ php -S 127.0.0.1:8080 -t public
 
 ## 🔍 Validações Executadas
 
-```
+```text
 ✅ Sintaxe Python (py_compile)
 ✅ Imports funcionais
 ✅ Detector module testado
@@ -225,7 +225,7 @@ php -S 127.0.0.1:8080 -t public
 
 ## 🚀 Estado Atual
 
-```
+```text
 Sistema GROM OCR - Versão Forense Profissional
 ├── Backend FastAPI ✅ Integrado
 │   ├── Multi-placa detection ✅
@@ -269,7 +269,7 @@ Sistema GROM OCR - Versão Forense Profissional
 Sistema transformado de "prototípico" para **"forense-jurídico profissional"**:
 
 | Aspecto | Antes | Depois |
-|--------|-------|--------|
+| ------- | ----- | ------ |
 | Detecção | Uma placa | Todas as placas (ranking) |
 | PDF | Básico (400 linhas) | Profissional (400+ linhas) |
 | Consenso | Falso (100% com 1 motor) | Real (Transparente) |
