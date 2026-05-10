@@ -28,6 +28,7 @@ import tempfile
 import shutil
 import re
 import hashlib
+import json
 from datetime import datetime, timezone
 from uuid import uuid4
 
@@ -2194,10 +2195,148 @@ async def analyze_spatial_metadata_endpoint(file: UploadFile = File(...)):
 
 
 @app.post("/process_video")
-async def process_video_legacy_endpoint():
-    return JSONResponse(status_code=501, content={
-        'error': 'process_video nao implementado no fastapi_backend'
-    })
+async def process_video_legacy_endpoint(
+    video: UploadFile = File(...),
+    analysis_stage: str = Form(default='final'),
+    max_frames_to_analyze: int = Form(default=12),
+    sample_every_n_frames: int = Form(default=5),
+):
+    """
+    Processamento pericial de vídeo:
+    - amostra frames do vídeo
+    - prioriza frames mais nítidos
+    - executa pipeline OCR pericial nos melhores frames
+    - devolve melhor hipótese consolidada + trilha de comparação
+    """
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except Exception:
+        return JSONResponse(status_code=503, content={'error': 'opencv/numpy nao disponivel para processamento de video'})
+
+    max_frames_to_analyze = max(1, min(int(max_frames_to_analyze or 12), 30))
+    sample_every_n_frames = max(1, min(int(sample_every_n_frames or 5), 60))
+
+    if not str(video.filename or '').lower().endswith(('.mp4', '.avi', '.mov', '.mkv', '.webm', '.m4v')):
+        return JSONResponse(status_code=400, content={'error': 'Formato de video nao suportado'})
+
+    tmp_video_path = _save_upload_to_temp(video)
+    frame_candidates = []
+
+    try:
+        cap = cv2.VideoCapture(tmp_video_path)
+        if not cap.isOpened():
+            return JSONResponse(status_code=400, content={'error': 'Nao foi possivel abrir o video enviado'})
+
+        fps = float(cap.get(cv2.CAP_PROP_FPS) or 0.0)
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+        frame_idx = 0
+
+        while True:
+            ok, frame = cap.read()
+            if not ok:
+                break
+
+            if frame_idx % sample_every_n_frames != 0:
+                frame_idx += 1
+                continue
+
+            sharpness = float(lap_variance(frame)) if _frame_selector_ok else float(cv2.Laplacian(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.CV_64F).var())
+            mean_luma = float(np.mean(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)))
+            exposure_penalty = abs(mean_luma - 128.0) / 128.0
+            frame_quality = sharpness * (1.0 - min(0.7, exposure_penalty))
+
+            success, encoded = cv2.imencode('.jpg', frame)
+            if success:
+                frame_candidates.append({
+                    'frame_index': frame_idx,
+                    'timestamp_sec': round(frame_idx / fps, 3) if fps > 0 else None,
+                    'sharpness': round(sharpness, 2),
+                    'mean_luma': round(mean_luma, 2),
+                    'frame_quality': float(frame_quality),
+                    'bytes': encoded.tobytes(),
+                })
+
+            frame_idx += 1
+            if len(frame_candidates) >= max_frames_to_analyze * 3:
+                break
+
+        cap.release()
+
+        if not frame_candidates:
+            return JSONResponse(status_code=400, content={'error': 'Nenhum frame valido extraido do video'})
+
+        frame_candidates.sort(key=lambda x: float(x.get('frame_quality', 0.0)), reverse=True)
+        selected = frame_candidates[:max_frames_to_analyze]
+
+        frame_results = []
+        best_payload = None
+        best_score = -1.0
+
+        for cand in selected:
+            up = UploadFile(
+                filename=f"{Path(video.filename or 'video').stem}_f{cand['frame_index']}.jpg",
+                file=io.BytesIO(cand['bytes'])
+            )
+            response = await process_legacy_endpoint(image=up, file=None, analysis_stage=analysis_stage)
+            if not isinstance(response, JSONResponse):
+                continue
+
+            try:
+                payload = json.loads(response.body.decode('utf-8'))
+            except Exception:
+                continue
+            if not isinstance(payload, dict):
+                continue
+
+            conf = payload.get('confidence_score', {}) if isinstance(payload.get('confidence_score'), dict) else {}
+            frame_conf = float(conf.get('overall_confidence', 0.0) or 0.0)
+            best_candidate = payload.get('best', {}) if isinstance(payload.get('best'), dict) else {}
+            best_text = str(best_candidate.get('text', '') or '').strip()
+            boost = 0.08 if best_text else 0.0
+            combined = frame_conf + boost
+
+            frame_results.append({
+                'frame_index': cand['frame_index'],
+                'timestamp_sec': cand.get('timestamp_sec'),
+                'sharpness': cand['sharpness'],
+                'frame_quality': round(cand['frame_quality'], 3),
+                'overall_confidence': round(frame_conf, 4),
+                'best_text': best_text,
+                'analysis_id': payload.get('forensic', {}).get('analysis_id', ''),
+                'pdf_report': payload.get('pdf_report', ''),
+            })
+
+            if combined > best_score:
+                best_score = combined
+                best_payload = payload
+                best_payload['video_context'] = {
+                    'source_video': video.filename,
+                    'source_video_sha256': _file_sha256(tmp_video_path),
+                    'fps': fps,
+                    'total_frames': total_frames,
+                    'sample_every_n_frames': sample_every_n_frames,
+                    'frames_analyzed': len(selected),
+                    'selected_frame_index': cand['frame_index'],
+                    'selected_timestamp_sec': cand.get('timestamp_sec'),
+                    'top_frame_candidates': frame_results,
+                }
+
+        if not best_payload:
+            return JSONResponse(status_code=500, content={'error': 'Falha ao processar frames selecionados'})
+
+        best_payload.setdefault('forensic', {})
+        if isinstance(best_payload['forensic'], dict):
+            best_payload['forensic']['source_type'] = 'video'
+            best_payload['forensic']['source_filename'] = str(video.filename or '')
+
+        return JSONResponse(best_payload)
+    finally:
+        if os.path.exists(tmp_video_path):
+            try:
+                os.remove(tmp_video_path)
+            except (PermissionError, OSError):
+                pass
 
 
 # ---------------------------------------------------------------------------
@@ -2217,6 +2356,12 @@ async def select_frame_endpoint(
       mode:  'best'  → seleciona frame mais nítido (Laplacian variance)
              'hdr'   → fusão de exposições via Mertens (OpenCV)
     """
+
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except Exception:
+        return JSONResponse({'error': 'opencv/numpy indisponivel'}, status_code=503)
 
     tmp_paths = []
     frames = []
@@ -2517,11 +2662,20 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
     payload['assessment']['manual_review_required'] = conf_level in ['low', 'reject']
     payload['assessment']['confidence_recommendation'] = confidence.get('recommendation', '')
 
+    # Matriz de prontidão jurídica/pericial para triagem de uso judicial.
+    payload['judicial_readiness'] = _compute_judicial_readiness(payload)
+    payload['assessment']['judicial_readiness_status'] = payload['judicial_readiness'].get('status', 'nao_apto')
+    payload['assessment']['judicial_recommendation'] = payload['judicial_readiness'].get('recommendation', '')
+    payload['assessment']['manual_review_required'] = payload['assessment']['manual_review_required'] or (
+        payload['judicial_readiness'].get('status', 'nao_apto') != 'apto_prova_preliminar'
+    )
+
     # Gera PDF automaticamente e inclui links de evidencias para front-end/relatorio.
     report_context = payload.get('report_context', {}) if isinstance(payload.get('report_context'), dict) else {}
     report_context['spatial_context'] = payload.get('spatial_context', {}) if isinstance(payload.get('spatial_context'), dict) else {}
     report_context['spatial_brief_report'] = payload.get('spatial_brief_report', {}) if isinstance(payload.get('spatial_brief_report'), dict) else {}
     report_context['scene_brief_report'] = payload.get('scene_brief_report', {}) if isinstance(payload.get('scene_brief_report'), dict) else {}
+    report_context['judicial_readiness'] = payload.get('judicial_readiness', {}) if isinstance(payload.get('judicial_readiness'), dict) else {}
     report_context['top_candidates'] = payload.get('top_candidates', []) if isinstance(payload.get('top_candidates'), list) else []
     report_context['plate_analyses'] = payload.get('plate_analyses', []) if isinstance(payload.get('plate_analyses'), list) else []
     report_context['ocr_engine_status'] = payload.get('ocr_engine_status', {}) if isinstance(payload.get('ocr_engine_status'), dict) else {}
@@ -2568,3 +2722,67 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
     payload.pop('ocr_results', None)
 
     return payload
+
+
+def _compute_judicial_readiness(payload: dict) -> dict:
+    """
+    Avalia aptidão técnico-jurídica da evidência para triagem pericial.
+    Não substitui cadeia formal de custódia e validação humana.
+    """
+    confidence = payload.get('confidence_score', {}) if isinstance(payload.get('confidence_score'), dict) else {}
+    plate_validation = payload.get('plate_validation', {}) if isinstance(payload.get('plate_validation'), dict) else {}
+    consensus = payload.get('consensus', {}) if isinstance(payload.get('consensus'), dict) else {}
+    image_quality = payload.get('image_quality', {}) if isinstance(payload.get('image_quality'), dict) else {}
+    forensic = payload.get('forensic', {}) if isinstance(payload.get('forensic'), dict) else {}
+    best = payload.get('best', {}) if isinstance(payload.get('best'), dict) else {}
+
+    conf_score = float(confidence.get('overall_confidence', 0.0) or 0.0)
+    conf_level = str(confidence.get('confidence_level', 'reject') or 'reject')
+    plate_valid = bool(plate_validation.get('valid', False))
+    agreement_ratio = float(consensus.get('agreement_ratio', 0.0) or 0.0)
+    img_quality_score = float(image_quality.get('overall_quality_score', 0.0) or 0.0)
+    has_analysis_id = bool(str(forensic.get('analysis_id', '') or '').strip())
+    has_timestamp = bool(str(forensic.get('generated_at_utc', '') or '').strip())
+    has_best_text = bool(str(best.get('text', '') or '').strip())
+
+    blockers = []
+    cautions = []
+
+    if not has_best_text:
+        blockers.append('Sem leitura OCR consolidada da placa')
+    if not has_analysis_id or not has_timestamp:
+        blockers.append('Metadados forenses incompletos (analysis_id/timestamp)')
+    if conf_level in ('reject', 'low') or conf_score < 0.75:
+        cautions.append('Confianca global abaixo do limiar pericial recomendado (0.75)')
+    if not plate_valid:
+        cautions.append('Padrao de placa nao validado automaticamente')
+    if agreement_ratio < 50.0:
+        cautions.append('Baixo consenso entre motores OCR')
+    if img_quality_score < 0.60:
+        cautions.append('Qualidade de imagem abaixo do ideal para uso judicial')
+
+    if blockers:
+        status = 'nao_apto'
+        recommendation = 'Nao apto para uso judicial sem nova coleta/prova complementar e revisao tecnica.'
+    elif cautions:
+        status = 'apto_com_revisao'
+        recommendation = 'Apto com revisao pericial obrigatoria e correlacao com outras evidencias independentes.'
+    else:
+        status = 'apto_prova_preliminar'
+        recommendation = 'Apto para uso preliminar em dossie tecnico, mantendo revisao humana e cadeia de custodia formal.'
+
+    return {
+        'status': status,
+        'recommendation': recommendation,
+        'confidence_score': round(conf_score, 4),
+        'consensus_ratio': round(agreement_ratio, 2),
+        'image_quality_score': round(img_quality_score, 4),
+        'plate_pattern_valid': plate_valid,
+        'blockers': blockers,
+        'cautions': cautions,
+        'legal_notes': [
+            'Resultado automatizado exige revisao pericial humana para fins judiciais.',
+            'Evidencia digital deve ser acompanhada de cadeia de custodia formal e integridade verificavel.',
+            'Recomenda-se correlacao com provas independentes (CFTV, metadata, testemunhos, telemetria).',
+        ],
+    }

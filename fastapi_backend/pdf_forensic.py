@@ -319,6 +319,55 @@ class ForensicPDF:
 
         self.pdf.ln(1)
 
+    def _add_judicial_readiness(self, report_context, assessment):
+        """Seção objetiva para triagem de uso jurídico da evidência."""
+        self._section_title("PRONTIDAO JURIDICO-PERICIAL")
+        self.pdf.set_font("Arial", "", 9)
+
+        readiness = {}
+        if isinstance(report_context, dict) and isinstance(report_context.get('judicial_readiness'), dict):
+            readiness = report_context.get('judicial_readiness', {})
+
+        if not readiness and isinstance(assessment, dict):
+            readiness = {
+                'status': str(assessment.get('judicial_readiness_status', '') or ''),
+                'recommendation': str(assessment.get('judicial_recommendation', '') or ''),
+            }
+
+        status = str(readiness.get('status', 'indisponivel') or 'indisponivel')
+        recommendation = str(readiness.get('recommendation', '') or '')
+
+        self._mc(4, f"Status de triagem: {status}")
+        if recommendation:
+            self._mc(4, f"Recomendacao: {recommendation}")
+
+        blockers = readiness.get('blockers', []) if isinstance(readiness, dict) else []
+        cautions = readiness.get('cautions', []) if isinstance(readiness, dict) else []
+        legal_notes = readiness.get('legal_notes', []) if isinstance(readiness, dict) else []
+
+        if isinstance(blockers, list) and blockers:
+            self.pdf.set_font("Arial", "B", 9)
+            self.pdf.cell(0, 5, "Bloqueadores:", ln=True)
+            self.pdf.set_font("Arial", "", 8)
+            for item in blockers[:8]:
+                self._mc(4, f"- {str(item)}")
+
+        if isinstance(cautions, list) and cautions:
+            self.pdf.set_font("Arial", "B", 9)
+            self.pdf.cell(0, 5, "Riscos / cuidados:", ln=True)
+            self.pdf.set_font("Arial", "", 8)
+            for item in cautions[:10]:
+                self._mc(4, f"- {str(item)}")
+
+        if isinstance(legal_notes, list) and legal_notes:
+            self.pdf.set_font("Arial", "B", 9)
+            self.pdf.cell(0, 5, "Notas legais:", ln=True)
+            self.pdf.set_font("Arial", "", 8)
+            for item in legal_notes[:10]:
+                self._mc(4, f"- {str(item)}")
+
+        self.pdf.ln(1)
+
     def _add_certification(self, analysis_id):
         """Assinatura e certificação."""
         self.pdf.ln(2)
@@ -365,6 +414,8 @@ class ForensicPDF:
         scene_brief_report = report_context.get('scene_brief_report', {}) if isinstance(report_context, dict) else {}
         vehicle_analysis = report_context.get('vehicle_analysis', {}) if isinstance(report_context, dict) else {}
         self._add_scene_analysis(scene_brief_report, vehicle_analysis)
+
+        self._add_judicial_readiness(report_context, assessment)
 
         self._add_conclusion(pericial, assessment, warnings)
         self._add_certification(analysis_id)
