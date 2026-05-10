@@ -1,0 +1,61 @@
+{
+  "generated_at_utc": "2026-05-10T16:34:30.004683Z",
+  "manifest": "C:\\Grom_OCR\\data\\video_forensic_benchmark_manifest.json",
+  "api_base": "http://127.0.0.1:8000",
+  "summary": {
+    "total_cases": 3,
+    "executed_cases": 0,
+    "passed_cases": 0,
+    "skipped_cases": 3,
+    "global_precision": 0.0,
+    "all_quality_targets_passed": false,
+    "all_scenario_targets_passed": false
+  },
+  "quality_metrics": {},
+  "scenario_metrics": {},
+  "recommended_judicial_thresholds": {
+    "confidence_min": 0.75,
+    "consensus_ratio_min": 50.0,
+    "image_quality_min": 0.6
+  },
+  "cases": [
+    {
+      "id": "sample_day_01",
+      "quality_class": "alta",
+      "scenarios": [
+        "dia"
+      ],
+      "video_path": "test-assets/videos/day_01.mp4",
+      "expected_plate": "",
+      "ok": false,
+      "matched": false,
+      "error": "video_not_found"
+    },
+    {
+      "id": "sample_night_motion_01",
+      "quality_class": "baixa",
+      "scenarios": [
+        "noite",
+        "motion_blur",
+        "compressao_forte"
+      ],
+      "video_path": "test-assets/videos/night_motion_01.mp4",
+      "expected_plate": "",
+      "ok": false,
+      "matched": false,
+      "error": "video_not_found"
+    },
+    {
+      "id": "sample_rain_01",
+      "quality_class": "media",
+      "scenarios": [
+        "chuva"
+      ],
+      "video_path": "test-assets/videos/rain_01.mp4",
+      "expected_plate": "",
+      "ok": false,
+      "matched": false,
+      "error": "video_not_found"
+    }
+  ]
+}

@@ -153,6 +153,21 @@ except Exception:
             'conclusion': 'Relatorio de cena nao disponivel.',
         }
 
+try:
+    from fastapi_backend.evidence_chain import sha256_file, compute_payload_hash, register_evidence_chain_entry
+    _evidence_chain_ok = True
+except Exception:
+    _evidence_chain_ok = False
+
+    def sha256_file(path):
+        return ''
+
+    def compute_payload_hash(payload):
+        return ''
+
+    def register_evidence_chain_entry(*args, **kwargs):
+        return {}
+
 def _is_legacy_pipeline_enabled() -> bool:
     """Verifica se o pipeline forense legado está habilitado."""
     # DESABILITADO: delegação bloqueante não funciona com FastAPI assíncrono
@@ -2713,6 +2728,44 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
                 'plate': f"/artifact/{plate_name}",
                 'pdf': f"/pdf/{pdf_name}",
             }
+
+            if pdf_success and _evidence_chain_ok:
+                evidence_hashes = {
+                    'photo_sha256': sha256_file(photo_path),
+                    'plate_sha256': sha256_file(plate_path),
+                }
+
+                pdf_path = _resolve_upload_file(pdf_name)
+                evidence_hashes['pdf_sha256'] = sha256_file(pdf_path)
+
+                video_ctx = payload.get('video_context', {}) if isinstance(payload.get('video_context'), dict) else {}
+                video_sha = str(video_ctx.get('source_video_sha256', '') or '').strip()
+                if video_sha:
+                    evidence_hashes['video_sha256'] = video_sha
+                if photo_path:
+                    evidence_hashes['frame_sha256'] = sha256_file(photo_path)
+
+                payload_hash = compute_payload_hash({
+                    'analysis_id': payload.get('forensic', {}).get('analysis_id', ''),
+                    'best': payload.get('best', {}),
+                    'top_candidates': payload.get('top_candidates', []),
+                    'assessment': payload.get('assessment', {}),
+                    'consensus': payload.get('consensus', {}),
+                    'judicial_readiness': payload.get('judicial_readiness', {}),
+                    'report_context': payload.get('report_context', {}),
+                    'pdf_report': payload.get('pdf_report', ''),
+                })
+
+                chain_info = register_evidence_chain_entry(
+                    analysis_id=str(payload.get('forensic', {}).get('analysis_id', '') or ''),
+                    source_type='video' if video_sha else 'image',
+                    evidence_hashes=evidence_hashes,
+                    payload_hash=payload_hash,
+                )
+                if chain_info:
+                    payload.setdefault('forensic', {})
+                    if isinstance(payload.get('forensic'), dict):
+                        payload['forensic']['evidence_chain'] = chain_info
         except Exception:
             payload.setdefault('warnings', []).append('pdf_generation_failed')
     else:
@@ -2736,6 +2789,13 @@ def _compute_judicial_readiness(payload: dict) -> dict:
     forensic = payload.get('forensic', {}) if isinstance(payload.get('forensic'), dict) else {}
     best = payload.get('best', {}) if isinstance(payload.get('best'), dict) else {}
 
+    policy = _load_judicial_policy()
+    thresholds = policy.get('thresholds', {}) if isinstance(policy.get('thresholds'), dict) else {}
+
+    conf_min = float(thresholds.get('confidence_min', 0.75) or 0.75)
+    consensus_min = float(thresholds.get('consensus_ratio_min', 50.0) or 50.0)
+    quality_min = float(thresholds.get('image_quality_min', 0.60) or 0.60)
+
     conf_score = float(confidence.get('overall_confidence', 0.0) or 0.0)
     conf_level = str(confidence.get('confidence_level', 'reject') or 'reject')
     plate_valid = bool(plate_validation.get('valid', False))
@@ -2752,13 +2812,13 @@ def _compute_judicial_readiness(payload: dict) -> dict:
         blockers.append('Sem leitura OCR consolidada da placa')
     if not has_analysis_id or not has_timestamp:
         blockers.append('Metadados forenses incompletos (analysis_id/timestamp)')
-    if conf_level in ('reject', 'low') or conf_score < 0.75:
-        cautions.append('Confianca global abaixo do limiar pericial recomendado (0.75)')
+    if conf_level in ('reject', 'low') or conf_score < conf_min:
+        cautions.append(f'Confianca global abaixo do limiar pericial recomendado ({conf_min:.2f})')
     if not plate_valid:
         cautions.append('Padrao de placa nao validado automaticamente')
-    if agreement_ratio < 50.0:
+    if agreement_ratio < consensus_min:
         cautions.append('Baixo consenso entre motores OCR')
-    if img_quality_score < 0.60:
+    if img_quality_score < quality_min:
         cautions.append('Qualidade de imagem abaixo do ideal para uso judicial')
 
     if blockers:
@@ -2777,6 +2837,11 @@ def _compute_judicial_readiness(payload: dict) -> dict:
         'confidence_score': round(conf_score, 4),
         'consensus_ratio': round(agreement_ratio, 2),
         'image_quality_score': round(img_quality_score, 4),
+        'thresholds_applied': {
+            'confidence_min': conf_min,
+            'consensus_ratio_min': consensus_min,
+            'image_quality_min': quality_min,
+        },
         'plate_pattern_valid': plate_valid,
         'blockers': blockers,
         'cautions': cautions,
@@ -2786,3 +2851,37 @@ def _compute_judicial_readiness(payload: dict) -> dict:
             'Recomenda-se correlacao com provas independentes (CFTV, metadata, testemunhos, telemetria).',
         ],
     }
+
+
+_JUDICIAL_POLICY_CACHE = None
+
+
+def _load_judicial_policy() -> dict:
+    global _JUDICIAL_POLICY_CACHE
+    if isinstance(_JUDICIAL_POLICY_CACHE, dict):
+        return _JUDICIAL_POLICY_CACHE
+
+    default_policy = {
+        'thresholds': {
+            'confidence_min': 0.75,
+            'consensus_ratio_min': 50.0,
+            'image_quality_min': 0.60,
+        }
+    }
+
+    policy_path = os.path.join(PROJECT_ROOT, 'data', 'judicial_threshold_policy.json')
+    if not os.path.exists(policy_path):
+        _JUDICIAL_POLICY_CACHE = default_policy
+        return _JUDICIAL_POLICY_CACHE
+
+    try:
+        with open(policy_path, 'r', encoding='utf-8') as stream:
+            loaded = json.load(stream)
+        if isinstance(loaded, dict):
+            _JUDICIAL_POLICY_CACHE = loaded
+            return _JUDICIAL_POLICY_CACHE
+    except Exception:
+        pass
+
+    _JUDICIAL_POLICY_CACHE = default_policy
+    return _JUDICIAL_POLICY_CACHE

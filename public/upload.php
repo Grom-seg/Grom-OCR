@@ -412,7 +412,7 @@ function accentuatePortugueseText(string $value): string
     return implode('', $parts);
 }
 
-function humanizePericialLabel($value): string
+function humanizePericialLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -501,7 +501,7 @@ function humanizePericialLabel($value): string
     return accentuatePortugueseText(ucfirst($lower));
 }
 
-function humanizeSceneLabel($value): string
+function humanizeSceneLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -532,7 +532,7 @@ function humanizeSceneLabel($value): string
     return humanizePericialLabel($raw);
 }
 
-function humanizeEngineHealthLabel($value): string
+function humanizeEngineHealthLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -560,7 +560,7 @@ function humanizeEngineHealthLabel($value): string
     return humanizePericialLabel($raw);
 }
 
-function humanizeRoiQualityLabel($value): string
+function humanizeRoiQualityLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -593,7 +593,7 @@ function humanizeRoiQualityLabel($value): string
     return humanizePericialLabel($raw);
 }
 
-function humanizeOfficialValidationLabel($value): string
+function humanizeOfficialValidationLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -627,7 +627,7 @@ function humanizeOfficialValidationLabel($value): string
     return humanizePericialLabel($raw);
 }
 
-function humanizeOfficialValidationSourceKindLabel($value): string
+function humanizeOfficialValidationSourceKindLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -654,7 +654,7 @@ function humanizeOfficialValidationSourceKindLabel($value): string
     return humanizePericialLabel($raw);
 }
 
-function humanizeOfficialValidationSourceLabel($value): string
+function humanizeOfficialValidationSourceLabel(mixed $value): string
 {
     $raw = trim((string) ($value ?? ''));
     if ($raw === '') {
@@ -1054,7 +1054,7 @@ function buildHumanReviewPayload(array $previewResult, array $postData, string $
     ];
 }
 
-function persistAnalysisRecord(array $result, string $filename, $db, int $userId): array
+function persistAnalysisRecord(array $result, string $filename, mixed $db, int $userId): array
 {
     $dbWarning = '';
     $savedId = null;

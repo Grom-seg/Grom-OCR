@@ -1,0 +1,14 @@
+{
+    "updated_at_utc": "2026-05-10T16:34:30.009225Z",
+    "source": "video_forensic_benchmark_calibration",
+    "manifest": "C:\\Grom_OCR\\data\\video_forensic_benchmark_manifest.json",
+    "thresholds": {
+        "confidence_min": 0.75,
+        "consensus_ratio_min": 50.0,
+        "image_quality_min": 0.6
+    },
+    "notes": [
+        "Gerado automaticamente por benchmark formal de vídeo por cenários.",
+        "Revisar periodicamente após entrada de novos casos reais."
+    ]
+}

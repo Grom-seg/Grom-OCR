@@ -1,0 +1,69 @@
+{
+    "description": "Benchmark formal de vídeo por cenários periciais",
+    "api_base": "http://127.0.0.1:8000",
+    "quality_targets": {
+        "alta": {
+            "min_precision": 0.98
+        },
+        "media": {
+            "min_precision": 0.95
+        },
+        "baixa": {
+            "min_precision": 0.9
+        }
+    },
+    "scenario_targets": {
+        "dia": {
+            "min_precision": 0.97
+        },
+        "noite": {
+            "min_precision": 0.92
+        },
+        "chuva": {
+            "min_precision": 0.9
+        },
+        "motion_blur": {
+            "min_precision": 0.88
+        },
+        "compressao_forte": {
+            "min_precision": 0.88
+        }
+    },
+    "cases": [
+        {
+            "id": "sample_day_01",
+            "video_path": "test-assets/videos/day_01.mp4",
+            "expected_plate": "",
+            "quality_class": "alta",
+            "scenarios": [
+                "dia"
+            ],
+            "sample_every_n_frames": 5,
+            "max_frames_to_analyze": 12
+        },
+        {
+            "id": "sample_night_motion_01",
+            "video_path": "test-assets/videos/night_motion_01.mp4",
+            "expected_plate": "",
+            "quality_class": "baixa",
+            "scenarios": [
+                "noite",
+                "motion_blur",
+                "compressao_forte"
+            ],
+            "sample_every_n_frames": 4,
+            "max_frames_to_analyze": 16
+        },
+        {
+            "id": "sample_rain_01",
+            "video_path": "test-assets/videos/rain_01.mp4",
+            "expected_plate": "",
+            "quality_class": "media",
+            "scenarios": [
+                "chuva"
+            ],
+            "sample_every_n_frames": 4,
+            "max_frames_to_analyze": 14
+        }
+    ]
+}
