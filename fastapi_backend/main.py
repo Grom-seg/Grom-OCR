@@ -2708,6 +2708,9 @@ async def process_video_legacy_endpoint(
             ],
         }
 
+        # Garantia explícita: análise de vídeo também sempre retorna OSINT.
+        best_payload = _ensure_vehicle_osint_presence(best_payload)
+
         return JSONResponse(best_payload)
     finally:
         if os.path.exists(tmp_video_path):
@@ -2911,6 +2914,26 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
+def _ensure_vehicle_osint_presence(payload: dict) -> dict:
+    """Garante presença do bloco OSINT no payload e no report_context."""
+    if not isinstance(payload, dict):
+        return payload
+
+    if not isinstance(payload.get('vehicle_osint'), dict) or not payload.get('vehicle_osint'):
+        payload['vehicle_osint'] = build_vehicle_osint_report(
+            vehicle_analysis=payload.get('vehicle_analysis', {}) if isinstance(payload.get('vehicle_analysis'), dict) else {},
+            top_candidates=payload.get('top_candidates', []) if isinstance(payload.get('top_candidates'), list) else [],
+            vehicle_info=payload.get('vehicle_info', {}) if isinstance(payload.get('vehicle_info'), dict) else {},
+            analysis_id=str(payload.get('forensic', {}).get('analysis_id', '') or ''),
+            source_filename=str(payload.get('forensic', {}).get('source_filename', '') or ''),
+        )
+
+    report_context = payload.get('report_context', {}) if isinstance(payload.get('report_context'), dict) else {}
+    report_context['vehicle_osint'] = payload.get('vehicle_osint', {}) if isinstance(payload.get('vehicle_osint'), dict) else {}
+    payload['report_context'] = report_context
+    return payload
+
+
 def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
     """Enriquece payload com validação de placa, qualidade e confiança."""
 
@@ -3033,13 +3056,7 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
         detections=payload.get('detections', []) if isinstance(payload.get('detections'), list) else [],
     )
 
-    payload['vehicle_osint'] = build_vehicle_osint_report(
-        vehicle_analysis=payload.get('vehicle_analysis', {}) if isinstance(payload.get('vehicle_analysis'), dict) else {},
-        top_candidates=payload.get('top_candidates', []) if isinstance(payload.get('top_candidates'), list) else [],
-        vehicle_info=payload.get('vehicle_info', {}) if isinstance(payload.get('vehicle_info'), dict) else {},
-        analysis_id=str(payload.get('forensic', {}).get('analysis_id', '') or ''),
-        source_filename=str(payload.get('forensic', {}).get('source_filename', '') or ''),
-    )
+    payload = _ensure_vehicle_osint_presence(payload)
 
     # Atualiza assessment baseado em confiança
     conf_level = confidence.get('confidence_level', 'reject')
