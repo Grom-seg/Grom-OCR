@@ -624,6 +624,72 @@ def _external_ocr_for_regions(photo_path: str, detections: List[dict], analysis_
     return rows, best_metadata
 
 
+def _detections_missing_valid_ocr(detections: List[dict], ocr_rows: List[dict]) -> List[dict]:
+    """Retorna detecções priorizadas que ainda não possuem leitura OCR plausível."""
+    if not isinstance(detections, list) or not detections:
+        return []
+
+    ranks_with_valid_ocr = set()
+    for row in (ocr_rows or []):
+        if not isinstance(row, dict):
+            continue
+        text = _normalize_plate_text(row.get('text', ''))
+        if len(text) < 6:
+            continue
+        try:
+            rank = int(row.get('detection_priority_rank', 0) or 0)
+        except (TypeError, ValueError):
+            rank = 0
+        if rank > 0:
+            ranks_with_valid_ocr.add(rank)
+
+    missing = []
+    for det in detections:
+        if not isinstance(det, dict):
+            continue
+        try:
+            rank = int(det.get('priority_rank', 0) or 0)
+        except (TypeError, ValueError):
+            rank = 0
+        if rank <= 0 or rank in ranks_with_valid_ocr:
+            continue
+        missing.append(det)
+
+    return missing
+
+
+def _merge_ocr_rows_without_duplicates(existing_rows: List[dict], incoming_rows: List[dict]) -> List[dict]:
+    """Mescla linhas OCR evitando duplicidade por (engine, rank, text, bbox)."""
+    merged = list(existing_rows or [])
+    seen = set()
+    for row in merged:
+        if not isinstance(row, dict):
+            continue
+        key = (
+            str(row.get('engine', '') or ''),
+            int(row.get('detection_priority_rank', 0) or 0),
+            _normalize_plate_text(row.get('text', '')),
+            tuple(row.get('bbox', []) if isinstance(row.get('bbox'), list) else []),
+        )
+        seen.add(key)
+
+    for row in (incoming_rows or []):
+        if not isinstance(row, dict):
+            continue
+        key = (
+            str(row.get('engine', '') or ''),
+            int(row.get('detection_priority_rank', 0) or 0),
+            _normalize_plate_text(row.get('text', '')),
+            tuple(row.get('bbox', []) if isinstance(row.get('bbox'), list) else []),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(row)
+
+    return merged
+
+
 def _bbox_iou(a: List[float], b: List[float]) -> float:
     if len(a) != 4 or len(b) != 4:
         return 0.0
@@ -1528,18 +1594,23 @@ async def process_legacy_endpoint(
             for item in (ocr_results or [])
         )
 
-        # FALLBACK 2: Se EasyOCR também falhou (ou veio inválido), tentar Plate Recognizer (API externa)
-        if (not has_valid_ocr_after_easyocr) and _PLATE_RECOGNIZER_AVAILABLE:
+        # FALLBACK 2 / ENRIQUECIMENTO: tenta Plate Recognizer em regiões sem OCR plausível.
+        missing_detections = _detections_missing_valid_ocr(detections, ocr_results)
+        should_call_external = _PLATE_RECOGNIZER_AVAILABLE and (
+            (not has_valid_ocr_after_easyocr) or bool(missing_detections)
+        )
+        if should_call_external:
             try:
+                target_detections = missing_detections if missing_detections else detections
                 external_rows, best_external_metadata = _external_ocr_for_regions(
                     persisted_photo_path,
-                    detections,
+                    target_detections,
                     analysis_id,
-                    max_regions=4,
+                    max_regions=8,
                 )
                 if external_rows:
                     external_metadata = best_external_metadata or {}
-                    ocr_results.extend(external_rows)
+                    ocr_results = _merge_ocr_rows_without_duplicates(ocr_results, external_rows)
                     ocr_runtime_events.append({
                         'engine': 'plate_recognizer_api',
                         'fallback_used': True,
@@ -1757,18 +1828,23 @@ async def process_ensemble_endpoint(
             for item in (ocr_results or [])
         )
 
-        # FALLBACK 2: Se EasyOCR também falhou (ou veio inválido), tentar Plate Recognizer (API externa)
-        if (not has_valid_ocr_after_easyocr) and _PLATE_RECOGNIZER_AVAILABLE:
+        # FALLBACK 2 / ENRIQUECIMENTO: tenta Plate Recognizer em regiões sem OCR plausível.
+        missing_detections = _detections_missing_valid_ocr(detections, ocr_results)
+        should_call_external = _PLATE_RECOGNIZER_AVAILABLE and (
+            (not has_valid_ocr_after_easyocr) or bool(missing_detections)
+        )
+        if should_call_external:
             try:
+                target_detections = missing_detections if missing_detections else detections
                 external_rows, best_external_metadata = _external_ocr_for_regions(
                     persisted_photo_path,
-                    detections,
+                    target_detections,
                     analysis_id,
-                    max_regions=4,
+                    max_regions=8,
                 )
                 if external_rows:
                     external_metadata = best_external_metadata or {}
-                    ocr_results.extend(external_rows)
+                    ocr_results = _merge_ocr_rows_without_duplicates(ocr_results, external_rows)
                     ocr_runtime_events.append({
                         'engine': 'plate_recognizer_api',
                         'fallback_used': True,

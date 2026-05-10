@@ -46,46 +46,88 @@ class ForensicPDF:
         self.pdf.add_page()
         self.pdf.set_font("Arial", "", 11)
 
+    def _mc(self, h, txt):
+        """FPDF2-safe multi_cell: garante cursor em margem esquerda."""
+        self.pdf.set_x(self.pdf.l_margin)
+        try:
+            self.pdf.multi_cell(0, h, str(txt or ""), new_x='LMARGIN', new_y='NEXT')
+        except TypeError:
+            # Compatibilidade com implementações legadas sem new_x/new_y.
+            self.pdf.multi_cell(0, h, str(txt or ""))
+
+    def _section_title(self, text):
+        """Título de seção com faixa visual para aparência timbrada."""
+        self.pdf.set_fill_color(235, 241, 248)
+        self.pdf.set_draw_color(175, 190, 210)
+        self.pdf.set_font("Arial", "B", 10)
+        self.pdf.cell(0, 7, str(text or ""), ln=True, fill=True, border=1)
+        self.pdf.ln(1)
+
+    def _find_logo_path(self):
+        root = Path(__file__).resolve().parent.parent
+        logo = root / "public" / "assets" / "grom-report-logo.png"
+        return str(logo) if logo.exists() else ""
+
     def _add_header(self, analysis_id, timestamp_utc):
         """Cabeçalho institucional."""
-        self.pdf.set_font("Arial", "B", 16)
-        self.pdf.cell(0, 8, "RELATORIO TECNICO-PERICIAL", ln=True, align="C")
-        self.pdf.set_font("Arial", "B", 12)
-        self.pdf.cell(0, 6, "Identificacao de Placa Veicular via OCR Multi-Motor", ln=True, align="C")
+        self.pdf.set_fill_color(22, 58, 96)
+        self.pdf.rect(0, 0, 210, 27, style='F')
+
+        logo_path = self._find_logo_path()
+        if logo_path:
+            try:
+                self.pdf.image(logo_path, x=10, y=5, w=24)
+            except Exception:
+                pass
+
+        self.pdf.set_text_color(255, 255, 255)
+        self.pdf.set_xy(38, 7)
+        self.pdf.set_font("Arial", "B", 13)
+        self.pdf.cell(120, 6, "GROM OCR - RELATORIO TECNICO-PERICIAL", ln=True)
+        self.pdf.set_x(38)
         self.pdf.set_font("Arial", "", 9)
-        self.pdf.cell(0, 5, f"Sistema: GROM-OCR v2.0 | Data: {timestamp_utc}", ln=True, align="C")
-        self.pdf.cell(0, 5, f"ID de Analise: {analysis_id}", ln=True, align="C")
+        self.pdf.cell(120, 5, "Identificacao veicular com OCR multi-motor e trilha forense", ln=True)
+
+        self.pdf.set_text_color(0, 0, 0)
+        self.pdf.set_y(31)
+        self.pdf.set_draw_color(22, 58, 96)
+        self.pdf.set_line_width(0.5)
+        self.pdf.line(10, 31, 200, 31)
         self.pdf.ln(3)
+
+        self.pdf.set_font("Arial", "", 9)
+        self.pdf.cell(0, 5, f"ID de Analise: {analysis_id}", ln=True)
+        self.pdf.cell(0, 5, f"Gerado em (UTC): {timestamp_utc}", ln=True)
+        self.pdf.cell(0, 5, "Sistema: GROM-OCR v2.0", ln=True)
+        self.pdf.ln(2)
 
     def _add_cadeia_custodia(self, photo_path, plate_path):
         """Seção de cadeia de custódia com hashes."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "CADEIA DE CUSTODIA E INTEGRIDADE DIGITAL", ln=True)
+        self._section_title("CADEIA DE CUSTODIA E INTEGRIDADE DIGITAL")
         self.pdf.set_font("Arial", "", 9)
 
         photo_hash = _file_sha256(photo_path) if os.path.exists(photo_path) else "UNAVAILABLE"
         plate_hash = _file_sha256(plate_path) if os.path.exists(plate_path) else "UNAVAILABLE"
 
-        self.pdf.multi_cell(0, 4, f"Arquivo original: {os.path.basename(photo_path)}")
+        self._mc(4, f"Arquivo original: {os.path.basename(photo_path)}")
         if photo_hash:
-            self.pdf.multi_cell(0, 4, f"Hash SHA-256: {photo_hash}")
+            self._mc(4, f"Hash SHA-256: {photo_hash}")
 
-        self.pdf.multi_cell(0, 4, f"\nRecorte principal placa: {os.path.basename(plate_path)}")
+        self._mc(4, f"\nRecorte principal placa: {os.path.basename(plate_path)}")
         if plate_hash:
-            self.pdf.multi_cell(0, 4, f"Hash SHA-256: {plate_hash}")
+            self._mc(4, f"Hash SHA-256: {plate_hash}")
 
         self.pdf.ln(2)
 
     def _add_methodology(self, process_trace, ocr_engine_summary):
         """Seção de metodologia técnica aplicada."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "METODOLOGIA TECNICA APLICADA", ln=True)
+        self._section_title("METODOLOGIA TECNICA APLICADA")
         self.pdf.set_font("Arial", "", 9)
 
         # Trace do processo
         if isinstance(process_trace, list):
             for step in process_trace[:10]:
-                self.pdf.multi_cell(0, 4, f"- {str(step)}")
+                self._mc(4, f"- {str(step)}")
 
         # Motores executados
         self.pdf.ln(1)
@@ -94,14 +136,13 @@ class ForensicPDF:
         fallback_status = "SIM" if ocr_engine_summary.get('fallback_used') else "NAO"
 
         self.pdf.set_font("Arial", "", 9)
-        self.pdf.multi_cell(0, 4, f"Motores OCR executados: {engines_text}")
-        self.pdf.multi_cell(0, 4, f"Fallback multi-motor acionado: {fallback_status}")
+        self._mc(4, f"Motores OCR executados: {engines_text}")
+        self._mc(4, f"Fallback multi-motor acionado: {fallback_status}")
         self.pdf.ln(2)
 
     def _add_evidence_photo(self, photo_path, max_width=180):
         """Insere foto original com qualidade."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "EVIDENCIA FOTOGRAFICA ORIGINAL", ln=True)
+        self._section_title("EVIDENCIA FOTOGRAFICA ORIGINAL")
 
         if os.path.exists(photo_path):
             try:
@@ -112,17 +153,16 @@ class ForensicPDF:
                 self.pdf.ln(1)
             except Exception as e:
                 self.pdf.set_font("Arial", "", 9)
-                self.pdf.multi_cell(0, 4, f"Nao foi possivel incorporar foto: {e}")
+                self._mc(4, f"Nao foi possivel incorporar foto: {e}")
         else:
             self.pdf.set_font("Arial", "", 9)
-            self.pdf.multi_cell(0, 4, "Arquivo de foto nao localizado")
+            self._mc(4, "Arquivo de foto nao localizado")
 
         self.pdf.ln(1)
 
     def _add_multi_plate_analysis(self, top_candidates, plate_analyses):
         """Análise de todas as placas detectadas."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "ANALISE MULTI-PLACA - TODAS AS REGIOES", ln=True)
+        self._section_title("ANALISE MULTI-PLACA - TODAS AS REGIOES")
 
         if isinstance(plate_analyses, list) and plate_analyses:
             self.pdf.set_font("Arial", "", 8)
@@ -138,7 +178,7 @@ class ForensicPDF:
 
                 line = f"Rank {rank}{is_primary}: {best_text or 'NAO RECONHECIDA'} | "
                 line += f"Motor: {best_engine or '-'} | Conf OCR: {best_conf:.3f} | Conf Det: {det_conf:.3f}"
-                self.pdf.multi_cell(0, 4, line)
+                self._mc(4, line)
 
         if isinstance(top_candidates, list) and top_candidates:
             self.pdf.ln(1)
@@ -158,14 +198,13 @@ class ForensicPDF:
 
                 line = f"- {txt or 'VAZIO'} | Motor primario: {eng} | "
                 line += f"Score: {sc:.3f} | Suporte: {sup} detec | Consenso: {agr:.1f}%"
-                self.pdf.multi_cell(0, 4, line)
+                self._mc(4, line)
 
         self.pdf.ln(1)
 
     def _add_consensus_analysis(self, consensus, assessment):
         """Análise de consenso inter-motores."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "ANALISE DE CONSENSO OCR INTER-MOTORES", ln=True)
+        self._section_title("ANALISE DE CONSENSO OCR INTER-MOTORES")
         self.pdf.set_font("Arial", "", 9)
 
         if isinstance(consensus, dict):
@@ -175,15 +214,15 @@ class ForensicPDF:
             supporting_count = int(consensus.get('engines_supporting_best_count', 0) or 0)
             supporting_engines = consensus.get('engines_supporting_best', [])
 
-            self.pdf.multi_cell(0, 4,
+            self._mc(4,
                 f"Motores executados: {engines_count} | "
                 f"Motores suportando melhor candidato: {supporting_count} ({supporting_count}/{engines_count})")
-            self.pdf.multi_cell(0, 4, f"Motores concordes: {', '.join([str(e) for e in supporting_engines])}")
-            self.pdf.multi_cell(0, 4, f"Taxa de concordancia: {agreement:.1f}%")
-            self.pdf.multi_cell(0, 4, f"Tipo de consenso: {basis}")
+            self._mc(4, f"Motores concordes: {', '.join([str(e) for e in supporting_engines])}")
+            self._mc(4, f"Taxa de concordancia: {agreement:.1f}%")
+            self._mc(4, f"Tipo de consenso: {basis}")
 
             if basis == "single_engine_or_no_consensus":
-                self.pdf.multi_cell(0, 4,
+                self._mc(4,
                     "ATENCAO: Resultado obtido de apenas um motor OCR. "
                     "Recomenda-se validacao manual ou multi-motor.")
 
@@ -191,8 +230,7 @@ class ForensicPDF:
 
     def _add_quality_analysis(self, image_quality):
         """Análise de qualidade de imagem."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "ANALISE DE QUALIDADE FOTOGRAFICA", ln=True)
+        self._section_title("ANALISE DE QUALIDADE FOTOGRAFICA")
         self.pdf.set_font("Arial", "", 9)
 
         if isinstance(image_quality, dict):
@@ -202,10 +240,10 @@ class ForensicPDF:
             rotation = float(image_quality.get('rotation_angle', 0) or 0)
             overall = float(image_quality.get('overall_quality_score', 0) or 0)
 
-            self.pdf.multi_cell(0, 4,
+            self._mc(4,
                 f"Nitidez: {blur} | Contraste: {contrast:.2f} | "
                 f"Brilho: {brightness} | Rotacao: {rotation:.1f} graus")
-            self.pdf.multi_cell(0, 4, f"Score geral de qualidade: {overall:.3f}")
+            self._mc(4, f"Score geral de qualidade: {overall:.3f}")
 
             recommendations = image_quality.get('recommendations', [])
             if isinstance(recommendations, list) and recommendations:
@@ -213,14 +251,13 @@ class ForensicPDF:
                 self.pdf.cell(0, 5, "Recomendacoes:", ln=True)
                 self.pdf.set_font("Arial", "", 8)
                 for rec in recommendations[:5]:
-                    self.pdf.multi_cell(0, 4, f"- {str(rec)}")
+                    self._mc(4, f"- {str(rec)}")
 
         self.pdf.ln(1)
 
     def _add_scene_analysis(self, scene_brief_report, vehicle_analysis):
         """Análise de cena e contexto veicular."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "ANALISE DE CENA E CONTEXTO OPERACIONAL", ln=True)
+        self._section_title("ANALISE DE CENA E CONTEXTO OPERACIONAL")
         self.pdf.set_font("Arial", "", 9)
 
         if isinstance(scene_brief_report, dict):
@@ -229,12 +266,12 @@ class ForensicPDF:
             context = str(scene_brief_report.get('operational_context', '?') or '?')
             conclusion = str(scene_brief_report.get('conclusion', '') or '')
 
-            self.pdf.multi_cell(0, 4, f"Tipo de cena: {scene_type}")
-            self.pdf.multi_cell(0, 4, f"Condicao de captura: {capture}")
-            self.pdf.multi_cell(0, 4, f"Contexto operacional: {context}")
+            self._mc(4, f"Tipo de cena: {scene_type}")
+            self._mc(4, f"Condicao de captura: {capture}")
+            self._mc(4, f"Contexto operacional: {context}")
 
             if conclusion:
-                self.pdf.multi_cell(0, 4, f"Conclusao preliminar: {conclusion}")
+                self._mc(4, f"Conclusao preliminar: {conclusion}")
 
         if isinstance(vehicle_analysis, dict):
             vehicles = vehicle_analysis.get('vehicle_detections', [])
@@ -246,32 +283,31 @@ class ForensicPDF:
                 for v in vehicles[:10]:
                     conf = float(v.get('confidence', 0) or 0)
                     class_name = str(v.get('class_name', '?') or '?')
-                    self.pdf.multi_cell(0, 4, f"- {class_name}: confianca {conf:.3f}")
+                    self._mc(4, f"- {class_name}: confianca {conf:.3f}")
 
         self.pdf.ln(1)
 
     def _add_conclusion(self, pericial, assessment, warnings):
         """Conclusão pericial."""
-        self.pdf.set_font("Arial", "B", 11)
-        self.pdf.cell(0, 7, "CONCLUSAO PERICIAL", ln=True)
+        self._section_title("CONCLUSAO PERICIAL")
         self.pdf.set_font("Arial", "", 9)
 
         if isinstance(pericial, dict):
             status = str(pericial.get('status', '?') or '?')
             quality_score = float(pericial.get('quality', {}).get('score', 0) or 0)
-            self.pdf.multi_cell(0, 4, f"Status: {status}")
-            self.pdf.multi_cell(0, 4, f"Score de qualidade pericial: {quality_score:.3f}")
+            self._mc(4, f"Status: {status}")
+            self._mc(4, f"Score de qualidade pericial: {quality_score:.3f}")
 
         if isinstance(assessment, dict):
             evidence_level = str(assessment.get('evidence_level', '?') or '?')
             recommendation = str(assessment.get('confidence_recommendation', '') or '')
-            self.pdf.multi_cell(0, 4, f"Nivel de evidencia: {evidence_level}")
+            self._mc(4, f"Nivel de evidencia: {evidence_level}")
 
             if recommendation:
                 self.pdf.set_font("Arial", "B", 9)
                 self.pdf.cell(0, 5, "Recomendacao:", ln=True)
                 self.pdf.set_font("Arial", "", 8)
-                self.pdf.multi_cell(0, 4, recommendation)
+                self._mc(4, recommendation)
 
         if isinstance(warnings, list) and warnings:
             self.pdf.ln(1)
@@ -279,7 +315,7 @@ class ForensicPDF:
             self.pdf.cell(0, 6, f"ALERTAS TECNICOS ({len(warnings)}):", ln=True)
             self.pdf.set_font("Arial", "", 8)
             for warning in warnings[:20]:
-                self.pdf.multi_cell(0, 4, f"- {str(warning)}")
+                self._mc(4, f"- {str(warning)}")
 
         self.pdf.ln(1)
 
@@ -287,7 +323,7 @@ class ForensicPDF:
         """Assinatura e certificação."""
         self.pdf.ln(2)
         self.pdf.set_font("Arial", "I", 8)
-        self.pdf.multi_cell(0, 4,
+        self._mc(4,
             "Este relatorio foi gerado automaticamente pelo sistema GROM-OCR. "
             "Representa uma analise tecnica de evidencia digital submetida para identificacao de placa veicular "
             "via tecnicas de reconhecimento optico de caracteres (OCR). "
@@ -297,8 +333,8 @@ class ForensicPDF:
         self.pdf.ln(1)
         self.pdf.set_font("Arial", "", 8)
         timestamp = datetime.now(timezone.utc).isoformat()
-        self.pdf.multi_cell(0, 4, f"Gerado em: {timestamp}")
-        self.pdf.multi_cell(0, 4, f"ID de Analise: {analysis_id}")
+        self._mc(4, f"Gerado em: {timestamp}")
+        self._mc(4, f"ID de Analise: {analysis_id}")
 
     def generate(self, photo_path, plate_path, recognized_text, analysis_id, report_context,
                  vehicle_info, forensic, consensus, assessment, pericial, warnings, output_path):
