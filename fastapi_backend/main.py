@@ -834,6 +834,12 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
     detection_count = int(report_context.get('detection_count', 0) or 0)
 
     pdf = FPDF()
+    # FPDF2 2.7+ deixa cursor X no final do texto apos multi_cell.
+    # Wrapper que sempre reseta X para margem esquerda antes de renderizar.
+    def _mc(h: int, txt: str) -> None:
+        pdf.set_x(pdf.l_margin)
+        pdf.multi_cell(0, h, _latin1_safe_text(str(txt or '')), new_x='LMARGIN', new_y='NEXT')
+
     pdf.set_auto_page_break(auto=True, margin=12)
     pdf.add_page()
     pdf.set_font('Arial', 'B', 14)
@@ -860,9 +866,9 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
     pdf.cell(0, 7, 'Cadeia de custodia (hash SHA-256)', ln=True)
     pdf.set_font('Arial', '', 9)
     if photo_hash:
-        pdf.multi_cell(0, 5, f'Foto original: {photo_hash}')
+        _mc(5, f'Foto original: {photo_hash}')
     if plate_hash:
-        pdf.multi_cell(0, 5, f'Recorte principal: {plate_hash}')
+        _mc(5, f'Recorte principal: {plate_hash}')
     pdf.ln(1)
 
     pdf.set_font('Arial', 'B', 11)
@@ -870,7 +876,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
     pdf.set_font('Arial', '', 10)
     engines = ocr_engine_summary.get('engines_executed', []) if isinstance(ocr_engine_summary, dict) else []
     engines_text = ', '.join([str(e) for e in engines]) if engines else 'indisponivel'
-    pdf.multi_cell(0, 6, f'Motores OCR executados: {engines_text}')
+    _mc(6, f'Motores OCR executados: {engines_text}')
     if isinstance(ocr_engine_summary, dict):
         pdf.cell(0, 6, f"Fallback acionado: {'sim' if ocr_engine_summary.get('fallback_used') else 'nao'}", ln=True)
     if isinstance(ocr_engine_status, dict):
@@ -882,7 +888,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
             line = f'- {engine_name}: {status_txt}'
             if err_txt:
                 line += f' (erro: {err_txt})'
-            pdf.multi_cell(0, 5, line)
+            _mc(5, line)
     pdf.ln(1)
 
     if isinstance(process_trace, list) and process_trace:
@@ -890,7 +896,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
         pdf.cell(0, 7, 'Metodologia tecnica aplicada', ln=True)
         pdf.set_font('Arial', '', 10)
         for step in _dedupe_text_lines([str(x) for x in process_trace])[:12]:
-            pdf.multi_cell(0, 5, f'- {step}')
+            _mc(5, f'- {step}')
         pdf.ln(1)
 
     if os.path.exists(photo_path):
@@ -919,7 +925,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
             best_conf = float(plate_row.get('best_confidence', 0.0) or 0.0)
             det_conf = float(plate_row.get('detection_confidence', 0.0) or 0.0)
             marker = ' [PRIMEIRO PLANO]' if bool(plate_row.get('is_primary_candidate')) else ''
-            pdf.multi_cell(0, 5, f'Rank {rank}{marker} | bbox={bbox} | conf_det={det_conf:.3f} | melhor OCR={best_text or "-"} ({best_engine or "-"}, {best_conf:.3f})')
+            _mc(5, f'Rank {rank}{marker} | bbox={bbox} | conf_det={det_conf:.3f} | melhor OCR={best_text or "-"} ({best_engine or "-"}, {best_conf:.3f})')
         pdf.ln(1)
 
     if isinstance(top_candidates, list) and top_candidates:
@@ -933,7 +939,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
             eng = str(row.get('engine', '-') or '-')
             sc = float(row.get('score', 0.0) or 0.0)
             sup = int(row.get('support_count', 1) or 1)
-            pdf.multi_cell(0, 5, f'- {txt or "-"} | motor={eng} | score={sc:.3f} | suporte={sup}')
+            _mc(5, f'- {txt or "-"} | motor={eng} | score={sc:.3f} | suporte={sup}')
         pdf.ln(1)
 
     if isinstance(scene_brief_report, dict) and scene_brief_report:
@@ -949,7 +955,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
         ):
             value = str(scene_brief_report.get(key, '') or '').strip()
             if value:
-                pdf.multi_cell(0, 5, f'{label}: {value}')
+                _mc(5, f'{label}: {value}')
 
         for section_name, title in (
             ('relevant_elements', 'Elementos relevantes'),
@@ -964,7 +970,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
             if rows:
                 pdf.cell(0, 6, f'{title}:', ln=True)
                 for row in rows[:12]:
-                    pdf.multi_cell(0, 5, f'- {row}')
+                    _mc(5, f'- {row}')
         pdf.ln(1)
 
     if isinstance(spatial_context, dict) and spatial_context:
@@ -977,7 +983,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
             pdf.cell(0, 6, f"Longitude: {spatial_context.get('longitude', '')}", ln=True)
             reverse = spatial_context.get('reverse_geocode', {}) if isinstance(spatial_context.get('reverse_geocode', {}), dict) else {}
             if reverse.get('display_name'):
-                pdf.multi_cell(0, 5, f"Local aproximado: {reverse.get('display_name')}")
+                _mc(5, f"Local aproximado: {reverse.get('display_name')}")
         pdf.ln(1)
 
     if isinstance(vehicle_info, dict) and vehicle_info:
@@ -999,7 +1005,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
         pdf.cell(0, 6, f"Nivel de evidencia: {assessment.get('evidence_level', '-')}", ln=True)
         recom = str(assessment.get('confidence_recommendation', '') or '').strip()
         if recom:
-            pdf.multi_cell(0, 5, f'Recomendacao: {recom}')
+            _mc(5, f'Recomendacao: {recom}')
     if isinstance(pericial, dict):
         pdf.cell(0, 6, f"Status pericial: {pericial.get('status', '-')}", ln=True)
 
@@ -1020,7 +1026,7 @@ def _generate_pdf_report(photo_path: str, plate_path: str, recognized_text: str,
         pdf.cell(0, 7, 'Alertas tecnicos', ln=True)
         pdf.set_font('Arial', '', 10)
         for warning in warning_lines[:16]:
-            pdf.multi_cell(0, 5, f'- {warning}')
+            _mc(5, f'- {warning}')
 
     pdf.add_page()
     pdf.set_font('Arial', 'B', 12)
@@ -2052,6 +2058,8 @@ async def enrich_report_legacy_endpoint(payload: dict = Body(default_factory=dic
             warnings=warnings,
         )
     except Exception as exc:
+        import traceback as _tb
+        _tb.print_exc()
         return JSONResponse(status_code=500, content={'error': f'Falha ao atualizar relatorio: {exc}'})
 
     return JSONResponse({

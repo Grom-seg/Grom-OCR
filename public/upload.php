@@ -211,6 +211,28 @@ function normalizeApiBase(string $url): string
     return rtrim(trim($url), '/');
 }
 
+function resolveApiBaseForArtifacts(string $defaultApiBase, ?array $result): string
+{
+    $fallback = normalizeApiBase($defaultApiBase);
+    if (strpos($fallback, ':5000') !== false) {
+        $fallback = normalizeApiBase(str_replace(':5000', ':8001', $fallback));
+    }
+    if (!is_array($result)) {
+        return $fallback;
+    }
+
+    $usedApi = trim((string) ($result['api_url_used'] ?? ''));
+    if ($usedApi !== '') {
+        $normalizedUsedApi = normalizeApiBase($usedApi);
+        if (strpos($normalizedUsedApi, ':5000') !== false && strpos($fallback, ':8001') !== false) {
+            return $fallback;
+        }
+        return $normalizedUsedApi;
+    }
+
+    return $fallback;
+}
+
 function buildApiCandidates(string $primaryUrl): array
 {
     $primaryNormalized = normalizeApiBase($primaryUrl);
@@ -1563,6 +1585,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $best = is_array($result) ? ($result['best'] ?? null) : null;
     $ocrEngines = is_array($result) && isset($result['ocr']) && is_array($result['ocr']) ? $result['ocr'] : [];
     $topCandidates = is_array($result) && isset($result['top_candidates']) && is_array($result['top_candidates']) ? $result['top_candidates'] : [];
+    $plateAnalyses = is_array($result) && isset($result['plate_analyses']) && is_array($result['plate_analyses'])
+        ? $result['plate_analyses']
+        : (is_array($result['report_context']['plate_analyses'] ?? null) ? $result['report_context']['plate_analyses'] : []);
     $charOptions = is_array($result) && isset($result['char_options']) && is_array($result['char_options']) ? $result['char_options'] : [];
     $regionsTested = is_array($result) && isset($result['regions_tested']) && is_array($result['regions_tested']) ? $result['regions_tested'] : [];
     $analysisStage = is_array($result) ? strtolower((string) ($result['analysis_stage'] ?? '')) : '';
@@ -1681,6 +1706,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $reviewDefaultCandidate = is_array($topCandidates[0] ?? null) ? $topCandidates[0] : (is_array($best) ? $best : []);
     $reviewDefaultText = normalizePlateValue((string) ($reviewDefaultCandidate['text'] ?? ($best['text'] ?? '')));
     $finalReportReady = is_array($result) && !empty($result['pdf_report']);
+    $artifactApiBase = resolveApiBaseForArtifacts($pythonApiUrl, is_array($result) ? $result : null);
     $analysisReportTopics = [
         'Identificação da captura',
         'Tratamento técnico da imagem',
@@ -2093,6 +2119,39 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         </article>
                     </div>
 
+                    <?php if (!empty($plateAnalyses)) { ?>
+                        <div class="analysis-report-topics-panel">
+                            <p class="analysis-report-section-label">Placas detectadas na cena (multi-placa)</p>
+                            <div class="table-wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Texto</th>
+                                            <th>Motor</th>
+                                            <th>Conf.</th>
+                                            <th>BBox</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach (array_slice($plateAnalyses, 0, 12) as $plateRow) { ?>
+                                            <?php if (!is_array($plateRow)) {
+                                                continue;
+                                            } ?>
+                                            <tr>
+                                                <td><?php echo (int) ($plateRow['priority_rank'] ?? 0); ?></td>
+                                                <td class="mono"><?php echo htmlspecialchars((string) ($plateRow['best_text'] ?? '-')); ?></td>
+                                                <td><?php echo htmlspecialchars((string) ($plateRow['best_engine'] ?? '-')); ?></td>
+                                                <td><?php echo number_format((float) ($plateRow['best_confidence'] ?? 0), 3, ',', '.'); ?></td>
+                                                <td class="mono"><?php echo htmlspecialchars(json_encode($plateRow['bbox'] ?? [], JSON_UNESCAPED_UNICODE)); ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php } ?>
+
                     <div class="analysis-report-topics-panel">
                         <p class="analysis-report-section-label">Procedimentos efetuados na análise</p>
                         <div class="analysis-report-outline">
@@ -2137,18 +2196,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         <?php if ($analysisStage === 'preview') { ?>
                             <a class="btn btn-primary" href="#humanReviewForm">Ir para correção</a>
                             <?php if (!empty($result['pdf_report'])) { ?>
-                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental (prévia)</a>
+                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental (prévia)</a>
                             <?php } ?>
                             <?php if ($manifestUrl !== '') { ?>
-                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . $manifestUrl); ?>">Abrir manifesto pericial</a>
+                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . $manifestUrl); ?>">Abrir manifesto pericial</a>
                             <?php } ?>
                             <span class="muted">Corrija os campos da conferência antes de liberar o documento final.</span>
                         <?php } else { ?>
                             <?php if (!empty($result['pdf_report'])) { ?>
-                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental</a>
+                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental</a>
                             <?php } ?>
                             <?php if ($manifestUrl !== '') { ?>
-                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . $manifestUrl); ?>">Abrir manifesto pericial</a>
+                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . $manifestUrl); ?>">Abrir manifesto pericial</a>
                             <?php } ?>
                             <button id="analysisReportPrintBtn" class="btn btn-secondary" type="button">Imprimir página (não é o laudo documental)</button>
                         <?php } ?>
@@ -2218,15 +2277,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         <?php if ($analysisStage === 'preview') { ?>
                             <a class="btn btn-primary" href="#humanReviewForm">Ir para correção</a>
                             <?php if ($manifestUrl !== '') { ?>
-                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . $manifestUrl); ?>">Abrir manifesto pericial</a>
+                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . $manifestUrl); ?>">Abrir manifesto pericial</a>
                             <?php } ?>
                             <span class="muted">Corrija os campos da conferência antes de liberar o documento final.</span>
                         <?php } else { ?>
                             <?php if (!empty($result['pdf_report'])) { ?>
-                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental</a>
+                                <a class="btn btn-primary" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . '/pdf/' . urlencode((string) $result['pdf_report'])); ?>">Abrir PDF documental</a>
                             <?php } ?>
                             <?php if ($manifestUrl !== '') { ?>
-                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($pythonApiUrl . $manifestUrl); ?>">Abrir manifesto pericial</a>
+                                <a class="btn btn-secondary analysis-report-manifest-link" target="_blank" href="<?php echo htmlspecialchars($artifactApiBase . $manifestUrl); ?>">Abrir manifesto pericial</a>
                             <?php } ?>
                             <button id="analysisReportPrintBtn" class="btn btn-secondary" type="button">Imprimir relatório</button>
                         <?php } ?>
