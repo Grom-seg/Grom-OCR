@@ -14,7 +14,7 @@ if not Path(video_path).exists():
     print(f"✗ Arquivo não encontrado: {video_path}")
     sys.exit(1)
 
-print(f"📹 Testando rastreamento temporal de veículos")
+print("[VIDEO] Testando rastreamento temporal de veiculos")
 print(f"   Arquivo: {video_path}")
 print(f"   Tamanho: {Path(video_path).stat().st_size / (1024*1024):.1f} MB")
 print(f"   API: {api_base}/process_video")
@@ -27,7 +27,7 @@ try:
             "max_frames_to_analyze": "12",
             "sample_every_n_frames": "5",
         }
-        print(f"\n⏳ Enviando vídeo para processamento...")
+        print("\n[INFO] Enviando video para processamento...")
         resp = requests.post(
             f"{api_base}/process_video",
             files=files,
@@ -35,7 +35,7 @@ try:
             timeout=180
         )
 
-    print(f"✓ Resposta HTTP: {resp.status_code}")
+    print(f"[OK] Resposta HTTP: {resp.status_code}")
 
     if resp.status_code == 200:
         result = resp.json()
@@ -45,7 +45,7 @@ try:
         vehicle_tracks = video_context.get("vehicle_tracks", [])
         total_vehicles = video_context.get("total_vehicles_detected", 0)
 
-        print(f"\n📊 Resultado do Rastreamento Temporal:")
+        print("\n[RESULT] Resultado do rastreamento temporal:")
         print(f"   Veículos detectados: {total_vehicles}")
         print(f"   FPS: {video_context.get('fps')}")
         print(f"   Total de frames: {video_context.get('total_frames')}")
@@ -59,7 +59,7 @@ try:
             avg_conf = track.get("avg_confidence", 0)
             candidates = track.get("plate_candidates", {})
 
-            print(f"\n   🚗 Veículo #{track_id}:")
+            print(f"\n   [VEICULO] #{track_id}:")
             print(f"      Placa consolidada: {plate}")
             print(f"      Período: {timespan[0]:.2f}s - {timespan[1]:.2f}s")
             print(f"      Detecções: {det_count}")
@@ -78,16 +78,16 @@ try:
         output_file = Path("resultado_video_temporal.json")
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
-        print(f"\n💾 Resultado completo salvo em: {output_file}")
+        print(f"\n[ARQUIVO] Resultado completo salvo em: {output_file}")
 
     else:
-        print(f"✗ Erro HTTP {resp.status_code}")
+        print(f"[ERRO] HTTP {resp.status_code}")
         print(f"   Resposta: {resp.text[:500]}")
 
 except requests.exceptions.ConnectionError:
-    print(f"✗ Erro de conexão: servidor não respondeu em {api_base}")
-    print(f"   Verifique se o FastAPI está rodando")
+    print(f"[ERRO] Conexao: servidor nao respondeu em {api_base}")
+    print("   Verifique se o FastAPI esta rodando")
 except Exception as e:
-    print(f"✗ Erro: {e}")
+    print(f"[ERRO] {e}")
     import traceback
     traceback.print_exc()
