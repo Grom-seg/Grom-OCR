@@ -2209,6 +2209,131 @@ async def analyze_spatial_metadata_endpoint(file: UploadFile = File(...)):
                 pass
 
 
+def _temporal_vehicle_tracking(frame_analyses: list, iou_threshold: float = 0.4) -> dict:
+    """
+    Rastreia veículos através de frames usando centroide + IoU.
+    Agrupa múltiplas detecções do mesmo veículo e consolida leituras OCR.
+    
+    Retorna:
+        {
+            'vehicle_tracks': [
+                {
+                    'track_id': int,
+                    'frames': [{frame_index, timestamp_sec, bbox, confidence, plate_readings}],
+                    'consolidated_plate': str (consenso por votação),
+                    'plate_candidates': {plate_text: count, ...},
+                    'timespan_sec': (start_ts, end_ts),
+                    'detections_count': int,
+                    'avg_confidence': float,
+                }
+            ],
+            'total_vehicles': int,
+        }
+    """
+    def centroid(bbox):
+        if not bbox or len(bbox) < 4:
+            return None
+        x1, y1, x2, y2 = bbox[:4]
+        return ((x1 + x2) / 2.0, (y1 + y2) / 2.0)
+
+    def iou_overlap(bbox1, bbox2):
+        if not bbox1 or not bbox2 or len(bbox1) < 4 or len(bbox2) < 4:
+            return 0.0
+        x1_1, y1_1, x2_1, y2_1 = bbox1[:4]
+        x1_2, y1_2, x2_2, y2_2 = bbox2[:4]
+        inter_x1 = max(x1_1, x1_2)
+        inter_y1 = max(y1_1, y1_2)
+        inter_x2 = min(x2_1, x2_2)
+        inter_y2 = min(y2_1, y2_2)
+        if inter_x2 < inter_x1 or inter_y2 < inter_y1:
+            return 0.0
+        inter_area = (inter_x2 - inter_x1) * (inter_y2 - inter_y1)
+        box1_area = (x2_1 - x1_1) * (y2_1 - y1_1)
+        box2_area = (x2_2 - x1_2) * (y2_2 - y1_2)
+        union_area = box1_area + box2_area - inter_area
+        return inter_area / union_area if union_area > 0 else 0.0
+
+    tracks = []
+    track_counter = 0
+
+    for frame_data in frame_analyses:
+        if not isinstance(frame_data, dict):
+            continue
+        frame_idx = frame_data.get('frame_index', -1)
+        ts = frame_data.get('timestamp_sec', 0.0)
+        detections = frame_data.get('detections', [])
+
+        for det in detections:
+            if not isinstance(det, dict):
+                continue
+            bbox = det.get('bbox', [])
+            plate_text = det.get('best_text', '').strip()
+            conf = det.get('overall_confidence', 0.0)
+
+            matched_track = None
+            for track in tracks:
+                if not track['frames']:
+                    continue
+                last_frame = track['frames'][-1]
+                last_bbox = last_frame.get('bbox', [])
+                if iou_overlap(bbox, last_bbox) >= iou_threshold:
+                    matched_track = track
+                    break
+
+            if matched_track:
+                matched_track['frames'].append({
+                    'frame_index': frame_idx,
+                    'timestamp_sec': ts,
+                    'bbox': bbox,
+                    'confidence': conf,
+                    'plate_text': plate_text,
+                })
+                if plate_text:
+                    matched_track['plate_votes'][plate_text] = matched_track['plate_votes'].get(plate_text, 0) + 1
+            else:
+                track_counter += 1
+                tracks.append({
+                    'track_id': track_counter,
+                    'frames': [{
+                        'frame_index': frame_idx,
+                        'timestamp_sec': ts,
+                        'bbox': bbox,
+                        'confidence': conf,
+                        'plate_text': plate_text,
+                    }],
+                    'plate_votes': {plate_text: 1} if plate_text else {},
+                })
+
+    vehicle_tracks = []
+    for track in tracks:
+        if not track['frames']:
+            continue
+
+        plate_votes = track['plate_votes']
+        consolidated = max(plate_votes.items(), key=lambda x: x[1])[0] if plate_votes else ''
+
+        timestamps = [f.get('timestamp_sec', 0.0) for f in track['frames']]
+        timespan = (min(timestamps), max(timestamps)) if timestamps else (0.0, 0.0)
+
+        confidences = [f.get('confidence', 0.0) for f in track['frames']]
+        avg_conf = sum(confidences) / len(confidences) if confidences else 0.0
+
+        vehicle_tracks.append({
+            'track_id': track['track_id'],
+            'frames': track['frames'],
+            'consolidated_plate': consolidated,
+            'plate_candidates': plate_votes,
+            'timespan_sec': timespan,
+            'detections_count': len(track['frames']),
+            'avg_confidence': round(avg_conf, 4),
+        })
+
+    return {
+        'vehicle_tracks': vehicle_tracks,
+        'total_vehicles': len(vehicle_tracks),
+    }
+
+
 @app.post("/process_video")
 async def process_video_legacy_endpoint(
     video: UploadFile = File(...),
@@ -2217,11 +2342,12 @@ async def process_video_legacy_endpoint(
     sample_every_n_frames: int = Form(default=5),
 ):
     """
-    Processamento pericial de vídeo:
-    - amostra frames do vídeo
-    - prioriza frames mais nítidos
-    - executa pipeline OCR pericial nos melhores frames
-    - devolve melhor hipótese consolidada + trilha de comparação
+    Processamento pericial de vídeo com rastreamento de veículos:
+    - amostra frames do vídeo (prioriza nitidez)
+    - rastreia cada veículo através dos frames (temporal tracking)
+    - consolida leituras OCR por veículo (votação de placa)
+    - marca timestamps de cada detecção
+    - devolve análise pericial consolidada por veículo + trilha temporal
     """
     try:
         import cv2  # type: ignore
@@ -2284,9 +2410,9 @@ async def process_video_legacy_endpoint(
         frame_candidates.sort(key=lambda x: float(x.get('frame_quality', 0.0)), reverse=True)
         selected = frame_candidates[:max_frames_to_analyze]
 
-        frame_results = []
-        best_payload = None
-        best_score = -1.0
+        frame_analyses = []
+        best_overall_payload = None
+        best_overall_score = -1.0
 
         for cand in selected:
             up = UploadFile(
@@ -2308,44 +2434,57 @@ async def process_video_legacy_endpoint(
             frame_conf = float(conf.get('overall_confidence', 0.0) or 0.0)
             best_candidate = payload.get('best', {}) if isinstance(payload.get('best'), dict) else {}
             best_text = str(best_candidate.get('text', '') or '').strip()
-            boost = 0.08 if best_text else 0.0
-            combined = frame_conf + boost
 
-            frame_results.append({
+            detections_for_track = payload.get('detections', []) if isinstance(payload.get('detections'), list) else []
+            frame_detections = []
+            for det in detections_for_track:
+                if isinstance(det, dict):
+                    frame_detections.append({
+                        'bbox': det.get('bbox', []),
+                        'best_text': best_text,
+                        'overall_confidence': frame_conf,
+                    })
+
+            frame_analyses.append({
                 'frame_index': cand['frame_index'],
                 'timestamp_sec': cand.get('timestamp_sec'),
                 'sharpness': cand['sharpness'],
                 'frame_quality': round(cand['frame_quality'], 3),
-                'overall_confidence': round(frame_conf, 4),
-                'best_text': best_text,
-                'analysis_id': payload.get('forensic', {}).get('analysis_id', ''),
-                'pdf_report': payload.get('pdf_report', ''),
+                'overall_confidence': frame_conf,
+                'detections': frame_detections,
+                'payload': payload,
             })
 
-            if combined > best_score:
-                best_score = combined
-                best_payload = payload
-                best_payload['video_context'] = {
-                    'source_video': video.filename,
-                    'source_video_sha256': _file_sha256(tmp_video_path),
-                    'fps': fps,
-                    'total_frames': total_frames,
-                    'sample_every_n_frames': sample_every_n_frames,
-                    'frames_analyzed': len(selected),
-                    'selected_frame_index': cand['frame_index'],
-                    'selected_timestamp_sec': cand.get('timestamp_sec'),
-                    'top_frame_candidates': frame_results,
-                }
+            boost = 0.08 if best_text else 0.0
+            combined = frame_conf + boost
+            if combined > best_overall_score:
+                best_overall_score = combined
+                best_overall_payload = payload
 
-        if not best_payload:
+        if not frame_analyses or not best_overall_payload:
             return JSONResponse(status_code=500, content={'error': 'Falha ao processar frames selecionados'})
 
-        best_payload.setdefault('forensic', {})
-        if isinstance(best_payload['forensic'], dict):
-            best_payload['forensic']['source_type'] = 'video'
-            best_payload['forensic']['source_filename'] = str(video.filename or '')
+        tracking_result = _temporal_vehicle_tracking(frame_analyses, iou_threshold=0.4)
+        vehicle_tracks = tracking_result.get('vehicle_tracks', [])
+        total_vehicles = tracking_result.get('total_vehicles', 0)
 
-        return JSONResponse(best_payload)
+        best_overall_payload.setdefault('forensic', {})
+        if isinstance(best_overall_payload['forensic'], dict):
+            best_overall_payload['forensic']['source_type'] = 'video'
+            best_overall_payload['forensic']['source_filename'] = str(video.filename or '')
+
+        best_overall_payload['video_context'] = {
+            'source_video': video.filename,
+            'source_video_sha256': _file_sha256(tmp_video_path),
+            'fps': fps,
+            'total_frames': total_frames,
+            'sample_every_n_frames': sample_every_n_frames,
+            'frames_analyzed': len(selected),
+            'vehicle_tracks': vehicle_tracks,
+            'total_vehicles_detected': total_vehicles,
+        }
+
+        return JSONResponse(best_overall_payload)
     finally:
         if os.path.exists(tmp_video_path):
             try:
