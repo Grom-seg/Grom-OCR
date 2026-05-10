@@ -287,6 +287,54 @@ class ForensicPDF:
 
         self.pdf.ln(1)
 
+    def _add_vehicle_osint(self, vehicle_osint):
+        """Seção complementar de inferência OSINT de modelo veicular."""
+        self._section_title("INFERENCIA OSINT COMPLEMENTAR")
+        self.pdf.set_font("Arial", "", 9)
+
+        if not isinstance(vehicle_osint, dict) or not vehicle_osint:
+            self._mc(4, "Dados OSINT indisponiveis para esta analise.")
+            self.pdf.ln(1)
+            return
+
+        summary = vehicle_osint.get('summary', {}) if isinstance(vehicle_osint.get('summary'), dict) else {}
+        top_candidate = str(summary.get('top_candidate', '') or '')
+        top_score = float(summary.get('top_probability_score', 0.0) or 0.0)
+        candidate_count = int(summary.get('candidate_count', 0) or 0)
+
+        if top_candidate:
+            self._mc(4, f"Candidato principal: {top_candidate} (score: {top_score:.4f})")
+        else:
+            self._mc(4, "Nao foi possivel inferir candidato principal com os dados atuais.")
+        self._mc(4, f"Quantidade de candidatos: {candidate_count}")
+
+        top_models = vehicle_osint.get('top_model_candidates', [])
+        if isinstance(top_models, list) and top_models:
+            self.pdf.set_font("Arial", "B", 9)
+            self.pdf.cell(0, 5, "Top candidatos (OSINT):", ln=True)
+            self.pdf.set_font("Arial", "", 8)
+            for row in top_models[:3]:
+                if not isinstance(row, dict):
+                    continue
+                rank = int(row.get('rank', 0) or 0)
+                model = str(row.get('model_candidate', '') or '')
+                make = str(row.get('make', '') or '')
+                score = float(row.get('probability_score', 0.0) or 0.0)
+                self._mc(4, f"- #{rank} {model} | marca: {make} | score: {score:.4f}")
+
+        query_trace = vehicle_osint.get('query_trace', {}) if isinstance(vehicle_osint.get('query_trace'), dict) else {}
+        partial_hint = query_trace.get('partial_plate_hint', {}) if isinstance(query_trace.get('partial_plate_hint'), dict) else {}
+        partial_text = str(partial_hint.get('text', '') or '')
+        if partial_text:
+            self._mc(4, f"Placa parcial usada como pista: {partial_text}")
+
+        disclaimer = str(vehicle_osint.get('legal_disclaimer', '') or '')
+        if disclaimer:
+            self.pdf.set_font("Arial", "I", 8)
+            self._mc(4, disclaimer)
+
+        self.pdf.ln(1)
+
     def _add_conclusion(self, pericial, assessment, warnings):
         """Conclusão pericial."""
         self._section_title("CONCLUSAO PERICIAL")
@@ -414,6 +462,9 @@ class ForensicPDF:
         scene_brief_report = report_context.get('scene_brief_report', {}) if isinstance(report_context, dict) else {}
         vehicle_analysis = report_context.get('vehicle_analysis', {}) if isinstance(report_context, dict) else {}
         self._add_scene_analysis(scene_brief_report, vehicle_analysis)
+
+        vehicle_osint = report_context.get('vehicle_osint', {}) if isinstance(report_context, dict) else {}
+        self._add_vehicle_osint(vehicle_osint)
 
         self._add_judicial_readiness(report_context, assessment)
 

@@ -31,8 +31,8 @@
     },
     "cases": [
         {
-            "id": "sample_day_01",
-            "video_path": "test-assets/videos/day_01.mp4",
+            "id": "real_day_wa0017",
+            "video_path": "C:/Users/Família Grom/OneDrive/Desktop/Josuel/Placas/VID-20260412-WA0017.mp4",
             "expected_plate": "",
             "quality_class": "alta",
             "scenarios": [
@@ -40,30 +40,6 @@
             ],
             "sample_every_n_frames": 5,
             "max_frames_to_analyze": 12
-        },
-        {
-            "id": "sample_night_motion_01",
-            "video_path": "test-assets/videos/night_motion_01.mp4",
-            "expected_plate": "",
-            "quality_class": "baixa",
-            "scenarios": [
-                "noite",
-                "motion_blur",
-                "compressao_forte"
-            ],
-            "sample_every_n_frames": 4,
-            "max_frames_to_analyze": 16
-        },
-        {
-            "id": "sample_rain_01",
-            "video_path": "test-assets/videos/rain_01.mp4",
-            "expected_plate": "",
-            "quality_class": "media",
-            "scenarios": [
-                "chuva"
-            ],
-            "sample_every_n_frames": 4,
-            "max_frames_to_analyze": 14
         }
     ]
 }

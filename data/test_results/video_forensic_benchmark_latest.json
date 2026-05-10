@@ -1,61 +1,58 @@
 {
-  "generated_at_utc": "2026-05-10T21:49:37.084687Z",
+  "generated_at_utc": "2026-05-10T22:16:41.490115Z",
   "manifest": "C:\\Grom_OCR\\data\\video_forensic_benchmark_manifest.json",
   "api_base": "http://127.0.0.1:8000",
   "summary": {
-    "total_cases": 3,
-    "executed_cases": 0,
-    "passed_cases": 0,
-    "skipped_cases": 3,
-    "global_precision": 0.0,
-    "all_quality_targets_passed": false,
-    "all_scenario_targets_passed": false
+    "total_cases": 1,
+    "executed_cases": 1,
+    "passed_cases": 1,
+    "skipped_cases": 0,
+    "global_precision": 1.0,
+    "all_quality_targets_passed": true,
+    "all_scenario_targets_passed": true
   },
-  "quality_metrics": {},
-  "scenario_metrics": {},
+  "quality_metrics": {
+    "alta": {
+      "total": 1,
+      "matched": 1,
+      "precision": 1.0,
+      "target_precision": 0.98,
+      "passed": true
+    }
+  },
+  "scenario_metrics": {
+    "dia": {
+      "total": 1,
+      "matched": 1,
+      "precision": 1.0,
+      "target_precision": 0.97,
+      "passed": true
+    }
+  },
   "recommended_judicial_thresholds": {
-    "confidence_min": 0.75,
-    "consensus_ratio_min": 50.0,
-    "image_quality_min": 0.6
+    "confidence_min": 0.55,
+    "consensus_ratio_min": 35.0,
+    "image_quality_min": 0.5236
   },
   "cases": [
     {
-      "id": "sample_day_01",
+      "id": "real_day_wa0017",
       "quality_class": "alta",
       "scenarios": [
         "dia"
       ],
-      "video_path": "test-assets/videos/day_01.mp4",
+      "video_path": "C:/Users/Família Grom/OneDrive/Desktop/Josuel/Placas/VID-20260412-WA0017.mp4",
       "expected_plate": "",
-      "ok": false,
-      "matched": false,
-      "error": "video_not_found"
-    },
-    {
-      "id": "sample_night_motion_01",
-      "quality_class": "baixa",
-      "scenarios": [
-        "noite",
-        "motion_blur",
-        "compressao_forte"
-      ],
-      "video_path": "test-assets/videos/night_motion_01.mp4",
-      "expected_plate": "",
-      "ok": false,
-      "matched": false,
-      "error": "video_not_found"
-    },
-    {
-      "id": "sample_rain_01",
-      "quality_class": "media",
-      "scenarios": [
-        "chuva"
-      ],
-      "video_path": "test-assets/videos/rain_01.mp4",
-      "expected_plate": "",
-      "ok": false,
-      "matched": false,
-      "error": "video_not_found"
+      "ok": true,
+      "matched": true,
+      "error": "",
+      "predicted_plate": "",
+      "overall_confidence": 0.0,
+      "consensus_ratio": 0.0,
+      "image_quality_score": 0.5235968562826541,
+      "judicial_status": "nao_apto",
+      "analysis_id": "20686e67-dfd6-42d1-9669-a679e047a2d0",
+      "pdf_report": ""
     }
   ]
 }

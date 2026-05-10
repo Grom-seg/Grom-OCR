@@ -154,6 +154,25 @@ except Exception:
         }
 
 try:
+    from fastapi_backend.vehicle_osint import build_vehicle_osint_report
+    _vehicle_osint_ok = True
+except Exception:
+    _vehicle_osint_ok = False
+
+    def build_vehicle_osint_report(*args, **kwargs):
+        return {
+            'status': 'unavailable',
+            'title': 'Inferencia OSINT de Modelo Veicular (Complementar)',
+            'top_model_candidates': [],
+            'summary': {
+                'top_candidate': '',
+                'top_probability_score': 0.0,
+                'candidate_count': 0,
+            },
+            'legal_disclaimer': 'Modulo OSINT indisponivel no ambiente atual.',
+        }
+
+try:
     from fastapi_backend.evidence_chain import sha256_file, compute_payload_hash, register_evidence_chain_entry
     _evidence_chain_ok = True
 except Exception:
@@ -3014,6 +3033,14 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
         detections=payload.get('detections', []) if isinstance(payload.get('detections'), list) else [],
     )
 
+    payload['vehicle_osint'] = build_vehicle_osint_report(
+        vehicle_analysis=payload.get('vehicle_analysis', {}) if isinstance(payload.get('vehicle_analysis'), dict) else {},
+        top_candidates=payload.get('top_candidates', []) if isinstance(payload.get('top_candidates'), list) else [],
+        vehicle_info=payload.get('vehicle_info', {}) if isinstance(payload.get('vehicle_info'), dict) else {},
+        analysis_id=str(payload.get('forensic', {}).get('analysis_id', '') or ''),
+        source_filename=str(payload.get('forensic', {}).get('source_filename', '') or ''),
+    )
+
     # Atualiza assessment baseado em confiança
     conf_level = confidence.get('confidence_level', 'reject')
     payload.setdefault('assessment', {})
@@ -3034,6 +3061,8 @@ def _enrich_payload_with_validation(payload: dict, image_path: str) -> dict:
     report_context['spatial_context'] = payload.get('spatial_context', {}) if isinstance(payload.get('spatial_context'), dict) else {}
     report_context['spatial_brief_report'] = payload.get('spatial_brief_report', {}) if isinstance(payload.get('spatial_brief_report'), dict) else {}
     report_context['scene_brief_report'] = payload.get('scene_brief_report', {}) if isinstance(payload.get('scene_brief_report'), dict) else {}
+    report_context['vehicle_analysis'] = payload.get('vehicle_analysis', {}) if isinstance(payload.get('vehicle_analysis'), dict) else {}
+    report_context['vehicle_osint'] = payload.get('vehicle_osint', {}) if isinstance(payload.get('vehicle_osint'), dict) else {}
     report_context['judicial_readiness'] = payload.get('judicial_readiness', {}) if isinstance(payload.get('judicial_readiness'), dict) else {}
     report_context['top_candidates'] = payload.get('top_candidates', []) if isinstance(payload.get('top_candidates'), list) else []
     report_context['plate_analyses'] = payload.get('plate_analyses', []) if isinstance(payload.get('plate_analyses'), list) else []
