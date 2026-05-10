@@ -63,7 +63,7 @@ for i, det in enumerate(detections, 1):
 
 if not detections:
     print("✗ PROBLEMA: Nenhuma placa foi detectada!")
-    
+
 # 4. OCR em cada região
 print("\n" + "=" * 80)
 print("ETAPA 4: Testando OCR em regiões detectadas")
@@ -75,7 +75,7 @@ if detections:
         x1, y1, x2, y2 = det['bbox']
         crop_path = f"/tmp/crop_{i}.jpg"
         img.crop((x1, y1, x2, y2)).save(crop_path)
-        
+
         print(f"\n  Região {i}: bbox={det['bbox']}")
         try:
             local_ocr = run_ocr(crop_path)
@@ -117,7 +117,7 @@ try:
         vehicle_info_seed={},
     )
     print("✓ Payload construído com sucesso")
-    
+
     # Verifica campos críticos
     print("\n  Campos críticos do payload:")
     print(f"    - best.text: '{payload.get('best', {}).get('text', '')}'")
@@ -127,7 +127,7 @@ try:
     print(f"    - top_candidates: {len(payload.get('top_candidates', []))}")
     print(f"    - ocr_engine_summary.engines_executed: {payload.get('ocr_engine_summary', {}).get('engines_executed', [])}")
     print(f"    - warnings: {payload.get('warnings', [])}")
-    
+
 except Exception as e:
     print(f"✗ Erro ao construir payload: {e}")
     import traceback
@@ -142,14 +142,14 @@ print("=" * 80)
 try:
     enriched_payload = _enrich_payload_with_validation(payload, str(test_image_path))
     print("✓ Payload enriquecido com sucesso")
-    
+
     print("\n  Campos após enriquecimento:")
     print(f"    - assessment.evidence_level: {enriched_payload.get('assessment', {}).get('evidence_level', '?')}")
     print(f"    - pericial.status: {enriched_payload.get('pericial', {}).get('status', '?')}")
     print(f"    - confidence_score.overall_confidence: {enriched_payload.get('confidence_score', {}).get('overall_confidence', 0):.3f}")
     print(f"    - image_quality.overall_quality_score: {enriched_payload.get('image_quality', {}).get('overall_quality_score', 0):.3f}")
     print(f"    - plate_validation.valid: {enriched_payload.get('plate_validation', {}).get('valid', '?')}")
-    
+
 except Exception as e:
     print(f"✗ Erro ao enriquecer: {e}")
     import traceback

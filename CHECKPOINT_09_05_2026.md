@@ -7,6 +7,7 @@
 ## ✅ CONCLUÍDO
 
 ### Arquitetura Reformulada
+
 - [x] Detector multi-placa inteligente (`detector_module.py` - 150+ linhas)
 - [x] PDF forense profissional (`pdf_forensic.py` - 400+ linhas)
 - [x] Consenso OCR real corrigido (commit ecbbe52)
@@ -14,12 +15,14 @@
 - [x] Documentação completa (`MELHORIAS_IMPLEMENTADAS.md`, `EXECUCAO_CONCLUIDA.md`)
 
 ### Git & Versionamento
+
 - [x] Commit ecbbe52 - Consenso OCR corrigido
 - [x] Commit 9e63e9b - Multi-placa + PDF forense
 - [x] Commit a6d4f8d - Requirements + documentação
-- [x] Todos os commits pushed para GitHub: https://github.com/Grom-seg/Grom-OCR
+- [x] Todos os commits pushed para GitHub: <https://github.com/Grom-seg/Grom-OCR>
 
 ### Validação Realizada
+
 - [x] Sintaxe Python validada para todos os arquivos
 - [x] teste_rapido.py passou ✅
   - Detector multi-placa ✅
@@ -32,12 +35,16 @@
 ## ⏳ EM ANDAMENTO
 
 ### Instalação de Dependências
-**Status**: Pendente  
+
+**Status**: Pendente
 **Comando**:
+
 ```bash
 python -m pip install -r requirements-modern.txt
 ```
+
 **Pacotes críticos**:
+
 - fastapi==0.109.2
 - uvicorn[standard]==0.27.0
 - FPDF2==2.7.0
@@ -51,6 +58,7 @@ python -m pip install -r requirements-modern.txt
 ## 📋 TODO - AMANHÃ
 
 ### [1] Instalação & Setup (15 min)
+
 ```bash
 # 1.1 Instalar stack completo
 python -m pip install -r requirements-modern.txt
@@ -63,6 +71,7 @@ python -c "from ultralytics import YOLO; print('✅ YOLO ready')"
 ```
 
 ### [2] Testes E2E (20 min)
+
 ```bash
 # 2.1 Executar auditoria completa
 python test_e2e_audit.py
@@ -76,19 +85,23 @@ python test_e2e_audit.py
 ```
 
 ### [3] Integração em Produção (30 min)
+
 **Arquivo**: `fastapi_backend/main.py`
 
 **3.1 Imports Necessários**:
+
 ```python
 from fastapi_backend.detector_module import detect_plate
 from fastapi_backend.pdf_forensic import generate_forensic_pdf
 ```
 
 **3.2 Usar detector melhorado** (linha ~1403):
+
 - Verificar que retorna `priority_rank` e `priority_score`
 - Já deve estar funcional pois main.py já chama `detect_plate()`
 
 **3.3 Substituir PDF report** (linhas 1996, 2427):
+
 ```python
 # ANTES:
 pdf_report = _generate_pdf_report(...)
@@ -99,26 +112,29 @@ pdf_report = pdf_name
 ```
 
 ### [4] Validação Full Workflow (30 min)
+
 **Teste no PHP Frontend**:
 
 1. Iniciar FastAPI:
+
 ```bash
 uvicorn fastapi_backend.main:app --host 127.0.0.1 --port 8001
 ```
 
-2. Iniciar PHP:
+1. Iniciar PHP:
+
 ```bash
 php -S 127.0.0.1:8080 -t public
 ```
 
-3. Upload teste:
-   - Navegue para: http://127.0.0.1:8080/upload.php
+1. Upload teste:
+   - Navegue para: <http://127.0.0.1:8080/upload.php>
    - Upload `test-assets/plate_test.png`
    - Verificar detecção multi-placa
    - Verificar consenso real (não 100% sempre)
    - Download PDF e validar todas as seções
 
-4. Checklist do PDF:
+2. Checklist do PDF:
    - ✓ Cabeçalho com ID único
    - ✓ Cadeia de custódia (SHA-256)
    - ✓ Metodologia (motores executados)
@@ -131,6 +147,7 @@ php -S 127.0.0.1:8080 -t public
    - ✓ Disclaimer legal
 
 ### [5] Testes Degradados (15 min)
+
 ```bash
 # Testar com imagens de baixa qualidade
 python -c "
@@ -143,6 +160,7 @@ for r in result:
 ```
 
 ### [6] Commit Final (5 min)
+
 ```bash
 git add fastapi_backend/main.py
 git commit -m "Integra detector multi-placa e PDF forense em produção"
@@ -166,13 +184,15 @@ git push
 
 ## 🔗 Referências Rápidas
 
-**GitHub**: https://github.com/Grom-seg/Grom-OCR  
+**GitHub**: <https://github.com/Grom-seg/Grom-OCR>
 **Commits Recentes**:
+
 - a6d4f8d - Requirements + documentação
 - 9e63e9b - Multi-placa + PDF forense
 - ecbbe52 - Consenso corrigido
 
 **Documentação**:
+
 - `MELHORIAS_IMPLEMENTADAS.md` - Detalhes técnicos
 - `EXECUCAO_CONCLUIDA.md` - Resumo executivo
 - `teste_rapido.py` - Script de validação rápida
@@ -182,6 +202,7 @@ git push
 ## 💼 Resumo Executivo
 
 **O que foi entregue**:
+
 - ✅ Detector multi-placa com ranking automático
 - ✅ PDF forense profissional com 10 seções periciais
 - ✅ Consenso OCR real (não inflacionado)
@@ -189,6 +210,7 @@ git push
 - ✅ Documentação e testes
 
 **O que falta**:
+
 - ⏳ Instalar deps (15 min)
 - ⏳ Testes E2E (20 min)
 - ⏳ Integração final em main.py (30 min)
@@ -217,10 +239,10 @@ python teste_rapido.py
 python test_e2e_audit.py
 ```
 
-Se tudo OK → Integração em main.py  
+Se tudo OK → Integração em main.py
 Se erro → Debug e rastreie
 
 ---
 
-**Data**: 09/05/2026  
+**Data**: 09/05/2026
 **Próximo checkpoint**: Amanhã após instalação de deps + testes E2E

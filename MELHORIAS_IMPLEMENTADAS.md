@@ -1,7 +1,7 @@
 # 🔧 Melhorias Implementadas - Sistema GROM OCR
 
-**Data**: 2026-03-30  
-**Status**: Em integração - Aguardando conclusão de dependências  
+**Data**: 2026-03-30
+**Status**: Em integração - Aguardando conclusão de dependências
 **Commit Base**: ecbbe52
 
 ---
@@ -42,6 +42,7 @@ def detect_plate(image_path, use_heuristic_fallback=True)
 ```
 
 **Retorna:**
+
 ```python
 {
     'bbox': [x1, y1, x2, y2],
@@ -53,6 +54,7 @@ def detect_plate(image_path, use_heuristic_fallback=True)
 ```
 
 **Lógica:**
+
 1. Tenta YOLO com threshold 0.3 (sensível)
 2. Filtra por aspect ratio plate-like (1.5-5.0)
 3. Se YOLO falha/vazio → fallback heurístico (Canny edges)
@@ -60,6 +62,7 @@ def detect_plate(image_path, use_heuristic_fallback=True)
 5. Retorna TODAS as placas ordenadas por relevância
 
 **Multi-Placa:**
+
 - Antes: `detections[0]` (apenas primeira)
 - Depois: `for det in detections:` (todas, priorizadas)
 
@@ -86,6 +89,7 @@ class ForensicPDF:
 ```
 
 **Seções Periciais:**
+
 - ✅ Cadeia de custódia com hashes
 - ✅ Metodologia detalhada (motores, fallback)
 - ✅ Foto original + cropped plates
@@ -103,11 +107,13 @@ class ForensicPDF:
 **Em `fastapi_backend/main.py` - função `_build_process_payload()`**
 
 **Antes (BUGADO):**
+
 ```python
 agreement_ratio = (engines_with_best / executed) * 100  # ERRADO: sempre 100% com 1 motor
 ```
 
 **Depois (CORRETO):**
+
 ```python
 engines_supporting_best = len([e for e in executed if e_result == best.text])
 consensus_ratio = (engines_supporting_best / len(executed_engines)) * 100
@@ -118,6 +124,7 @@ consensus.engines_supporting_best = ["paddle", "tesseract"] # lista de motores q
 ```
 
 **Resultado:**
+
 - 1 motor: `agreement_ratio=100%, basis="single_engine_or_no_consensus"` (transparente)
 - 2 motores concordam: `agreement_ratio=100%, basis="cross_engine_consensus"` (forte)
 - 1 de 2 concorda: `agreement_ratio=50%, basis="single_engine_or_no_consensus"` (fraco)
@@ -126,14 +133,16 @@ consensus.engines_supporting_best = ["paddle", "tesseract"] # lista de motores q
 
 ## 📁 Arquivos Alterados
 
-### Criados (Novos):
+### Criados (Novos)
+
 - `fastapi_backend/detector_module.py` (150 linhas) - Multi-placa com heurística
 - `fastapi_backend/pdf_forensic.py` (400 linhas) - PDF forense profissional
 - `fastapi_backend/integrate_improvements.py` (helper script)
 - `requirements-modern.txt` - Dependências completas (fastapi, uvicorn, pillow, easyocr, etc)
 - `test_e2e_audit.py` - Teste diagnóstico end-to-end
 
-### Modificados:
+### Modificados
+
 - `fastapi_backend/main.py` (commit ecbbe52)
   - Consenso OCR corrigido (linhas ~1001-1050)
   - Campos novos: consensus.basis, consensus.engines_supporting_best, etc
@@ -147,16 +156,19 @@ consensus.engines_supporting_best = ["paddle", "tesseract"] # lista de motores q
 
 ## 🧪 Validação
 
-### Python Syntax Check:
-✅ `detector_module.py` - Válido  
-✅ `pdf_forensic.py` - Válido  
+### Python Syntax Check
+
+✅ `detector_module.py` - Válido
+✅ `pdf_forensic.py` - Válido
 ✅ `main.py` - Válido (py_compile OK)
 
-### Git Commits:
-✅ Commit ecbbe52: "Corrige consenso OCR e estabiliza payload pericial"  
-✅ Push para GitHub: https://github.com/Grom-seg/Grom-OCR
+### Git Commits
 
-### Testes Prontos:
+✅ Commit ecbbe52: "Corrige consenso OCR e estabiliza payload pericial"
+✅ Push para GitHub: <https://github.com/Grom-seg/Grom-OCR>
+
+### Testes Prontos
+
 - `test_e2e_audit.py` - Diagnostico completo (aguardando fastapi)
 - Validação de detector: `test-assets/plate_test.png`
 - Validação de degradação: `test-assets/plate_test_degraded.png`
@@ -166,30 +178,38 @@ consensus.engines_supporting_best = ["paddle", "tesseract"] # lista de motores q
 ## 🚀 Próximos Passos
 
 ### [1] Conclusão de Dependências (EM ANDAMENTO)
+
 ```bash
 python -m pip install -r requirements-modern.txt --quiet
 ```
+
 Status: Instalando FastAPI, uvicorn, FPDF2, easyocr, etc.
 
 ### [2] Validação E2E (BLOQUEADO EM DEPS)
+
 ```bash
 python test_e2e_audit.py
 ```
+
 Verifica: detector, OCR, consensus, payload, PDF
 
 ### [3] Integração de Detector em main.py
+
 - Ativar multi-placa no endpoint `/process`
 - Testar com `plate_test.png`
 
 ### [4] Integração de PDF em main.py
+
 - Substituir `_generate_pdf_report()` por `generate_forensic_pdf()`
 - Testar geração completa do PDF
 
 ### [5] Teste Full Workflow
+
 - PHP upload → FastAPI → Multi-placa detector → OCR → PDF
 - Validar todas as seções periciais
 
 ### [6] Commit Final
+
 ```bash
 git add fastapi_backend/detector_module.py fastapi_backend/pdf_forensic.py
 git commit -m "Implementa multi-placa inteligente, PDF forense profissional, consenso real"
@@ -241,11 +261,13 @@ git push
 ## 🎯 Objetivo Final
 
 **Transformar GROM OCR de:**
+
 - ❌ Sistema "obeso mórbido" sem análise real
 - ❌ Sem peso jurídico
 - ❌ Consenso falso entre motores
 
 **Para:**
+
 - ✅ Sistema profissional com análise forense completa
 - ✅ PDF admissível em processo judicial
 - ✅ Transparência inter-motores real

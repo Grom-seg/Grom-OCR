@@ -24,7 +24,7 @@ if detector_file.exists():
 else:
     print("   ❌ Arquivo não encontrado")
 
-# 2. Verificar pdf_forensic.py  
+# 2. Verificar pdf_forensic.py
 print("\n2. PDF Forense Profissional:")
 pdf_file = Path("fastapi_backend/pdf_forensic.py")
 if pdf_file.exists():
@@ -86,7 +86,7 @@ try:
         print("   ✅ detector_module importável")
     except ImportError as e:
         print(f"   ⚠️  detector_module: {str(e)[:50]}")
-    
+
     try:
         from fastapi_backend.pdf_forensic import generate_forensic_pdf
         print("   ✅ pdf_forensic importável")

@@ -306,8 +306,10 @@ def _score_detection_priority(det: Dict[str, Any], img_w: int, img_h: int) -> fl
     centrality = 1.0 - min(1.0, (dx + dy) / 2.0)
 
     confidence = float(det.get('confidence', 0.0) or 0.0)
-    # Peso maior para area e centralidade: tende a selecionar placa principal visivel.
-    return (area_ratio * 0.50) + (confidence * 0.25) + (centrality * 0.25)
+    # CRÍTICO: Área (tamanho visual) é indicador PRIMARY de proeminência
+    # Reduz peso da confiança YOLO para evitar falsos positivos em segundo plano
+    # Pesos: área 60% (tamanho visual), centralidade 25%, confiança 15%
+    return (area_ratio * 0.60) + (centrality * 0.25) + (confidence * 0.15)
 
 
 def _prioritize_detections(detections: List[dict], image_size: tuple) -> List[dict]:
@@ -640,6 +642,42 @@ def _bbox_iou(a: List[float], b: List[float]) -> float:
     if union <= 0.0:
         return 0.0
     return inter_area / union
+
+
+def _merge_detections(primary: List[dict], secondary: List[dict], iou_threshold: float = 0.45, max_regions: int = 12) -> List[dict]:
+    merged: List[dict] = []
+
+    for src_name, source_rows in (('primary', primary or []), ('secondary', secondary or [])):
+        for row in source_rows:
+            if not isinstance(row, dict):
+                continue
+            bbox = row.get('bbox')
+            if not isinstance(bbox, list) or len(bbox) != 4:
+                continue
+            try:
+                candidate_bbox = [float(v) for v in bbox]
+            except (TypeError, ValueError):
+                continue
+
+            candidate = dict(row)
+            candidate['source'] = str(candidate.get('source') or candidate.get('detection_method') or src_name)
+            candidate['confidence'] = float(candidate.get('confidence', 0.0) or 0.0)
+
+            duplicate_idx = -1
+            for idx, existing in enumerate(merged):
+                existing_bbox = existing.get('bbox', [])
+                if _bbox_iou(candidate_bbox, [float(v) for v in existing_bbox]) >= iou_threshold:
+                    duplicate_idx = idx
+                    break
+
+            if duplicate_idx >= 0:
+                if float(candidate.get('confidence', 0.0)) > float(merged[duplicate_idx].get('confidence', 0.0)):
+                    merged[duplicate_idx] = candidate
+            else:
+                merged.append(candidate)
+
+    merged.sort(key=lambda d: float(d.get('confidence', 0.0) or 0.0), reverse=True)
+    return merged[:max_regions]
 
 
 def _heuristic_plate_detections(image_path: str, max_regions: int = 8) -> List[dict]:
@@ -1401,14 +1439,15 @@ async def process_legacy_endpoint(
             quality_score=_pre_quality,
             rotation_angle=_pre_rotation,
         ).save(tmp_path)
-        raw_detections = detect_plate(tmp_path)
+        detector_detections = detect_plate(tmp_path) or []
+        try:
+            ensemble_detections = detect_ensemble(tmp_path) or []
+        except Exception:
+            ensemble_detections = []
+
+        raw_detections = _merge_detections(detector_detections, ensemble_detections, iou_threshold=0.45, max_regions=12)
         if not raw_detections:
-            try:
-                raw_detections = detect_ensemble(tmp_path)
-            except Exception:
-                raw_detections = []
-        if not raw_detections:
-            raw_detections = _heuristic_plate_detections(tmp_path, max_regions=8)
+            raw_detections = _heuristic_plate_detections(tmp_path, max_regions=12)
 
         ocr_results = []
         ocr_runtime_events = []
@@ -1629,10 +1668,15 @@ async def process_ensemble_endpoint(
             rotation_angle=_pre_rotation,
         ).save(tmp_path)
 
-        # Ensemble detection
-        raw_detections = detect_ensemble(tmp_path)
+        # Detecção combinada para aumentar cobertura multi-placa
+        try:
+            ensemble_detections = detect_ensemble(tmp_path) or []
+        except Exception:
+            ensemble_detections = []
+        detector_detections = detect_plate(tmp_path) or []
+        raw_detections = _merge_detections(ensemble_detections, detector_detections, iou_threshold=0.45, max_regions=12)
         if not raw_detections:
-            raw_detections = _heuristic_plate_detections(tmp_path, max_regions=8)
+            raw_detections = _heuristic_plate_detections(tmp_path, max_regions=12)
 
         ocr_results = []
         ocr_runtime_events = []
@@ -2088,24 +2132,7 @@ async def select_frame_endpoint(
       files: lista de imagens (burst de 2–10 frames)
       mode:  'best'  → seleciona frame mais nítido (Laplacian variance)
              'hdr'   → fusão de exposições via Mertens (OpenCV)
-
-    try:
-        pdf_report, pdf_success = generate_forensic_pdf(
-            photo_path=photo_path,
-            plate_path=plate_path,
-            recognized_text=ocr_text,
-            analysis_id=analysis_id,
-            report_context=report_context,
-            vehicle_info=vehicle_info,
-            forensic=forensic,
-            consensus=consensus,
-            assessment=assessment,
-            pericial=pericial,
-            warnings=warnings,
-            output_dir=UPLOAD_DIR
-        )
-    except Exception as exc:
-        return JSONResponse(status_code=500, content={'error': f'Falha ao gerar PDF forense: {exc}'})
+    """
 
     tmp_paths = []
     frames = []

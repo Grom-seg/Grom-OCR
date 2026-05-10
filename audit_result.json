@@ -1,0 +1,35 @@
+{
+  "analysis_id": "6a04582e-1b85-4bd4-af4f-75a8bf32fd62",
+  "detections_count": 0,
+  "ocr_results_count": 0,
+  "best_text": "",
+  "best_score": 0.0,
+  "consensus": {
+    "agreement_ratio": 0.0,
+    "basis": "single_engine_or_no_consensus",
+    "best_text": "",
+    "engines_executed_count": 0,
+    "engines_supporting_best_count": 0,
+    "engines_supporting_best": []
+  },
+  "engines_executed": [],
+  "warnings": [
+    "ocr_sem_resultado",
+    "evidence_images_missing"
+  ],
+  "assessment": {
+    "manual_review_required": true,
+    "evidence_level": "BAIXA",
+    "confidence_level": "reject",
+    "confidence_recommendation": "❌ OCR não disponível"
+  },
+  "pericial_status": "INCONCLUSIVO",
+  "confidence_score": {
+    "overall_confidence": 0.0,
+    "confidence_level": "reject",
+    "accept": false,
+    "requires_review": false,
+    "recommendation": "❌ OCR não disponível",
+    "reason": "Sem resultado de OCR válido"
+  }
+}
