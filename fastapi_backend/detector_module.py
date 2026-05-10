@@ -3,7 +3,14 @@ import cv2
 import numpy as np
 import os
 
-yolo_model = YOLO('yolov8n.pt')  # Modelo leve, pode ser trocado por customizado
+# Usa modelo especializado em detecção de placas se disponível, caso contrário o genérico
+_PLATE_MODEL_PATH = os.path.join(os.path.dirname(__file__), '..', 'models', 'yolov8n_plate.pt')
+_GENERIC_MODEL_PATH = 'yolov8n.pt'
+
+if os.path.exists(_PLATE_MODEL_PATH):
+    yolo_model = YOLO(_PLATE_MODEL_PATH)
+else:
+    yolo_model = YOLO(_GENERIC_MODEL_PATH)  # Fallback para modelo genérico
 
 def detect_plate(image_path, use_heuristic_fallback=True):
     """

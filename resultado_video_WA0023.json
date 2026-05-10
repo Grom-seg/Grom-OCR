@@ -1,0 +1,1864 @@
+{
+  "best": {
+    "text": "",
+    "engine": "none",
+    "avg_conf": 0.0,
+    "score": 0.0
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "text": "AENS",
+      "engine": "tesseract",
+      "avg_conf": 0.55,
+      "score": 0.3992,
+      "support_count": 1,
+      "engine_support_count": 1,
+      "agreement_ratio": 0.0,
+      "weighted_support": 0.55,
+      "pattern_quality": 0.05,
+      "bbox_likelihood": 0.5423,
+      "region": "BR"
+    }
+  ],
+  "ocr": [
+    {
+      "text": "AENS",
+      "confidence": 0.55,
+      "engine": "tesseract",
+      "bbox": [
+        650,
+        207,
+        872,
+        340
+      ],
+      "detection_priority_rank": 3,
+      "detection_priority_score": 0.27282
+    }
+  ],
+  "ocr_engine_status": {
+    "paddleocr": {
+      "status": "skipped",
+      "error": ""
+    },
+    "tesseract": {
+      "status": "executed"
+    },
+    "easyocr": {
+      "status": "available"
+    },
+    "plate_recognizer_api": {
+      "status": "available"
+    }
+  },
+  "ocr_engine_summary": {
+    "total_candidates": 1,
+    "engines_executed": [
+      "tesseract"
+    ],
+    "fallback_used": false,
+    "paddle_disabled": false
+  },
+  "ocr_runtime": {
+    "preferred_engine": "paddleocr",
+    "selected_engine": "tesseract",
+    "fallback_used": false,
+    "paddle_disabled": false,
+    "paddle_available": false,
+    "tesseract_available": true,
+    "paddle_error": "",
+    "mode": "runtime"
+  },
+  "ocr_runtime_events": [
+    {
+      "preferred_engine": "paddleocr",
+      "selected_engine": "tesseract",
+      "fallback_used": false,
+      "paddle_disabled": false,
+      "paddle_available": false,
+      "tesseract_available": true,
+      "paddle_error": "",
+      "mode": "runtime"
+    },
+    {
+      "preferred_engine": "paddleocr",
+      "selected_engine": "tesseract",
+      "fallback_used": false,
+      "paddle_disabled": false,
+      "paddle_available": false,
+      "tesseract_available": true,
+      "paddle_error": "",
+      "mode": "runtime"
+    },
+    {
+      "preferred_engine": "paddleocr",
+      "selected_engine": "tesseract",
+      "fallback_used": false,
+      "paddle_disabled": false,
+      "paddle_available": false,
+      "tesseract_available": true,
+      "paddle_error": "",
+      "mode": "runtime"
+    },
+    {
+      "preferred_engine": "paddleocr",
+      "selected_engine": "tesseract",
+      "fallback_used": false,
+      "paddle_disabled": false,
+      "paddle_available": false,
+      "tesseract_available": true,
+      "paddle_error": "",
+      "mode": "runtime"
+    },
+    {
+      "preferred_engine": "paddleocr",
+      "selected_engine": "tesseract",
+      "fallback_used": false,
+      "paddle_disabled": false,
+      "paddle_available": false,
+      "tesseract_available": true,
+      "paddle_error": "",
+      "mode": "runtime"
+    }
+  ],
+  "regions_tested": [
+    [
+      480,
+      232,
+      687,
+      287
+    ],
+    [
+      540,
+      196,
+      677,
+      250
+    ],
+    [
+      650,
+      207,
+      872,
+      340
+    ],
+    [
+      561,
+      93,
+      957,
+      187
+    ],
+    [
+      145,
+      1,
+      272,
+      42
+    ]
+  ],
+  "detections": [
+    {
+      "bbox": [
+        480,
+        232,
+        687,
+        287
+      ],
+      "confidence": 0.5,
+      "detection_method": "heuristic",
+      "priority_score": 0.302715,
+      "priority_rank": 1,
+      "source": "heuristic",
+      "is_primary_candidate": true
+    },
+    {
+      "bbox": [
+        540,
+        196,
+        677,
+        250
+      ],
+      "confidence": 0.5,
+      "detection_method": "heuristic",
+      "priority_score": 0.292315,
+      "priority_rank": 2,
+      "source": "heuristic",
+      "is_primary_candidate": false
+    },
+    {
+      "bbox": [
+        650,
+        207,
+        872,
+        340
+      ],
+      "confidence": 0.5,
+      "detection_method": "heuristic",
+      "priority_score": 0.27282,
+      "priority_rank": 3,
+      "source": "heuristic",
+      "is_primary_candidate": false
+    },
+    {
+      "bbox": [
+        561,
+        93,
+        957,
+        187
+      ],
+      "confidence": 0.5,
+      "detection_method": "heuristic",
+      "priority_score": 0.248729,
+      "priority_rank": 4,
+      "source": "heuristic",
+      "is_primary_candidate": false
+    },
+    {
+      "bbox": [
+        145,
+        1,
+        272,
+        42
+      ],
+      "confidence": 0.5,
+      "detection_method": "heuristic",
+      "priority_score": 0.147275,
+      "priority_rank": 5,
+      "source": "heuristic",
+      "is_primary_candidate": false
+    }
+  ],
+  "forensic": {
+    "analysis_id": "da32c6c9-14e4-46f2-8d7f-70249701445c",
+    "source_filename": "VID-20260412-WA0023.mp4",
+    "generated_at_utc": "2026-05-10T20:01:46.558998+00:00",
+    "source_type": "video"
+  },
+  "report_context": {
+    "analysis_id": "da32c6c9-14e4-46f2-8d7f-70249701445c",
+    "photo_filename": "VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+    "plate_filename": "placa_VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+    "crop_raw_path": "placa_raw_VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+    "crop_treated_path": "placa_VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+    "analysis_stage": "final",
+    "process_trace": [
+      "1) Obtencao da imagem e preservacao de evidencia (arquivo original).",
+      "2) Tratamento/pre-processamento (qualidade, rotacao e normalizacao).",
+      "3) Deteccao de placas com ordenacao por primeiro plano (area, centralidade e confianca).",
+      "4) OCR multi-regiao em cascata (motor local + fallbacks externos quando necessario).",
+      "5) Consolidacao por consenso, validacao tecnica e trilha forense auditavel."
+    ],
+    "detection_count": 5,
+    "plate_analyses": [
+      {
+        "priority_rank": 1,
+        "priority_score": 0.302715,
+        "is_primary_candidate": true,
+        "bbox": [
+          480,
+          232,
+          687,
+          287
+        ],
+        "detection_confidence": 0.5,
+        "best_text": "",
+        "best_engine": "",
+        "best_confidence": 0.0,
+        "best_composite_score": 0.0,
+        "candidates": []
+      },
+      {
+        "priority_rank": 2,
+        "priority_score": 0.292315,
+        "is_primary_candidate": false,
+        "bbox": [
+          540,
+          196,
+          677,
+          250
+        ],
+        "detection_confidence": 0.5,
+        "best_text": "",
+        "best_engine": "",
+        "best_confidence": 0.0,
+        "best_composite_score": 0.0,
+        "candidates": []
+      },
+      {
+        "priority_rank": 3,
+        "priority_score": 0.27282,
+        "is_primary_candidate": false,
+        "bbox": [
+          650,
+          207,
+          872,
+          340
+        ],
+        "detection_confidence": 0.5,
+        "best_text": "AENS",
+        "best_engine": "tesseract",
+        "best_confidence": 0.55,
+        "best_composite_score": 0.3992,
+        "candidates": [
+          {
+            "text": "AENS",
+            "engine": "tesseract",
+            "confidence": 0.55,
+            "pattern_quality": 0.05,
+            "composite_score": 0.3992
+          }
+        ]
+      },
+      {
+        "priority_rank": 4,
+        "priority_score": 0.248729,
+        "is_primary_candidate": false,
+        "bbox": [
+          561,
+          93,
+          957,
+          187
+        ],
+        "detection_confidence": 0.5,
+        "best_text": "",
+        "best_engine": "",
+        "best_confidence": 0.0,
+        "best_composite_score": 0.0,
+        "candidates": []
+      },
+      {
+        "priority_rank": 5,
+        "priority_score": 0.147275,
+        "is_primary_candidate": false,
+        "bbox": [
+          145,
+          1,
+          272,
+          42
+        ],
+        "detection_confidence": 0.5,
+        "best_text": "",
+        "best_engine": "",
+        "best_confidence": 0.0,
+        "best_composite_score": 0.0,
+        "candidates": []
+      }
+    ],
+    "top_candidates": [
+      {
+        "rank": 1,
+        "text": "AENS",
+        "engine": "tesseract",
+        "avg_conf": 0.55,
+        "score": 0.3992,
+        "support_count": 1,
+        "engine_support_count": 1,
+        "agreement_ratio": 0.0,
+        "weighted_support": 0.55,
+        "pattern_quality": 0.05,
+        "bbox_likelihood": 0.5423,
+        "region": "BR"
+      }
+    ],
+    "image_evidence": {
+      "photo": "VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+      "plate": "placa_VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+      "crop_raw": "placa_raw_VID-20260412-WA0023_f18183_da32c6c9-14e.jpg"
+    },
+    "spatial_context": {
+      "status": "no_gps_metadata",
+      "gps_extracted": false,
+      "latitude": null,
+      "longitude": null,
+      "altitude_m": null,
+      "reverse_geocode": {},
+      "spatial_evidence": {
+        "source": "VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+        "image_has_gps": false
+      }
+    },
+    "spatial_brief_report": {
+      "title": "Relatorio Breve de Analise Geoespacial",
+      "generated_at_utc": "2026-05-10T20:01:46.581439+00:00",
+      "analysis_id": "da32c6c9-14e4-46f2-8d7f-70249701445c",
+      "filename": "VID-20260412-WA0023_f18183.jpg",
+      "status": "no_gps_metadata",
+      "evidence_level": "BAIXA",
+      "conclusion": "Nao foram encontrados metadados geoespaciais suficientes para inferencia de local.",
+      "findings": [
+        "Nao foi identificado metadado GPS EXIF na evidencia analisada.",
+        "Sem coordenadas validas, nao foi possivel correlacionar localizacao por reverse geocoding."
+      ],
+      "methodology": [
+        "1) Coleta da evidencia digital e preservacao do arquivo submetido.",
+        "2) Leitura de metadados EXIF com foco em tags GPS.",
+        "3) Conversao de coordenadas DMS para decimal quando aplicavel.",
+        "4) Reverse geocoding por provedores configurados (Mapbox/HERE/Nominatim).",
+        "5) Consolidacao pericial dos achados geoespaciais e limitacoes."
+      ],
+      "legal_notes": [
+        "A inferencia espacial depende da integridade dos metadados EXIF.",
+        "Metadados podem ser ausentes ou alterados por aplicativos de edicao/compartilhamento.",
+        "Recomenda-se correlacao com outras fontes de prova (CFTV, telecom, testemunhas)."
+      ],
+      "spatial_context": {
+        "status": "no_gps_metadata",
+        "gps_extracted": false,
+        "latitude": null,
+        "longitude": null,
+        "altitude_m": null,
+        "reverse_geocode": {},
+        "spatial_evidence": {
+          "source": "VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+          "image_has_gps": false
+        }
+      }
+    },
+    "scene_brief_report": {
+      "title": "Analise Preliminar da Imagem",
+      "generated_at_utc": "2026-05-10T20:01:46.581504+00:00",
+      "analysis_id": "da32c6c9-14e4-46f2-8d7f-70249701445c",
+      "filename": "VID-20260412-WA0023_f18183.jpg",
+      "scene_type": "area_operacional_com_veiculo",
+      "capture_condition": "qualidade=ok; brilho=ok; nitidez=sharp",
+      "operational_context": "1 veiculo(s) identificado(s) no enquadramento; 5 regiao(oes) de placa detectada(s); contexto espacial=no_gps_metadata",
+      "summary": "Cena classificada como area_operacional_com_veiculo. Captura descrita como qualidade=ok; brilho=ok; nitidez=sharp. Contexto operacional: 1 veiculo(s) identificado(s) no enquadramento; 5 regiao(oes) de placa detectada(s); contexto espacial=no_gps_metadata.",
+      "relevant_elements": [
+        "car em bbox=[630, 114, 886, 255] (conf=0.47)",
+        "placa candidata em bbox=[630, 114, 886, 255] (conf=0.47)"
+      ],
+      "forensic_potential": [
+        "correlacao espacial e operacional da cena",
+        "analise de posicionamento de veiculos e maquinario",
+        "verificacao de padrao de circulacao/manobra"
+      ],
+      "limitations": [
+        "ausencia de GPS EXIF valido para georreferenciamento"
+      ],
+      "methodology": [
+        "1) Preservacao da evidencia original e leitura do arquivo submetido.",
+        "2) Identificacao do contexto visual/operacional da cena a partir do material fornecido.",
+        "3) Cruzamento com qualidade da imagem, analise veicular e contexto espacial quando disponiveis.",
+        "4) Consolidacao dos elementos relevantes, potencial pericial e limitacoes tecnicas.",
+        "5) Estruturacao do relatorio para uso investigativo e posterior correlacao com outras provas."
+      ],
+      "conclusion": "A cena deve ser tratada como evidencia complementar de contexto, especialmente util para analise de posicao, dinamica e ambiente operacional.",
+      "scene_context": {},
+      "evidence_level": "MEDIA"
+    },
+    "judicial_readiness": {
+      "status": "nao_apto",
+      "recommendation": "Nao apto para uso judicial sem nova coleta/prova complementar e revisao tecnica.",
+      "confidence_score": 0.0,
+      "consensus_ratio": 0.0,
+      "image_quality_score": 0.7975,
+      "thresholds_applied": {
+        "confidence_min": 0.75,
+        "consensus_ratio_min": 50.0,
+        "image_quality_min": 0.6
+      },
+      "plate_pattern_valid": false,
+      "blockers": [
+        "Sem leitura OCR consolidada da placa"
+      ],
+      "cautions": [
+        "Confianca global abaixo do limiar pericial recomendado (0.75)",
+        "Padrao de placa nao validado automaticamente",
+        "Baixo consenso entre motores OCR"
+      ],
+      "legal_notes": [
+        "Resultado automatizado exige revisao pericial humana para fins judiciais.",
+        "Evidencia digital deve ser acompanhada de cadeia de custodia formal e integridade verificavel.",
+        "Recomenda-se correlacao com provas independentes (CFTV, metadata, testemunhos, telemetria)."
+      ]
+    },
+    "ocr_engine_status": {
+      "paddleocr": {
+        "status": "skipped",
+        "error": ""
+      },
+      "tesseract": {
+        "status": "executed"
+      },
+      "easyocr": {
+        "status": "available"
+      },
+      "plate_recognizer_api": {
+        "status": "available"
+      }
+    },
+    "ocr_engine_summary": {
+      "total_candidates": 1,
+      "engines_executed": [
+        "tesseract"
+      ],
+      "fallback_used": false,
+      "paddle_disabled": false
+    },
+    "evidence_links": {
+      "photo": "/artifact/VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+      "plate": "/artifact/placa_VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+      "pdf": "/pdf/None"
+    }
+  },
+  "plate_analyses": [
+    {
+      "priority_rank": 1,
+      "priority_score": 0.302715,
+      "is_primary_candidate": true,
+      "bbox": [
+        480,
+        232,
+        687,
+        287
+      ],
+      "detection_confidence": 0.5,
+      "best_text": "",
+      "best_engine": "",
+      "best_confidence": 0.0,
+      "best_composite_score": 0.0,
+      "candidates": []
+    },
+    {
+      "priority_rank": 2,
+      "priority_score": 0.292315,
+      "is_primary_candidate": false,
+      "bbox": [
+        540,
+        196,
+        677,
+        250
+      ],
+      "detection_confidence": 0.5,
+      "best_text": "",
+      "best_engine": "",
+      "best_confidence": 0.0,
+      "best_composite_score": 0.0,
+      "candidates": []
+    },
+    {
+      "priority_rank": 3,
+      "priority_score": 0.27282,
+      "is_primary_candidate": false,
+      "bbox": [
+        650,
+        207,
+        872,
+        340
+      ],
+      "detection_confidence": 0.5,
+      "best_text": "AENS",
+      "best_engine": "tesseract",
+      "best_confidence": 0.55,
+      "best_composite_score": 0.3992,
+      "candidates": [
+        {
+          "text": "AENS",
+          "engine": "tesseract",
+          "confidence": 0.55,
+          "pattern_quality": 0.05,
+          "composite_score": 0.3992
+        }
+      ]
+    },
+    {
+      "priority_rank": 4,
+      "priority_score": 0.248729,
+      "is_primary_candidate": false,
+      "bbox": [
+        561,
+        93,
+        957,
+        187
+      ],
+      "detection_confidence": 0.5,
+      "best_text": "",
+      "best_engine": "",
+      "best_confidence": 0.0,
+      "best_composite_score": 0.0,
+      "candidates": []
+    },
+    {
+      "priority_rank": 5,
+      "priority_score": 0.147275,
+      "is_primary_candidate": false,
+      "bbox": [
+        145,
+        1,
+        272,
+        42
+      ],
+      "detection_confidence": 0.5,
+      "best_text": "",
+      "best_engine": "",
+      "best_confidence": 0.0,
+      "best_composite_score": 0.0,
+      "candidates": []
+    }
+  ],
+  "vehicle_info": {
+    "ambiente": "veiculo:car"
+  },
+  "pdf_report": null,
+  "assessment": {
+    "manual_review_required": true,
+    "evidence_level": "BAIXA",
+    "confidence_level": "reject",
+    "confidence_recommendation": "❌ OCR não disponível",
+    "judicial_readiness_status": "nao_apto",
+    "judicial_recommendation": "Nao apto para uso judicial sem nova coleta/prova complementar e revisao tecnica."
+  },
+  "consensus": {
+    "agreement_ratio": 0.0,
+    "basis": "single_engine_or_no_consensus",
+    "best_text": "",
+    "engines_executed_count": 1,
+    "engines_supporting_best_count": 0,
+    "engines_supporting_best": []
+  },
+  "pericial": {
+    "status": "INCONCLUSIVO",
+    "quality": {
+      "score": 0.0
+    },
+    "cross_checks": {}
+  },
+  "analysis_stage": "final",
+  "report_ready": false,
+  "warnings": [
+    "best_candidate_low_plausibility"
+  ],
+  "plate_validation": {
+    "valid": false,
+    "score": 0.0,
+    "issues": [
+      "Sem texto para validar"
+    ]
+  },
+  "image_quality": {
+    "blur_score": 1.0,
+    "blur_level": "sharp",
+    "rotation_angle": 0.0,
+    "rotation_confidence": 0.35,
+    "contrast_score": 0.3501751720905304,
+    "brightness_level": "ok",
+    "brightness_score": 1.0,
+    "resolution_category": "medium",
+    "resolution_pixels": 460800,
+    "resolution_dimensions": "960x480",
+    "overall_quality_score": 0.7975437831878662,
+    "recommendations": [],
+    "issues": [],
+    "quality_status": "ok"
+  },
+  "confidence_score": {
+    "overall_confidence": 0.0,
+    "confidence_level": "reject",
+    "accept": false,
+    "requires_review": false,
+    "recommendation": "❌ OCR não disponível",
+    "reason": "Sem resultado de OCR válido"
+  },
+  "analysis_trace": [
+    "1) Obtencao da imagem e preservacao de evidencia (arquivo original).",
+    "2) Tratamento/pre-processamento (qualidade, rotacao e normalizacao).",
+    "3) Deteccao de placas com ordenacao por primeiro plano (area, centralidade e confianca).",
+    "4) OCR multi-regiao em cascata (motor local + fallbacks externos quando necessario).",
+    "5) Consolidacao por consenso, validacao tecnica e trilha forense auditavel."
+  ],
+  "spatial_context": {
+    "status": "no_gps_metadata",
+    "gps_extracted": false,
+    "latitude": null,
+    "longitude": null,
+    "altitude_m": null,
+    "reverse_geocode": {},
+    "spatial_evidence": {
+      "source": "VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+      "image_has_gps": false
+    }
+  },
+  "scene_brief_report": {
+    "title": "Analise Preliminar da Imagem",
+    "generated_at_utc": "2026-05-10T20:01:46.581504+00:00",
+    "analysis_id": "da32c6c9-14e4-46f2-8d7f-70249701445c",
+    "filename": "VID-20260412-WA0023_f18183.jpg",
+    "scene_type": "area_operacional_com_veiculo",
+    "capture_condition": "qualidade=ok; brilho=ok; nitidez=sharp",
+    "operational_context": "1 veiculo(s) identificado(s) no enquadramento; 5 regiao(oes) de placa detectada(s); contexto espacial=no_gps_metadata",
+    "summary": "Cena classificada como area_operacional_com_veiculo. Captura descrita como qualidade=ok; brilho=ok; nitidez=sharp. Contexto operacional: 1 veiculo(s) identificado(s) no enquadramento; 5 regiao(oes) de placa detectada(s); contexto espacial=no_gps_metadata.",
+    "relevant_elements": [
+      "car em bbox=[630, 114, 886, 255] (conf=0.47)",
+      "placa candidata em bbox=[630, 114, 886, 255] (conf=0.47)"
+    ],
+    "forensic_potential": [
+      "correlacao espacial e operacional da cena",
+      "analise de posicionamento de veiculos e maquinario",
+      "verificacao de padrao de circulacao/manobra"
+    ],
+    "limitations": [
+      "ausencia de GPS EXIF valido para georreferenciamento"
+    ],
+    "methodology": [
+      "1) Preservacao da evidencia original e leitura do arquivo submetido.",
+      "2) Identificacao do contexto visual/operacional da cena a partir do material fornecido.",
+      "3) Cruzamento com qualidade da imagem, analise veicular e contexto espacial quando disponiveis.",
+      "4) Consolidacao dos elementos relevantes, potencial pericial e limitacoes tecnicas.",
+      "5) Estruturacao do relatorio para uso investigativo e posterior correlacao com outras provas."
+    ],
+    "conclusion": "A cena deve ser tratada como evidencia complementar de contexto, especialmente util para analise de posicao, dinamica e ambiente operacional.",
+    "scene_context": {},
+    "evidence_level": "MEDIA"
+  },
+  "vehicle_analysis": {
+    "vehicle_detections": [
+      {
+        "class_id": 2,
+        "class_name": "car",
+        "bbox": [
+          630,
+          114,
+          886,
+          255
+        ],
+        "confidence": 0.4655395746231079,
+        "mask_area": 0
+      }
+    ],
+    "light_regions": {
+      "headlight_left": [
+        630,
+        114,
+        706,
+        156
+      ],
+      "headlight_right": [
+        810,
+        114,
+        886,
+        156
+      ],
+      "taillight_left": [
+        630,
+        114,
+        706,
+        156
+      ],
+      "taillight_right": [
+        810,
+        114,
+        886,
+        156
+      ],
+      "reliable": false,
+      "note": "estimativa geométrica — oriente por modelo de partes para maior precisão"
+    },
+    "headlight_templates": [],
+    "make_model_clip": [],
+    "clip_available": false,
+    "yolo_available": true,
+    "parts_model_available": false
+  },
+  "spatial_brief_report": {
+    "title": "Relatorio Breve de Analise Geoespacial",
+    "generated_at_utc": "2026-05-10T20:01:46.581439+00:00",
+    "analysis_id": "da32c6c9-14e4-46f2-8d7f-70249701445c",
+    "filename": "VID-20260412-WA0023_f18183.jpg",
+    "status": "no_gps_metadata",
+    "evidence_level": "BAIXA",
+    "conclusion": "Nao foram encontrados metadados geoespaciais suficientes para inferencia de local.",
+    "findings": [
+      "Nao foi identificado metadado GPS EXIF na evidencia analisada.",
+      "Sem coordenadas validas, nao foi possivel correlacionar localizacao por reverse geocoding."
+    ],
+    "methodology": [
+      "1) Coleta da evidencia digital e preservacao do arquivo submetido.",
+      "2) Leitura de metadados EXIF com foco em tags GPS.",
+      "3) Conversao de coordenadas DMS para decimal quando aplicavel.",
+      "4) Reverse geocoding por provedores configurados (Mapbox/HERE/Nominatim).",
+      "5) Consolidacao pericial dos achados geoespaciais e limitacoes."
+    ],
+    "legal_notes": [
+      "A inferencia espacial depende da integridade dos metadados EXIF.",
+      "Metadados podem ser ausentes ou alterados por aplicativos de edicao/compartilhamento.",
+      "Recomenda-se correlacao com outras fontes de prova (CFTV, telecom, testemunhas)."
+    ],
+    "spatial_context": {
+      "status": "no_gps_metadata",
+      "gps_extracted": false,
+      "latitude": null,
+      "longitude": null,
+      "altitude_m": null,
+      "reverse_geocode": {},
+      "spatial_evidence": {
+        "source": "VID-20260412-WA0023_f18183_da32c6c9-14e.jpg",
+        "image_has_gps": false
+      }
+    }
+  },
+  "judicial_readiness": {
+    "status": "nao_apto",
+    "recommendation": "Nao apto para uso judicial sem nova coleta/prova complementar e revisao tecnica.",
+    "confidence_score": 0.0,
+    "consensus_ratio": 0.0,
+    "image_quality_score": 0.7975,
+    "thresholds_applied": {
+      "confidence_min": 0.75,
+      "consensus_ratio_min": 50.0,
+      "image_quality_min": 0.6
+    },
+    "plate_pattern_valid": false,
+    "blockers": [
+      "Sem leitura OCR consolidada da placa"
+    ],
+    "cautions": [
+      "Confianca global abaixo do limiar pericial recomendado (0.75)",
+      "Padrao de placa nao validado automaticamente",
+      "Baixo consenso entre motores OCR"
+    ],
+    "legal_notes": [
+      "Resultado automatizado exige revisao pericial humana para fins judiciais.",
+      "Evidencia digital deve ser acompanhada de cadeia de custodia formal e integridade verificavel.",
+      "Recomenda-se correlacao com provas independentes (CFTV, metadata, testemunhos, telemetria)."
+    ]
+  },
+  "video_context": {
+    "source_video": "VID-20260412-WA0023.mp4",
+    "source_video_sha256": "619acfb0461321ccf95979fc536c93882ff87f4d9e14c8806eda5bba33bed145",
+    "fps": 30.0,
+    "total_frames": 18825,
+    "duration_sec": 627.5,
+    "sample_every_n_frames": 8,
+    "frames_analyzed": 10,
+    "best_frame_index": 18183,
+    "best_frame_timestamp_sec": 606.099,
+    "vehicle_tracks": [
+      {
+        "track_id": 1,
+        "frames": [
+          {
+            "frame_index": 18183,
+            "timestamp_sec": 606.099,
+            "bbox": [
+              472,
+              245,
+              575,
+              305
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 14421,
+            "timestamp_sec": 480.699,
+            "bbox": [
+              466,
+              243,
+              552,
+              299
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 15675,
+            "timestamp_sec": 522.499,
+            "bbox": [
+              461,
+              244,
+              595,
+              301
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 12540,
+            "timestamp_sec": 417.999,
+            "bbox": [
+              465,
+              243,
+              573,
+              296
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6270,
+            "timestamp_sec": 209.0,
+            "bbox": [
+              481,
+              233,
+              608,
+              282
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 0,
+            "timestamp_sec": 0.0,
+            "bbox": [
+              481,
+              233,
+              716,
+              284
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          0.0,
+          606.099
+        ],
+        "detections_count": 6,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 2,
+        "frames": [
+          {
+            "frame_index": 18183,
+            "timestamp_sec": 606.099,
+            "bbox": [
+              547,
+              203,
+              764,
+              302
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 14421,
+            "timestamp_sec": 480.699,
+            "bbox": [
+              611,
+              196,
+              800,
+              302
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 12540,
+            "timestamp_sec": 417.999,
+            "bbox": [
+              634,
+              200,
+              788,
+              292
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6270,
+            "timestamp_sec": 209.0,
+            "bbox": [
+              519,
+              196,
+              798,
+              301
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          209.0,
+          606.099
+        ],
+        "detections_count": 4,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 3,
+        "frames": [
+          {
+            "frame_index": 18183,
+            "timestamp_sec": 606.099,
+            "bbox": [
+              637,
+              206,
+              879,
+              341
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 14421,
+            "timestamp_sec": 480.699,
+            "bbox": [
+              633,
+              199,
+              957,
+              391
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6270,
+            "timestamp_sec": 209.0,
+            "bbox": [
+              635,
+              200,
+              957,
+              390
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 16929,
+            "timestamp_sec": 564.299,
+            "bbox": [
+              706,
+              242,
+              1001,
+              407
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 16929,
+            "timestamp_sec": 564.299,
+            "bbox": [
+              809,
+              300,
+              1000,
+              411
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 4389,
+            "timestamp_sec": 146.3,
+            "bbox": [
+              711,
+              252,
+              1001,
+              419
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 4389,
+            "timestamp_sec": 146.3,
+            "bbox": [
+              813,
+              311,
+              1000,
+              423
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6897,
+            "timestamp_sec": 229.9,
+            "bbox": [
+              844,
+              326,
+              1000,
+              419
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          146.3,
+          606.099
+        ],
+        "detections_count": 8,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 4,
+        "frames": [
+          {
+            "frame_index": 18183,
+            "timestamp_sec": 606.099,
+            "bbox": [
+              636,
+              101,
+              960,
+              182
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 0,
+            "timestamp_sec": 0.0,
+            "bbox": [
+              617,
+              0,
+              959,
+              188
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          0.0,
+          606.099
+        ],
+        "detections_count": 2,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 5,
+        "frames": [
+          {
+            "frame_index": 18183,
+            "timestamp_sec": 606.099,
+            "bbox": [
+              794,
+              141,
+              961,
+              192
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 15675,
+            "timestamp_sec": 522.499,
+            "bbox": [
+              780,
+              137,
+              957,
+              186
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          522.499,
+          606.099
+        ],
+        "detections_count": 2,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 6,
+        "frames": [
+          {
+            "frame_index": 18183,
+            "timestamp_sec": 606.099,
+            "bbox": [
+              147,
+              17,
+              270,
+              57
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 14421,
+            "timestamp_sec": 480.699,
+            "bbox": [
+              146,
+              0,
+              269,
+              42
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 15675,
+            "timestamp_sec": 522.499,
+            "bbox": [
+              146,
+              0,
+              272,
+              43
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6270,
+            "timestamp_sec": 209.0,
+            "bbox": [
+              146,
+              0,
+              272,
+              42
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          209.0,
+          606.099
+        ],
+        "detections_count": 4,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 7,
+        "frames": [
+          {
+            "frame_index": 14421,
+            "timestamp_sec": 480.699,
+            "bbox": [
+              479,
+              233,
+              607,
+              276
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          480.699,
+          480.699
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 8,
+        "frames": [
+          {
+            "frame_index": 14421,
+            "timestamp_sec": 480.699,
+            "bbox": [
+              564,
+              94,
+              791,
+              151
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 12540,
+            "timestamp_sec": 417.999,
+            "bbox": [
+              565,
+              93,
+              789,
+              152
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6270,
+            "timestamp_sec": 209.0,
+            "bbox": [
+              526,
+              94,
+              789,
+              194
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 0,
+            "timestamp_sec": 0.0,
+            "bbox": [
+              559,
+              95,
+              745,
+              156
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          0.0,
+          480.699
+        ],
+        "detections_count": 4,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 9,
+        "frames": [
+          {
+            "frame_index": 15675,
+            "timestamp_sec": 522.499,
+            "bbox": [
+              539,
+              196,
+              681,
+              249
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 0,
+            "timestamp_sec": 0.0,
+            "bbox": [
+              518,
+              194,
+              677,
+              250
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6897,
+            "timestamp_sec": 229.9,
+            "bbox": [
+              536,
+              177,
+              668,
+              235
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          0.0,
+          522.499
+        ],
+        "detections_count": 3,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 10,
+        "frames": [
+          {
+            "frame_index": 15675,
+            "timestamp_sec": 522.499,
+            "bbox": [
+              605,
+              249,
+              757,
+              291
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 12540,
+            "timestamp_sec": 417.999,
+            "bbox": [
+              606,
+              249,
+              768,
+              295
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6270,
+            "timestamp_sec": 209.0,
+            "bbox": [
+              601,
+              249,
+              759,
+              291
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 4389,
+            "timestamp_sec": 146.3,
+            "bbox": [
+              624,
+              247,
+              809,
+              309
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6897,
+            "timestamp_sec": 229.9,
+            "bbox": [
+              623,
+              244,
+              809,
+              306
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          146.3,
+          522.499
+        ],
+        "detections_count": 5,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 11,
+        "frames": [
+          {
+            "frame_index": 15675,
+            "timestamp_sec": 522.499,
+            "bbox": [
+              683,
+              231,
+              797,
+              301
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 12540,
+            "timestamp_sec": 417.999,
+            "bbox": [
+              688,
+              233,
+              797,
+              301
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          417.999,
+          522.499
+        ],
+        "detections_count": 2,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 12,
+        "frames": [
+          {
+            "frame_index": 12540,
+            "timestamp_sec": 417.999,
+            "bbox": [
+              788,
+              292,
+              956,
+              391
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          417.999,
+          417.999
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 13,
+        "frames": [
+          {
+            "frame_index": 16302,
+            "timestamp_sec": 543.399,
+            "bbox": [
+              568,
+              284,
+              775,
+              388
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          543.399,
+          543.399
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 14,
+        "frames": [
+          {
+            "frame_index": 16302,
+            "timestamp_sec": 543.399,
+            "bbox": [
+              718,
+              185,
+              989,
+              314
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          543.399,
+          543.399
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 15,
+        "frames": [
+          {
+            "frame_index": 16302,
+            "timestamp_sec": 543.399,
+            "bbox": [
+              621,
+              381,
+              799,
+              429
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          543.399,
+          543.399
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 16,
+        "frames": [
+          {
+            "frame_index": 16302,
+            "timestamp_sec": 543.399,
+            "bbox": [
+              212,
+              18,
+              328,
+              79
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          543.399,
+          543.399
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 17,
+        "frames": [
+          {
+            "frame_index": 16929,
+            "timestamp_sec": 564.299,
+            "bbox": [
+              545,
+              342,
+              714,
+              406
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 4389,
+            "timestamp_sec": 146.3,
+            "bbox": [
+              524,
+              346,
+              640,
+              421
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          146.3,
+          564.299
+        ],
+        "detections_count": 2,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 18,
+        "frames": [
+          {
+            "frame_index": 16929,
+            "timestamp_sec": 564.299,
+            "bbox": [
+              655,
+              401,
+              784,
+              458
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          564.299,
+          564.299
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 19,
+        "frames": [
+          {
+            "frame_index": 16929,
+            "timestamp_sec": 564.299,
+            "bbox": [
+              623,
+              427,
+              800,
+              503
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 4389,
+            "timestamp_sec": 146.3,
+            "bbox": [
+              627,
+              442,
+              798,
+              510
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          },
+          {
+            "frame_index": 6897,
+            "timestamp_sec": 229.9,
+            "bbox": [
+              626,
+              439,
+              798,
+              509
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          146.3,
+          564.299
+        ],
+        "detections_count": 3,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 20,
+        "frames": [
+          {
+            "frame_index": 0,
+            "timestamp_sec": 0.0,
+            "bbox": [
+              466,
+              243,
+              553,
+              299
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          0.0,
+          0.0
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 21,
+        "frames": [
+          {
+            "frame_index": 0,
+            "timestamp_sec": 0.0,
+            "bbox": [
+              434,
+              43,
+              595,
+              92
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          0.0,
+          0.0
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      },
+      {
+        "track_id": 22,
+        "frames": [
+          {
+            "frame_index": 4389,
+            "timestamp_sec": 146.3,
+            "bbox": [
+              564,
+              356,
+              708,
+              409
+            ],
+            "confidence": 0.14,
+            "plate_text": ""
+          }
+        ],
+        "consolidated_plate": "",
+        "plate_candidates": {},
+        "timespan_sec": [
+          146.3,
+          146.3
+        ],
+        "detections_count": 1,
+        "avg_confidence": 0.14
+      }
+    ],
+    "total_vehicles_detected": 22,
+    "frame_summary": [
+      {
+        "frame_index": 0,
+        "timestamp_sec": 0.0,
+        "sharpness": 520.95,
+        "frame_quality": 514.866,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 4389,
+        "timestamp_sec": 146.3,
+        "sharpness": 519.62,
+        "frame_quality": 514.23,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 6270,
+        "timestamp_sec": 209.0,
+        "sharpness": 529.93,
+        "frame_quality": 517.444,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 6897,
+        "timestamp_sec": 229.9,
+        "sharpness": 518.88,
+        "frame_quality": 508.962,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 12540,
+        "timestamp_sec": 417.999,
+        "sharpness": 529.07,
+        "frame_quality": 517.487,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 14421,
+        "timestamp_sec": 480.699,
+        "sharpness": 527.39,
+        "frame_quality": 520.445,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 15675,
+        "timestamp_sec": 522.499,
+        "sharpness": 526.85,
+        "frame_quality": 520.247,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 16302,
+        "timestamp_sec": 543.399,
+        "sharpness": 517.94,
+        "frame_quality": 516.419,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 16929,
+        "timestamp_sec": 564.299,
+        "sharpness": 521.96,
+        "frame_quality": 515.312,
+        "plate_read": "",
+        "confidence": 0.14
+      },
+      {
+        "frame_index": 18183,
+        "timestamp_sec": 606.099,
+        "sharpness": 526.93,
+        "frame_quality": 520.607,
+        "plate_read": "",
+        "confidence": 0.14
+      }
+    ]
+  }
+}

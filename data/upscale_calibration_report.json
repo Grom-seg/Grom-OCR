@@ -1,0 +1,2138 @@
+{
+  "generated_at_utc": "2026-05-10T20:35:21.791354+00:00",
+  "methodology": {
+    "reference": [
+      "ALPR benchmark practices (exact match + edit similarity + confidence)",
+      "CCPD-inspired robustness criteria for blur/low-light stress testing"
+    ],
+    "note": "CCPD foi usado como referencia tecnica de robustez, nao como corpus principal BR/Mercosul."
+  },
+  "cases_total": 13,
+  "results": [
+    {
+      "config": {
+        "name": "baseline_sem_upscale",
+        "min_width": 0,
+        "factor": 1.0,
+        "max_width": 900
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.3981,
+          "avg_confidence": 0.2997,
+          "avg_score": 0.2211,
+          "median_score": 0.146
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4737,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2803,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.228,
+          "avg_confidence": 0.2987,
+          "avg_score": 0.088,
+          "median_score": 0.073
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1234",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2283350116619697
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6745578899383544,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.14602721756526402
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "light_240_1.8_900",
+        "min_width": 240,
+        "factor": 1.8,
+        "max_width": 900
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4691,
+          "avg_confidence": 0.3484,
+          "avg_score": 0.2402,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4737,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2803,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4568,
+          "avg_score": 0.1499,
+          "median_score": 0.1763
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1234",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2283350116619697
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6813078899383544,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.14670221756526403
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "light_300_2.0_1200",
+        "min_width": 300,
+        "factor": 2.0,
+        "max_width": 1200
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4691,
+          "avg_confidence": 0.3478,
+          "avg_score": 0.2402,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4737,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2803,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4551,
+          "avg_score": 0.1498,
+          "median_score": 0.1759
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1234",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2283350116619697
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6745578899383544,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.14602721756526402
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "balanced_320_2.5_1400",
+        "min_width": 320,
+        "factor": 2.5,
+        "max_width": 1400
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4691,
+          "avg_confidence": 0.3478,
+          "avg_score": 0.2402,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4737,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2803,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4551,
+          "avg_score": 0.1498,
+          "median_score": 0.1759
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1234",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2283350116619697
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6745578899383544,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.14602721756526402
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "balanced_360_2.4_1400",
+        "min_width": 360,
+        "factor": 2.4,
+        "max_width": 1400
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4691,
+          "avg_confidence": 0.3473,
+          "avg_score": 0.2401,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4737,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2803,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4534,
+          "avg_score": 0.1496,
+          "median_score": 0.1756
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1234",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2283350116619697
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6678078899383545,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.145352217565264
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "balanced_360_2.8_1500",
+        "min_width": 360,
+        "factor": 2.8,
+        "max_width": 1500
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4691,
+          "avg_confidence": 0.3473,
+          "avg_score": 0.2401,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4737,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2803,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4534,
+          "avg_score": 0.1496,
+          "median_score": 0.1756
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1234",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2283350116619697
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6678078899383545,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.145352217565264
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "aggressive_420_3.0_1500",
+        "min_width": 420,
+        "factor": 3.0,
+        "max_width": 1500
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4573,
+          "avg_confidence": 0.3473,
+          "avg_score": 0.2377,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4567,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2769,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4534,
+          "avg_score": 0.1496,
+          "median_score": 0.1756
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.19756578089273893
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6678078899383545,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.145352217565264
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "aggressive_420_3.4_1800",
+        "min_width": 420,
+        "factor": 3.4,
+        "max_width": 1800
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.1538,
+          "avg_similarity": 0.4573,
+          "avg_confidence": 0.3478,
+          "avg_score": 0.2378,
+          "median_score": 0.1591
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.2222,
+          "avg_similarity": 0.4567,
+          "avg_confidence": 0.3002,
+          "avg_score": 0.2769,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.4588,
+          "avg_confidence": 0.4551,
+          "avg_score": 0.1498,
+          "median_score": 0.1759
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1234",
+          "http_status": 200,
+          "confidence": 0.6735051944255829,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9673505194425585
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.19756578089273893
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6745578899383544,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.14602721756526402
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX3640",
+          "http_status": 200,
+          "confidence": 0.6257635276317596,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.9230769230769231,
+            "pattern": 0.0,
+            "final": 0.2471917373785606
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "very_aggressive_500_3.6_2000",
+        "min_width": 500,
+        "factor": 3.6,
+        "max_width": 2000
+      },
+      "summary": {
+        "all": {
+          "count": 13,
+          "exact_rate": 0.0769,
+          "avg_similarity": 0.4108,
+          "avg_confidence": 0.3373,
+          "avg_score": 0.1774,
+          "median_score": 0.1454
+        },
+        "aberto": {
+          "count": 9,
+          "exact_rate": 0.1111,
+          "avg_similarity": 0.4408,
+          "avg_confidence": 0.2974,
+          "avg_score": 0.2012,
+          "median_score": 0.1591
+        },
+        "fechado": {
+          "count": 4,
+          "exact_rate": 0.0,
+          "avg_similarity": 0.3434,
+          "avg_confidence": 0.427,
+          "avg_score": 0.1239,
+          "median_score": 0.1448
+        }
+      },
+      "rows": [
+        {
+          "image": "data/uploads/plate_test.png",
+          "difficulty": "easy",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "ABC1254",
+          "http_status": 200,
+          "confidence": 0.6485051944255829,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.8571428571428571,
+            "pattern": 1.0,
+            "final": 0.28627909087112974
+          }
+        },
+        {
+          "image": "data/uploads/plate_test_degraded.png",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "1801234",
+          "http_status": 200,
+          "confidence": 0.448624190568924,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.5714285714285714,
+            "pattern": 0.0,
+            "final": 0.1591481333426067
+          }
+        },
+        {
+          "image": "data/uploads/placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "AX9640",
+          "http_status": 200,
+          "confidence": 0.5201261775493622,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.20585877160109006
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test.jpg",
+          "difficulty": "medium",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.43719627046585086,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.19756578089273893
+          }
+        },
+        {
+          "image": "data/uploads/placa_plate_test_degraded.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "DXP3457",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_10458347_x216.jpg",
+          "difficulty": "critical",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "",
+          "http_status": 200,
+          "confidence": 0.0,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.0,
+            "pattern": 0.0,
+            "final": 0.0
+          }
+        },
+        {
+          "image": "data/uploads/placa_placa_plate_test.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "ABC1234",
+          "observed": "BC1254",
+          "http_status": 200,
+          "confidence": 0.4828251395225525,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.7692307692307693,
+            "pattern": 0.0,
+            "final": 0.2021286677984091
+          }
+        },
+        {
+          "image": "data/uploads/20171119_154214_ch6-1024x576.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "DXP3457",
+          "observed": "DFO8819",
+          "http_status": 200,
+          "confidence": 0.6678078899383545,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.14285714285714285,
+            "pattern": 1.0,
+            "final": 0.145352217565264
+          }
+        },
+        {
+          "image": "data/uploads/10458347_x216.jpg",
+          "difficulty": "hard",
+          "environment": "aberto",
+          "expected": "PXZ9391",
+          "observed": "PXZ9391",
+          "http_status": 200,
+          "confidence": 0.6594019281864166,
+          "score": {
+            "exact": 1.0,
+            "similarity": 1.0,
+            "pattern": 1.0,
+            "final": 0.9659401928186417
+          }
+        },
+        {
+          "image": "data/uploads/sddefault.jpg",
+          "difficulty": "hard",
+          "environment": "fechado",
+          "expected": "AMX3640",
+          "observed": "LX3244",
+          "http_status": 200,
+          "confidence": 0.5200135276317597,
+          "score": {
+            "exact": 0.0,
+            "similarity": 0.46153846153846156,
+            "pattern": 0.0,
+            "final": 0.14430904507086828
+          }
+        }
+      ]
+    }
+  ],
+  "best": {
+    "all": {
+      "name": "light_240_1.8_900",
+      "min_width": 240,
+      "factor": 1.8,
+      "max_width": 900
+    },
+    "aberto": {
+      "name": "baseline_sem_upscale",
+      "min_width": 0,
+      "factor": 1.0,
+      "max_width": 900
+    },
+    "fechado": {
+      "name": "light_240_1.8_900",
+      "min_width": 240,
+      "factor": 1.8,
+      "max_width": 900
+    }
+  },
+  "best_summary": {
+    "all": {
+      "count": 13,
+      "exact_rate": 0.1538,
+      "avg_similarity": 0.4691,
+      "avg_confidence": 0.3484,
+      "avg_score": 0.2402,
+      "median_score": 0.1591
+    },
+    "aberto": {
+      "count": 9,
+      "exact_rate": 0.2222,
+      "avg_similarity": 0.4737,
+      "avg_confidence": 0.3002,
+      "avg_score": 0.2803,
+      "median_score": 0.1591
+    },
+    "fechado": {
+      "count": 4,
+      "exact_rate": 0.0,
+      "avg_similarity": 0.4588,
+      "avg_confidence": 0.4568,
+      "avg_score": 0.1499,
+      "median_score": 0.1763
+    }
+  }
+}

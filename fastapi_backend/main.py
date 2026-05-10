@@ -40,7 +40,7 @@ from fastapi_backend.pdf_forensic import generate_forensic_pdf
 from fastapi_backend.onnx_exporter import export_to_onnx, get_export_info
 from fastapi_backend.benchmark_onnx import run_benchmark, format_report
 from fastapi_backend.ocr_module import run_ocr, get_last_ocr_runtime_info
-from PIL import Image
+from PIL import Image, ImageFilter, ImageStat
 from fpdf import FPDF
 from fastapi_backend.plate_validator import PlateValidator
 from fastapi_backend.quality_metrics import ImageQualityAnalyzer
@@ -236,6 +236,67 @@ def _save_upload_to_temp(upload: UploadFile) -> str:
         tmp_path = tmp.name
         tmp.write(upload.file.read())
     return tmp_path
+
+
+def _upscale_crop_for_ocr(crop_path: str) -> None:
+    """
+    Upscaling de crop antes do OCR para melhorar legibilidade de placas pequenas.
+    Aplica apenas quando a largura do crop está abaixo do limiar configurado.
+
+    Perfis (inspirados em práticas ALPR robustas para cenas degradadas):
+    - open: menor ampliação para reduzir artefatos em cenas bem iluminadas.
+    - closed: maior ampliação para compensar baixa luz/baixo contraste.
+    - auto (default): escolhe perfil com base em luminância/contraste do crop.
+    """
+    try:
+        with Image.open(crop_path) as crop_img:
+            profile = str(os.getenv('GROM_OCR_CROP_UPSCALE_PROFILE', 'auto') or 'auto').strip().lower()
+
+            min_width = int(os.getenv('GROM_OCR_CROP_UPSCALE_MIN_WIDTH', '320'))
+            scale_factor = float(os.getenv('GROM_OCR_CROP_UPSCALE_FACTOR', '2.5'))
+            max_width = int(os.getenv('GROM_OCR_CROP_UPSCALE_MAX_WIDTH', '1400'))
+
+            # Perfil automático aberto/fechado por luminância e contraste do crop.
+            if profile == 'auto':
+                gray = crop_img.convert('L')
+                stats = ImageStat.Stat(gray)
+                mean_luma = float(stats.mean[0]) if stats.mean else 0.0
+                std_luma = float(stats.stddev[0]) if stats.stddev else 0.0
+
+                if mean_luma < 118.0 or std_luma < 42.0:
+                    profile = 'closed'
+                else:
+                    profile = 'open'
+
+            if profile in ('closed', 'fechado', 'night'):
+                min_width = int(os.getenv('GROM_OCR_CROP_UPSCALE_MIN_WIDTH_CLOSED', '420'))
+                scale_factor = float(os.getenv('GROM_OCR_CROP_UPSCALE_FACTOR_CLOSED', '3.2'))
+                max_width = int(os.getenv('GROM_OCR_CROP_UPSCALE_MAX_WIDTH_CLOSED', '1800'))
+            elif profile in ('open', 'aberto', 'day'):
+                min_width = int(os.getenv('GROM_OCR_CROP_UPSCALE_MIN_WIDTH_OPEN', '320'))
+                scale_factor = float(os.getenv('GROM_OCR_CROP_UPSCALE_FACTOR_OPEN', '2.4'))
+                max_width = int(os.getenv('GROM_OCR_CROP_UPSCALE_MAX_WIDTH_OPEN', '1400'))
+
+            if min_width <= 0 or scale_factor <= 1.0:
+                return
+
+            w, h = crop_img.size
+            if w <= 0 or h <= 0 or w >= min_width:
+                return
+
+            target_w = max(min_width, int(round(w * scale_factor)))
+            target_w = min(max_width, target_w)
+            if target_w <= w:
+                return
+
+            target_h = max(1, int(round(h * (target_w / float(w)))))
+            resized = crop_img.convert('RGB').resize((target_w, target_h), Image.Resampling.LANCZOS)
+            # Leve unsharp para ressaltar bordas de caracteres sem exagerar ruído.
+            resized = resized.filter(ImageFilter.UnsharpMask(radius=1.4, percent=160, threshold=2))
+            resized.save(crop_path, quality=95)
+    except Exception:
+        # Se o upscaling falhar, mantém fluxo de OCR original sem bloquear análise.
+        return
 
 
 def _sanitize_filename(name: str) -> str:
@@ -1441,6 +1502,7 @@ async def full_pipeline(file: UploadFile = File(...)):
         crop_path = tmp_path + "_crop.jpg"
         crop.save(crop_path)
         try:
+            _upscale_crop_for_ocr(crop_path)
             ocr = run_ocr(crop_path)
             ocr_runtime_events.append(get_last_ocr_runtime_info())
         except RuntimeError as exc:
@@ -1552,6 +1614,7 @@ async def process_legacy_endpoint(
                 # Persistimos evidencia principal (placa prioritaria rank=1)
                 if det.get('priority_rank', 99) == 1 and not os.path.exists(persisted_crop_raw_path):
                     shutil.copy2(crop_path, persisted_crop_raw_path)
+                _upscale_crop_for_ocr(crop_path)
                 if det.get('priority_rank', 99) == 1 and not os.path.exists(persisted_plate_path):
                     shutil.copy2(crop_path, persisted_plate_path)
                 try:
@@ -2209,11 +2272,135 @@ async def analyze_spatial_metadata_endpoint(file: UploadFile = File(...)):
                 pass
 
 
+async def _analyze_video_frame_lightweight(img_bytes: bytes, filename: str) -> dict:
+    """
+    Pipeline LEVE para frames de vídeo: detecção + OCR local apenas.
+    Sem PlateRecognizer, sem PDF, sem CLIP, sem GPS, sem evidência chain.
+    Retorna dict mínimo com detections, best, confidence estimado, bbox.
+    """
+    import io as _io_mod
+    import tempfile as _tmp_mod
+
+    suffix = os.path.splitext(filename or 'frame.jpg')[1] or '.jpg'
+    tmp_path = None
+    try:
+        with _tmp_mod.NamedTemporaryFile(delete=False, suffix=suffix) as tf:
+            tf.write(img_bytes)
+            tmp_path = tf.name
+
+        # Pré-processamento
+        try:
+            preprocess_image(tmp_path).save(tmp_path)
+        except Exception:
+            pass
+
+        # Detecção de placa
+        try:
+            detector_dets = detect_plate(tmp_path) or []
+        except Exception:
+            detector_dets = []
+        try:
+            ensemble_dets = detect_ensemble(tmp_path) or []
+        except Exception:
+            ensemble_dets = []
+
+        raw_dets = _merge_detections(detector_dets, ensemble_dets, iou_threshold=0.45, max_regions=6)
+        if not raw_dets:
+            raw_dets = _heuristic_plate_detections(tmp_path, max_regions=6)
+
+        img = Image.open(tmp_path)
+        img_w, img_h = img.size
+        dets = _prioritize_detections(raw_dets, (img_w, img_h))
+
+        # OCR local apenas (sem PlateRecognizer externo)
+        ocr_results = []
+        if dets:
+            for det in dets:
+                x1, y1, x2, y2 = det['bbox']
+                crop = img.crop((x1, y1, x2, y2))
+                crop_path = tmp_path + '_crop.jpg'
+                try:
+                    crop.save(crop_path)
+                    _upscale_crop_for_ocr(crop_path)
+                    local_ocr = run_ocr(crop_path)
+                    for item in local_ocr:
+                        row = dict(item)
+                        row['bbox'] = det.get('bbox')
+                        row['detection_priority_rank'] = det.get('priority_rank')
+                        ocr_results.append(row)
+                except Exception:
+                    pass
+                finally:
+                    if os.path.exists(crop_path):
+                        try:
+                            os.remove(crop_path)
+                        except OSError:
+                            pass
+        else:
+            try:
+                ocr_results = run_ocr(tmp_path)
+            except Exception:
+                ocr_results = []
+
+        # Consolida melhor candidato OCR
+        valid_candidates = [
+            r for r in (ocr_results or [])
+            if isinstance(r, dict) and len(_normalize_plate_text(r.get('text', ''))) >= 5
+        ]
+        valid_candidates.sort(key=lambda r: float(r.get('avg_conf', r.get('score', 0.0))), reverse=True)
+        best = valid_candidates[0] if valid_candidates else {}
+        best_text = _normalize_plate_text(best.get('text', ''))
+
+        # Validação rápida de placa
+        plate_valid = False
+        if best_text:
+            try:
+                pv = PlateValidator(strict_mode=False)
+                plate_valid = bool(pv.validate(best_text).get('valid'))
+            except Exception:
+                pass
+
+        # Estimativa simples de confiança
+        avg_conf = float(best.get('avg_conf', best.get('score', 0.0)) or 0.0)
+        if avg_conf > 1.0:
+            avg_conf = avg_conf / 100.0
+        det_conf = float((dets[0].get('confidence', 0.5) if dets else 0.2))
+        est_confidence = round((avg_conf * 0.6 + det_conf * 0.4) * (1.1 if plate_valid else 0.7), 4)
+        est_confidence = min(1.0, max(0.0, est_confidence))
+
+        return {
+            'best': {'text': best_text, 'avg_conf': avg_conf, 'valid': plate_valid},
+            'detections': [
+                {'bbox': d.get('bbox', []), 'confidence': d.get('confidence', 0.0),
+                 'priority_rank': d.get('priority_rank', 99)}
+                for d in dets
+            ],
+            'ocr_results': ocr_results,
+            'confidence_score': {'overall_confidence': est_confidence},
+            'img_w': img_w,
+            'img_h': img_h,
+        }
+    except Exception as ex:
+        return {
+            'best': {'text': '', 'avg_conf': 0.0, 'valid': False},
+            'detections': [],
+            'ocr_results': [],
+            'confidence_score': {'overall_confidence': 0.0},
+            'error': str(ex),
+        }
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except OSError:
+                pass
+
+
 def _temporal_vehicle_tracking(frame_analyses: list, iou_threshold: float = 0.4) -> dict:
     """
     Rastreia veículos através de frames usando centroide + IoU.
     Agrupa múltiplas detecções do mesmo veículo e consolida leituras OCR.
-    
+
     Retorna:
         {
             'vehicle_tracks': [
@@ -2338,16 +2525,17 @@ def _temporal_vehicle_tracking(frame_analyses: list, iou_threshold: float = 0.4)
 async def process_video_legacy_endpoint(
     video: UploadFile = File(...),
     analysis_stage: str = Form(default='final'),
-    max_frames_to_analyze: int = Form(default=12),
+    max_frames_to_analyze: int = Form(default=10),
     sample_every_n_frames: int = Form(default=5),
 ):
     """
-    Processamento pericial de vídeo com rastreamento de veículos:
-    - amostra frames do vídeo (prioriza nitidez)
-    - rastreia cada veículo através dos frames (temporal tracking)
-    - consolida leituras OCR por veículo (votação de placa)
-    - marca timestamps de cada detecção
-    - devolve análise pericial consolidada por veículo + trilha temporal
+    Processamento pericial de vídeo com rastreamento temporal de veículos.
+
+    Pipeline em duas fases para garantir conclusão rápida:
+    1. Fase leve (todos os frames): detecção + OCR local sem APIs externas,
+       sem PDF, sem GPS — apenas para rastrear veículos e eleger o melhor frame.
+    2. Fase completa (melhor frame): pipeline pericial completo com enriquecimento,
+       PDF, evidência chain e prontidão jurídica.
     """
     try:
         import cv2  # type: ignore
@@ -2355,7 +2543,7 @@ async def process_video_legacy_endpoint(
     except Exception:
         return JSONResponse(status_code=503, content={'error': 'opencv/numpy nao disponivel para processamento de video'})
 
-    max_frames_to_analyze = max(1, min(int(max_frames_to_analyze or 12), 30))
+    max_frames_to_analyze = max(1, min(int(max_frames_to_analyze or 10), 30))
     sample_every_n_frames = max(1, min(int(sample_every_n_frames or 5), 60))
 
     if not str(video.filename or '').lower().endswith(('.mp4', '.avi', '.mov', '.mkv', '.webm', '.m4v')):
@@ -2371,15 +2559,20 @@ async def process_video_legacy_endpoint(
 
         fps = float(cap.get(cv2.CAP_PROP_FPS) or 0.0)
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
-        frame_idx = 0
 
-        while True:
+        # Distribuir amostragem por TODO o vídeo usando seek direto.
+        # Gera posições uniformemente distribuídas no vídeo inteiro.
+        target_candidates = max_frames_to_analyze * 3
+        if total_frames > 0 and target_candidates > 0:
+            step = max(1, total_frames // target_candidates)
+            frame_positions = list(range(0, total_frames, step))[:target_candidates]
+        else:
+            frame_positions = list(range(0, max(1, max_frames_to_analyze * 3)))
+
+        for frame_idx in frame_positions:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
             ok, frame = cap.read()
             if not ok:
-                break
-
-            if frame_idx % sample_every_n_frames != 0:
-                frame_idx += 1
                 continue
 
             sharpness = float(lap_variance(frame)) if _frame_selector_ok else float(cv2.Laplacian(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.CV_64F).var())
@@ -2398,10 +2591,6 @@ async def process_video_legacy_endpoint(
                     'bytes': encoded.tobytes(),
                 })
 
-            frame_idx += 1
-            if len(frame_candidates) >= max_frames_to_analyze * 3:
-                break
-
         cap.release()
 
         if not frame_candidates:
@@ -2410,34 +2599,20 @@ async def process_video_legacy_endpoint(
         frame_candidates.sort(key=lambda x: float(x.get('frame_quality', 0.0)), reverse=True)
         selected = frame_candidates[:max_frames_to_analyze]
 
+        # --- Fase 1: análise leve de todos os frames (sem PDF, sem APIs externas) ---
         frame_analyses = []
-        best_overall_payload = None
+        best_overall_cand = None
         best_overall_score = -1.0
 
         for cand in selected:
-            up = UploadFile(
-                filename=f"{Path(video.filename or 'video').stem}_f{cand['frame_index']}.jpg",
-                file=io.BytesIO(cand['bytes'])
-            )
-            response = await process_legacy_endpoint(image=up, file=None, analysis_stage=analysis_stage)
-            if not isinstance(response, JSONResponse):
-                continue
+            frame_name = f"{Path(video.filename or 'video').stem}_f{cand['frame_index']}.jpg"
+            light = await _analyze_video_frame_lightweight(cand['bytes'], frame_name)
 
-            try:
-                payload = json.loads(response.body.decode('utf-8'))
-            except Exception:
-                continue
-            if not isinstance(payload, dict):
-                continue
+            frame_conf = float(light.get('confidence_score', {}).get('overall_confidence', 0.0) or 0.0)
+            best_text = str(light.get('best', {}).get('text', '') or '').strip()
 
-            conf = payload.get('confidence_score', {}) if isinstance(payload.get('confidence_score'), dict) else {}
-            frame_conf = float(conf.get('overall_confidence', 0.0) or 0.0)
-            best_candidate = payload.get('best', {}) if isinstance(payload.get('best'), dict) else {}
-            best_text = str(best_candidate.get('text', '') or '').strip()
-
-            detections_for_track = payload.get('detections', []) if isinstance(payload.get('detections'), list) else []
             frame_detections = []
-            for det in detections_for_track:
+            for det in light.get('detections', []):
                 if isinstance(det, dict):
                     frame_detections.append({
                         'bbox': det.get('bbox', []),
@@ -2452,39 +2627,69 @@ async def process_video_legacy_endpoint(
                 'frame_quality': round(cand['frame_quality'], 3),
                 'overall_confidence': frame_conf,
                 'detections': frame_detections,
-                'payload': payload,
+                'best_text': best_text,
             })
 
-            boost = 0.08 if best_text else 0.0
+            boost = 0.10 if best_text else 0.0
             combined = frame_conf + boost
             if combined > best_overall_score:
                 best_overall_score = combined
-                best_overall_payload = payload
+                best_overall_cand = cand
 
-        if not frame_analyses or not best_overall_payload:
-            return JSONResponse(status_code=500, content={'error': 'Falha ao processar frames selecionados'})
-
+        # Rastreamento temporal de veículos
         tracking_result = _temporal_vehicle_tracking(frame_analyses, iou_threshold=0.4)
         vehicle_tracks = tracking_result.get('vehicle_tracks', [])
         total_vehicles = tracking_result.get('total_vehicles', 0)
 
-        best_overall_payload.setdefault('forensic', {})
-        if isinstance(best_overall_payload['forensic'], dict):
-            best_overall_payload['forensic']['source_type'] = 'video'
-            best_overall_payload['forensic']['source_filename'] = str(video.filename or '')
+        # --- Fase 2: pipeline completo APENAS no melhor frame eleito ---
+        best_cand = best_overall_cand or selected[0]
+        up = UploadFile(
+            filename=f"{Path(video.filename or 'video').stem}_f{best_cand['frame_index']}.jpg",
+            file=io.BytesIO(best_cand['bytes'])
+        )
+        response = await process_legacy_endpoint(image=up, file=None, analysis_stage=analysis_stage)
+        if not isinstance(response, JSONResponse):
+            return JSONResponse(status_code=500, content={'error': 'Falha no pipeline pericial do frame selecionado'})
 
-        best_overall_payload['video_context'] = {
+        try:
+            best_payload = json.loads(response.body.decode('utf-8'))
+        except Exception:
+            best_payload = {}
+
+        if not isinstance(best_payload, dict):
+            best_payload = {}
+
+        best_payload.setdefault('forensic', {})
+        if isinstance(best_payload.get('forensic'), dict):
+            best_payload['forensic']['source_type'] = 'video'
+            best_payload['forensic']['source_filename'] = str(video.filename or '')
+
+        best_payload['video_context'] = {
             'source_video': video.filename,
             'source_video_sha256': _file_sha256(tmp_video_path),
-            'fps': fps,
+            'fps': round(fps, 3),
             'total_frames': total_frames,
+            'duration_sec': round(total_frames / fps, 2) if fps > 0 else None,
             'sample_every_n_frames': sample_every_n_frames,
             'frames_analyzed': len(selected),
+            'best_frame_index': best_cand['frame_index'],
+            'best_frame_timestamp_sec': best_cand.get('timestamp_sec'),
             'vehicle_tracks': vehicle_tracks,
             'total_vehicles_detected': total_vehicles,
+            'frame_summary': [
+                {
+                    'frame_index': fa['frame_index'],
+                    'timestamp_sec': fa['timestamp_sec'],
+                    'sharpness': fa['sharpness'],
+                    'frame_quality': fa['frame_quality'],
+                    'plate_read': fa['best_text'],
+                    'confidence': fa['overall_confidence'],
+                }
+                for fa in sorted(frame_analyses, key=lambda x: x.get('frame_index', 0))
+            ],
         }
 
-        return JSONResponse(best_overall_payload)
+        return JSONResponse(best_payload)
     finally:
         if os.path.exists(tmp_video_path):
             try:

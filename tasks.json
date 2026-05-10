@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "GROM OCR PHP - Versão do PHP",
+            "type": "shell",
+            "command": "C:\\Users\\Família Grom\\AppData\\Local\\Microsoft\\WinGet\\Packages\\PHP.PHP.8.4_Microsoft.Winget.Source_8wekyb3d8bbwe\\php.exe",
+            "args": [
+                "-v"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "GROM OCR PHP - Testar Tesseract portátil",
+            "type": "shell",
+            "command": "C:\\Grom_OCR\\tools\\tesseract-portable\\tesseract.exe",
+            "args": [
+                "--version"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "GROM OCR PHP - Validar sintaxe",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "Get-ChildItem -Path . -Recurse -Filter *.php | Where-Object { $_.FullName -notmatch '\\\\vendor\\\\' } | ForEach-Object { Write-Host $_.FullName; & 'C:\\Users\\Família Grom\\AppData\\Local\\Microsoft\\WinGet\\Packages\\PHP.PHP.8.4_Microsoft.Winget.Source_8wekyb3d8bbwe\\php.exe' -l $_.FullName }"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "GROM OCR PHP - Servidor local",
+            "type": "shell",
+            "command": "C:\\Users\\Família Grom\\AppData\\Local\\Microsoft\\WinGet\\Packages\\PHP.PHP.8.4_Microsoft.Winget.Source_8wekyb3d8bbwe\\php.exe",
+            "args": [
+                "-S",
+                "127.0.0.1:8080",
+                "-t",
+                "public"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true
+        }
+    ]
+}
