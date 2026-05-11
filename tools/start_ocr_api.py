@@ -5,12 +5,16 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-TESSERACT_CMD = PROJECT_ROOT / 'tools' / 'tesseract-portable' / 'tesseract.exe'
-TESSDATA_DIR = PROJECT_ROOT / 'tools' / 'tesseract-portable' / 'tessdata'
+PYTHON_ROOT = PROJECT_ROOT / 'python'
+if str(PYTHON_ROOT) not in sys.path:
+    sys.path.insert(0, str(PYTHON_ROOT))
+
+from utils.tesseract_runtime import apply_tesseract_env_defaults
+
+
 YOLO_MODEL_PATH = PROJECT_ROOT / 'models' / 'yolov8n_plate.pt'
 
-os.environ.setdefault('GROM_OCR_TESSERACT_CMD', str(TESSERACT_CMD))
-os.environ.setdefault('TESSDATA_PREFIX', str(TESSDATA_DIR))
+tesseract_runtime = apply_tesseract_env_defaults(project_root=str(PROJECT_ROOT))
 if YOLO_MODEL_PATH.exists():
     os.environ.setdefault('GROM_OCR_YOLO_MODEL_PATH', str(YOLO_MODEL_PATH))
 os.environ.setdefault('GROM_OCR_ENABLE_EASYOCR', '1')
@@ -47,6 +51,8 @@ api_host = os.environ.get('GROM_OCR_API_HOST', '127.0.0.1')
 
 print(f'BOOT_TESSERACT_CMD={os.environ.get("GROM_OCR_TESSERACT_CMD", "")}', flush=True)
 print(f'BOOT_TESSDATA_PREFIX={os.environ.get("TESSDATA_PREFIX", "")}', flush=True)
+print(f'BOOT_TESSERACT_CMD_SOURCE={tesseract_runtime.get("cmd_source", "")}', flush=True)
+print(f'BOOT_TESSDATA_SOURCE={tesseract_runtime.get("tessdata_source", "")}', flush=True)
 print(f'BOOT_API=http://{api_host}:{api_port}', flush=True)
 
 cmd = [

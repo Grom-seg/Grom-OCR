@@ -10,8 +10,51 @@ param(
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $pythonExe = Join-Path $projectRoot '.venv\Scripts\python.exe'
 $pythonScript = Join-Path $projectRoot 'tools\start_ocr_api.py'
-$tesseractCmd = Join-Path $projectRoot 'tools\tesseract-portable\tesseract.exe'
-$tessdataDir = Join-Path $projectRoot 'tools\tesseract-portable\tessdata'
+$defaultTesseractDir = Join-Path $projectRoot 'tools\tesseract-portable'
+
+function Resolve-TesseractRuntime {
+    $runtime = [ordered]@{
+        Cmd = ''
+        Tessdata = ''
+        Source = 'not_found'
+    }
+
+    $cmdCandidates = @(
+        @{ Source = 'GROM_OCR_TESSERACT_CMD'; Path = $env:GROM_OCR_TESSERACT_CMD },
+        @{ Source = 'TESSERACT_CMD'; Path = $env:TESSERACT_CMD },
+        @{ Source = 'GROM_OCR_TESSERACT_ROOT'; Path = $(if ($env:GROM_OCR_TESSERACT_ROOT) { Join-Path $env:GROM_OCR_TESSERACT_ROOT 'tesseract.exe' }) },
+        @{ Source = 'GROM_OCR_TESSERACT_PORTABLE_DIR'; Path = $(if ($env:GROM_OCR_TESSERACT_PORTABLE_DIR) { Join-Path $env:GROM_OCR_TESSERACT_PORTABLE_DIR 'tesseract.exe' }) },
+        @{ Source = 'project_default'; Path = (Join-Path $defaultTesseractDir 'tesseract.exe') },
+        @{ Source = 'system_program_files'; Path = 'C:\Program Files\Tesseract-OCR\tesseract.exe' },
+        @{ Source = 'system_program_files_x86'; Path = 'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe' }
+    )
+
+    foreach ($item in $cmdCandidates) {
+        if ($item.Path -and (Test-Path $item.Path)) {
+            $runtime.Cmd = $item.Path
+            $runtime.Source = $item.Source
+            break
+        }
+    }
+
+    $tessCandidates = @(
+        $env:TESSDATA_PREFIX,
+        $env:GROM_OCR_TESSDATA_PREFIX,
+        $(if ($runtime.Cmd) { Join-Path (Split-Path -Parent $runtime.Cmd) 'tessdata' }),
+        $(if ($env:GROM_OCR_TESSERACT_ROOT) { Join-Path $env:GROM_OCR_TESSERACT_ROOT 'tessdata' }),
+        $(if ($env:GROM_OCR_TESSERACT_PORTABLE_DIR) { Join-Path $env:GROM_OCR_TESSERACT_PORTABLE_DIR 'tessdata' }),
+        (Join-Path $defaultTesseractDir 'tessdata')
+    )
+
+    foreach ($candidate in $tessCandidates) {
+        if ($candidate -and (Test-Path $candidate)) {
+            $runtime.Tessdata = $candidate
+            break
+        }
+    }
+
+    return [PSCustomObject]$runtime
+}
 
 function Write-Status {
     param([string]$Message, [switch]$Warning)
@@ -67,8 +110,13 @@ function Resolve-PhpExe {
 }
 
 function Set-ServiceEnv {
-    $env:GROM_OCR_TESSERACT_CMD = $tesseractCmd
-    $env:TESSDATA_PREFIX = $tessdataDir
+    $tRuntime = Resolve-TesseractRuntime
+    if ($tRuntime.Cmd) {
+        $env:GROM_OCR_TESSERACT_CMD = $tRuntime.Cmd
+    }
+    if ($tRuntime.Tessdata) {
+        $env:TESSDATA_PREFIX = $tRuntime.Tessdata
+    }
     $yoloModelPath = Join-Path $projectRoot 'models\yolov8n_plate.pt'
     if (-not $env:GROM_OCR_YOLO_MODEL_PATH -and (Test-Path $yoloModelPath)) {
         $env:GROM_OCR_YOLO_MODEL_PATH = $yoloModelPath

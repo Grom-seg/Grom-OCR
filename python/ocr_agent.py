@@ -118,6 +118,7 @@ from utils import microcalibration as microcalibration_module
 from utils import visual_reference_catalog as visual_reference_catalog_module
 from utils import vehicle_analysis_protocol as vehicle_analysis_protocol_module
 from utils import vehicle_confrontation_form as vehicle_confrontation_form_module
+from utils.tesseract_runtime import resolve_tesseract_runtime
 from utils.partial_plate import (
     build_partial_plate_candidates,
     build_partial_plate_overview,
@@ -696,15 +697,23 @@ HAAR_PLATE_CASCADE = cv2.CascadeClassifier(HAAR_PLATE_CASCADE_PATH)
 
 
 def configure_tesseract():
-    candidates = [
+    runtime = resolve_tesseract_runtime(project_root=PROJECT_ROOT)
+
+    selected_cmd = runtime.get('cmd', '')
+    if selected_cmd and os.path.exists(selected_cmd):
+        pytesseract.pytesseract.tesseract_cmd = selected_cmd
+        if runtime.get('tessdata_prefix') and not os.environ.get('TESSDATA_PREFIX'):
+            os.environ['TESSDATA_PREFIX'] = runtime['tessdata_prefix']
+        if not os.environ.get('GROM_OCR_TESSERACT_CMD'):
+            os.environ['GROM_OCR_TESSERACT_CMD'] = selected_cmd
+        return selected_cmd
+
+    legacy_candidates = [
         os.environ.get('GROM_OCR_TESSERACT_CMD'),
         os.environ.get('TESSERACT_CMD'),
         PROJECT_TESSERACT_CMD,
-        r'C:\Program Files\Tesseract-OCR\tesseract.exe',
-        r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe',
     ]
-
-    for candidate in candidates:
+    for candidate in legacy_candidates:
         if candidate and os.path.exists(candidate):
             pytesseract.pytesseract.tesseract_cmd = candidate
             tessdata_dir = os.path.join(os.path.dirname(candidate), 'tessdata')

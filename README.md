@@ -109,6 +109,9 @@ Defina as variaveis abaixo antes de subir o sistema:
 - `GROM_OCR_ADMIN_PASS_HASH`
 - `GROM_OCR_ADMIN_PASS`
 - `GROM_OCR_TESSERACT_CMD`
+- `GROM_OCR_TESSERACT_ROOT` (opcional; pasta externa contendo `tesseract.exe` e `tessdata`)
+- `GROM_OCR_TESSERACT_PORTABLE_DIR` (opcional; alias para pasta do pacote portátil)
+- `GROM_OCR_TESSDATA_PREFIX` (opcional; override explícito de `tessdata`)
 - `TESSDATA_PREFIX`
 - `GROM_OCR_ENABLE_EASYOCR`
 - `GROM_OCR_ENABLE_RAPIDOCR`
@@ -242,7 +245,7 @@ Se o seu MySQL local estiver com usuario `root` sem senha, `GROM_OCR_DB_PASS` po
 10. Para remover o autostart, execute `powershell -ExecutionPolicy Bypass -File C:\Grom_OCR\tools\uninstall_grom_ocr_autostart.ps1`
 11. Na primeira inicializacao, aguarde o carregamento dos motores OCR (pode levar ate ~90s) e valide em `http://127.0.0.1:8000/health` antes do primeiro upload.
 
-`tools/start_ocr_api.py` ja prepara o Tesseract portatil extraido em `tools/tesseract-portable` e usa `waitress` quando disponivel para manter a API em um unico processo no Windows.
+`tools/start_ocr_api.py` resolve o Tesseract por prioridade: variaveis de ambiente (externo) -> pacote local em `tools/tesseract-portable` -> instalacao de sistema, mantendo compatibilidade e permitindo externalizacao sem regressao.
 Ao subir por `start_ocr_api.py` ou `start_grom_ocr.*`, o modo profissional entra com um perfil mais rapido por padrao: `easyocr` e `rapidocr` ficam habilitados, `GROM_OCR_FORCE_ENSEMBLE=0`, e o Tesseract roda como OCR de linha unica para placa (ANPR/LPR) para reduzir latencia sem perder o fallback inteligente. Os motores `PaddleOCR`, `TrOCR` e `docTR` continuam em opt-in por padrao para evitar boot pesado sem ganho comprovado no acervo atual.
 Por padrao, o endpoint FastAPI `/process` delega para o pipeline forense consolidado (`python/ocr_agent.py`) via `GROM_OCR_USE_LEGACY_PIPELINE=1`, mantendo compatibilidade de rota e reduzindo risco de regressao de acuracia.
 O arranque agora e idempotente: se a API ou o PHP ja estiverem rodando, o script apenas confirma o estado e nao cria instancias duplicadas. O autostart de login usa a chave `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run`.
