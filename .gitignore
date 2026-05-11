@@ -84,3 +84,8 @@ data/datasets/Imagens/*.mp4
 tools/tesseract-portable/*
 !tools/tesseract-portable/.gitkeep
 !tools/tesseract-portable/README.md
+
+# Configuração local e artefatos empacotados do Tesseract externo
+config/tesseract_artifact.json
+dist/
+release/

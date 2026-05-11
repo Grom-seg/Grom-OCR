@@ -6,8 +6,9 @@ Sistema hibrido em PHP + Python para leitura OCR de placas, registro de analises
 
 - v1.0: plataforma inicial concentrada em Python.
 - v2.0: evolucao para aplicacao web em PHP com backend Python de OCR/forense.
+- v2.1.0: introducao da analise de video como evolucao funcional significativa sobre a base web/hibrida.
 
-Para reduzir peso do repositorio na v2.0, o pacote binario do Tesseract portatil foi migrado para distribuicao externa (release/artefato), com bootstrap e validacao automatica no startup.
+Para reduzir peso do repositorio a partir da linha v2.x, o pacote binario do Tesseract portatil foi migrado para distribuicao externa (release/artefato), com bootstrap e validacao automatica no startup.
 
 ## Estrutura
 
