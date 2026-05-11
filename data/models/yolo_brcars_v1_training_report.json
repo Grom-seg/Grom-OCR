@@ -1,7 +1,0 @@
-{
-  "run_name": "yolo_brcars_v1",
-  "base_model": "C:\\Grom_OCR\\yolov8n.pt",
-  "dataset": "C:\\Grom_OCR\\data\\datasets\\stub_dataset\\dataset.yaml",
-  "epochs_requested": 50,
-  "output_model": "C:\\Grom_OCR\\data\\models\\yolo_brcars_v1.pt"
-}

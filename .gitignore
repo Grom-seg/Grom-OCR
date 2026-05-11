@@ -46,3 +46,20 @@ data/ccpd/
 *.tar
 *.tar.gz
 *.zip
+
+# Artefatos transitórios de benchmark/treino (higienização branch)
+runs/
+data/models/openclip_embeddings/
+data/models/yolo_brcars_v1.pt
+data/models/yolo_brcars_v1_training_report.json
+
+# Relatórios e saídas efêmeras de validação local
+build_openclip_embeddings_latest.txt
+finetune_check*.txt
+finetune_stub.txt
+pytest_roadmap*.txt
+pytest_osint_db.txt
+resultado_osint_semantic_runtime.json
+resultado_validacao_osint_runtime.json
+venv_test_*.txt
+train_when_ready_*.txt

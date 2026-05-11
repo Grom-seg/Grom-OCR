@@ -1,8 +1,0 @@
-{
-  "total_embeddings": 944,
-  "model_name": "ViT-B-32",
-  "pretrained": "openai",
-  "device": "cpu",
-  "elapsed_seconds": 181.18,
-  "output_file": "C:\\Grom_OCR\\data\\models\\openclip_embeddings\\brcars_embeddings.npy"
-}
