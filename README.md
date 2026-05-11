@@ -262,6 +262,20 @@ Se o seu MySQL local estiver com usuario `root` sem senha, `GROM_OCR_DB_PASS` po
 O bootstrap e executado por `tools/bootstrap_tesseract_portable.py` e aceita configuracao por variaveis de ambiente ou por arquivo local `config/tesseract_artifact.json` (veja exemplo em `config/tesseract_artifact.example.json`).
 
 Enquanto a release remota ainda nao estiver publicada, o bootstrap pode operar em modo remoto-first com fallback local: mantenha `artifact_url` apontando para a URL final desejada e `artifact_path` apontando para o ZIP local gerado em `dist/`.
+
+Para automatizar a publicacao do artefato, use `tools/publish_tesseract_artifact_release.py`. O script:
+
+- empacota o runtime local novamente,
+- cria ou atualiza a release/tag de artefato no GitHub,
+- remove o asset anterior com mesmo nome,
+- publica o ZIP novo,
+- e imprime a URL final + SHA256.
+
+Exemplo:
+
+`C:\Grom_OCR\.venv\Scripts\python.exe C:\Grom_OCR\tools\publish_tesseract_artifact_release.py --dry-run`
+
+Para publicacao real, defina `GITHUB_TOKEN` ou `GH_TOKEN` com permissao de release no repositorio.
 Ao subir por `start_ocr_api.py` ou `start_grom_ocr.*`, o modo profissional entra com um perfil mais rapido por padrao: `easyocr` e `rapidocr` ficam habilitados, `GROM_OCR_FORCE_ENSEMBLE=0`, e o Tesseract roda como OCR de linha unica para placa (ANPR/LPR) para reduzir latencia sem perder o fallback inteligente. Os motores `PaddleOCR`, `TrOCR` e `docTR` continuam em opt-in por padrao para evitar boot pesado sem ganho comprovado no acervo atual.
 Por padrao, o endpoint FastAPI `/process` delega para o pipeline forense consolidado (`python/ocr_agent.py`) via `GROM_OCR_USE_LEGACY_PIPELINE=1`, mantendo compatibilidade de rota e reduzindo risco de regressao de acuracia.
 O arranque agora e idempotente: se a API ou o PHP ja estiverem rodando, o script apenas confirma o estado e nao cria instancias duplicadas. O autostart de login usa a chave `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run`.
