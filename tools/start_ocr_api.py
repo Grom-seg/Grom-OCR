@@ -13,7 +13,23 @@ from utils.tesseract_runtime import apply_tesseract_env_defaults
 
 
 YOLO_MODEL_PATH = PROJECT_ROOT / 'models' / 'yolov8n_plate.pt'
+BOOTSTRAP_SCRIPT = PROJECT_ROOT / 'tools' / 'bootstrap_tesseract_portable.py'
 
+
+def bootstrap_tesseract_if_needed() -> int:
+    if os.environ.get('GROM_OCR_TESSERACT_BOOTSTRAP', '1').strip().lower() not in ('1', 'true', 'yes', 'on'):
+        return 0
+    if not BOOTSTRAP_SCRIPT.exists():
+        return 0
+    proc = subprocess.run(
+        [sys.executable, str(BOOTSTRAP_SCRIPT), '--quiet'],
+        cwd=str(PROJECT_ROOT),
+        check=False,
+    )
+    return int(proc.returncode)
+
+
+bootstrap_code = bootstrap_tesseract_if_needed()
 tesseract_runtime = apply_tesseract_env_defaults(project_root=str(PROJECT_ROOT))
 if YOLO_MODEL_PATH.exists():
     os.environ.setdefault('GROM_OCR_YOLO_MODEL_PATH', str(YOLO_MODEL_PATH))
@@ -53,6 +69,7 @@ print(f'BOOT_TESSERACT_CMD={os.environ.get("GROM_OCR_TESSERACT_CMD", "")}', flus
 print(f'BOOT_TESSDATA_PREFIX={os.environ.get("TESSDATA_PREFIX", "")}', flush=True)
 print(f'BOOT_TESSERACT_CMD_SOURCE={tesseract_runtime.get("cmd_source", "")}', flush=True)
 print(f'BOOT_TESSDATA_SOURCE={tesseract_runtime.get("tessdata_source", "")}', flush=True)
+print(f'BOOT_TESSERACT_BOOTSTRAP_EXIT={bootstrap_code}', flush=True)
 print(f'BOOT_API=http://{api_host}:{api_port}', flush=True)
 
 cmd = [

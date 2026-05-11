@@ -79,3 +79,8 @@ data/test_results/*.pdf
 
 # Vídeos brutos duplicados em pasta de imagens
 data/datasets/Imagens/*.mp4
+
+# Tesseract portátil agora vem por artefato externo no startup
+tools/tesseract-portable/*
+!tools/tesseract-portable/.gitkeep
+!tools/tesseract-portable/README.md

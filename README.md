@@ -2,6 +2,13 @@
 
 Sistema hibrido em PHP + Python para leitura OCR de placas, registro de analises e geracao de relatorios PDF.
 
+## Linha de Versao
+
+- v1.0: plataforma inicial concentrada em Python.
+- v2.0: evolucao para aplicacao web em PHP com backend Python de OCR/forense.
+
+Para reduzir peso do repositorio na v2.0, o pacote binario do Tesseract portatil foi migrado para distribuicao externa (release/artefato), com bootstrap e validacao automatica no startup.
+
 ## Estrutura
 
 - `public/`: entradas web em PHP (`index.php`, `login.php`, `upload.php`, `historico.php`, `logout.php`)
@@ -113,6 +120,10 @@ Defina as variaveis abaixo antes de subir o sistema:
 - `GROM_OCR_TESSERACT_PORTABLE_DIR` (opcional; alias para pasta do pacote portátil)
 - `GROM_OCR_TESSDATA_PREFIX` (opcional; override explícito de `tessdata`)
 - `TESSDATA_PREFIX`
+- `GROM_OCR_TESSERACT_ARTIFACT_URL` (URL do ZIP do pacote portatil)
+- `GROM_OCR_TESSERACT_ARTIFACT_PATH` (caminho local para ZIP do pacote portatil)
+- `GROM_OCR_TESSERACT_ARTIFACT_SHA256` (hash opcional para validacao de integridade)
+- `GROM_OCR_TESSERACT_BOOTSTRAP` (default `1`; use `0` para desativar bootstrap automatico)
 - `GROM_OCR_ENABLE_EASYOCR`
 - `GROM_OCR_ENABLE_RAPIDOCR`
 - `GROM_OCR_ENABLE_PADDLEOCR`
@@ -245,7 +256,9 @@ Se o seu MySQL local estiver com usuario `root` sem senha, `GROM_OCR_DB_PASS` po
 10. Para remover o autostart, execute `powershell -ExecutionPolicy Bypass -File C:\Grom_OCR\tools\uninstall_grom_ocr_autostart.ps1`
 11. Na primeira inicializacao, aguarde o carregamento dos motores OCR (pode levar ate ~90s) e valide em `http://127.0.0.1:8000/health` antes do primeiro upload.
 
-`tools/start_ocr_api.py` resolve o Tesseract por prioridade: variaveis de ambiente (externo) -> pacote local em `tools/tesseract-portable` -> instalacao de sistema, mantendo compatibilidade e permitindo externalizacao sem regressao.
+`tools/start_ocr_api.py` resolve o Tesseract por prioridade: variaveis de ambiente (externo) -> bootstrap por artefato -> pacote local em `tools/tesseract-portable` (se existir) -> instalacao de sistema, mantendo compatibilidade e permitindo externalizacao sem regressao.
+
+O bootstrap e executado por `tools/bootstrap_tesseract_portable.py` e aceita configuracao por variaveis de ambiente ou por arquivo local `config/tesseract_artifact.json` (veja exemplo em `config/tesseract_artifact.example.json`).
 Ao subir por `start_ocr_api.py` ou `start_grom_ocr.*`, o modo profissional entra com um perfil mais rapido por padrao: `easyocr` e `rapidocr` ficam habilitados, `GROM_OCR_FORCE_ENSEMBLE=0`, e o Tesseract roda como OCR de linha unica para placa (ANPR/LPR) para reduzir latencia sem perder o fallback inteligente. Os motores `PaddleOCR`, `TrOCR` e `docTR` continuam em opt-in por padrao para evitar boot pesado sem ganho comprovado no acervo atual.
 Por padrao, o endpoint FastAPI `/process` delega para o pipeline forense consolidado (`python/ocr_agent.py`) via `GROM_OCR_USE_LEGACY_PIPELINE=1`, mantendo compatibilidade de rota e reduzindo risco de regressao de acuracia.
 O arranque agora e idempotente: se a API ou o PHP ja estiverem rodando, o script apenas confirma o estado e nao cria instancias duplicadas. O autostart de login usa a chave `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run`.

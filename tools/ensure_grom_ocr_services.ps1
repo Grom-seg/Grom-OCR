@@ -10,13 +10,14 @@ param(
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $pythonExe = Join-Path $projectRoot '.venv\Scripts\python.exe'
 $pythonScript = Join-Path $projectRoot 'tools\start_ocr_api.py'
+$bootstrapScript = Join-Path $projectRoot 'tools\bootstrap_tesseract_portable.py'
 $defaultTesseractDir = Join-Path $projectRoot 'tools\tesseract-portable'
 
 function Resolve-TesseractRuntime {
     $runtime = [ordered]@{
-        Cmd = ''
+        Cmd      = ''
         Tessdata = ''
-        Source = 'not_found'
+        Source   = 'not_found'
     }
 
     $cmdCandidates = @(
@@ -110,6 +111,13 @@ function Resolve-PhpExe {
 }
 
 function Set-ServiceEnv {
+    if ((Test-Path $pythonExe) -and (Test-Path $bootstrapScript)) {
+        $bootstrap = Start-Process -FilePath $pythonExe -ArgumentList @($bootstrapScript, '--quiet') -WorkingDirectory $projectRoot -WindowStyle Hidden -PassThru -Wait
+        if ($bootstrap.ExitCode -ne 0) {
+            Write-Status "Bootstrap do Tesseract retornou codigo $($bootstrap.ExitCode). Seguindo com fallback local/sistema." -Warning
+        }
+    }
+
     $tRuntime = Resolve-TesseractRuntime
     if ($tRuntime.Cmd) {
         $env:GROM_OCR_TESSERACT_CMD = $tRuntime.Cmd
