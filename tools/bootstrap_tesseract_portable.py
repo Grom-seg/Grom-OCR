@@ -44,6 +44,40 @@ def _read_config() -> dict:
         return {}
 
 
+def _collect_zip_sources(config: dict) -> list[dict[str, object]]:
+    sources: list[dict[str, object]] = []
+
+    env_url = os.environ.get('GROM_OCR_TESSERACT_ARTIFACT_URL', '').strip()
+    if env_url:
+        sources.append({'kind': 'url', 'value': env_url, 'source': 'env_url'})
+
+    env_path = os.environ.get('GROM_OCR_TESSERACT_ARTIFACT_PATH', '').strip()
+    if env_path:
+        path = Path(env_path)
+        if path.exists() and path.is_file():
+            sources.append({'kind': 'path', 'value': path, 'source': 'env_path'})
+
+    cfg_url = str(config.get('artifact_url', '') or '').strip()
+    if cfg_url:
+        sources.append({'kind': 'url', 'value': cfg_url, 'source': 'config_url'})
+
+    cfg_path = str(config.get('artifact_path', '') or '').strip()
+    if cfg_path:
+        path = Path(cfg_path)
+        if path.exists() and path.is_file():
+            sources.append({'kind': 'path', 'value': path, 'source': 'config_path'})
+
+    deduped: list[dict[str, object]] = []
+    seen: set[tuple[str, str]] = set()
+    for item in sources:
+        key = (str(item['kind']), str(item['value']))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+    return deduped
+
+
 def _validate_runtime(target_dir: Path) -> tuple[bool, str]:
     exe = target_dir / 'tesseract.exe'
     tessdata = target_dir / 'tessdata'
@@ -67,30 +101,6 @@ def _validate_runtime(target_dir: Path) -> tuple[bool, str]:
     except Exception as exc:
         return False, f'falha ao validar executavel: {exc}'
     return True, 'ok'
-
-
-def _discover_zip_source(config: dict) -> tuple[Path | None, str | None, str | None]:
-    env_path = os.environ.get('GROM_OCR_TESSERACT_ARTIFACT_PATH', '').strip()
-    if env_path:
-        path = Path(env_path)
-        if path.exists() and path.is_file():
-            return path, None, 'env_path'
-
-    env_url = os.environ.get('GROM_OCR_TESSERACT_ARTIFACT_URL', '').strip()
-    if env_url:
-        return None, env_url, 'env_url'
-
-    cfg_path = str(config.get('artifact_path', '') or '').strip()
-    if cfg_path:
-        path = Path(cfg_path)
-        if path.exists() and path.is_file():
-            return path, None, 'config_path'
-
-    cfg_url = str(config.get('artifact_url', '') or '').strip()
-    if cfg_url:
-        return None, cfg_url, 'config_url'
-
-    return None, None, 'none'
 
 
 def _download_zip(url: str, output_path: Path, quiet: bool = False) -> None:
@@ -146,13 +156,13 @@ def main() -> int:
         return 0
 
     config = _read_config()
-    source_path, source_url, source_kind = _discover_zip_source(config)
+    sources = _collect_zip_sources(config)
     expected_sha256 = (
         os.environ.get('GROM_OCR_TESSERACT_ARTIFACT_SHA256', '').strip()
         or str(config.get('artifact_sha256', '') or '').strip()
     )
 
-    if source_path is None and source_url is None:
+    if not sources:
         _print(
             '[TESSERACT_BOOTSTRAP] artefato nao configurado. Defina GROM_OCR_TESSERACT_ARTIFACT_URL '
             'ou GROM_OCR_TESSERACT_ARTIFACT_PATH (ou config/tesseract_artifact.json).',
@@ -161,31 +171,38 @@ def main() -> int:
         _print(f'[TESSERACT_BOOTSTRAP] motivo atual: {reason}', quiet)
         return 2
 
-    try:
-        if source_path:
-            zip_path = source_path
-            _print(f'[TESSERACT_BOOTSTRAP] usando artefato local ({source_kind}): {zip_path}', quiet)
-        else:
-            zip_path = ARTIFACT_CACHE_FILE
-            _download_zip(source_url or '', zip_path, quiet=quiet)
+    failures: list[str] = []
+    for source in sources:
+        try:
+            if source['kind'] == 'path':
+                zip_path = Path(str(source['value']))
+                _print(f'[TESSERACT_BOOTSTRAP] usando artefato local ({source["source"]}): {zip_path}', quiet)
+            else:
+                zip_path = ARTIFACT_CACHE_FILE
+                _download_zip(str(source['value']), zip_path, quiet=quiet)
 
-        if expected_sha256:
-            digest = _sha256_file(zip_path)
-            if digest.lower() != expected_sha256.lower():
-                raise RuntimeError(
-                    f'hash sha256 divergente; esperado={expected_sha256.lower()} obtido={digest.lower()}'
-                )
+            if expected_sha256:
+                digest = _sha256_file(zip_path)
+                if digest.lower() != expected_sha256.lower():
+                    raise RuntimeError(
+                        f'hash sha256 divergente; esperado={expected_sha256.lower()} obtido={digest.lower()}'
+                    )
 
-        _extract_zip(zip_path, TARGET_DIR, quiet=quiet)
-        ok, validate_reason = _validate_runtime(TARGET_DIR)
-        if not ok:
-            raise RuntimeError(f'validacao pos-extracao falhou: {validate_reason}')
+            _extract_zip(zip_path, TARGET_DIR, quiet=quiet)
+            ok, validate_reason = _validate_runtime(TARGET_DIR)
+            if not ok:
+                raise RuntimeError(f'validacao pos-extracao falhou: {validate_reason}')
 
-        _print('[TESSERACT_BOOTSTRAP] runtime pronto e validado.', quiet)
-        return 0
-    except Exception as exc:
-        _print(f'[TESSERACT_BOOTSTRAP] falha: {exc}', quiet)
-        return 3
+            _print(f'[TESSERACT_BOOTSTRAP] runtime pronto e validado via {source["source"]}.', quiet)
+            return 0
+        except Exception as exc:
+            failures.append(f'{source["source"]}: {exc}')
+            _print(f'[TESSERACT_BOOTSTRAP] fonte {source["source"]} falhou: {exc}', quiet)
+
+    _print('[TESSERACT_BOOTSTRAP] todas as fontes falharam.', quiet)
+    for item in failures:
+        _print(f'[TESSERACT_BOOTSTRAP] detalhe: {item}', quiet)
+    return 3
 
 
 if __name__ == '__main__':
