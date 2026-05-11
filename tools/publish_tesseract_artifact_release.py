@@ -17,6 +17,35 @@ PACKAGE_SCRIPT = PROJECT_ROOT / 'tools' / 'package_tesseract_artifact.py'
 DEFAULT_MANIFEST = PROJECT_ROOT / 'dist' / 'tesseract-portable-manifest.json'
 
 
+def _read_http_error_body(exc: urllib.error.HTTPError) -> str:
+    try:
+        body = exc.read()
+        if not body:
+            return ''
+        return body.decode('utf-8', errors='replace')
+    except Exception:
+        return ''
+
+
+def validate_token(token: str) -> None:
+    normalized = (token or '').strip()
+    if not normalized:
+        raise RuntimeError('defina GITHUB_TOKEN ou GH_TOKEN para publicar a release')
+
+    placeholder_values = {
+        'SEU_TOKEN',
+        'YOUR_TOKEN',
+        'TOKEN_AQUI',
+        'GH_TOKEN',
+        'GITHUB_TOKEN',
+    }
+    if normalized.upper() in placeholder_values:
+        raise RuntimeError(
+            'token placeholder detectado. Substitua o valor por um token GitHub real '
+            'com permissao de releases/conteudo no repositorio.'
+        )
+
+
 def api_request(url: str, method: str, token: str, payload: dict | None = None, content_type: str = 'application/json') -> dict:
     data = None
     headers = {
@@ -61,6 +90,26 @@ def get_release_by_tag(repo: str, tag: str, token: str) -> dict | None:
         if exc.code == 404:
             return None
         raise
+
+
+def describe_http_error(exc: urllib.error.HTTPError) -> RuntimeError:
+    body = _read_http_error_body(exc)
+    if exc.code == 401:
+        return RuntimeError(
+            'GitHub respondeu 401 Unauthorized. Verifique se GITHUB_TOKEN/GH_TOKEN '
+            'esta correto, nao expirou e nao e um valor placeholder. '
+            f'Detalhe da API: {body or "sem corpo de resposta"}'
+        )
+    if exc.code == 403:
+        return RuntimeError(
+            'GitHub respondeu 403 Forbidden. O token provavelmente nao tem permissao '
+            'para releases ou o limite da API foi atingido. '
+            f'Detalhe da API: {body or "sem corpo de resposta"}'
+        )
+    return RuntimeError(
+        f'GitHub API retornou HTTP {exc.code}. '
+        f'Detalhe da API: {body or "sem corpo de resposta"}'
+    )
 
 
 def delete_existing_asset(repo: str, release: dict, asset_name: str, token: str) -> None:
@@ -150,17 +199,19 @@ def main() -> int:
         return 0
 
     token = os.environ.get('GITHUB_TOKEN', '').strip() or os.environ.get('GH_TOKEN', '').strip()
-    if not token:
-        raise RuntimeError('defina GITHUB_TOKEN ou GH_TOKEN para publicar a release')
+    validate_token(token)
 
-    release = get_release_by_tag(args.repo, args.tag, token)
-    if release is None:
-        release = create_release(args.repo, args.tag, args.title, notes, token, target_commitish=args.target_commitish)
-    else:
-        release = update_release(args.repo, int(release['id']), args.title, notes, token)
+    try:
+        release = get_release_by_tag(args.repo, args.tag, token)
+        if release is None:
+            release = create_release(args.repo, args.tag, args.title, notes, token, target_commitish=args.target_commitish)
+        else:
+            release = update_release(args.repo, int(release['id']), args.title, notes, token)
 
-    delete_existing_asset(args.repo, release, asset_path.name, token)
-    asset = upload_asset(str(release['upload_url']), asset_path, token)
+        delete_existing_asset(args.repo, release, asset_path.name, token)
+        asset = upload_asset(str(release['upload_url']), asset_path, token)
+    except urllib.error.HTTPError as exc:
+        raise describe_http_error(exc) from exc
 
     print(f'RELEASE_URL={release.get("html_url", "")}')
     print(f'ASSET_URL={asset.get("browser_download_url", "")}')
