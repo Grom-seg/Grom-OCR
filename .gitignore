@@ -73,3 +73,9 @@ resultado_pytest*.txt
 resultado_debug_video.json
 resultado_video_WA0023.json
 resultado_video_temporal.json
+
+# Artefatos pesados derivados de relatórios (não essenciais no branch)
+data/test_results/*.pdf
+
+# Vídeos brutos duplicados em pasta de imagens
+data/datasets/Imagens/*.mp4
