@@ -63,3 +63,13 @@ resultado_osint_semantic_runtime.json
 resultado_validacao_osint_runtime.json
 venv_test_*.txt
 train_when_ready_*.txt
+
+# Artefatos legados de debug/execução local
+curl_test_response.txt
+frame_*.jpg
+pytest_exit_code*.txt
+pytest_output.txt
+resultado_pytest*.txt
+resultado_debug_video.json
+resultado_video_WA0023.json
+resultado_video_temporal.json
