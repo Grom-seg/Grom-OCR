@@ -763,3 +763,32 @@ Fluxo implementado no script:
 - arquivos Python compilam (`py_compile`)
 - API OCR validada em `http://127.0.0.1:8000/health`
 - fluxo web validado em `http://127.0.0.1:8080` (login, upload, OCR e historico)
+
+## Fluxo operacional enquanto aguarda BRCars
+
+Checklist de prontidao pre-BRCars (mantem evolucao sem regressao):
+
+`c:/Grom_OCR/.venv/Scripts/python.exe c:/Grom_OCR/tools/check_pre_brcars_readiness.py`
+
+Atalho no Windows (executa o checklist e abre o relatorio):
+
+`C:\\Grom_OCR\\tools\\check_pre_brcars_readiness.cmd`
+
+Saida gerada:
+
+- `data/datasets/brcars/pre_brcars_readiness_report.json`
+
+Interpretacao rapida do status:
+
+- `blocked`: falta dependencia basica ou teste de integracao falhou
+- `ready_waiting_brcars`: sistema pronto, faltando apenas `brcars_summary.json`
+- `fully_ready`: BRCars ja disponivel e stack completa validada
+
+Quando o ZIP real autorizado chegar:
+
+`c:/Grom_OCR/.venv/Scripts/python.exe c:/Grom_OCR/tools/finalize_brcars_integration.py --zip-path "CAMINHO_DO_ZIP_REAL"`
+
+Isso executa preparacao do dataset, validacao de sumario, testes de integracao e gera:
+
+- `data/datasets/brcars/brcars_summary.json`
+- `data/datasets/brcars/brcars_finalize_report.json`

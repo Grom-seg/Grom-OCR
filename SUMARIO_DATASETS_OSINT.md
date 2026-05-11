@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD060 MD040 MD036 -->
+
 # SUMÁRIO EXECUTIVO: Datasets + Tecnologias para OSINT Veicular
 
 ## 🎯 Recomendação Pronta
@@ -24,6 +26,7 @@
 ## ✓ DATASETS PRIORITÁRIOS (Ordem de Importância)
 
 ### 1️⃣ BRCars Dataset ⭐⭐⭐⭐⭐
+
 - **Uso:** Database visual de veículos brasileiros
 - **Tamanho:** 500k+ imagens (marca/modelo/cor/ano/tipo)
 - **Licença:** ⚠ Verificar (possivelmente Creative Commons)
@@ -33,6 +36,7 @@
 - **Integração:** Tabela (marca, modelo, ano, cor) → busca rápida
 
 ### 2️⃣ UFPR-VeSV-Dataset ⭐⭐⭐⭐⭐
+
 - **Uso:** Treinamento de detector em vigilância real
 - **Tamanho:** 15k+ imagens anotadas
 - **Licença:** ✓ Aberta (uso acadêmico)
@@ -42,6 +46,7 @@
 - **Integração:** Fine-tuning YOLOv8 com esse dataset
 
 ### 3️⃣ gpupo/brazilian-cars ⭐⭐⭐⭐
+
 - **Uso:** Tabela de lookup de modelos nacionais
 - **Tamanho:** Pequeno (~MB)
 - **Licença:** ✓ Open Source (MIT/Apache)
@@ -51,6 +56,7 @@
 - **Integração:** Verificação: "esse modelo existe no Brasil em 2024?"
 
 ### 4️⃣ VMMRdb ⭐⭐⭐
+
 - **Uso:** Transfer learning internacional
 - **Tamanho:** 300k imagens (múltiplos ângulos)
 - **Licença:** ⚠ Acadêmica (verificar)
@@ -64,6 +70,7 @@
 ## 🚀 TECNOLOGIAS PRIORITÁRIAS
 
 ### YOLO (Já Integrado) ✓
+
 ```
 Manutenção:  Ultralytics (ativa)
 Versão:      YOLOv8 (recomendado) → YOLOv9/10 futura
@@ -74,6 +81,7 @@ Prioridade:  🔴 IMEDIATA
 ```
 
 ### OpenCLIP (Novo para OSINT) ⭐⭐⭐⭐
+
 ```
 Função:      Embeddings semânticos (imagem ↔ texto)
 Exemplo:     "Toyota branco 2020-2025" → similares em BRCars
@@ -85,6 +93,7 @@ Prioridade:  🟢 SEMANA 2
 ```
 
 ### SAM - Segment Anything (Opcional) ⭐⭐⭐
+
 ```
 Função:      Segmentação zero-shot de veículo
 Uso:         Contexto espacial (posição de placa)
@@ -188,7 +197,7 @@ Termos:         → Adicionar a LICENSE.md
 1. **BRCars Dataset** → Buscar em GitHub (dsmlr/BRCars ou similar)
 2. **UFPR-VeSV** → Publicação: "VeRi-776: A Large-scale Person Re-identification Database"
 3. **VMMRdb** → Stanford Cars + Kaggle vehicle recognition
-4. **OpenCLIP** → https://github.com/mlfoundations/open_clip
+4. **OpenCLIP** → <https://github.com/mlfoundations/open_clip>
 
 ---
 

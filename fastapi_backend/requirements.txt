@@ -7,3 +7,13 @@ pillow
 paddleocr
 ultralytics
 onnxruntime
+
+# ── Datasets + Semantic Search ──────────────────────────────────────────────
+# OpenCLIP: busca semântica veicular (Parte II do roadmap)
+# Instalar manualmente quando necessário (requer ~1 GB de modelo):
+#   pip install open-clip-torch
+# open-clip-torch
+
+# Fine-tuning YOLOv8 (ultralytics já instalado acima)
+# Datasets brasileiros: gpupo/brazilian-cars (clone via git), BRCars (ZIP autorizado)
+

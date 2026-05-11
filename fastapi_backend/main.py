@@ -173,6 +173,39 @@ except Exception:
         }
 
 try:
+    from fastapi_backend.datasets_loader import datasets_status
+    _datasets_loader_ok = True
+except Exception:
+    _datasets_loader_ok = False
+
+    def datasets_status():
+        return {
+            'brazilian_cars_ref': {'available': False},
+            'brcars_summary': {'available': False},
+        }
+
+try:
+    from fastapi_backend.osint_database import get_osint_database as _get_osint_db
+    _osint_db_module_ok = True
+except Exception:
+    _osint_db_module_ok = False
+
+    def _get_osint_db():  # type: ignore
+        return None
+
+try:
+    from fastapi_backend.semantic_search import get_semantic_search as _get_semantic_search, is_semantic_search_available
+    _semantic_search_module_ok = True
+except Exception:
+    _semantic_search_module_ok = False
+
+    def _get_semantic_search():  # type: ignore
+        return None
+
+    def is_semantic_search_available() -> bool:  # type: ignore
+        return False
+
+try:
     from fastapi_backend.evidence_chain import sha256_file, compute_payload_hash, register_evidence_chain_entry
     _evidence_chain_ok = True
 except Exception:
@@ -2850,6 +2883,7 @@ def capabilities_endpoint():
         'spatial_report': {'available': _spatial_report_ok},
         'scene_report': {'available': _scene_report_ok},
         'frame_selector': {'available': _frame_selector_ok},
+        'datasets': datasets_status(),
         'modules': {
             'frame_selector': _frame_selector_ok,
             'super_resolution': _sr_info_ok,
@@ -2858,7 +2892,107 @@ def capabilities_endpoint():
             'geo_context': _geo_ok,
             'spatial_report': _spatial_report_ok,
             'scene_report': _scene_report_ok,
+            'datasets_loader': _datasets_loader_ok,
         },
+    })
+
+
+@app.get('/datasets/status')
+def datasets_status_endpoint():
+    """
+    Retorna status direto dos datasets locais e um indicador de prontidão.
+
+    Pronto para etapa final quando:
+    - referência brasileira disponível (models.json)
+    - sumário BRCars disponível (brcars_summary.json)
+    """
+    status = datasets_status()
+    br_ref_ok = bool(status.get('brazilian_cars_ref', {}).get('available', False))
+    brcars_ok = bool(status.get('brcars_summary', {}).get('available', False))
+    ready = br_ref_ok and brcars_ok
+
+    return JSONResponse({
+        'status': 'ok',
+        'timestamp_utc': datetime.now(timezone.utc).isoformat(),
+        'ready_for_brcars_osint': ready,
+        'datasets': status,
+        'missing_requirements': [
+            req for req, ok in (
+                ('brazilian_cars_ref', br_ref_ok),
+                ('brcars_summary', brcars_ok),
+            ) if not ok
+        ],
+    })
+
+
+@app.get('/osint/search')
+def osint_search_endpoint(
+    make: str = '',
+    model: str = '',
+    color: str = '',
+    year: int = None,
+    limit: int = 10,
+    query: str = '',
+):
+    """
+    Busca estruturada de candidatos veiculares via OSINTVehicleDatabase.
+
+    Parâmetros:
+      make  — marca (ex: toyota, honda)
+      model — modelo (ex: corolla, civic)
+      color — cor estimada (ex: prata, branco)
+      year  — ano estimado
+      limit — máximo de resultados (padrão: 10)
+      query — texto livre para busca semântica (requer open_clip)
+
+    Retorna candidatos ordenados por score com fonte auditável.
+    """
+    db = _get_osint_db()
+    if db is None:
+        return JSONResponse({'status': 'unavailable', 'candidates': [], 'error': 'osint_database nao disponivel'}, status_code=503)
+
+    limit = max(1, min(50, limit))
+
+    try:
+        candidates = db.search_by_attributes(
+            make=make,
+            model=model,
+            color=color,
+            year=year,
+            limit=limit,
+        )
+    except Exception as exc:
+        return JSONResponse({'status': 'error', 'candidates': [], 'error': str(exc)}, status_code=500)
+
+    # Reranking semântico se query fornecida e open_clip disponível
+    semantic_applied = False
+    if query and is_semantic_search_available():
+        ss = _get_semantic_search()
+        if ss is not None:
+            try:
+                candidates = ss.search_query(query, candidates)
+                semantic_applied = True
+            except Exception:
+                pass
+
+    db_status = {}
+    try:
+        db_status = db.status()
+    except Exception:
+        pass
+
+    return JSONResponse({
+        'status': 'ok',
+        'timestamp_utc': datetime.now(timezone.utc).isoformat(),
+        'query': {'make': make, 'model': model, 'color': color, 'year': year, 'text_query': query},
+        'total': len(candidates),
+        'semantic_reranking_applied': semantic_applied,
+        'candidates': candidates,
+        'db_status': db_status,
+        'legal_disclaimer': (
+            'Resultado probabilistico. Nao substitui identificacao formal por placa '
+            'ou confirmacao em bases oficiais.'
+        ),
     })
 
 

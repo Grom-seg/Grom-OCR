@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD060 MD040 MD036 -->
+
 # MATRIX TÉCNICA: Datasets ↔ Componentes GROM OCR
 
 Mapeamento de como cada dataset se conecta aos componentes do sistema.
@@ -254,17 +256,20 @@ tensorboard>=2.14
 
 ## PERFORMANCE EXPECTATIONS
 
-### Antes (OSINT v1):
+### Antes (OSINT v1)
+
 - Modelo candidates: 0 (apenas placa)
 - Tempo: 100ms
 - Acurácia: N/A (sem candidates)
 
-### Depois (OSINT v2 com datasets):
+### Depois (OSINT v2 com datasets)
+
 - Modelo candidates: 3-5 ranked
 - Tempo: 150-300ms (+ embedding lookup)
 - Acurácia: ~75-85% (top-1 correto em vigilância real)
 
-### Overhead:
+### Overhead
+
 - Latência: +100-200ms (aceitável)
 - Memória: +500MB (índices em RAM)
 - Disk: +5-10GB (datasets + modelos)

@@ -21,19 +21,21 @@ if (-not $phpExe) {
     exit 1
 }
 
-$failed = $false
-
-Get-ChildItem -Path . -Recurse -Filter *.php |
-Where-Object { $_.FullName -notmatch '\\vendor\\' } |
-ForEach-Object {
-    Write-Host $_.FullName
-    & $phpExe -l $_.FullName
-    if ($LASTEXITCODE -ne 0) {
-        $failed = $true
+$failedFiles = @(
+    Get-ChildItem -Path . -Recurse -Filter *.php |
+    Where-Object { $_.FullName -notmatch '\\vendor\\' } |
+    ForEach-Object {
+        Write-Host $_.FullName
+        & $phpExe -l $_.FullName
+        if ($LASTEXITCODE -ne 0) {
+            $_.FullName
+        }
     }
-}
+)
 
-if ($failed) {
+if ($failedFiles.Count -gt 0) {
+    Write-Host "Falhas de sintaxe em $($failedFiles.Count) arquivo(s):" -ForegroundColor Red
+    $failedFiles | ForEach-Object { Write-Host " - $_" -ForegroundColor Red }
     exit 1
 }
 

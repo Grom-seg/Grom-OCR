@@ -1,7 +1,9 @@
+<!-- markdownlint-disable MD060 MD040 MD036 -->
+
 # GUIA DE IMPLEMENTAÇÃO: Integrar Datasets + Tecnologias no GROM OCR
 
-**Objetivo:** Traduzir análise de datasets em código executável  
-**Data:** 10 de maio de 2026  
+**Objetivo:** Traduzir análise de datasets em código executável
+**Data:** 10 de maio de 2026
 **Status:** Planning phase → Ready for execution
 
 ---
@@ -68,34 +70,34 @@ logger = logging.getLogger(__name__)
 
 class BRCarsDatabase:
     """Index em memória de BRCars: (marca, modelo, ano, cor) → imagens."""
-    
+
     def __init__(self, brcars_path: str = "data/datasets/brcars"):
         self.base_path = Path(brcars_path)
         self.metadata = {}
         self.lookup_index = {}
         self._load()
-    
+
     def _load(self):
         """Carrega metadata de BRCars e constrói lookup index."""
         metadata_file = self.base_path / "metadata.json"
         if not metadata_file.exists():
             logger.warning(f"BRCars metadata não encontrado: {metadata_file}")
             return
-        
+
         with open(metadata_file, 'r', encoding='utf-8') as f:
             self.metadata = json.load(f)
-        
+
         # Constrói index: (marca, modelo, cor) → lista de anos/imagens
         for item in self.metadata:
             marca = item.get('marca', '').lower()
             modelo = item.get('modelo', '').lower()
             cor = item.get('cor', '').lower()
-            
+
             key = (marca, modelo, cor)
             if key not in self.lookup_index:
                 self.lookup_index[key] = []
             self.lookup_index[key].append(item)
-    
+
     def search(self, marca: str, modelo: str, cor: str = None) -> List[Dict]:
         """
         Busca rápida por marca/modelo/cor.
@@ -103,7 +105,7 @@ class BRCarsDatabase:
         """
         marca = marca.lower()
         modelo = modelo.lower()
-        
+
         if cor:
             cor = cor.lower()
             key = (marca, modelo, cor)
@@ -119,38 +121,38 @@ class BRCarsDatabase:
 
 class BrazilianCarsReference:
     """Lookup de modelos vendidos no Brasil (gpupo/brazilian-cars)."""
-    
+
     def __init__(self, ref_path: str = "data/datasets/brazilian-cars-ref/models.json"):
         self.models = {}
         self._load(ref_path)
-    
+
     def _load(self, ref_path: str):
         """Carrega lista de modelos válidos no Brasil."""
         path = Path(ref_path)
         if not path.exists():
             logger.warning(f"Brazilian cars ref não encontrado: {ref_path}")
             return
-        
+
         with open(path, 'r', encoding='utf-8') as f:
             self.models = json.load(f)
-    
+
     def is_valid(self, marca: str, modelo: str, ano: int = None) -> bool:
         """Valida se marca/modelo existem no Brasil."""
         marca = marca.lower()
         modelo = modelo.lower()
-        
+
         for m in self.models.get(marca, []):
             if m['nome'].lower() == modelo:
                 if ano and m.get('anos'):
                     return ano in m['anos']
                 return True
         return False
-    
+
     def get_valid_years(self, marca: str, modelo: str) -> List[int]:
         """Retorna anos válidos de um modelo."""
         marca = marca.lower()
         modelo = modelo.lower()
-        
+
         for m in self.models.get(marca, []):
             if m['nome'].lower() == modelo:
                 return m.get('anos', [])
@@ -199,23 +201,23 @@ from pathlib import Path
 
 class OSINTVehicleDatabase:
     """Index principal de OSINT para matching de modelos."""
-    
+
     def __init__(self):
         self.brcars = get_brcars_database()
         self.brazil_ref = get_brazilian_cars_reference()
         self.embeddings = {}  # {(marca, modelo): embedding_vector}
         self._load_embeddings()
-    
+
     def _load_embeddings(self):
         """Carrega embeddings CLIP precomputados (gerado offline)."""
         embedding_path = Path("data/models/openclip_embeddings/brcars_embeddings.npy")
         if embedding_path.exists():
             data = np.load(embedding_path, allow_pickle=True).item()
             self.embeddings = data
-    
-    def search_by_attributes(self, 
-                            marca: str, 
-                            modelo: str, 
+
+    def search_by_attributes(self,
+                            marca: str,
+                            modelo: str,
                             cor: str = None,
                             ano: int = None,
                             limit: int = 10) -> List[Dict]:
@@ -224,14 +226,14 @@ class OSINTVehicleDatabase:
         Retorna: [{marca, modelo, ano, cor, score, fonte}, ...]
         """
         candidates = self.brcars.search(marca, modelo, cor)
-        
+
         # Filtra por ano se especificado
         if ano:
             candidates = [c for c in candidates if c.get('ano') == ano or abs(c.get('ano', ano) - ano) <= 2]
-        
+
         # Valida contra brazilian cars reference
         candidates = [c for c in candidates if self.brazil_ref.is_valid(c['marca'], c['modelo'])]
-        
+
         # Score por relevância
         scored = []
         for c in candidates[:limit]:
@@ -240,7 +242,7 @@ class OSINTVehicleDatabase:
                 score += 0.5
             if c.get('ano') == ano:
                 score += 0.3
-            
+
             scored.append({
                 'marca': c['marca'],
                 'modelo': c['modelo'],
@@ -249,11 +251,11 @@ class OSINTVehicleDatabase:
                 'score': score,
                 'fonte': 'brcars'
             })
-        
+
         return sorted(scored, key=lambda x: x['score'], reverse=True)
-    
-    def semantic_rerank(self, 
-                       candidates: List[Dict], 
+
+    def semantic_rerank(self,
+                       candidates: List[Dict],
                        image_embedding: np.ndarray,
                        top_k: int = 3) -> List[Dict]:
         """
@@ -269,7 +271,7 @@ class OSINTVehicleDatabase:
                 cand['semantic_score'] = float(sim)
             else:
                 cand['semantic_score'] = 0.0
-        
+
         # Sort by semantic_score
         candidates = sorted(candidates, key=lambda x: x.get('semantic_score', 0.0), reverse=True)
         return candidates[:top_k]
@@ -311,13 +313,13 @@ except ImportError:
 
 class SemanticVehicleSearch:
     """Search semântico baseado em CLIP."""
-    
+
     def __init__(self, model_name: str = "ViT-B-32", pretrained: str = "openai"):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        
+
         if create_model_and_transforms is None:
             raise RuntimeError("open_clip não instalado. pip install open-clip-torch")
-        
+
         self.model, self.preprocess, _ = create_model_and_transforms(
             model_name=model_name,
             pretrained=pretrained,
@@ -325,7 +327,7 @@ class SemanticVehicleSearch:
         )
         self.model.eval()
         self.embedding_dim = 512  # ViT-B-32 output dim
-    
+
     def embed_text(self, text: str) -> np.ndarray:
         """Converte texto em embedding."""
         with torch.no_grad():
@@ -333,17 +335,17 @@ class SemanticVehicleSearch:
             text_features = self.model.encode_text(tokens.to(self.device))
             text_features /= text_features.norm(dim=-1, keepdim=True)
         return text_features.cpu().numpy()[0]
-    
+
     def embed_image(self, image: np.ndarray) -> np.ndarray:
         """Converte imagem em embedding."""
         img_tensor = torch.from_numpy(image).permute(2, 0, 1).unsqueeze(0).float()
         img_tensor = img_tensor.to(self.device) / 255.0
-        
+
         with torch.no_grad():
             image_features = self.model.encode_image(img_tensor)
             image_features /= image_features.norm(dim=-1, keepdim=True)
         return image_features.cpu().numpy()[0]
-    
+
     def search_query(self, query: str, candidates: List[Dict]) -> List[Dict]:
         """
         Dado query textual ("Toyota branco 2020"), score candidatos.
@@ -352,16 +354,16 @@ class SemanticVehicleSearch:
         Retorna: candidates com semantic_score adicionado
         """
         query_emb = self.embed_text(query)
-        
+
         for cand in candidates:
             # Constrói texto descritivo do candidato
             desc = f"{cand['marca']} {cand['modelo']} {cand.get('ano', '')} {cand.get('cor', '')}"
             desc_emb = self.embed_text(desc)
-            
+
             # Cosine similarity
             score = np.dot(query_emb, desc_emb)
             cand['semantic_score'] = float(score)
-        
+
         return sorted(candidates, key=lambda x: x['semantic_score'], reverse=True)
 
 # Global instance
@@ -382,6 +384,7 @@ def get_semantic_search() -> SemanticVehicleSearch:
 **Modificação:** `fastapi_backend/main.py`
 
 Adicionar imports:
+
 ```python
 from datasets_loader import get_brcars_database, get_brazilian_cars_reference
 from osint_database import get_osint_database
@@ -389,6 +392,7 @@ from semantic_search import get_semantic_search
 ```
 
 Modificar `build_vehicle_osint_report`:
+
 ```python
 def build_vehicle_osint_report(
     vehicle_analysis: dict,
@@ -402,11 +406,11 @@ def build_vehicle_osint_report(
     """
     osint_db = get_osint_database()
     semantic_search = get_semantic_search()
-    
+
     # Busca por atributos estruturados
     detected_class = vehicle_analysis.get('vehicle_detections', [{}])[0].get('class_name')
     detected_color = vehicle_analysis.get('color_estimate')
-    
+
     # Candidatos iniciais por estrutura
     candidates = osint_db.search_by_attributes(
         marca="",  # Será inferido
@@ -414,17 +418,17 @@ def build_vehicle_osint_report(
         cor=detected_color,
         limit=20
     )
-    
+
     # Reranking semântico
     if candidates and vehicle_analysis.get('image_embedding'):
         img_emb = np.array(vehicle_analysis['image_embedding'])
         candidates = osint_db.semantic_rerank(candidates, img_emb, top_k=5)
-    
+
     # Query textual adicional
     if detected_color and detected_class:
         query = f"{detected_class} {detected_color} Brasil 2020-2025"
         candidates = semantic_search.search_query(query, candidates)
-    
+
     return {
         'status': 'ok',
         'title': 'Inferencia OSINT de Modelo Veicular (v2 - com BRCars)',
@@ -463,10 +467,10 @@ def prepare_brcars():
     """
     out_dir = Path("data/datasets/brcars")
     out_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # Exemplo: ler imagens e metadados
     # (implementação depende da fonte exata do BRCars)
-    
+
     metadata = []
     for item in get_brcars_items():  # Placeholder
         metadata.append({
@@ -477,11 +481,11 @@ def prepare_brcars():
             'imagem': item['image_path'],
             'tipo': item['body_type']
         })
-    
+
     # Salva
     with open(out_dir / 'metadata.json', 'w', encoding='utf-8') as f:
         json.dump(metadata, f, ensure_ascii=False, indent=2)
-    
+
     print(f"✓ Preparado BRCars: {len(metadata)} registros")
 
 if __name__ == '__main__':
@@ -502,9 +506,9 @@ from ultralytics import YOLO
 
 def finetune_yolo():
     """Treina YOLOv8 com datasets brasileiros."""
-    
+
     model = YOLO('yolov8n.pt')  # Nano model
-    
+
     results = model.train(
         data='data/datasets/ufpr-vesv/dataset.yaml',  # COCO format
         epochs=50,
@@ -516,7 +520,7 @@ def finetune_yolo():
         project='runs/detect',
         name='yolo_brcars_v1'
     )
-    
+
     # Salva modelo final
     model.save('data/models/yolo_brcars_v1.pt')
     print("✓ YOLOv8 fine-tuned e salvo")
@@ -549,37 +553,37 @@ except ImportError:
 
 def build_embeddings():
     """Gera e salva embeddings de todos modelos em BRCars."""
-    
+
     search = get_semantic_search()
-    
+
     # Carrega metadata de BRCars
     metadata_file = Path('data/datasets/brcars/metadata.json')
     with open(metadata_file, 'r', encoding='utf-8') as f:
         metadata = json.load(f)
-    
+
     # Dedup (marca, modelo)
     unique_models = {}
     for item in metadata:
         key = (item['marca'], item['modelo'])
         unique_models[key] = item
-    
+
     embeddings = {}
     print(f"Gerando {len(unique_models)} embeddings...")
-    
+
     for i, (key, item) in enumerate(unique_models.items()):
         marca, modelo = key
         desc = f"{marca} {modelo}"
-        
+
         emb = search.embed_text(desc)
         embeddings[key] = emb.tolist()
-        
+
         if (i + 1) % 100 == 0:
             print(f"  {i+1}/{len(unique_models)}")
-    
+
     # Salva
     out_dir = Path('data/models/openclip_embeddings')
     out_dir.mkdir(parents=True, exist_ok=True)
-    
+
     np.save(out_dir / 'brcars_embeddings.npy', embeddings)
     print(f"✓ Embeddings salvos: {out_dir / 'brcars_embeddings.npy'}")
 

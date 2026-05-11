@@ -1,7 +1,9 @@
+<!-- markdownlint-disable MD060 MD040 MD036 -->
+
 # 📚 ÍNDICE DE DOCUMENTAÇÃO: Análise de Datasets para OSINT Veicular
 
-**Status:** ✓ Análise concluída + Roadmap pronto  
-**Data:** 10 de maio de 2026  
+**Status:** ✓ Análise concluída + Roadmap pronto
+**Data:** 10 de maio de 2026
 **Commits:** fa6c105, 545e9b9, 6669633
 
 ---
@@ -9,9 +11,11 @@
 ## 📂 Documentos Criados
 
 ### 1. **ANALISE_DATASETS_TECHNOLOGIES_OSINT.md** (Commit 545e9b9)
-**Descrição:** Análise técnica detalhada de todas as 18 opções mencionadas  
-**Público:** Técnico (decisores de arquitetura)  
+
+**Descrição:** Análise técnica detalhada de todas as 18 opções mencionadas
+**Público:** Técnico (decisores de arquitetura)
 **Conteúdo:**
+
 - ✓ Datasets brasileiros especializados (UFPR-VeSV, BRCars, brazilian-cars)
 - ✓ Datasets internacionais (VMMRdb, Car-Parts-Segmentation)
 - ✓ Tecnologias/Plataformas (YOLO, SAM, CLIP, OpenCLIP, etc)
@@ -24,9 +28,11 @@
 ---
 
 ### 2. **SUMARIO_DATASETS_OSINT.md** (Commit 545e9b9)
-**Descrição:** Sumário executivo visual e roadmap acelerado  
-**Público:** Executivos + Product Owners  
+
+**Descrição:** Sumário executivo visual e roadmap acelerado
+**Público:** Executivos + Product Owners
 **Conteúdo:**
+
 - ✓ Stack recomendado em box visual
 - ✓ Datasets prioritários (top 4)
 - ✓ Tecnologias prioritárias (YOLO, OpenCLIP, SAM)
@@ -39,9 +45,11 @@
 ---
 
 ### 3. **IMPLEMENTACAO_DATASETS_GUIA.md** (Commit 6669633)
-**Descrição:** Guia técnico passo-a-passo de implementação  
-**Público:** Desenvolvedores  
+
+**Descrição:** Guia técnico passo-a-passo de implementação
+**Público:** Desenvolvedores
 **Conteúdo:**
+
 - ✓ Estrutura de diretórios (setup)
 - ✓ 5 módulos Python novos (datasets_loader, osint_database, semantic_search, etc)
 - ✓ Código de exemplo (esqueleto pronto para implementação)
@@ -56,9 +64,11 @@
 ---
 
 ### 4. **MATRIX_DATASETS_COMPONENTES.md** (Commit 6669633)
-**Descrição:** Mapeamento visual de datasets ↔ componentes GROM  
-**Público:** Arquitetos + Desenvolvedores  
+
+**Descrição:** Mapeamento visual de datasets ↔ componentes GROM
+**Público:** Arquitetos + Desenvolvedores
 **Conteúdo:**
+
 - ✓ Diagrama de camadas GROM (Detection → OCR → Vehicle → OSINT → Report)
 - ✓ Matrix técnica: Datasets × Camadas (intensidade de uso)
 - ✓ Fluxo técnico: Imagem → OSINT Candidates
@@ -72,7 +82,8 @@
 ---
 
 ### 5. **VALIDACAO_OSINT_RUNTIME.md** (anterior)
-**Descrição:** Validação de OSINT obrigatório em endpoints  
+
+**Descrição:** Validação de OSINT obrigatório em endpoints
 **Status:** ✓ Já concluído (commits fa6c105)
 
 ---
@@ -80,6 +91,7 @@
 ## 🎯 RECOMENDAÇÃO CONSOLIDADA
 
 ### Stack Recomendado (100% Open Source)
+
 ```
 ┌─ BRCars Dataset (500k imagens brasileiras)
 ├─ UFPR-VeSV (15k vigilância para fine-tuning)
@@ -94,6 +106,7 @@ Conformidade: LGPD ✓
 ```
 
 ### Prioridade de Datasets
+
 ```
 🥇 BRCars Dataset        → Database visual para OSINT
 🥈 UFPR-VeSV            → Treinamento em vigilância
@@ -102,6 +115,7 @@ Conformidade: LGPD ✓
 ```
 
 ### Evitar (Caro/Proprietário)
+
 ```
 ❌ OpenAI Image Embeddings ($0.02/img = inviável em escala)
 ❌ Google Vision Product Search (caro + genérico)
@@ -114,6 +128,7 @@ Conformidade: LGPD ✓
 ## 📋 CHECKLIST DE AÇÕES (Semana 1)
 
 ### Prioridade 1 (HOJE - Pesquisa)
+
 ```
 ☐ Pesquisar acesso BRCars Dataset (GitHub/Webmotors)
 ☐ Verificar licença exata de cada dataset
@@ -121,6 +136,7 @@ Conformidade: LGPD ✓
 ```
 
 ### Prioridade 2 (Esta semana - Setup)
+
 ```
 ☐ Download UFPR-VeSV-Dataset
 ☐ Clone gpupo/brazilian-cars
@@ -129,6 +145,7 @@ Conformidade: LGPD ✓
 ```
 
 ### Prioridade 3 (Próxima semana - Code)
+
 ```
 ☐ Implementar datasets_loader.py
 ☐ Implementar osint_database.py
@@ -138,6 +155,7 @@ Conformidade: LGPD ✓
 ```
 
 ### Prioridade 4 (Semana 3 - Integração)
+
 ```
 ☐ Integrar em main.py
 ☐ Teste E2E: POST /process + verificar OSINT v2
@@ -149,26 +167,31 @@ Conformidade: LGPD ✓
 ## 🚀 PRÓXIMOS PASSOS RECOMENDADOS
 
 ### Passo 1: Decisão de Direcionamento (HOJE)
+
 - [ ] Revisar **SUMARIO_DATASETS_OSINT.md** (10 min)
 - [ ] Aprovar stack recomendado
 - [ ] Confirmar timeline Semana 1-6
 
 ### Passo 2: Pesquisa de Dados (Hoje-Amanhã)
+
 - [ ] Localizar BRCars Dataset (GitHub/Academia)
 - [ ] Confirmar termos de uso/licença
 - [ ] Estimar tamanho (espaço disco necessário)
 
 ### Passo 3: Planejamento Dev (Amanhã)
+
 - [ ] Ler **IMPLEMENTACAO_DATASETS_GUIA.md** (45 min)
 - [ ] Revisar **MATRIX_DATASETS_COMPONENTES.md** (20 min)
 - [ ] Criar tasks/issues para cada módulo
 
 ### Passo 4: Codificação (Semana 1)
+
 - [ ] Seguir checklist de execução Dia 1-5
 - [ ] Usar código de esqueleto de **IMPLEMENTACAO_DATASETS_GUIA.md**
 - [ ] Validar cada módulo isoladamente
 
 ### Passo 5: Integração (Semana 2)
+
 - [ ] Conectar ao main.py
 - [ ] Teste E2E ponta-a-ponta
 - [ ] Benchmarking
@@ -204,16 +227,16 @@ Cada documento suporta a tomada de decisão do seu nível.
    - Tamanho: ~2GB
 
 3. **gpupo/brazilian-cars**
-   - URL: https://github.com/gpupo/brazilian-cars (confirmar)
+   - URL: <https://github.com/gpupo/brazilian-cars> (confirmar)
    - Tamanho: <1MB (JSON)
 
 4. **OpenCLIP**
-   - URL: https://github.com/mlfoundations/open_clip
+   - URL: <https://github.com/mlfoundations/open_clip>
    - Instalação: `pip install open-clip-torch`
 
 5. **YOLOv8**
-   - URL: https://github.com/ultralytics/ultralytics
-   - Docs: https://docs.ultralytics.com
+   - URL: <https://github.com/ultralytics/ultralytics>
+   - Docs: <https://docs.ultralytics.com>
 
 ---
 
@@ -232,12 +255,14 @@ Se durante a implementação (Semana 1-6) surgirem dúvidas:
 ## ✅ VALIDAÇÃO FINAL
 
 **Análise:**
+
 - [x] 18 opções avaliadas
 - [x] Recomendação consolidada (5 componentes prioritários)
 - [x] Roadmap 6 semanas
 - [x] Código de esqueleto pronto
 
 **Documentação:**
+
 - [x] Sumário executivo
 - [x] Análise técnica detalhada
 - [x] Guia de implementação
